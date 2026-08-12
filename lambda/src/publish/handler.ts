@@ -2,18 +2,17 @@ import type {
   APIGatewayProxyEventV2,
   APIGatewayProxyStructuredResultV2,
 } from 'aws-lambda'
-import { postDraftSchema } from '@nexsift/contracts'
-import { getPublishToken } from '../auth/publish-token'
+import { postDraftSchema } from '@nexsift/schemas/post'
 import { publishPost } from '../publishing/publish-post'
 
 export async function handler(
   event: APIGatewayProxyEventV2,
 ): Promise<APIGatewayProxyStructuredResultV2> {
   try {
-    const token = await getPublishToken()
+    const token = process.env.PUBLISH_TOKEN
     const authorization = event.headers.authorization
 
-    if (authorization !== `Bearer ${token}`) {
+    if (!token || authorization !== `Bearer ${token}`) {
       return response(401, { error: 'Unauthorized' })
     }
 

@@ -6,6 +6,8 @@ import { Header } from '@/components/header'
 import { SignalLedger } from '@/features/blog/signal-ledger'
 import { listPosts } from '@/lib/content'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Sinais e análises técnicas do NexSift em português.',

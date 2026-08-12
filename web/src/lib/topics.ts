@@ -1,4 +1,4 @@
-import type { Topic } from '@nexsift/contracts'
+import type { Topic } from '@nexsift/schemas/topic'
 
 export const topicMeta: Record<
   Topic,

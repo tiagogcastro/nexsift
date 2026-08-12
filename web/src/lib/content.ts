@@ -2,15 +2,15 @@ import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import {
   postIndexSchema,
   postSchema,
-  type Topic,
-} from '@nexsift/contracts'
+} from '@nexsift/schemas/post'
+import type { Topic } from '@nexsift/schemas/topic'
 
 function createS3Client() {
   const endpoint = process.env.AWS_ENDPOINT_URL || undefined
 
   return new S3Client({
     region: process.env.AWS_REGION ?? 'us-east-1',
-    endpoint,
+    ...(endpoint ? { endpoint } : {}),
     forcePathStyle: Boolean(endpoint),
   })
 }
@@ -19,7 +19,7 @@ function getBucket() {
   const bucket = process.env.CONTENT_BUCKET
 
   if (!bucket) {
-    throw new Error('CONTENT_BUCKET is required when CONTENT_SOURCE=s3')
+    throw new Error('CONTENT_BUCKET is required')
   }
 
   return bucket
@@ -40,12 +40,12 @@ async function readJsonObject(key: string) {
   return JSON.parse(await response.Body.transformToString()) as unknown
 }
 
-export async function listS3Posts() {
+export async function listPosts() {
   const value = await readJsonObject('public/indexes/latest.json')
   return postIndexSchema.parse(value)
 }
 
-export async function getS3Post(slug: string) {
+export async function getPostBySlug(slug: string) {
   try {
     const value = await readJsonObject(`public/posts/${slug}.json`)
     return postSchema.parse(value)
@@ -54,7 +54,7 @@ export async function getS3Post(slug: string) {
   }
 }
 
-export async function listS3PostsByTopic(topic: Topic) {
+export async function listPostsByTopic(topic: Topic) {
   const value = await readJsonObject(`public/indexes/topics/${topic}.json`)
   return postIndexSchema.parse(value)
 }

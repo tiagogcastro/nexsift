@@ -12,6 +12,9 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true
+    "noEmit": true,
+    "paths": {
+      "@nexsift/schemas/*": ["./packages/schemas/*"]
+    }
   }
 }

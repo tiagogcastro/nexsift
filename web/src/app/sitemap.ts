@@ -4,6 +4,8 @@ import { routing } from '@/i18n/routing'
 import { listPosts } from '@/lib/content'
 import { topicMeta } from '@/lib/topics'
 
+export const dynamic = 'force-dynamic'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await listPosts()
   const localizedPages = routing.locales.flatMap((locale) => [

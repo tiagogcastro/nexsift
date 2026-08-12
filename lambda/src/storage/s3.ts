@@ -8,7 +8,7 @@ import {
   postSchema,
   type Post,
   type PostSummary,
-} from '@nexsift/contracts'
+} from '@nexsift/schemas/post'
 
 let client: S3Client | null = null
 
@@ -20,7 +20,7 @@ function getS3Client() {
   const endpoint = process.env.AWS_ENDPOINT_URL || undefined
   client = new S3Client({
     region: process.env.AWS_REGION ?? 'us-east-1',
-    endpoint,
+    ...(endpoint ? { endpoint } : {}),
     forcePathStyle: Boolean(endpoint),
   })
   return client

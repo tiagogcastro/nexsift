@@ -5,12 +5,9 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { siteConfig } from '@/config/site'
 import { PostArticle } from '@/features/blog/post-article'
-import { getPostBySlug, listPosts } from '@/lib/content'
+import { getPostBySlug } from '@/lib/content'
 
-export async function generateStaticParams() {
-  const posts = await listPosts()
-  return posts.map((post) => ({ locale: 'pt-BR', slug: post.slug }))
-}
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({
   params,

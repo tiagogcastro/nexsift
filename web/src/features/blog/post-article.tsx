@@ -1,7 +1,7 @@
 import { ArrowUpRight } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import type { Post } from '@nexsift/contracts'
+import type { Post } from '@nexsift/schemas/post'
 import { TrackedLink } from '@/analytics/tracked-link'
 import { formatDate } from '@/lib/date'
 import { topicMeta } from '@/lib/topics'

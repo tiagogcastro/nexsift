@@ -2,7 +2,7 @@ import {
   postSchema,
   type Post,
   type PostDraft,
-} from '@nexsift/contracts'
+} from '@nexsift/schemas/post'
 import { calculateReadingTime } from './reading-time'
 import { createSlug } from './slug'
 

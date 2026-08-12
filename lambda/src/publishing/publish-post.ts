@@ -3,8 +3,8 @@ import {
   type Post,
   type PostDraft,
   type PostSummary,
-  type Topic,
-} from '@nexsift/contracts'
+} from '@nexsift/schemas/post'
+import type { Topic } from '@nexsift/schemas/topic'
 import { getIndex, getPost, putIndex, putPost } from '../storage/s3'
 import { normalizePost } from './normalize-post'
 import { createSlug } from './slug'

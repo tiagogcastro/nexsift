@@ -12,6 +12,8 @@ import { TopicBands } from '@/features/landing/topic-bands'
 import { routing, type AppLocale } from '@/i18n/routing'
 import { listPosts } from '@/lib/content'
 
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage({
   params,
 }: {

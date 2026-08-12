@@ -1,4 +1,4 @@
-import { topicSchema, type Topic } from '@nexsift/contracts'
+import { topicSchema, type Topic } from '@nexsift/schemas/topic'
 import { getTranslations } from 'next-intl/server'
 import { notFound, redirect } from 'next/navigation'
 import { Footer } from '@/components/footer'
@@ -6,6 +6,8 @@ import { Header } from '@/components/header'
 import { SignalLedger } from '@/features/blog/signal-ledger'
 import { listPostsByTopic } from '@/lib/content'
 import { topicMeta } from '@/lib/topics'
+
+export const dynamic = 'force-dynamic'
 
 export default async function TopicPage({
   params,

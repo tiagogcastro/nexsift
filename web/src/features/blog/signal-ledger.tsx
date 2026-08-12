@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import type { PostSummary } from '@nexsift/contracts'
+import type { PostSummary } from '@nexsift/schemas/post'
 import { formatCompactDate } from '@/lib/date'
 import { topicMeta } from '@/lib/topics'
 

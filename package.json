@@ -4,16 +4,14 @@
   "packageManager": "yarn@4.9.2",
   "workspaces": [
     "web",
-    "lambda",
-    "contracts"
+    "lambda"
   ],
   "scripts": {
     "dev": "yarn workspace @nexsift/web dev",
-    "build": "yarn workspace @nexsift/contracts typecheck && yarn workspace @nexsift/lambda build && yarn workspace @nexsift/web build",
+    "build": "yarn workspace @nexsift/lambda build && yarn workspace @nexsift/web build",
     "lint": "yarn workspace @nexsift/web lint",
-    "typecheck": "yarn workspace @nexsift/contracts typecheck && yarn workspace @nexsift/lambda typecheck && yarn workspace @nexsift/web typecheck",
+    "typecheck": "yarn workspace @nexsift/lambda typecheck && yarn workspace @nexsift/web typecheck",
     "test": "yarn workspace @nexsift/lambda test",
-    "seed": "tsx scripts/seed.ts",
     "infra:up": "docker compose -f iac/local/compose.yml up -d",
     "infra:down": "docker compose -f iac/local/compose.yml down",
     "infra:logs": "docker compose -f iac/local/compose.yml logs -f ministack",
@@ -24,8 +22,6 @@
     "terraform:local:destroy": "terraform -chdir=iac/terraform destroy -auto-approve -var-file=local.tfvars"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.1097.0",
-    "@nexsift/contracts": "workspace:*",
     "tsx": "4.23.1"
   },
   "engines": {

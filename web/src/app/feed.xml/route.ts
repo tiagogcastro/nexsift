@@ -1,6 +1,8 @@
 import { siteConfig } from '@/config/site'
 import { listPosts } from '@/lib/content'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   const posts = await listPosts()
   const items = posts

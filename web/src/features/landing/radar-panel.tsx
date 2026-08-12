@@ -1,4 +1,4 @@
-import type { PostSummary } from '@nexsift/contracts'
+import type { PostSummary } from '@nexsift/schemas/post'
 import { topicMeta } from '@/lib/topics'
 
 export function RadarPanel({
