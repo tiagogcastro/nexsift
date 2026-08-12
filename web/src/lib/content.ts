@@ -48,13 +48,21 @@ async function readJsonObject(key: string) {
 
 function cachedReadJsonObject(key: string) {
   return unstable_cache(() => readJsonObject(key), [key], {
-    revalidate: 86400,
+    revalidate: 600,
   })
 }
 
 export async function listPosts() {
-  const value = await cachedReadJsonObject('public/indexes/latest.json')()
-  return postIndexSchema.parse(value)
+  try {
+    const value = await cachedReadJsonObject('public/indexes/latest.json')()
+    return postIndexSchema.parse(value)
+  } catch (error) {
+    if (error instanceof Error && error.name === 'NoSuchKey') {
+      return []
+    }
+
+    throw error
+  }
 }
 
 export async function getPostBySlug(slug: string) {
