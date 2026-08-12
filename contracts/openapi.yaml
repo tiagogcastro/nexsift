@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: NexSift Publisher
+  version: 1.0.0
+  description: Publishes a validated pt-BR NexSift post.
+servers:
+  - url: https://replace-with-lambda-function-url
+paths:
+  /:
+    post:
+      operationId: publishPost
+      summary: Publish an approved NexSift post
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [post]
+              properties:
+                post:
+                  $ref: '#/components/schemas/PostDraft'
+      responses:
+        '201':
+          description: Post published
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  slug:
+                    type: string
+                  publishedAt:
+                    type: string
+                    format: date-time
+        '401':
+          description: Invalid publication token
+        '422':
+          description: Invalid post payload
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    PostDraft:
+      type: object
+      required:
+        - type
+        - title
+        - description
+        - content
+        - whyItMatters
+        - topics
+        - tags
+        - sources
+        - relevanceScore
+      properties:
+        type:
+          type: string
+          enum: [daily-briefing, article]
+        slug:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        content:
+          type: string
+          description: Markdown content in pt-BR.
+        whyItMatters:
+          type: string
+        topics:
+          type: array
+          minItems: 1
+          maxItems: 3
+          items:
+            type: string
+            enum: [ai, aws-cloud, development, devops, career]
+        tags:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+        sources:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/PostSource'
+        relevanceScore:
+          type: number
+          minimum: 0
+          maximum: 10
+        featured:
+          type: boolean
+    PostSource:
+      type: object
+      required: [title, publisher, url]
+      properties:
+        title:
+          type: string
+        publisher:
+          type: string
+        url:
+          type: string
+          format: uri
+        publishedAt:
+          type: string
+          format: date-time

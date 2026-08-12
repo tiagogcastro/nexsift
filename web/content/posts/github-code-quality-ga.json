@@ -1,0 +1,24 @@
+{
+  "id": "post_github-code-quality-ga",
+  "type": "article",
+  "slug": "github-code-quality-ga",
+  "title": "GitHub Code Quality chega ao GA com quality gates e cobrança por committer",
+  "description": "O GitHub transformou o Code Quality em produto pago e adicionou visão por organização, cobertura, regras de qualidade e APIs de gerenciamento.",
+  "content": "## O que entrou em GA\n\nO **GitHub Code Quality** ficou generally available em 20 de julho de 2026 para GitHub Enterprise Cloud e GitHub Team. O produto combina análise determinística baseada em CodeQL com detecção assistida por IA para encontrar problemas de manutenibilidade e confiabilidade.\n\nA versão GA adiciona deployment em nível de organização, dashboards com scores, métricas de cobertura vindas de relatórios Cobertura XML e quality gates integrados aos rulesets do GitHub. Também existem APIs para habilitação e consulta de findings.\n\n## Como a cobrança funciona\n\nO preço de lista informado pelo GitHub é de **US$ 10 por committer ativo por mês** nos repositórios habilitados. Trabalho assistido por IA pode gerar consumo adicional e as análises determinísticas executadas no GitHub Actions consomem minutos do Actions.\n\nUm committer é considerado ativo quando realizou push para um repositório com Code Quality habilitado nos últimos 90 dias. A mesma pessoa é contada uma vez dentro da organização.\n\n## O que muda para engenharia\n\nA parte mais interessante não é apenas encontrar um smell. É conseguir colocar qualidade como uma política de merge. Cobertura, confiabilidade e manutenibilidade passam a entrar no mesmo fluxo de rulesets que já controla outras exigências de pull request.\n\nPara organizações maiores, isso aproxima segurança e qualidade de um modelo de governança centralizado. Para equipes menores, o preço e o consumo adicional precisam ser comparados com alternativas já presentes no pipeline.",
+  "whyItMatters": "A geração de código ficou mais rápida com ferramentas de IA, mas o volume adicional aumenta a necessidade de políticas objetivas de qualidade. O movimento do GitHub mostra que análise de manutenibilidade e confiabilidade está virando uma camada de governança do próprio fluxo de entrega.",
+  "topics": ["development", "devops"],
+  "tags": ["github", "codeql", "code-quality", "ci-cd", "copilot"],
+  "sources": [
+    {
+      "title": "GitHub Code Quality is now generally available",
+      "publisher": "GitHub",
+      "url": "https://github.blog/changelog/2026-07-20-github-code-quality-is-now-generally-available/",
+      "publishedAt": "2026-07-20T00:00:00.000Z"
+    }
+  ],
+  "publishedAt": "2026-07-21T12:00:00.000Z",
+  "readingTime": 4,
+  "relevanceScore": 8.8,
+  "locale": "pt-BR",
+  "featured": true
+}

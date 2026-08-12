@@ -1,0 +1,7 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "aws-lambda"]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"]
+}

@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "blog": "Blog en portugués",
+    "topics": "Temas",
+    "process": "Cómo funciona",
+    "about": "Sobre",
+    "today": "Ver señales"
+  },
+  "hero": {
+    "eyebrow": "Inteligencia tech para desarrolladores",
+    "titleA": "Menos ruido.",
+    "titleB": "Más señal.",
+    "description": "NexSift filtra, verifica y contextualiza lo que realmente importa en IA, cloud, desarrollo de software y carrera tech.",
+    "primary": "Ver señales",
+    "secondary": "Ver el proceso"
+  },
+  "signal": {
+    "label": "RADAR ACTUAL",
+    "frequencies": "frecuencias activas",
+    "selected": "señales seleccionadas",
+    "verified": "con fuentes rastreables"
+  },
+  "latest": {
+    "eyebrow": "SIGNAL LEDGER",
+    "title": "Lo que merece tu atención ahora",
+    "description": "Pocos elementos, contexto suficiente y un indicador claro de relevancia."
+  },
+  "topics": {
+    "eyebrow": "FRECUENCIAS",
+    "title": "Cinco áreas, un solo radar",
+    "description": "La cobertura es amplia. La selección sigue enfocada en señales con impacto técnico o profesional real."
+  },
+  "process": {
+    "eyebrow": "PIPELINE",
+    "title": "Curaduría antes de publicar",
+    "description": "La IA ayuda a investigar, organizar y revisar. El contenido debe permanecer vinculado a sus fuentes.",
+    "research": "Investigar",
+    "filter": "Filtrar",
+    "verify": "Verificar",
+    "context": "Contextualizar",
+    "publish": "Publicar"
+  },
+  "trust": {
+    "eyebrow": "SOURCE GROUNDED",
+    "title": "IA asistida. Fuentes visibles.",
+    "description": "NexSift no intenta sustituir la fuente original. Cada análisis apunta al material que lo sustenta y separa hechos de interpretación."
+  },
+  "footer": {
+    "tagline": "Menos ruido. Más señal.",
+    "builtBy": "Creado por Tiago Castro",
+    "rights": "NexSift"
+  },
+  "about": {
+    "eyebrow": "SOBRE",
+    "title": "Un filtro técnico, no otro feed infinito",
+    "body": "NexSift existe para reducir el costo de seguir la tecnología. En lugar de reproducir todo lo publicado, prioriza señales con impacto real para quienes construyen software, trabajan con cloud o siguen la evolución de la IA.",
+    "principleTitle": "Principios editoriales",
+    "principleA": "Fuentes antes de opinión",
+    "principleB": "Contexto antes de volumen",
+    "principleC": "Impacto técnico antes de hype"
+  },
+  "blog": {
+    "eyebrow": "ARCHIVO",
+    "title": "Señales y análisis",
+    "description": "El contenido editorial se publica en portugués y se ordena por relevancia y actualidad.",
+    "read": "Leer análisis",
+    "why": "Por qué importa",
+    "sources": "Fuentes",
+    "related": "Señales relacionadas",
+    "minutes": "min de lectura",
+    "score": "relevancia"
+  }
+}

@@ -1,0 +1,6 @@
+environment         = "local"
+aws_region          = "us-east-1"
+aws_endpoint_url    = "http://localhost:4566"
+lambda_endpoint_url = "http://ministack:4566"
+content_bucket_name = "nexsift-content-local"
+publish_token       = "local-dev-token-change-me"

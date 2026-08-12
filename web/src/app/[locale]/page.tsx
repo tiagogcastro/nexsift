@@ -1,0 +1,167 @@
+import Link from 'next/link'
+import { ArrowDownRight, ArrowUpRight } from 'lucide-react'
+import { hasLocale } from 'next-intl'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
+import { SignalLedger } from '@/features/blog/signal-ledger'
+import { ProcessLine } from '@/features/landing/process-line'
+import { RadarPanel } from '@/features/landing/radar-panel'
+import { TopicBands } from '@/features/landing/topic-bands'
+import { routing, type AppLocale } from '@/i18n/routing'
+import { listPosts } from '@/lib/content'
+
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale: rawLocale } = await params
+
+  if (!hasLocale(routing.locales, rawLocale)) {
+    notFound()
+  }
+
+  const locale = rawLocale as AppLocale
+  setRequestLocale(locale)
+  const t = await getTranslations()
+  const posts = await listPosts()
+
+  return (
+    <>
+      <Header
+        locale={locale}
+        labels={{
+          blog: t('nav.blog'),
+          topics: t('nav.topics'),
+          process: t('nav.process'),
+          about: t('nav.about'),
+          today: t('nav.today'),
+        }}
+      />
+
+      <main>
+        <section className="relative overflow-hidden border-b border-[var(--border)]">
+          <div className="pointer-events-none absolute inset-0 grid-line opacity-[0.14]" />
+          <div className="page-shell relative grid min-h-[calc(100vh-4rem)] items-center gap-12 py-16 lg:grid-cols-[1.12fr_0.88fr] lg:py-24">
+            <div>
+              <div className="eyebrow flex items-center gap-3">
+                <span className="signal-dot" />
+                {t('hero.eyebrow')}
+              </div>
+              <h1 className="mt-8 max-w-5xl text-[clamp(4rem,9vw,9rem)] font-medium leading-[0.82] tracking-[-0.085em]">
+                <span className="block">{t('hero.titleA')}</span>
+                <span className="block text-[var(--signal)]">{t('hero.titleB')}</span>
+              </h1>
+              <p className="mt-9 max-w-2xl text-[clamp(1rem,1.7vw,1.28rem)] leading-relaxed text-[var(--muted-strong)]">
+                {t('hero.description')}
+              </p>
+              <div className="mt-9 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/pt-BR/blog"
+                  className="flex items-center gap-2 rounded-[var(--radius-sm)] bg-[var(--signal)] px-4 py-2.5 text-sm font-semibold text-[#090b0d] transition-transform hover:-translate-y-0.5"
+                >
+                  {t('hero.primary')}
+                  <ArrowUpRight size={15} />
+                </Link>
+                <Link
+                  href={`/${locale}#process`}
+                  className="flex items-center gap-2 px-3 py-2.5 text-sm text-[var(--muted-strong)] hover:text-white"
+                >
+                  {t('hero.secondary')}
+                  <ArrowDownRight size={15} />
+                </Link>
+              </div>
+            </div>
+
+            <RadarPanel
+              posts={posts}
+              labels={{
+                label: t('signal.label'),
+                frequencies: t('signal.frequencies'),
+                selected: t('signal.selected'),
+                verified: t('signal.verified'),
+              }}
+            />
+          </div>
+        </section>
+
+        <section id="signals" className="page-shell py-20 lg:py-28">
+          <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
+            <div>
+              <div className="eyebrow">{t('latest.eyebrow')}</div>
+              <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
+                {t('latest.title')}
+              </h2>
+              <p className="mt-5 max-w-sm text-sm leading-relaxed text-[var(--muted)]">
+                {t('latest.description')}
+              </p>
+            </div>
+            <SignalLedger posts={posts} limit={5} />
+          </div>
+        </section>
+
+        <section id="topics" className="border-y border-[var(--border)] bg-[var(--surface-soft)]">
+          <div className="page-shell py-20 lg:py-28">
+            <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
+              <div>
+                <div className="eyebrow">{t('topics.eyebrow')}</div>
+                <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
+                  {t('topics.title')}
+                </h2>
+                <p className="mt-5 max-w-sm text-sm leading-relaxed text-[var(--muted)]">
+                  {t('topics.description')}
+                </p>
+              </div>
+              <TopicBands />
+            </div>
+          </div>
+        </section>
+
+        <section id="process" className="page-shell py-20 lg:py-28">
+          <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
+            <div>
+              <div className="eyebrow">{t('process.eyebrow')}</div>
+              <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
+                {t('process.title')}
+              </h2>
+              <p className="mt-5 max-w-sm text-sm leading-relaxed text-[var(--muted)]">
+                {t('process.description')}
+              </p>
+            </div>
+            <ProcessLine
+              steps={[
+                t('process.research'),
+                t('process.filter'),
+                t('process.verify'),
+                t('process.context'),
+                t('process.publish'),
+              ]}
+            />
+          </div>
+        </section>
+
+        <section className="border-t border-[var(--border)] bg-[var(--surface)]">
+          <div className="page-shell grid gap-8 py-20 lg:grid-cols-[0.65fr_1.35fr] lg:py-28">
+            <div className="eyebrow text-[var(--signal)]">{t('trust.eyebrow')}</div>
+            <div>
+              <h2 className="max-w-4xl text-[clamp(2.8rem,6vw,6rem)] font-medium leading-[0.96] tracking-[-0.065em]">
+                {t('trust.title')}
+              </h2>
+              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-[var(--muted-strong)]">
+                {t('trust.description')}
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer
+        locale={locale}
+        tagline={t('footer.tagline')}
+        builtBy={t('footer.builtBy')}
+      />
+    </>
+  )
+}

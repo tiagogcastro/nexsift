@@ -1,0 +1,31 @@
+services:
+  ministack:
+    image: ministackorg/ministack:1.4.8
+    container_name: nexsift-ministack
+    ports:
+      - '4566:4566'
+    environment:
+      PERSIST_STATE: '1'
+      S3_PERSIST: '1'
+      LOG_LEVEL: INFO
+      LAMBDA_EXECUTOR: docker
+      LAMBDA_DOCKER_NETWORK: nexsift-local
+    volumes:
+      - ./data/state:/tmp/ministack-state
+      - ./data/s3:/tmp/ministack-data/s3
+      - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'python',
+          '-c',
+          "import urllib.request; urllib.request.urlopen('http://localhost:4566/_ministack/health')",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+networks:
+  default:
+    name: nexsift-local

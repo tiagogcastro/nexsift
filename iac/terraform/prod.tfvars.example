@@ -1,0 +1,6 @@
+environment         = "prod"
+aws_region          = "us-east-1"
+aws_endpoint_url    = ""
+lambda_endpoint_url = ""
+content_bucket_name = "replace-with-a-globally-unique-bucket-name"
+publish_token       = "replace-with-a-long-random-token"

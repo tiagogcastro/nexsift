@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "blog": "Blog in Portuguese",
+    "topics": "Topics",
+    "process": "How it works",
+    "about": "About",
+    "today": "View signals"
+  },
+  "hero": {
+    "eyebrow": "Tech intelligence for developers",
+    "titleA": "Less noise.",
+    "titleB": "More signal.",
+    "description": "NexSift filters, verifies and contextualizes what actually matters across AI, cloud, software development and tech careers.",
+    "primary": "View signals",
+    "secondary": "See the process"
+  },
+  "signal": {
+    "label": "CURRENT RADAR",
+    "frequencies": "active frequencies",
+    "selected": "signals selected",
+    "verified": "with traceable sources"
+  },
+  "latest": {
+    "eyebrow": "SIGNAL LEDGER",
+    "title": "What deserves your attention now",
+    "description": "A small set of items, enough context and a clear relevance indicator."
+  },
+  "topics": {
+    "eyebrow": "FREQUENCIES",
+    "title": "Five areas, one radar",
+    "description": "Coverage is broad. Selection stays focused on signals with real technical or professional impact."
+  },
+  "process": {
+    "eyebrow": "PIPELINE",
+    "title": "Curation before publication",
+    "description": "AI helps research, organize and review. Published content must stay traceable to its sources.",
+    "research": "Research",
+    "filter": "Filter",
+    "verify": "Verify",
+    "context": "Contextualize",
+    "publish": "Publish"
+  },
+  "trust": {
+    "eyebrow": "SOURCE GROUNDED",
+    "title": "AI assisted. Sources visible.",
+    "description": "NexSift does not try to replace original sources. Each analysis points to the material that supports it and separates facts from interpretation."
+  },
+  "footer": {
+    "tagline": "Less noise. More signal.",
+    "builtBy": "Built by Tiago Castro",
+    "rights": "NexSift"
+  },
+  "about": {
+    "eyebrow": "ABOUT",
+    "title": "A technical filter, not another infinite feed",
+    "body": "NexSift exists to reduce the cost of keeping up with technology. Instead of reproducing everything that gets published, it prioritizes signals with real impact for people who build software, work with cloud or follow the evolution of AI.",
+    "principleTitle": "Editorial principles",
+    "principleA": "Sources before opinion",
+    "principleB": "Context before volume",
+    "principleC": "Technical impact before hype"
+  },
+  "blog": {
+    "eyebrow": "ARCHIVE",
+    "title": "Signals and analysis",
+    "description": "Editorial content is published in Portuguese and ordered by relevance and recency.",
+    "read": "Read analysis",
+    "why": "Why it matters",
+    "sources": "Sources",
+    "related": "Related signals",
+    "minutes": "min read",
+    "score": "relevance"
+  }
+}
