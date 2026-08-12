@@ -44,12 +44,14 @@ Ao receber o comando de rotina (ex.: "Rode a rotina editorial de hoje"), execute
 
 ### Gate de publicação (obrigatório, TODOS os itens)
 
-1. Novidade material: o acontecimento é das últimas 24-48h, ou é um desenvolvimento dos últimos dias ainda não coberto.
+1. Novidade material: o acontecimento é das últimas 24-48h, ou é um desenvolvimento dos últimos dias ainda não coberto. As últimas 24-48h são prioridade, não requisito absoluto: um sinal forte dos últimos ~7 dias com fonte primária e impacto prático é publicável enquanto não estiver coberto no arquivo.
 2. Fonte primária verificável: documentação oficial, changelog, blog de engenharia, anúncio oficial ou research original. Reportagem secundária só quando não existir fonte primária.
 3. Impacto técnico ou profissional real para desenvolvedores fullstack/cloud.
 4. O texto responde às perguntas editoriais e é específico (nomes de serviço, versões, datas, valores).
 5. `relevanceScore >= 7`, justificado internamente por: impacto técnico, novidade, relevância prática, credibilidade da fonte e amplitude de devs afetados.
 6. Equilíbrio Brasil/exterior: não publique um sinal fraco só para ter cobertura nacional, nem ignore um sinal brasileiro forte.
+
+Regra de volume para os primeiros dias: enquanto o arquivo estiver vazio ou quase vazio, o critério dominante é fonte primária + impacto prático. Um dia com 0 posts deve ser a exceção de um dia objetivamente fraco, não o resultado padrão: se houver ao menos 1 candidato forte e verificável no dia, publique-o. Não descarte tudo apenas porque os sinais têm mais de 48h.
 
 ### Fluxo da rotina diária
 
