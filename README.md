@@ -308,3 +308,18 @@ feat: add localized landing page
 feat: add S3 content provider
 fix: preserve publication timestamp on update
 ```
+
+## Licensing
+
+Code, configuration and infrastructure in this repository are licensed under
+the MIT License. See `LICENSE`. Copyright (c) 2026 Tiago Gonçalves de Castro.
+
+Editorial content (posts, analyses and briefings published through the
+NexSift pipeline) is licensed under CC BY-NC-ND 4.0: attribution to
+Tiago Gonçalves de Castro is mandatory, commercial use and derivatives are
+not allowed, and attributing authorship to third parties (including AI
+systems) is explicitly forbidden. See `LICENSE-CONTENT.md`.
+
+If the project grows, consider registering the software (programa de
+computador) and the NexSift trademark at INPI, and submit the site to
+Google Search Console and Bing Webmaster Tools.

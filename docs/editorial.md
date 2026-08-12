@@ -41,10 +41,11 @@ A curated set of a few signals published as one briefing. The briefing is a futu
 ## Topics
 
 - `ai`
-- `aws-cloud`
+- `aws-cloud` (published label "Cloud"; a dedicated AWS topic may split out later)
 - `development`
 - `devops`
-- `career`
+- `career` (published label "Carreira & Vagas", covers jobs, salaries and market moves)
+- `finance`
 
 ## Relevance score
 

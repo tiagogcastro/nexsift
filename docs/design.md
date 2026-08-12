@@ -45,6 +45,7 @@ This creates a scan pattern closer to a market terminal, changelog or engineerin
 | orchid | `#C9A7FF` | AI frequency |
 | coral | `#FF9C73` | development frequency |
 | amber | `#FFD166` | career frequency |
+| finance green | `#7EE787` | finance frequency |
 
 The primary accent is chartreuse instead of the common blue SaaS palette.
 
