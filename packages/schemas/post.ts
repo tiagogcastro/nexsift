@@ -36,6 +36,7 @@ export const postSummarySchema = postSchema.pick({
   topics: true,
   tags: true,
   publishedAt: true,
+  updatedAt: true,
   readingTime: true,
   relevanceScore: true,
   locale: true,

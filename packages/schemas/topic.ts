@@ -6,6 +6,7 @@ export const topicSchema = z.enum([
   'development',
   'devops',
   'career',
+  'finance',
 ])
 
 export type Topic = z.infer<typeof topicSchema>
