@@ -59,7 +59,7 @@ Regra de volume para os primeiros dias: enquanto o arquivo estiver vazio ou quas
 2. Pesquise os sinais do dia nas áreas de cobertura.
 3. Para cada tópico, selecione o melhor sinal candidato.
 4. Redija o post em pt-BR.
-5. Autocrítica: analise o rascunho como um crítico severo. É hype? A fonte sustenta cada afirmação? A novidade é real? A linguagem é precisa? Respeita os limites do contrato? Revise até ficar sólido, ou descarte.
+5. Autocrítica: analise o rascunho como um crítico severo. É hype? A fonte sustenta cada afirmação? A novidade é real? A linguagem é precisa? Respeita os limites do contrato? Revise até ficar sólido, ou descarte. Limite: no máximo 2 rodadas de revisão por post; após isso, publique como está ou descarte - não fique em loop de autocrítica.
 6. Publique apenas os aprovados no gate.
 
 ### Contrato de publicação (action `publishPost`)
