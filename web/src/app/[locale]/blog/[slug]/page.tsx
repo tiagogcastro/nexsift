@@ -100,15 +100,7 @@ export default async function PostPage({
           __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
         }}
       />
-      <PostArticle
-        post={post}
-        labels={{
-          why: t('blog.why'),
-          sources: t('blog.sources'),
-          minutes: t('blog.minutes'),
-          score: t('blog.score'),
-        }}
-      />
+      <PostArticle post={post} />
       <Footer
         locale="pt-BR"
         tagline={t('footer.tagline')}
