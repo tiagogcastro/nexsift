@@ -115,7 +115,7 @@ button:not(:disabled),
   --topic-color: var(--topic-ai);
 }
 
-.topic-color[data-topic='aws-cloud'] {
+.topic-color[data-topic='cloud'] {
   --topic-color: var(--topic-cloud);
 }
 
