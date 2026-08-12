@@ -10,7 +10,7 @@
     "eyebrow": "Tech intelligence for developers",
     "titleA": "Less noise.",
     "titleB": "More signal.",
-    "description": "NexSift filters, verifies and contextualizes what actually matters across AI, cloud, software development and tech careers.",
+    "description": "NexSift is a knowledge aggregator that gets straight to the point. It filters, verifies and contextualizes what matters across AI, cloud, development and tech careers, with every signal traceable to its official source.",
     "primary": "View signals",
     "secondary": "See the process"
   },
@@ -23,11 +23,11 @@
   "latest": {
     "eyebrow": "SIGNAL LEDGER",
     "title": "What deserves your attention now",
-    "description": "A small set of items, enough context and a clear relevance indicator."
+    "description": "Not a news portal. A short selection of signals with enough context and a traceable source."
   },
   "topics": {
     "eyebrow": "FREQUENCIES",
-    "title": "Five areas, one radar",
+    "title": "Six areas, one radar",
     "description": "Coverage is broad. Selection stays focused on signals with real technical or professional impact."
   },
   "process": {
@@ -43,7 +43,90 @@
   "trust": {
     "eyebrow": "SOURCE GROUNDED",
     "title": "AI assisted. Sources visible.",
-    "description": "NexSift does not try to replace original sources. Each analysis points to the material that supports it and separates facts from interpretation."
+    "description": "Each analysis gets straight to the point: what happened, what changed and why it matters. NexSift does not replace the original source; it points to the material that supports the content and separates facts from interpretation."
+  },
+  "topicItems": {
+    "ai": {
+      "label": "Artificial Intelligence",
+      "shortLabel": "AI",
+      "description": "Models, agents, tools and practical changes across the AI ecosystem."
+    },
+    "aws-cloud": {
+      "label": "Cloud",
+      "shortLabel": "CLOUD",
+      "description": "Cloud infrastructure, managed services, architecture and costs."
+    },
+    "development": {
+      "label": "Development",
+      "shortLabel": "DEV",
+      "description": "Frameworks, runtimes, platforms and software engineering practices."
+    },
+    "devops": {
+      "label": "DevOps",
+      "shortLabel": "OPS",
+      "description": "CI/CD, IaC, observability, automation and systems operation."
+    },
+    "career": {
+      "label": "Career & Jobs",
+      "shortLabel": "CAREER",
+      "description": "Jobs, salaries, interviews, skills and the tech job market."
+    },
+    "finance": {
+      "label": "Finance",
+      "shortLabel": "FIN",
+      "description": "Investments, income, currency and money decisions for tech professionals."
+    }
+  },
+  "notice": {
+    "short": "Content produced with AI support from official sources. Errors may occur.",
+    "article": "This text was produced with AI support and is extracted from the official sources cited below. Review the sources before making decisions; errors may occur."
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "blog": "Blog",
+    "topics": "Topics"
+  },
+  "console": {
+    "searchPlaceholder": "Search by title, tag or description",
+    "allTopics": "All",
+    "sortRecent": "Recent",
+    "sortUpdated": "Updated",
+    "loadMore": "Load more signals",
+    "empty": "No signals match the current filters.",
+    "countLabel": "signals on the radar",
+    "signalFallback": "SIGNAL"
+  },
+  "topicPage": {
+    "frequency": "FREQUENCY"
+  },
+  "article": {
+    "metadata": "Signal metadata",
+    "published": "Published",
+    "updated": "Updated",
+    "reading": "Reading",
+    "author": "Author",
+    "authorValue": "NexSift Editorial"
+  },
+  "radar": {
+    "badge": "CURATED / CURRENT",
+    "frequencyHeader": "Frequency / signal",
+    "scoreHeader": "score"
+  },
+  "stats": {
+    "signals": "signals published",
+    "frequencies": "active frequencies",
+    "avgRelevance": "average relevance"
+  },
+  "recentlyUpdated": {
+    "eyebrow": "RECENTLY UPDATED",
+    "title": "Signals reviewed last",
+    "description": "Posts corrected or updated with new sources and context."
+  },
+  "notFound": {
+    "eyebrow": "404 / NO SIGNAL",
+    "title": "Frequency not found.",
+    "body": "This address does not point to a signal published by NexSift.",
+    "back": "Back to the radar"
   },
   "footer": {
     "tagline": "Less noise. More signal.",
@@ -68,6 +151,9 @@
     "sources": "Sources",
     "related": "Related signals",
     "minutes": "min read",
-    "score": "relevance"
+    "score": "relevance",
+    "signalsPublished": "{count} signals published",
+    "metaTitle": "Blog",
+    "metaDescription": "NexSift technical signals and analysis in Portuguese."
   }
 }

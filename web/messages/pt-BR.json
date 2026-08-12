@@ -10,7 +10,7 @@
     "eyebrow": "Inteligência tech para desenvolvedores",
     "titleA": "Menos ruído.",
     "titleB": "Mais sinal.",
-    "description": "O NexSift filtra, verifica e contextualiza o que realmente importa em IA, cloud, desenvolvimento e mercado tech.",
+    "description": "O NexSift é um agregador de conhecimento direto ao ponto. Filtra, verifica e contextualiza o que importa em IA, cloud, desenvolvimento e mercado tech, com cada sinal rastreável até a fonte oficial.",
     "primary": "Ver sinais",
     "secondary": "Entender o processo"
   },
@@ -21,13 +21,13 @@
     "verified": "com fontes verificáveis"
   },
   "latest": {
-    "eyebrow": "SIGNAL LEDGER",
+    "eyebrow": "LEDGER DE SINAIS",
     "title": "O que merece sua atenção agora",
-    "description": "Poucos itens, contexto suficiente e uma indicação clara de relevância."
+    "description": "Não é um portal de notícias. É uma seleção curta de sinais com contexto suficiente e fonte verificável."
   },
   "topics": {
     "eyebrow": "FREQUÊNCIAS",
-    "title": "Cinco áreas, um único radar",
+    "title": "Seis áreas, um único radar",
     "description": "A cobertura é ampla. A seleção continua restrita ao que tem impacto técnico ou profissional real."
   },
   "process": {
@@ -41,9 +41,92 @@
     "publish": "Publicar"
   },
   "trust": {
-    "eyebrow": "SOURCE GROUNDED",
+    "eyebrow": "BASEADO EM FONTES",
     "title": "IA assistida. Fontes visíveis.",
-    "description": "O NexSift não tenta substituir a fonte original. Cada análise aponta para o material que sustenta o conteúdo e separa fato de interpretação."
+    "description": "Cada análise é direta ao ponto: o que aconteceu, o que mudou e por que importa. O NexSift não substitui a fonte original; aponta para o material que sustenta o conteúdo e separa fato de interpretação."
+  },
+  "topicItems": {
+    "ai": {
+      "label": "Inteligência Artificial",
+      "shortLabel": "IA",
+      "description": "Modelos, agentes, ferramentas e mudanças práticas no ecossistema de IA."
+    },
+    "aws-cloud": {
+      "label": "Cloud",
+      "shortLabel": "CLOUD",
+      "description": "Infraestrutura, serviços gerenciados, arquitetura e custos em nuvem."
+    },
+    "development": {
+      "label": "Desenvolvimento",
+      "shortLabel": "DEV",
+      "description": "Frameworks, runtimes, plataformas e práticas de engenharia de software."
+    },
+    "devops": {
+      "label": "DevOps",
+      "shortLabel": "OPS",
+      "description": "CI/CD, IaC, observabilidade, automação e operação de sistemas."
+    },
+    "career": {
+      "label": "Carreira & Vagas",
+      "shortLabel": "CAREER",
+      "description": "Vagas, salários, entrevistas, habilidades e o mercado de trabalho tech."
+    },
+    "finance": {
+      "label": "Finanças",
+      "shortLabel": "FIN",
+      "description": "Investimentos, renda, câmbio e decisões financeiras de quem trabalha com tecnologia."
+    }
+  },
+  "notice": {
+    "short": "Conteúdo gerado com apoio de IA a partir de fontes oficiais. Pode conter erros.",
+    "article": "Este texto foi produzido com apoio de IA e é extraído das fontes oficiais citadas abaixo. Antes de tomar decisões, revise as fontes; erros podem ocorrer."
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "blog": "Blog",
+    "topics": "Tópicos"
+  },
+  "console": {
+    "searchPlaceholder": "Buscar por título, tag ou descrição",
+    "allTopics": "Todos",
+    "sortRecent": "Recentes",
+    "sortUpdated": "Atualizados",
+    "loadMore": "Carregar mais sinais",
+    "empty": "Nenhum sinal corresponde aos filtros atuais.",
+    "countLabel": "sinais no radar",
+    "signalFallback": "SINAL"
+  },
+  "topicPage": {
+    "frequency": "FREQUÊNCIA"
+  },
+  "article": {
+    "metadata": "METADADOS DO SINAL",
+    "published": "Publicado",
+    "updated": "Atualizado",
+    "reading": "Leitura",
+    "author": "Autor",
+    "authorValue": "NexSift Editorial"
+  },
+  "radar": {
+    "badge": "CURADO / ATUAL",
+    "frequencyHeader": "FREQUÊNCIA / SINAL",
+    "scoreHeader": "NOTA"
+  },
+  "stats": {
+    "signals": "sinais publicados",
+    "frequencies": "frequências ativas",
+    "avgRelevance": "relevância média"
+  },
+  "recentlyUpdated": {
+    "eyebrow": "ATUALIZADOS RECENTEMENTE",
+    "title": "Sinais revistos por último",
+    "description": "Posts corrigidos ou atualizados com novas fontes e contexto."
+  },
+  "notFound": {
+    "eyebrow": "404 / SEM SINAL",
+    "title": "Frequência não encontrada.",
+    "body": "Este endereço não aponta para um sinal publicado pelo NexSift.",
+    "back": "Voltar ao radar"
   },
   "footer": {
     "tagline": "Menos ruído. Mais sinal.",
@@ -68,6 +151,9 @@
     "sources": "Fontes",
     "related": "Sinais relacionados",
     "minutes": "min de leitura",
-    "score": "relevância"
+    "score": "relevância",
+    "signalsPublished": "{count} sinais publicados",
+    "metaTitle": "Blog",
+    "metaDescription": "Sinais e análises técnicas do NexSift em português."
   }
 }
