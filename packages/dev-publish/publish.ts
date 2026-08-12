@@ -12,6 +12,11 @@ if (!invokeUrl || !token) {
 // AWS Lambda Function URLs receive the HTTP request directly; the MiniStack
 // Invoke API expects the Lambda event envelope in the request body.
 const isFunctionUrl = invokeUrl.includes('.lambda-url.')
+const allowProd = process.argv.includes('--allow-prod')
+
+if (isFunctionUrl && !allowProd) {
+  throw new Error('Refusing to publish to a production Function URL; pass --allow-prod to override')
+}
 
 async function main() {
   const fileArg = process.argv.find((arg) => arg.startsWith('--file='))

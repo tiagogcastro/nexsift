@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const topicSchema = z.enum([
   'ai',
-  'aws-cloud',
+  'cloud',
   'development',
   'devops',
   'career',

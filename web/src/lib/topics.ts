@@ -3,7 +3,7 @@ import type { getTranslations } from 'next-intl/server'
 
 export const topicOrder: readonly Topic[] = [
   'ai',
-  'aws-cloud',
+  'cloud',
   'development',
   'devops',
   'career',
@@ -26,11 +26,11 @@ export function getTopicMeta(t: Translator, topic: Topic): TopicMeta {
         shortLabel: t('topicItems.ai.shortLabel'),
         description: t('topicItems.ai.description'),
       }
-    case 'aws-cloud':
+    case 'cloud':
       return {
-        label: t('topicItems.aws-cloud.label'),
-        shortLabel: t('topicItems.aws-cloud.shortLabel'),
-        description: t('topicItems.aws-cloud.description'),
+        label: t('topicItems.cloud.label'),
+        shortLabel: t('topicItems.cloud.shortLabel'),
+        description: t('topicItems.cloud.description'),
       }
     case 'development':
       return {

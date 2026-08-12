@@ -7,7 +7,7 @@ export const contentType = 'image/png'
 
 const topicColors: Record<string, string> = {
   ai: '#c9a7ff',
-  'aws-cloud': '#6de7e7',
+  cloud: '#6de7e7',
   development: '#ff9c73',
   devops: '#c7f66b',
   career: '#ffd166',

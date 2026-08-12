@@ -51,7 +51,7 @@
       "shortLabel": "IA",
       "description": "Modelos, agentes, herramientas y cambios prácticos en el ecosistema de IA."
     },
-    "aws-cloud": {
+    "cloud": {
       "label": "Cloud",
       "shortLabel": "CLOUD",
       "description": "Infraestructura, servicios gestionados, arquitectura y costos en la nube."

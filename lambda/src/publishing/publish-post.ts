@@ -9,7 +9,7 @@ import { getIndex, getPost, putIndex, putPost } from '../storage/s3'
 import { normalizePost } from './normalize-post'
 import { createSlug } from './slug'
 
-const latestIndexKey = 'public/indexes/latest.json'
+export const latestIndexKey = 'public/indexes/latest.json'
 const latestLimit = 100
 
 export async function publishPost(draft: PostDraft) {

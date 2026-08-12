@@ -74,3 +74,7 @@ yarn build
 The MVP does not need a database, Redis, Kubernetes, GraphQL, NestJS, Turborepo, Nx, microservices or a full CMS.
 
 Prefer the smallest solution that preserves the agreed path from local MiniStack to AWS production.
+
+## Production content
+
+Prod content is published only through the NexSift Editor GPT flow. Never publish test or example payloads to the prod Function URL; `packages/dev-publish` refuses Function URLs without `--allow-prod`, and `--allow-prod` is not to be used for test content.

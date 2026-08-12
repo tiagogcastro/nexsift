@@ -51,7 +51,7 @@
       "shortLabel": "AI",
       "description": "Models, agents, tools and practical changes across the AI ecosystem."
     },
-    "aws-cloud": {
+    "cloud": {
       "label": "Cloud",
       "shortLabel": "CLOUD",
       "description": "Cloud infrastructure, managed services, architecture and costs."

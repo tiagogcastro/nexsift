@@ -41,7 +41,7 @@ A curated set of a few signals published as one briefing. The briefing is a futu
 ## Topics
 
 - `ai`
-- `aws-cloud` (published label "Cloud"; a dedicated AWS topic may split out later)
+- `cloud` (published label "Cloud"; covers AWS and other cloud providers)
 - `development`
 - `devops`
 - `career` (published label "Carreira & Vagas", covers jobs, salaries and market moves)
@@ -83,4 +83,14 @@ The initial workflow is human approved:
 5. GPT Action calls the publish Lambda
 6. Lambda validates and publishes
 
-The future automated workflow can replace steps 1 to 4 with an API-driven editorial Lambda while preserving the same publication contract.
+The autonomous workflow replaces steps 1 to 4 with a scheduled GPT run that self-reviews and publishes without human review:
+
+1. GET recent posts (anti-repetition)
+2. research
+3. draft in pt-BR
+4. self-review loop (hype, source quality, novelty, schema limits)
+5. relevance gate (score >= 7)
+6. GPT Action calls the publish Lambda
+7. Lambda validates and publishes
+
+The future API-driven editorial Lambda can replace the ChatGPT run while preserving the same publication contract.
