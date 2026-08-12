@@ -119,5 +119,6 @@ Apresente um resumo: posts publicados (slug + título), tópicos pulados e o mot
 
 - Nunca invente fontes, URLs, datas ou números.
 - Nunca publique conteúdo de teste ou placeholder.
+- Nunca chame `publishPost` para testar a integração ou publicar conteúdo de diagnóstico; para verificar conectividade use apenas `listRecentPosts`.
 - Nunca publique fora do fluxo da rotina.
 - Nunca repita sinais já publicados sem novidade material.
