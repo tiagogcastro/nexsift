@@ -39,20 +39,20 @@ export default async function AboutPage({
             <h1 className="max-w-5xl text-[clamp(3.4rem,8vw,8rem)] font-medium leading-[0.9] tracking-[-0.075em]">
               {t('about.title')}
             </h1>
-            <p className="mt-10 max-w-3xl text-xl leading-relaxed text-[var(--muted-strong)]">
+            <p className="mt-10 max-w-3xl text-xl leading-relaxed text-(--muted-strong)">
               {t('about.body')}
             </p>
 
-            <div className="mt-16 border-t border-[var(--border)] pt-6">
+            <div className="mt-16 border-t border-(--border) pt-6">
               <div className="eyebrow">{t('about.principleTitle')}</div>
-              <div className="mt-6 grid gap-px bg-[var(--border)] md:grid-cols-3">
+              <div className="mt-6 grid gap-px bg-(--border) md:grid-cols-3">
                 {[
                   t('about.principleA'),
                   t('about.principleB'),
                   t('about.principleC'),
                 ].map((principle, index) => (
-                  <div key={principle} className="bg-[var(--background)] p-6">
-                    <div className="font-mono text-[10px] text-[var(--muted)]">
+                  <div key={principle} className="bg-(--background) p-6">
+                    <div className="font-mono text-[10px] text-(--muted)">
                       0{index + 1}
                     </div>
                     <p className="mt-10 text-lg tracking-[-0.025em]">{principle}</p>
