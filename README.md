@@ -10,16 +10,15 @@ The product is designed to feel closer to a technical signal console than a trad
 
 The repository already contains the foundation for:
 
-- localized Next.js landing page
+- localized Next.js landing page (pt-BR as default locale without URL prefix)
 - signal-ledger blog archive
 - article pages with visible source rails
 - topic pages
-- bundled bootstrap content for a zero-cost first Vercel deploy
-- optional S3 content provider
+- S3 content provider (the site always reads posts from S3)
 - MiniStack local AWS simulation
-- Terraform for S3, Lambda, IAM and SSM
+- Terraform for S3, Lambda and IAM
 - publication Lambda with Bearer authentication and Zod validation
-- GPT Action OpenAPI contract
+- local dev publish tool (`yarn dev:publish`)
 - RSS, sitemap, robots and Article JSON-LD
 - PostHog integration that stays disabled until a key is configured
 - GitHub Actions quality pipeline
@@ -28,13 +27,15 @@ The repository already contains the foundation for:
 
 ```text
 nexsift/
-├── web/          Next.js product surface
-├── lambda/       publication Lambda and publishing logic
-├── contracts/    shared Zod schemas and OpenAPI contract
-├── iac/          MiniStack and Terraform
-├── scripts/      seed and operational data
-├── docs/         architecture, design and editorial decisions
-└── .github/      CI
+├── web/             Next.js product surface
+├── lambda/          publication Lambda and publishing logic
+├── packages/
+│   ├── schemas/     shared Zod schemas (plain folder, not a workspace)
+│   └── dev-publish/ local publish tool and example payloads
+├── iac/terraform/   Terraform for MiniStack and AWS
+├── docs/            architecture, design and editorial decisions
+├── docker-compose.yml   MiniStack local environment
+└── .github/         CI
 ```
 
 See `AGENTS.md` before making structural or style changes.
@@ -53,7 +54,6 @@ See `AGENTS.md` before making structural or style changes.
 - AWS S3
 - AWS Lambda
 - AWS IAM
-- AWS SSM Parameter Store
 - Terraform
 - Docker Compose
 - MiniStack
@@ -79,22 +79,14 @@ Then:
 corepack enable
 yarn install
 cp web/.env.example web/.env.local
-yarn dev
+cp .env.example .env
 ```
-
-Open:
-
-```text
-http://localhost:3000
-```
-
-The default `CONTENT_SOURCE=filesystem` reads the bootstrap posts from `web/content/posts`. This is the mode intended for the first zero-cost Vercel deployment.
 
 Running `yarn install` creates `yarn.lock`. Commit that lockfile with the project after the first install.
 
 ## Full local AWS simulation
 
-MiniStack runs the AWS-shaped local environment.
+MiniStack runs the AWS-shaped local environment. The site always reads content from S3; there is no bundled content.
 
 ### 1. Start MiniStack
 
@@ -116,76 +108,78 @@ yarn lambda:build
 
 ### 3. Initialize and apply Terraform
 
+First time only:
+
 ```bash
 yarn terraform:init
 yarn terraform:local:apply
 ```
 
-Terraform creates the local S3 bucket, SSM parameter, IAM role and publication Lambda.
+Terraform creates the local S3 bucket, IAM role and publication Lambda inside MiniStack.
 
-### 4. Seed S3
+### 4. Publish a test post
 
 ```bash
-yarn seed
+yarn dev:publish --file=packages/dev-publish/payloads/example.json
 ```
 
-### 5. Make the web app read from S3
+The script POSTs the payload to the Lambda, which validates it with Zod, writes the post and updates the S3 indexes.
 
-Change `web/.env.local`:
+Check the objects in the local bucket:
 
-```env
-CONTENT_SOURCE=s3
-CONTENT_BUCKET=nexsift-content-local
-AWS_REGION=us-east-1
-AWS_ENDPOINT_URL=http://localhost:4566
-AWS_ACCESS_KEY_ID=test
-AWS_SECRET_ACCESS_KEY=test
+```bash
+curl "http://localhost:4566/nexsift-content-local?list-type=2"
 ```
 
-Then:
+### 5. Run the site
 
 ```bash
 yarn dev
 ```
 
-The same pages now read through the AWS SDK from MiniStack S3.
+Open:
 
-## Test local publication
-
-Get the local Function URL:
-
-```bash
-terraform -chdir=iac/terraform output -raw publish_function_url
+```text
+http://localhost:3000
 ```
 
-Use the URL returned by Terraform:
+The published post appears in the signal ledger at `/` and at `/blog/{slug}`. `/pt-BR` is the default locale and has no URL prefix; `en-US` and `es-ES` keep their prefix. Old `/pt-BR/*` URLs redirect to the unprefixed form.
 
-```bash
-curl -X POST '<FUNCTION_URL>' \
-  -H 'Authorization: Bearer local-dev-token-change-me' \
-  -H 'Content-Type: application/json' \
-  --data @scripts/data/publish-example.json
+## Publish flow
+
+```text
+ChatGPT / NexSift Editor
+  -> user approval
+  -> GPT Action
+  -> Lambda Function URL
+  -> Zod validation
+  -> S3
+  -> NexSift
 ```
 
-The Lambda validates the payload, writes the post and updates the S3 indexes.
+Locally, `yarn dev:publish` replaces the GPT Action step: it reads a JSON payload from `packages/dev-publish/payloads/` and invokes the Lambda through MiniStack.
 
 ## Vercel MVP
-
-For the first deployment, keep:
-
-```env
-CONTENT_SOURCE=filesystem
-```
 
 Recommended Vercel setup:
 
 1. import the GitHub repository
 2. select `web` as the project root directory
 3. keep the detected Next.js framework settings
-4. set `NEXT_PUBLIC_SITE_URL` after Vercel assigns the project URL
+4. set the environment variables (see below) after Vercel assigns the project URL
 5. deploy
 
-No AWS resource or OpenAI API key is required for this phase.
+Environment variables:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://<project>.vercel.app
+NEXT_PUBLIC_POSTHOG_KEY=<project-api-key>
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
+CONTENT_BUCKET=<s3-bucket-name>
+AWS_REGION=us-east-1
+```
+
+The site reads posts from S3, so publishing does not require a redeploy.
 
 ## Assisted publication phase
 
@@ -201,7 +195,7 @@ ChatGPT / NexSift Editor
   -> NexSift
 ```
 
-`contracts/openapi.yaml` defines the GPT Action contract.
+The GPT Action contract is defined in the OpenAPI spec at `docs/openapi.yaml`.
 
 The ChatGPT step handles research, writing and review. The Lambda only validates and publishes.
 
@@ -244,7 +238,7 @@ relevanceScore
 locale
 ```
 
-The runtime contract lives in `contracts/src` and is validated by Zod.
+The runtime contract lives in `packages/schemas` and is validated by Zod.
 
 ## Content storage
 
@@ -267,22 +261,23 @@ A database is not part of the MVP.
 ## Product routes
 
 ```text
-/pt-BR
+/            default locale (pt-BR), no prefix
+/about
+/blog
+/blog/{slug}
+/topics/{topic}
+
 /en-US
+/en-US/about
 /es-ES
-
-/{locale}/about
-
-/pt-BR/blog
-/pt-BR/blog/{slug}
-/pt-BR/topics/{topic}
+/es-ES/about
 
 /feed.xml
 /sitemap.xml
 /robots.txt
 ```
 
-Editorial content remains in pt-BR. English and Spanish users are redirected to the pt-BR blog for articles.
+Editorial content remains in pt-BR. English and Spanish users are redirected to the unprefixed blog for articles.
 
 ## Design and editorial references
 

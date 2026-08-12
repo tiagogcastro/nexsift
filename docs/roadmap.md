@@ -1,27 +1,26 @@
 # NexSift Roadmap
 
-## Milestone 1: product surface
+## Milestone 1: product surface (done)
 
 1. project foundation
 2. design system
-3. localized landing
+3. localized landing (pt-BR default without prefix)
 4. blog archive
 5. article layout
 6. topic pages
-7. bootstrap posts
+7. S3 content provider
 8. SEO, RSS and structured data
-9. PostHog integration
-10. Vercel deployment
+9. PostHog integration (Cloud)
+10. local MiniStack flow
 
 Goal: validate product, design and content at zero additional infrastructure cost.
 
-## Milestone 2: local cloud parity
+## Milestone 2: local cloud parity (done)
 
 1. MiniStack with persistent S3 and Lambda execution
 2. Terraform local apply
-3. S3 seed
-4. web reading from local S3
-5. publication Lambda invocation
+3. web reading from local S3
+4. publication Lambda invocation via `yarn dev:publish`
 
 Goal: exercise the AWS-shaped flow without using a real AWS account.
 
@@ -31,7 +30,7 @@ Goal: exercise the AWS-shaped flow without using a real AWS account.
 2. configure Function URL
 3. configure secure publication token
 4. create NexSift Editor GPT
-5. add GPT Action from `contracts/openapi.yaml`
+5. add GPT Action from `docs/openapi.yaml`
 6. publish approved posts from ChatGPT
 
 Goal: use the existing ChatGPT subscription for editorial work while keeping publication infrastructure ready for automation.

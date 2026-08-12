@@ -10,10 +10,11 @@ The product must feel like an editorial intelligence tool, not a generic blog te
 
 - `web/`: Next.js product surface.
 - `lambda/`: AWS Lambda handlers and publication logic.
-- `contracts/`: shared Zod schemas and domain contracts.
-- `iac/`: Docker/MiniStack and Terraform infrastructure.
-- `scripts/`: local operational scripts and seed data.
+- `packages/schemas/`: shared Zod schemas (plain folder, not a workspace).
+- `packages/dev-publish/`: local publish tool and example payloads.
+- `iac/terraform/`: Terraform for MiniStack and AWS.
 - `docs/`: architecture, design and editorial decisions.
+- `docker-compose.yml`: MiniStack local environment (S3, Lambda, IAM).
 
 Do not introduce new top-level layers without a concrete need.
 
