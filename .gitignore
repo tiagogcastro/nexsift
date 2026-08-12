@@ -17,9 +17,8 @@ coverage/
 .terraform/
 *.tfstate
 *.tfstate.*
-.terraform.lock.hcl
 
-iac/local/data/
+data/
 
 .DS_Store
 Thumbs.db

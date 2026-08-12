@@ -3,7 +3,7 @@ services:
     image: ministackorg/ministack:1.4.8
     container_name: nexsift-ministack
     ports:
-      - '4566:4566'
+      - '${MINISTACK_PORT:-4566}:4566'
     environment:
       PERSIST_STATE: '1'
       S3_PERSIST: '1'
