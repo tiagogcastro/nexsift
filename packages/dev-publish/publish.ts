@@ -9,6 +9,10 @@ if (!invokeUrl || !token) {
   throw new Error('PUBLISH_INVOKE_URL and PUBLISH_TOKEN are required')
 }
 
+// AWS Lambda Function URLs receive the HTTP request directly; the MiniStack
+// Invoke API expects the Lambda event envelope in the request body.
+const isFunctionUrl = invokeUrl.includes('.lambda-url.')
+
 async function main() {
   const fileArg = process.argv.find((arg) => arg.startsWith('--file='))
   const filePath = fileArg?.slice('--file='.length) ?? 'payloads/example.json'
@@ -28,8 +32,11 @@ async function main() {
 
   const response = await fetch(invokeUrl, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(event),
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: isFunctionUrl ? JSON.stringify({ post: draft }) : JSON.stringify(event),
   })
 
   const text = await response.text()
