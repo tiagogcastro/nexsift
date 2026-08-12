@@ -18,8 +18,14 @@ function getS3Client() {
   }
 
   const endpoint = process.env.AWS_ENDPOINT_URL || undefined
+  const region = process.env.AWS_REGION
+
+  if (!region) {
+    throw new Error('AWS_REGION is required')
+  }
+
   client = new S3Client({
-    region: process.env.AWS_REGION ?? 'us-east-1',
+    region,
     ...(endpoint ? { endpoint } : {}),
     forcePathStyle: Boolean(endpoint),
   })

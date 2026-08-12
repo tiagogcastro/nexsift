@@ -1,6 +1,6 @@
 data "aws_iam_policy_document" "lambda_assume_role" {
   statement {
-    effect = "Allow"
+    effect  = "Allow"
     actions = ["sts:AssumeRole"]
 
     principals {
@@ -29,13 +29,6 @@ data "aws_iam_policy_document" "publish" {
       aws_s3_bucket.content.arn,
       "${aws_s3_bucket.content.arn}/*",
     ]
-  }
-
-  statement {
-    sid       = "PublishToken"
-    effect    = "Allow"
-    actions   = ["ssm:GetParameter"]
-    resources = [aws_ssm_parameter.publish_token.arn]
   }
 
   statement {

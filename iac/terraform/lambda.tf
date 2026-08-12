@@ -1,6 +1,6 @@
 data "archive_file" "publish" {
   type        = "zip"
-  source_file = "${path.module}/../../lambda/dist/publish/index.mjs"
+  source_file = "${path.module}/../../lambda/dist/publish/index.js"
   output_path = "${path.module}/../../lambda/dist/publish.zip"
 }
 
@@ -17,8 +17,8 @@ resource "aws_lambda_function" "publish" {
   environment {
     variables = merge(
       {
-        CONTENT_BUCKET          = aws_s3_bucket.content.bucket
-        PUBLISH_TOKEN_PARAMETER = aws_ssm_parameter.publish_token.name
+        CONTENT_BUCKET = aws_s3_bucket.content.bucket
+        PUBLISH_TOKEN  = var.publish_token
       },
       var.lambda_endpoint_url != "" ? { AWS_ENDPOINT_URL = var.lambda_endpoint_url } : {}
     )
@@ -41,9 +41,9 @@ resource "aws_lambda_permission" "publish_url" {
 }
 
 resource "aws_lambda_permission" "publish_invoke" {
-  statement_id           = "AllowPublicInvokeViaFunctionUrl"
-  action                 = "lambda:InvokeFunction"
-  function_name          = aws_lambda_function.publish.function_name
-  principal              = "*"
+  statement_id             = "AllowPublicInvokeViaFunctionUrl"
+  action                   = "lambda:InvokeFunction"
+  function_name            = aws_lambda_function.publish.function_name
+  principal                = "*"
   invoked_via_function_url = true
 }

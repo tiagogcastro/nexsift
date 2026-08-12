@@ -2,9 +2,8 @@
   "name": "@nexsift/lambda",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "build": "mkdir -p dist/publish && esbuild src/publish/handler.ts --bundle --platform=node --target=node22 --format=esm --outfile=dist/publish/index.mjs",
+    "build": "mkdir -p dist/publish && esbuild src/publish/handler.ts --bundle --platform=node --target=node22 --format=cjs --outfile=dist/publish/index.js",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run"
   },

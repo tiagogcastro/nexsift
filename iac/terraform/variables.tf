@@ -37,9 +37,3 @@ variable "publish_token" {
   description = "Bearer token accepted by the publication Lambda."
   sensitive   = true
 }
-
-variable "publish_token_version" {
-  type        = number
-  description = "Version trigger for the write-only SSM publication token."
-  default     = 1
-}
