@@ -1,4 +1,8 @@
-const url = process.env.NEXT_PUBLIC_SITE_URL
+const url =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    : undefined)
 
 if (!url) {
   throw new Error('NEXT_PUBLIC_SITE_URL is required')
