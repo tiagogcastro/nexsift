@@ -1329,6 +1329,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@nexsift/schemas@workspace:packages/schemas":
+  version: 0.0.0-use.local
+  resolution: "@nexsift/schemas@workspace:packages/schemas"
+  languageName: unknown
+  linkType: soft
+
 "@nexsift/web@workspace:web":
   version: 0.0.0-use.local
   resolution: "@nexsift/web@workspace:web"

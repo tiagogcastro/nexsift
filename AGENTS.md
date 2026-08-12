@@ -10,7 +10,7 @@ The product must feel like an editorial intelligence tool, not a generic blog te
 
 - `web/`: Next.js product surface.
 - `lambda/`: AWS Lambda handlers and publication logic.
-- `packages/schemas/`: shared Zod schemas (plain folder, not a workspace).
+- `packages/schemas/`: shared Zod schemas as a yarn workspace (`@nexsift/schemas`) resolved via `node_modules`, so both web and lambda consume the same TS sources.
 - `packages/dev-publish/`: local publish tool and example payloads.
 - `iac/terraform/`: Terraform for MiniStack and AWS.
 - `docs/`: architecture, design and editorial decisions.

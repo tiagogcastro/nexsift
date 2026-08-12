@@ -5,8 +5,7 @@
     "incremental": true,
     "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["./src/*"],
-      "@nexsift/schemas/*": ["../packages/schemas/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [

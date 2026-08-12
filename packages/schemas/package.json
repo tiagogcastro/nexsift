@@ -1,0 +1,11 @@
+{
+  "name": "@nexsift/schemas",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./post": "./post.ts",
+    "./source": "./source.ts",
+    "./topic": "./topic.ts"
+  }
+}

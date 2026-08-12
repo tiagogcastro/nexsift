@@ -4,7 +4,8 @@
   "packageManager": "yarn@4.9.2",
   "workspaces": [
     "web",
-    "lambda"
+    "lambda",
+    "packages/schemas"
   ],
   "scripts": {
     "dev": "yarn workspace @nexsift/web dev",
