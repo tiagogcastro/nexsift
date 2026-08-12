@@ -3,7 +3,10 @@ import type {
   APIGatewayProxyStructuredResultV2,
 } from 'aws-lambda'
 import { postDraftSchema } from '@nexsift/schemas/post'
-import { publishPost } from '../publishing/publish-post'
+import { latestIndexKey, publishPost } from '../publishing/publish-post'
+import { getIndex } from '../storage/s3'
+
+const recentLimit = 30
 
 export async function handler(
   event: APIGatewayProxyEventV2,
@@ -14,6 +17,11 @@ export async function handler(
 
     if (!token || authorization !== `Bearer ${token}`) {
       return response(401, { error: 'Unauthorized' })
+    }
+
+    if (event.requestContext.http.method === 'GET') {
+      const index = await getIndex(latestIndexKey)
+      return response(200, { posts: index.slice(0, recentLimit) })
     }
 
     const body = parseBody(event)
