@@ -18,7 +18,7 @@ The repository already contains the foundation for:
 - MiniStack local AWS simulation
 - Terraform for S3, Lambda and IAM
 - publication Lambda with Bearer authentication and Zod validation
-- local dev publish tool (`yarn dev:publish`)
+- local dev publish tool (direct `tsx` invocation)
 - RSS, sitemap, robots and Article JSON-LD
 - PostHog integration that stays disabled until a key is configured
 - GitHub Actions quality pipeline
@@ -30,9 +30,11 @@ nexsift/
 ├── web/             Next.js product surface
 ├── lambda/          publication Lambda and publishing logic
 ├── packages/
-│   ├── schemas/     shared Zod schemas (plain folder, not a workspace)
+│   ├── schemas/     shared Zod schemas as a yarn workspace (@nexsift/schemas)
 │   └── dev-publish/ local publish tool and example payloads
-├── iac/terraform/   Terraform for MiniStack and AWS
+├── iac/
+│   ├── modules/content-stack/   shared Terraform module (S3, Lambda, IAM)
+│   └── environments/            local (MiniStack) and prod (AWS) stacks
 ├── docs/            architecture, design and editorial decisions
 ├── docker-compose.yml   MiniStack local environment
 └── .github/         CI
@@ -91,7 +93,7 @@ MiniStack runs the AWS-shaped local environment. The site always reads content f
 ### 1. Start MiniStack
 
 ```bash
-yarn infra:up
+docker compose up -d
 ```
 
 Health check:
@@ -103,24 +105,29 @@ curl http://localhost:4566/_ministack/health
 ### 2. Build the Lambda
 
 ```bash
-yarn lambda:build
+yarn workspace @nexsift/lambda build
 ```
 
-### 3. Initialize and apply Terraform
+### 3. Apply the local Terraform stack
 
 First time only:
 
 ```bash
-yarn terraform:init
-yarn terraform:local:apply
+terraform -chdir=iac/environments/local init
 ```
 
-Terraform creates the local S3 bucket, IAM role and publication Lambda inside MiniStack.
+Then:
+
+```bash
+terraform -chdir=iac/environments/local apply
+```
+
+`iac/environments/local/terraform.tfvars` is auto-loaded and committed. Terraform creates the local S3 bucket, IAM role and publication Lambda inside MiniStack.
 
 ### 4. Publish a test post
 
 ```bash
-yarn dev:publish --file=packages/dev-publish/payloads/example.json
+yarn tsx --env-file=.env packages/dev-publish/publish.ts --file=packages/dev-publish/payloads/example.json
 ```
 
 The script POSTs the payload to the Lambda, which validates it with Zod, writes the post and updates the S3 indexes.
@@ -157,7 +164,7 @@ ChatGPT / NexSift Editor
   -> NexSift
 ```
 
-Locally, `yarn dev:publish` replaces the GPT Action step: it reads a JSON payload from `packages/dev-publish/payloads/` and invokes the Lambda through MiniStack.
+Locally, the direct publish command replaces the GPT Action step: it reads a JSON payload from `packages/dev-publish/payloads/` and invokes the Lambda through MiniStack.
 
 ## Vercel MVP
 

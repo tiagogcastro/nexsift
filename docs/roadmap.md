@@ -20,7 +20,7 @@ Goal: validate product, design and content at zero additional infrastructure cos
 1. MiniStack with persistent S3 and Lambda execution
 2. Terraform local apply
 3. web reading from local S3
-4. publication Lambda invocation via `yarn dev:publish`
+4. publication Lambda invocation via the direct publish command
 
 Goal: exercise the AWS-shaped flow without using a real AWS account.
 

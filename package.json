@@ -12,16 +12,7 @@
     "build": "yarn workspace @nexsift/lambda build && yarn workspace @nexsift/web build",
     "lint": "yarn workspace @nexsift/web lint",
     "typecheck": "yarn workspace @nexsift/lambda typecheck && yarn workspace @nexsift/web typecheck",
-    "test": "yarn workspace @nexsift/lambda test",
-    "dev:publish": "tsx --env-file=.env packages/dev-publish/publish.ts",
-    "infra:up": "docker compose up -d",
-    "infra:down": "docker compose down",
-    "infra:logs": "docker compose logs -f",
-    "lambda:build": "yarn workspace @nexsift/lambda build",
-    "terraform:init": "terraform -chdir=iac/terraform init",
-    "terraform:local:plan": "terraform -chdir=iac/terraform plan -var-file=local.tfvars",
-    "terraform:local:apply": "terraform -chdir=iac/terraform apply -auto-approve -var-file=local.tfvars",
-    "terraform:local:destroy": "terraform -chdir=iac/terraform destroy -auto-approve -var-file=local.tfvars"
+    "test": "yarn workspace @nexsift/lambda test"
   },
   "dependencies": {
     "tsx": "4.23.1"

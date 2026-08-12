@@ -65,7 +65,7 @@ MiniStack :4566
 
 Terraform targets MiniStack by overriding AWS provider endpoints. The application uses the same AWS SDK clients used later in production.
 
-The local publish flow uses `yarn dev:publish`, which reads a JSON payload from `packages/dev-publish/payloads/` and invokes the Lambda through MiniStack. It replaces the GPT Action step locally.
+The local publish flow uses the direct `tsx` invocation against MiniStack, which reads a JSON payload from `packages/dev-publish/payloads/` and invokes the Lambda. It replaces the GPT Action step locally.
 
 ## Assisted publication
 
