@@ -19,7 +19,13 @@ export async function handler(
       return response(401, { error: 'Unauthorized' })
     }
 
-    if (event.requestContext.http.method === 'GET') {
+    // Function URLs and HTTP API v2 events use requestContext.http.method;
+    // REST-style events (MiniStack Invoke API) use httpMethod.
+    const method =
+      event.requestContext?.http?.method ??
+      (event as { httpMethod?: string }).httpMethod
+
+    if (method === 'GET') {
       const index = await getIndex(latestIndexKey)
       return response(200, { posts: index.slice(0, recentLimit) })
     }

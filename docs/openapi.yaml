@@ -4,7 +4,7 @@ info:
   version: 1.1.0
   description: Publishes validated pt-BR NexSift posts and lists recently published signals.
 servers:
-  - url: https://bjzzyv6zrgxdqupkvwnepfzday0lwdiz.lambda-url.us-east-1.on.aws/
+  - url: https://oh4qzz4ivd.execute-api.us-east-1.amazonaws.com/
 paths:
   /:
     get:

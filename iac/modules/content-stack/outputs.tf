@@ -10,6 +10,10 @@ output "publish_function_url" {
   value = aws_lambda_function_url.publish.function_url
 }
 
+output "publish_api_url" {
+  value = aws_apigatewayv2_api.publish.api_endpoint
+}
+
 output "vercel_reader_access_key_id" {
   value     = one(aws_iam_access_key.vercel_reader[*].id)
   sensitive = true

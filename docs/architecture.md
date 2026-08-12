@@ -77,7 +77,7 @@ ChatGPT / NexSift Editor
 GPT Action
   |
   v
-Lambda Function URL
+API Gateway HTTP API (Function URL for local testing)
   |
   +--> bearer token validation
   +--> Zod validation
@@ -89,7 +89,7 @@ Lambda Function URL
 S3
 ```
 
-The Lambda does not call OpenAI. The publication Lambda also exposes GET, returning the most recent published posts so the editor can avoid repeating signals across days.
+The Lambda does not call OpenAI. The publication endpoint also exposes GET, returning the most recent published posts so the editor can avoid repeating signals across days. Production uses an API Gateway HTTP API because the ChatGPT Actions gateway does not reach `*.lambda-url.*.on.aws` domains; the Lambda Function URL is kept for local flows and rollback.
 
 ## Autonomous publication via ChatGPT Tasks
 

@@ -9,13 +9,15 @@ if (!invokeUrl || !token) {
   throw new Error('PUBLISH_INVOKE_URL and PUBLISH_TOKEN are required')
 }
 
-// AWS Lambda Function URLs receive the HTTP request directly; the MiniStack
-// Invoke API expects the Lambda event envelope in the request body.
-const isFunctionUrl = invokeUrl.includes('.lambda-url.')
+// AWS Lambda Function URLs and API Gateway endpoints receive the HTTP
+// request directly; the MiniStack Invoke API expects the Lambda event
+// envelope in the request body.
+const isProdUrl =
+  invokeUrl.includes('.lambda-url.') || invokeUrl.includes('.execute-api.')
 const allowProd = process.argv.includes('--allow-prod')
 
-if (isFunctionUrl && !allowProd) {
-  throw new Error('Refusing to publish to a production Function URL; pass --allow-prod to override')
+if (isProdUrl && !allowProd) {
+  throw new Error('Refusing to publish to a production endpoint; pass --allow-prod to override')
 }
 
 async function main() {
@@ -41,7 +43,7 @@ async function main() {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: isFunctionUrl ? JSON.stringify({ post: draft }) : JSON.stringify(event),
+    body: isProdUrl ? JSON.stringify({ post: draft }) : JSON.stringify(event),
   })
 
   const text = await response.text()
