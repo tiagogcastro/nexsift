@@ -89,9 +89,32 @@ Lambda Function URL
 S3
 ```
 
-The Lambda does not call OpenAI in this phase.
+The Lambda does not call OpenAI. The publication Lambda also exposes GET, returning the most recent published posts so the editor can avoid repeating signals across days.
 
-## Future autonomous publication
+## Autonomous publication via ChatGPT Tasks
+
+```text
+ChatGPT Tasks (weekday morning)
+  |
+  v
+NexSift Editor GPT
+  |
+  +--> GET recent posts (anti-repetition)
+  +--> research
+  +--> draft
+  +--> self-review loop
+  +--> relevance gate (score >= 7)
+  |
+  v
+POST /publish (same contract)
+  |
+  v
+S3
+```
+
+The editor runs without human review and publishes at most one post per topic per day, only when a signal passes the editorial gate. Re-publishing with the same slug updates the post instead of duplicating it.
+
+## Future autonomous publication via OpenAI API
 
 ```text
 EventBridge Scheduler

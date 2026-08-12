@@ -24,7 +24,7 @@ Goal: validate product, design and content at zero additional infrastructure cos
 
 Goal: exercise the AWS-shaped flow without using a real AWS account.
 
-## Milestone 3: assisted publishing
+## Milestone 3: assisted publishing (done)
 
 1. provision AWS S3 and publication Lambda
 2. configure Function URL
@@ -36,6 +36,10 @@ Goal: exercise the AWS-shaped flow without using a real AWS account.
 Goal: use the existing ChatGPT subscription for editorial work while keeping publication infrastructure ready for automation.
 
 ## Milestone 4: autonomous editorial pipeline
+
+The current path uses ChatGPT Tasks: a scheduled GPT run drafts, self-reviews and publishes each weekday morning without human review. The GPT self-review loop, the relevance gate and the list of recent posts (GET action) keep the process autonomous and repetition-free.
+
+The future EventBridge + OpenAI API pipeline remains the path for scaling beyond ChatGPT:
 
 1. source registry
 2. feed ingestion
