@@ -25,7 +25,7 @@ export function PostHogProvider({ children }: { children: ReactNode }) {
         // Optional PostHog features load external scripts that can crash
         // client-side navigations; only the core tracking is needed here.
         disable_surveys: true,
-        disable_dead_clicks_autocapture: true,
+        disable_external_dependency_loading: true,
         person_profiles: 'identified_only',
       })
       posthog.register({
