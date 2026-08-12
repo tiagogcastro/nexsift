@@ -24,6 +24,7 @@ function initPostHog() {
       capture_pageleave: false,
       disable_surveys: true,
       disable_external_dependency_loading: true,
+      request_batching: false,
       person_profiles: 'identified_only',
     })
     posthog.register({
