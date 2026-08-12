@@ -8,7 +8,7 @@ export function TopicBands() {
       {Object.entries(topicMeta).map(([topic, meta], index) => (
         <Link
           key={topic}
-          href={`/pt-BR/topics/${topic}`}
+          href={`/topics/${topic}`}
           data-topic={topic}
           className="topic-color group grid min-h-24 grid-cols-[3rem_1fr_auto] items-center gap-4 border-b border-[var(--border)] last:border-b-0 md:grid-cols-[5rem_0.8fr_2fr_auto]"
         >

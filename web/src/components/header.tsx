@@ -25,7 +25,7 @@ export function Header({
         <Brand locale={locale} />
 
         <nav className="hidden items-center gap-7 text-sm text-[var(--muted-strong)] lg:flex">
-          <Link className="transition-colors hover:text-white" href="/pt-BR/blog">
+          <Link className="transition-colors hover:text-white" href="/blog">
             {labels.blog}
           </Link>
           <Link
@@ -51,7 +51,7 @@ export function Header({
         <div className="flex items-center gap-3">
           <LocaleSwitcher locale={locale} />
           <Link
-            href="/pt-BR/blog"
+            href="/blog"
             className="hidden items-center gap-2 rounded-[var(--radius-sm)] bg-[var(--signal)] px-3.5 py-2 text-xs font-semibold text-[#0b0d0a] transition-transform hover:-translate-y-0.5 sm:flex"
           >
             {labels.today}

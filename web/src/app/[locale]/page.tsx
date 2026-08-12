@@ -61,7 +61,7 @@ export default async function HomePage({
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-3">
                 <Link
-                  href="/pt-BR/blog"
+                  href="/blog"
                   className="flex items-center gap-2 rounded-[var(--radius-sm)] bg-[var(--signal)] px-4 py-2.5 text-sm font-semibold text-[#090b0d] transition-transform hover:-translate-y-0.5"
                 >
                   {t('hero.primary')}

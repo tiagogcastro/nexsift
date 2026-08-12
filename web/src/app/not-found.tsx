@@ -12,7 +12,7 @@ export default function NotFound() {
           Este endereço não aponta para um sinal publicado pelo NexSift.
         </p>
         <Link
-          href="/pt-BR"
+          href="/"
           className="mt-8 inline-flex rounded-[var(--radius-sm)] bg-[var(--signal)] px-4 py-2.5 text-sm font-semibold text-[#090b0d]"
         >
           Voltar ao radar

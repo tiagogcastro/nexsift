@@ -17,7 +17,7 @@ export default async function TopicPage({
   const { locale, topic: rawTopic } = await params
 
   if (locale !== 'pt-BR') {
-    redirect(`/pt-BR/topics/${rawTopic}`)
+    redirect(`/topics/${rawTopic}`)
   }
 
   const result = topicSchema.safeParse(rawTopic)

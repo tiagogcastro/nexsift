@@ -21,7 +21,7 @@ export async function generateMetadata({
     return {}
   }
 
-  const canonical = `/pt-BR/blog/${post.slug}`
+  const canonical = `/blog/${post.slug}`
 
   return {
     title: post.title,
@@ -53,7 +53,7 @@ export default async function PostPage({
   const { locale, slug } = await params
 
   if (locale !== 'pt-BR') {
-    redirect(`/pt-BR/blog/${slug}`)
+    redirect(`/blog/${slug}`)
   }
 
   const post = await getPostBySlug(slug)
@@ -79,7 +79,7 @@ export default async function PostPage({
       name: siteConfig.name,
       url: siteConfig.url,
     },
-    mainEntityOfPage: `${siteConfig.url}/pt-BR/blog/${post.slug}`,
+    mainEntityOfPage: `${siteConfig.url}/blog/${post.slug}`,
   }
 
   return (

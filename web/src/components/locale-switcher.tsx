@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import type { AppLocale } from '@/i18n/routing'
+import { routing, type AppLocale } from '@/i18n/routing'
 
 const localeLabels: Record<AppLocale, string> = {
   'pt-BR': 'PT',
@@ -13,7 +13,7 @@ export function LocaleSwitcher({ locale }: { locale: AppLocale }) {
       {Object.entries(localeLabels).map(([value, label]) => (
         <Link
           key={value}
-          href={`/${value}`}
+          href={value === routing.defaultLocale ? '/' : `/${value}`}
           className={`rounded-[var(--radius-sm)] px-2 py-1 transition-colors hover:text-[var(--foreground)] ${
             value === locale
               ? 'bg-[var(--surface-raised)] text-[var(--foreground)]'

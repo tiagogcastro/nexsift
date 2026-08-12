@@ -22,7 +22,7 @@ export function SignalLedger({
         return (
           <Link
             key={post.slug}
-            href={`/pt-BR/blog/${post.slug}`}
+            href={`/blog/${post.slug}`}
             data-topic={topic}
             className="signal-ledger-row topic-color"
           >

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: 'Blog',
   description: 'Sinais e análises técnicas do NexSift em português.',
   alternates: {
-    canonical: '/pt-BR/blog',
+    canonical: '/blog',
   },
 }
 
@@ -24,7 +24,7 @@ export default async function BlogPage({
   const { locale } = await params
 
   if (locale !== 'pt-BR') {
-    redirect('/pt-BR/blog')
+    redirect('/blog')
   }
 
   const t = await getTranslations()
