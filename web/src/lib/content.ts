@@ -1,3 +1,4 @@
+import { unstable_cache } from 'next/cache'
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import {
   postIndexSchema,
@@ -45,14 +46,20 @@ async function readJsonObject(key: string) {
   return JSON.parse(await response.Body.transformToString()) as unknown
 }
 
+function cachedReadJsonObject(key: string) {
+  return unstable_cache(() => readJsonObject(key), [key], {
+    revalidate: 86400,
+  })
+}
+
 export async function listPosts() {
-  const value = await readJsonObject('public/indexes/latest.json')
+  const value = await cachedReadJsonObject('public/indexes/latest.json')()
   return postIndexSchema.parse(value)
 }
 
 export async function getPostBySlug(slug: string) {
   try {
-    const value = await readJsonObject(`public/posts/${slug}.json`)
+    const value = await cachedReadJsonObject(`public/posts/${slug}.json`)()
     return postSchema.parse(value)
   } catch {
     return null
@@ -60,6 +67,14 @@ export async function getPostBySlug(slug: string) {
 }
 
 export async function listPostsByTopic(topic: Topic) {
-  const value = await readJsonObject(`public/indexes/topics/${topic}.json`)
-  return postIndexSchema.parse(value)
+  try {
+    const value = await cachedReadJsonObject(`public/indexes/topics/${topic}.json`)()
+    return postIndexSchema.parse(value)
+  } catch (error) {
+    if (error instanceof Error && error.name === 'NoSuchKey') {
+      return []
+    }
+
+    throw error
+  }
 }

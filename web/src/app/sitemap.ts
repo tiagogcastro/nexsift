@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { siteConfig } from '@/config/site'
 import { routing } from '@/i18n/routing'
 import { listPosts } from '@/lib/content'
-import { topicMeta } from '@/lib/topics'
+import { topicOrder } from '@/lib/topics'
 
 export const dynamic = 'force-dynamic'
 
@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'daily',
       priority: 0.9,
     },
-    ...Object.keys(topicMeta).map((topic) => ({
+    ...topicOrder.map((topic) => ({
       url: `${siteConfig.url}/topics/${topic}`,
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
@@ -45,7 +45,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     ...posts.map((post) => ({
       url: `${siteConfig.url}/blog/${post.slug}`,
-      lastModified: new Date(post.publishedAt),
+      lastModified: new Date(post.updatedAt ?? post.publishedAt),
       changeFrequency: 'weekly' as const,
       priority: post.featured ? 0.9 : 0.8,
     })),
