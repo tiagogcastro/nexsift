@@ -75,3 +75,13 @@ output "publish_function_name" {
 output "publish_function_url" {
   value = module.content_stack.publish_function_url
 }
+
+output "vercel_reader_access_key_id" {
+  value     = module.content_stack.vercel_reader_access_key_id
+  sensitive = true
+}
+
+output "vercel_reader_secret_access_key" {
+  value     = module.content_stack.vercel_reader_secret_access_key
+  sensitive = true
+}

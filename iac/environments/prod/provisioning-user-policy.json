@@ -13,7 +13,7 @@
       "Action": [
         "s3:CreateBucket",
         "s3:DeleteBucket",
-        "s3:GetBucket*",
+        "s3:Get*",
         "s3:PutBucket*",
         "s3:ListBucket"
       ],
@@ -30,10 +30,14 @@
         "iam:GetRole",
         "iam:DeleteRole",
         "iam:TagRole",
+        "iam:UntagRole",
         "iam:PassRole",
         "iam:PutRolePolicy",
         "iam:GetRolePolicy",
-        "iam:DeleteRolePolicy"
+        "iam:DeleteRolePolicy",
+        "iam:ListRolePolicies",
+        "iam:ListAttachedRolePolicies",
+        "iam:ListRoleTags"
       ],
       "Resource": ["arn:aws:iam::*:role/nexsift-prod-publish"]
     },
@@ -45,9 +49,13 @@
         "iam:GetUser",
         "iam:DeleteUser",
         "iam:TagUser",
+        "iam:UntagUser",
         "iam:PutUserPolicy",
         "iam:GetUserPolicy",
         "iam:DeleteUserPolicy",
+        "iam:ListUserPolicies",
+        "iam:ListUserTags",
+        "iam:ListAttachedUserPolicies",
         "iam:CreateAccessKey",
         "iam:ListAccessKeys",
         "iam:DeleteAccessKey",
@@ -61,8 +69,13 @@
       "Action": [
         "iam:CreatePolicy",
         "iam:GetPolicy",
+        "iam:GetPolicyVersion",
         "iam:DeletePolicy",
+        "iam:CreatePolicyVersion",
+        "iam:DeletePolicyVersion",
         "iam:ListPolicyVersions",
+        "iam:TagPolicy",
+        "iam:UntagPolicy",
         "iam:AttachUserPolicy",
         "iam:DetachUserPolicy",
         "iam:ListAttachedUserPolicies"
@@ -77,8 +90,8 @@
       "Effect": "Allow",
       "Action": [
         "lambda:CreateFunction",
-        "lambda:GetFunction",
-        "lambda:GetFunctionConfiguration",
+        "lambda:Get*",
+        "lambda:GetFunctionCodeSigningConfig",
         "lambda:DeleteFunction",
         "lambda:UpdateFunctionCode",
         "lambda:UpdateFunctionConfiguration",
@@ -89,9 +102,10 @@
         "lambda:AddPermission",
         "lambda:RemovePermission",
         "lambda:GetPolicy",
+        "lambda:ListVersionsByFunction",
+        "lambda:ListTags",
         "lambda:TagResource",
         "lambda:UntagResource",
-        "lambda:ListTags",
         "lambda:InvokeFunction"
       ],
       "Resource": ["arn:aws:lambda:us-east-1:*:function:nexsift-prod-publish"]
