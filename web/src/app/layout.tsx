@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import { getLocale } from 'next-intl/server'
-import { PostHogProvider } from '@/analytics/posthog-provider'
+import {
+  PostHogPageView,
+  PostHogProvider,
+} from '@/analytics/posthog-provider'
 import { siteConfig } from '@/config/site'
 import './globals.css'
 
@@ -40,7 +44,12 @@ export default async function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body>
-        <PostHogProvider>{children}</PostHogProvider>
+        <PostHogProvider>
+          <Suspense fallback={null}>
+            <PostHogPageView />
+          </Suspense>
+          {children}
+        </PostHogProvider>
       </body>
     </html>
   )
