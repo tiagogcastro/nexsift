@@ -3,18 +3,27 @@ import { getTranslations } from 'next-intl/server'
 import { notFound, redirect } from 'next/navigation'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
-import { SignalLedger } from '@/features/blog/signal-ledger'
+import { Breadcrumbs } from '@/features/blog/breadcrumbs'
+import { LedgerConsole } from '@/features/blog/ledger-console'
+import type { SortOrder } from '@/features/blog/order-toggle'
 import { listPostsByTopic } from '@/lib/content'
-import { topicMeta } from '@/lib/topics'
+import { getTopicMeta, topicOrder } from '@/lib/topics'
 
 export const dynamic = 'force-dynamic'
 
+function parseSort(value: string | undefined): SortOrder | undefined {
+  return value === 'updated' ? 'updated' : undefined
+}
+
 export default async function TopicPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string; topic: string }>
+  searchParams: Promise<{ q?: string; sort?: string }>
 }) {
   const { locale, topic: rawTopic } = await params
+  const { q, sort: sortParam } = await searchParams
 
   if (locale !== 'pt-BR') {
     redirect(`/topics/${rawTopic}`)
@@ -28,8 +37,15 @@ export default async function TopicPage({
 
   const topic = result.data as Topic
   const posts = await listPostsByTopic(topic)
-  const meta = topicMeta[topic]
   const t = await getTranslations()
+  const meta = getTopicMeta(t, topic)
+  const topicMeta = Object.fromEntries(
+    topicOrder.map((topicKey) => {
+      const topicKeyMeta = getTopicMeta(t, topicKey)
+
+      return [topicKey, { label: topicKeyMeta.label, shortLabel: topicKeyMeta.shortLabel }]
+    }),
+  ) as Record<Topic, { label: string; shortLabel: string }>
 
   return (
     <>
@@ -46,21 +62,42 @@ export default async function TopicPage({
       <main className="page-shell min-h-[75vh] py-16 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[0.55fr_1.45fr]">
           <div data-topic={topic} className="topic-color lg:sticky lg:top-10 lg:self-start">
-            <div className="eyebrow text-[var(--topic-color)]">FREQUENCY / {meta.shortLabel}</div>
+            <Breadcrumbs
+              items={[
+                { label: t('breadcrumb.home'), href: '/' },
+                { label: t('breadcrumb.topics'), href: '/#topics' },
+                { label: meta.label },
+              ]}
+              topic={topic}
+            />
+            <div className="eyebrow text-(--topic-color)">
+              {t('topicPage.frequency')} / {meta.shortLabel}
+            </div>
             <h1 className="mt-5 text-[clamp(3.5rem,7vw,7rem)] font-medium leading-[0.9] tracking-[-0.075em]">
               {meta.label}
             </h1>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-[var(--muted)]">
+            <p className="mt-6 max-w-sm text-sm leading-relaxed text-(--muted)">
               {meta.description}
             </p>
           </div>
-          {posts.length > 0 ? (
-            <SignalLedger posts={posts} />
-          ) : (
-            <div className="border-y border-[var(--border)] py-10 text-sm text-[var(--muted)]">
-              Nenhum sinal publicado nesta frequência ainda.
-            </div>
-          )}
+          <LedgerConsole
+            posts={posts}
+            fixedTopic={topic}
+            labels={{
+              searchPlaceholder: t('console.searchPlaceholder'),
+              allTopics: t('console.allTopics'),
+              sortRecent: t('console.sortRecent'),
+              sortUpdated: t('console.sortUpdated'),
+              loadMore: t('console.loadMore'),
+              empty: t('console.empty'),
+              countLabel: t('console.countLabel'),
+              signalFallback: t('console.signalFallback'),
+            }}
+            topicMeta={topicMeta}
+            initialTopic={topic}
+            initialQuery={q}
+            initialSort={parseSort(sortParam)}
+          />
         </div>
       </main>
       <Footer
