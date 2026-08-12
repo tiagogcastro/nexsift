@@ -1,11 +1,11 @@
 data "archive_file" "publish" {
   type        = "zip"
-  source_file = "${path.module}/../../lambda/dist/publish/index.js"
-  output_path = "${path.module}/../../lambda/dist/publish.zip"
+  source_file = "${path.module}/../../../lambda/dist/publish/index.js"
+  output_path = "${path.module}/../../../lambda/dist/publish.zip"
 }
 
 resource "aws_lambda_function" "publish" {
-  function_name    = "${local.name_prefix}-publish"
+  function_name    = "${var.name_prefix}-publish"
   role             = aws_iam_role.publish.arn
   runtime          = "nodejs22.x"
   handler          = "index.handler"

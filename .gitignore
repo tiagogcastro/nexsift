@@ -17,8 +17,13 @@ coverage/
 .terraform/
 *.tfstate
 *.tfstate.*
+iac/environments/prod/terraform.tfvars
+iac/local/
 
 data/
+iac/local/
+iac/local/
+iac/local/
 
 .DS_Store
 Thumbs.db

@@ -1,6 +1,14 @@
+locals {
+  common_tags = {
+    Application = "nexsift"
+    Environment = var.tags_environment
+    ManagedBy   = "Terraform"
+  }
+}
+
 resource "aws_s3_bucket" "content" {
   bucket        = var.content_bucket_name
-  force_destroy = var.environment == "local"
+  force_destroy = var.bucket_force_destroy
 
   tags = local.common_tags
 }

@@ -12,7 +12,9 @@ The product must feel like an editorial intelligence tool, not a generic blog te
 - `lambda/`: AWS Lambda handlers and publication logic.
 - `packages/schemas/`: shared Zod schemas as a yarn workspace (`@nexsift/schemas`) resolved via `node_modules`, so both web and lambda consume the same TS sources.
 - `packages/dev-publish/`: local publish tool and example payloads.
-- `iac/terraform/`: Terraform for MiniStack and AWS.
+- `iac/modules/content-stack/`: shared Terraform module (S3 content bucket, publish Lambda, IAM).
+- `iac/environments/local/`: MiniStack local environment (terraform.tfvars committed).
+- `iac/environments/prod/`: AWS production environment (terraform.tfvars gitignored).
 - `docs/`: architecture, design and editorial decisions.
 - `docker-compose.yml`: MiniStack local environment (S3, Lambda, IAM).
 
