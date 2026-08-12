@@ -22,12 +22,40 @@ export default function OpenGraphImage() {
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
         <div
           style={{
-            width: '14px',
-            height: '14px',
-            borderRadius: '999px',
-            background: '#c7f66b',
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 34,
+            height: 34,
+            borderRadius: 7,
+            border: '1px solid #354239',
+            background: '#101418',
           }}
-        />
+        >
+          <span
+            style={{
+              fontFamily: 'ui-monospace, monospace',
+              fontSize: 16,
+              fontWeight: 700,
+              letterSpacing: '-1px',
+              color: '#c7f66b',
+            }}
+          >
+            N/
+          </span>
+          <span
+            style={{
+              position: 'absolute',
+              top: 4,
+              right: 4,
+              width: 5,
+              height: 5,
+              borderRadius: 999,
+              background: '#c7f66b',
+            }}
+          />
+        </div>
         <div style={{ fontSize: 28, letterSpacing: '-0.03em' }}>NEXSIFT</div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
