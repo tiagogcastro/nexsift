@@ -1,14 +1,12 @@
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { SignalLedger } from '@/features/blog/signal-ledger'
-import { ProcessLine } from '@/features/landing/process-line'
-import { RadarPanel } from '@/features/landing/radar-panel'
-import { StatsBand } from '@/features/landing/stats-band'
+import { Funnel } from '@/features/landing/funnel'
 import { TopicBands } from '@/features/landing/topic-bands'
+import { TrustBand } from '@/features/landing/trust-band'
 import { localizedAlternates } from '@/lib/alternates'
 import { routing, type AppLocale } from '@/i18n/routing'
 import { listPosts } from '@/lib/content'
-import { selectHomeSignals } from '@/lib/home-selection'
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react'
 import { hasLocale } from 'next-intl'
 import {
@@ -19,6 +17,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
+
+const HOME_RADAR_LIMIT = 6
 
 export async function generateMetadata({
   params,
@@ -53,9 +53,17 @@ export default async function HomePage({
   setRequestLocale(locale)
   const t = await getTranslations()
   const posts = await listPosts()
-  const homeSignals = selectHomeSignals(posts, { limit: 5 })
+  const radarSignals = [...posts]
+    .sort(
+      (first, second) =>
+        new Date(second.publishedAt).getTime() -
+        new Date(first.publishedAt).getTime(),
+    )
+    .slice(0, HOME_RADAR_LIMIT)
   const topicCount = new Set(posts.flatMap((post) => post.topics)).size
   const homePath = locale === 'pt-BR' ? '/' : `/${locale}`
+  const topicsPath = locale === 'pt-BR' ? '/topics' : `/${locale}/topics`
+  const aboutPath = `/${locale}/about`
 
   return (
     <>
@@ -73,22 +81,22 @@ export default async function HomePage({
       <main>
         <section className="relative overflow-hidden border-b border-(--border)">
           <div className="pointer-events-none absolute inset-0 grid-line opacity-[0.14]" />
-          <div className="page-shell relative grid min-h-[calc(100vh-4rem)] items-center gap-12 py-16 lg:grid-cols-[1.12fr_0.88fr] lg:py-24">
-            <div>
-              <div className="eyebrow flex items-center gap-3">
+          <div className="page-shell relative grid min-h-[calc(100vh-4rem)] place-items-center py-16 lg:py-24">
+            <div className="max-w-4xl text-center">
+              <div className="eyebrow flex items-center justify-center gap-3">
                 <span className="signal-dot" />
                 {t('hero.eyebrow')}
               </div>
-              <h1 className="mt-8 max-w-5xl text-[clamp(4rem,9vw,9rem)] font-medium leading-[0.82] tracking-[-0.085em]">
+              <h1 className="mt-8 text-[clamp(4rem,9vw,9rem)] font-medium leading-[0.82] tracking-[-0.085em]">
                 <span className="block">{t('hero.titleA')}</span>
                 <span className="block text-(--signal)">{t('hero.titleB')}</span>
               </h1>
-              <p className="mt-9 max-w-2xl text-[clamp(1rem,1.7vw,1.28rem)] leading-relaxed text-(--muted-strong)">
+              <p className="mx-auto mt-9 max-w-2xl text-[clamp(1rem,1.7vw,1.28rem)] leading-relaxed text-(--muted-strong)">
                 {t('hero.description')}
               </p>
-              <div className="mt-9 flex flex-wrap items-center gap-3">
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
                 <Link
-                  href="/blog"
+                  href={`${homePath}#radar`}
                   className="flex items-center gap-2 rounded-sm bg-(--signal) px-4 py-2.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
                 >
                   {t('hero.primary')}
@@ -103,23 +111,34 @@ export default async function HomePage({
                 </Link>
               </div>
             </div>
-
-            <RadarPanel posts={posts} topSignals={homeSignals} />
           </div>
         </section>
 
-        <section id="signals" className="page-shell py-20 lg:py-28">
+        <section id="radar" className="page-shell py-20 lg:py-28">
           <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
             <div>
-              <div className="eyebrow">{t('latest.eyebrow')}</div>
+              <div className="eyebrow flex items-center gap-3">
+                <span className="signal-dot" />
+                {t('radar.eyebrow')}
+              </div>
               <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
-                {t('latest.title')}
+                {t('radar.title')}
               </h2>
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
-                {t('latest.description')}
+                {t('radar.description')}
               </p>
+              <p className="mt-5 max-w-sm font-mono text-[10px] leading-relaxed text-(--muted)">
+                {t('radar.definition')}
+              </p>
+              <Link
+                href="/blog"
+                className="mt-8 inline-flex items-center gap-2 border border-(--border) px-4 py-2.5 text-sm text-(--foreground) transition-colors hover:border-(--signal) hover:text-(--signal)"
+              >
+                {t('radar.viewAll')}
+                <ArrowUpRight size={15} />
+              </Link>
             </div>
-            <SignalLedger posts={homeSignals} limit={5} />
+            <SignalLedger posts={radarSignals} />
           </div>
         </section>
 
@@ -140,62 +159,91 @@ export default async function HomePage({
           </div>
         </section>
 
-        <section id="process" className="page-shell py-20 lg:py-28">
+        <section className="page-shell py-20 lg:py-28">
           <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
+            <div className="eyebrow text-(--signal)">{t('why.eyebrow')}</div>
             <div>
-              <div className="eyebrow">{t('process.eyebrow')}</div>
-              <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
-                {t('process.title')}
+              <h2 className="max-w-4xl text-[clamp(2.8rem,6vw,6rem)] font-medium leading-[0.96] tracking-[-0.065em]">
+                {t('why.title')}
               </h2>
-              <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
-                {t('process.description')}
-              </p>
-              <p className="mt-5 font-mono text-xs text-(--muted)">
-                {t('process.rhythm')}
+              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-(--muted-strong)">
+                {t('why.description')}
               </p>
             </div>
-            <ProcessLine
-              steps={[
-                t('process.research'),
-                t('process.filter'),
-                t('process.verify'),
-                t('process.context'),
-                t('process.publish'),
-              ]}
-            />
           </div>
         </section>
 
-        <section className="page-shell py-20 lg:py-28">
-          <StatsBand
-            signals={posts.length}
-            topics={topicCount}
-            avgRelevance={
-              posts.length > 0
-                ? (
-                  posts.reduce((sum, post) => sum + post.relevanceScore, 0) /
-                  posts.length
-                ).toFixed(1)
-                : '0.0'
-            }
+        <section id="process" className="border-y border-(--border) bg-(--surface-soft)">
+          <div className="page-shell py-20 lg:py-28">
+            <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
+              <div>
+                <div className="eyebrow">{t('process.eyebrow')}</div>
+                <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
+                  {t('process.title')}
+                </h2>
+                <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
+                  {t('process.description')}
+                </p>
+                <p className="mt-5 font-mono text-xs text-(--muted)">
+                  {t('process.scarcity')}
+                </p>
+              </div>
+              <Funnel
+                steps={[
+                  t('process.steps.0'),
+                  t('process.steps.1'),
+                  t('process.steps.2'),
+                  t('process.steps.3'),
+                  t('process.steps.4'),
+                ]}
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-(--border) bg-(--surface)">
+          <TrustBand
+            posts={posts}
             labels={{
-              signals: t('stats.signals', { count: posts.length }),
-              topics: t('stats.topics', { count: topicCount }),
-              avgRelevance: t('stats.avgRelevance'),
+              eyebrow: t('trust.eyebrow'),
+              title: t('trust.title'),
+              description: t('trust.description'),
+              publicationLabel: t('trust.publicationLabel'),
+              publicationTooltip: t('trust.publicationTooltip'),
+              verifiableLabel: t('trust.verifiableLabel'),
+              verifiableTooltip: t('trust.verifiableTooltip'),
+              topicsLabel: t('trust.topicsLabel', { count: topicCount }),
             }}
           />
         </section>
 
-        <section className="border-t border-(--border) bg-(--surface)">
-          <div className="page-shell grid gap-8 py-20 lg:grid-cols-[0.65fr_1.35fr] lg:py-28">
-            <div className="eyebrow text-(--signal)">{t('trust.eyebrow')}</div>
+        <section className="page-shell py-20 lg:py-28">
+          <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
             <div>
-              <h2 className="max-w-4xl text-[clamp(2.8rem,6vw,6rem)] font-medium leading-[0.96] tracking-[-0.065em]">
-                {t('trust.title')}
+              <div className="eyebrow">{t('explore.eyebrow')}</div>
+              <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
+                {t('explore.title')}
               </h2>
-              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-(--muted-strong)">
-                {t('trust.description')}
-              </p>
+            </div>
+            <div className="grid gap-px border-y border-(--border) bg-(--border) sm:grid-cols-3">
+              <ExploreCard
+                href="/blog"
+                eyebrow="RADAR"
+                title={t('explore.fullRadar')}
+                body={t('explore.fullRadarBody')}
+              />
+              <ExploreCard
+                href={topicsPath}
+                eyebrow="TOPICS"
+                title={t('explore.topicsLink')}
+                body={t('explore.topicsLinkBody')}
+              />
+              <ExploreCard
+                href={aboutPath}
+                eyebrow="ABOUT"
+                title={t('explore.aboutLink')}
+                body={t('explore.aboutLinkBody')}
+              />
             </div>
           </div>
         </section>
@@ -207,5 +255,36 @@ export default async function HomePage({
         builtBy={t('footer.builtBy')}
       />
     </>
+  )
+}
+
+function ExploreCard({
+  href,
+  eyebrow,
+  title,
+  body,
+}: {
+  href: string
+  eyebrow: string
+  title: string
+  body: string
+}) {
+  return (
+    <Link
+      href={href}
+      className="group flex flex-col justify-between gap-8 bg-(--surface) p-6 transition-colors hover:bg-(--surface-raised)"
+    >
+      <div className="eyebrow">{eyebrow}</div>
+      <div>
+        <div className="flex items-center justify-between gap-3 text-lg font-medium tracking-[-0.03em]">
+          {title}
+          <ArrowUpRight
+            size={16}
+            className="text-(--muted) transition-colors group-hover:text-(--signal)"
+          />
+        </div>
+        <p className="mt-2 text-sm leading-relaxed text-(--muted)">{body}</p>
+      </div>
+    </Link>
   )
 }
