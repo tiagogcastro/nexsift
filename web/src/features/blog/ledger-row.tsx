@@ -53,7 +53,13 @@ export function LedgerRow({
             </span>
           ) : null}
         </span>
-        <h3 className="signal-title mt-2 text-[clamp(1rem,1.4vw,1.22rem)] font-medium leading-snug tracking-[-0.025em] text-(--foreground)">
+        <h3
+          className={`signal-title mt-2 font-medium leading-snug tracking-[-0.025em] text-(--foreground) ${
+            compact
+              ? 'text-[clamp(0.9rem,1.15vw,1.05rem)]'
+              : 'text-[clamp(1rem,1.4vw,1.22rem)]'
+          }`}
+        >
           {post.title}
         </h3>
         {!compact ? (

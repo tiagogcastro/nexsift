@@ -94,7 +94,7 @@ export default async function HomePage({
               <p className="mt-9 max-w-2xl text-[clamp(1rem,1.7vw,1.28rem)] leading-relaxed text-(--muted-strong)">
                 {t('hero.description')}
               </p>
-              <p className="mt-6 max-w-sm font-mono text-[10px] leading-relaxed text-(--muted)">
+              <p className="mt-6 max-w-sm font-mono text-sm leading-relaxed text-(--muted)">
                 {t.rich('radar.definition', {
                   sinal: (chunks) => (
                     <span className="font-semibold text-(--signal)">{chunks}</span>
