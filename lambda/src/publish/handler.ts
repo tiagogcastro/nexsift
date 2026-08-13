@@ -12,6 +12,11 @@ import {
   publishPost,
 } from '../publishing/publish-post'
 import { getIndex, getPost } from '../storage/s3'
+import {
+  SourceRejectedError,
+  validateSourceUrl,
+} from '../publishing/validate-source'
+import { auditAllSources } from '../publishing/audit-sources'
 
 const defaultRecentLimit = 30
 const maxRecentLimit = 100
@@ -74,6 +79,34 @@ export async function handler(
       return response(200, { posts })
     }
 
+    if (method === 'POST' && path === '/validate-source') {
+      const body = parseBody(event) as { url?: unknown }
+      const url = body.url
+
+      if (typeof url !== 'string' || url.length === 0) {
+        return response(422, { error: 'url is required' })
+      }
+
+      try {
+        const check = await validateSourceUrl(url)
+        return response(200, check)
+      } catch (error) {
+        if (error instanceof SourceRejectedError && error.check) {
+          return response(422, {
+            error: 'Source rejected',
+            check: error.check,
+          })
+        }
+
+        throw error
+      }
+    }
+
+    if (method === 'POST' && path === '/audit-sources') {
+      const result = await auditAllSources()
+      return response(200, result)
+    }
+
     if (method === 'POST' && path === '/') {
       const body = parseBody(event)
       const draft = postDraftSchema.parse(body.post)
@@ -107,6 +140,13 @@ export async function handler(
 
     if (error instanceof NotFoundError) {
       return response(404, { error: 'Signal not found' })
+    }
+
+    if (error instanceof SourceRejectedError) {
+      return response(422, {
+        error: 'Source verification failed',
+        issues: error.failures,
+      })
     }
 
     if (isValidationError(error)) {

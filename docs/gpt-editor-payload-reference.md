@@ -39,27 +39,44 @@ Arquivo de referência para anexar em **Conhecimento** no GPT "NexSift Editor". 
 - `title`: 8 a 140 caracteres.
 - `description`: 30 a 260 caracteres.
 - `whyItMatters`: 30 a 800 caracteres.
-- `content`: markdown em pt-BR, mínimo de 100 caracteres. Sem imagens. Links para as fontes inline no ponto da afirmação, além do array `sources`.
+- `content`: markdown em pt-BR, mínimo de 100 caracteres. Sem imagens. Links para as fontes inline no ponto da afirmação, além do array `sources`. Não é necessário ter todos os campos acima do mínimo: densidade, não comprimento. Explique pelo menos uma consequência técnica, operacional, econômica ou estratégica concreta e feche com o que observar agora.
 - `topics`: 1 a 3, apenas dos valores válidos: `ai`, `development`, `cloud`, `devops`, `security`, `industry`, `design`. O primeiro é o tópico primário e define o slug.
 - `tags`: até 10, em minúsculas, estritamente ligadas ao conteúdo do sinal.
-- `sources`: 1 ou mais; cada um com `title`, `publisher` e `url` obrigatórios; `publishedAt` opcional em ISO 8601. Liste todas as fontes usadas e só URLs reais verificadas (acesse cada URL e confirme resposta 200).
+- `sources`: 1 ou mais; cada um com `title`, `publisher` e `url` obrigatórios; `publishedAt` opcional em ISO 8601. Liste todas as fontes usadas. O `title` deve ser o título real da página.
+- O sinal pode (e deve) ter **mais de uma fonte** quando fatos diferentes vierem de páginas primárias distintas (ex.: anúncio + changelog + release). Cada `sources[].url` é verificada individualmente pelo backend: se qualquer uma falhar, a publicação é rejeitada. Não agrupe URLs diferentes em uma única entrada.
 - `relevanceScore`: 0 a 10. Gate: mínimo 6.5. Faixas: 9.0-10 excepcional; 8.0-8.9 forte; 7.0-7.9 relevante; 6.0-6.9 útil para segmento específico.
 - `confidenceScore`: 0 a 10. Gate: mínimo 7.
 - Não invente nomes, versões, datas, valores ou números.
 
+## Semântica de fonte verificada
+
+Uma URL encontrada em busca é apenas um **candidato a fonte**. Ela só vira fonte do sinal depois que for: localizada, aberta, com página recuperada, publisher confirmado, conteúdo inspecionado, acontecimento confirmado, data confirmada e fatos principais confirmados.
+
+- Nunca invente, reconstrua ou deduza uma URL; a URL em `sources` deve ser exatamente uma URL que foi aberta com sucesso.
+- HTTP 200 é necessário, mas não é prova suficiente. Detecte soft-404 (página 200 com "not found" no título), homepage genérica, página removida, redirect irrelevante ou conteúdo diferente.
+- Use `validateSource` antes de publicar: o backend abre a URL, segue redirects (com proteção contra endereços privados), registra `finalUrl`, `httpStatus`, `pageTitle`, `contentType`, `checkedAt` e `sourceStatus`.
+- Estados de fonte: `healthy` (aberta e sem redirect), `redirected` (redirect válido para o conteúdo), `temporarily_unavailable` (erro 5xx, 429 ou falha de rede), `broken` (404/410, soft-404, redirect para homepage, host bloqueado), `replaced` (fonte substituída em auditoria).
+
 ## Validação no servidor
 
-A Lambda valida o payload com Zod (schema `postDraftSchema`) e aplica os gates editoriais. Respostas possíveis:
+A Lambda valida o payload com Zod (schema `postDraftSchema`), aplica os gates editoriais e **reabre mecanicamente cada `sources[].url`** antes de gravar. O backend não confia na afirmação do editor de que a fonte foi verificada: ele confirma as propriedades mecânicas no momento da publicação e registra a verificação no sinal gravado. Respostas possíveis:
 
 - `201`: sinal publicado (retorna `ok`, `slug`, `operation` = `created` | `updated`, `publishedAt`, `updatedAt`).
 - `400`: JSON malformado.
 - `401`: token inválido.
 - `404`: sinal não encontrado (em `getPost` e `deletePost`).
-- `422`: payload inválido ou gate não atendido (retorna a lista de issues; corrija e tente uma vez).
+- `422`: payload inválido, gate não atendido ou `Source verification failed` com a lista de fontes rejeitadas (corrija e tente uma vez; se falhar de novo, descarte).
+- `500`: falha de publicação.
 
 ## Endpoints
 
 - GET `/` (operationId `listRecentPosts`): lista os sinais recentes. Filtros opcionais: `since` (ISO 8601), `topic`, `signalType`, `limit` (padrão 30, máximo 100).
-- GET `/posts/{slug}` (operationId `getPost`): retorna o sinal completo.
+- GET `/posts/{slug}` (operationId `getPost`): retorna o sinal completo, incluindo os dados de verificação de cada fonte.
 - POST `/` (operationId `publishPost`): publica ou atualiza um sinal.
+- POST `/validate-source` (operationId `validateSource`): abre e valida uma URL candidata. Body: `{ "url": "https://..." }`. Resposta 200 com o resultado da verificação; 422 com o motivo quando a URL for rejeitada.
+- POST `/audit-sources` (operationId `auditSources`): revalida todas as fontes de todos os sinais publicados, atualiza o registro de verificação e devolve contagem por estado. Use periodicamente (ex.: semanal) para detectar link rot.
 - DELETE `/posts/{slug}` (operationId `deletePost`): exclui um sinal.
+
+## Link rot (fonte que deixa de existir)
+
+Fonte válida na publicação que vira 404 depois não significa automaticamente que o sinal esteja errado. Antes de remover o sinal, procure: nova URL oficial, changelog oficial, documentação oficial, release oficial ou fonte primária equivalente. Somente retire o sinal se a perda da evidência comprometer a confiabilidade factual. Para publicações novas, a regra é rígida: fonte quebrada não publica.

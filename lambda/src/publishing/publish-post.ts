@@ -4,6 +4,7 @@ import {
   type PostDraft,
   type PostSummary,
 } from '@nexsift/schemas/post'
+import type { VerifiedPostSource } from '@nexsift/schemas/source'
 import type { Topic } from '@nexsift/schemas/topic'
 import {
   deleteObject,
@@ -14,6 +15,11 @@ import {
 } from '../storage/s3'
 import { normalizePost } from './normalize-post'
 import { buildSignalSlug } from './signal-slug'
+import {
+  SourceRejectedError,
+  type SourceFailure,
+  validateSourceUrl,
+} from './validate-source'
 
 export const latestIndexKey = 'public/indexes/latest.json'
 const latestLimit = 100
@@ -37,15 +43,84 @@ export async function publishPost(draft: PostDraft): Promise<PublishResult> {
     throw new Error('A post needs at least one topic')
   }
 
+  const verifiedSources = await verifyPostSources(draft.sources)
   const slug = buildSignalSlug(primaryTopic, draft.title, draft.signalDate)
   const existing = await getPost(slug)
-  const post = normalizePost(draft, existing)
+  const post = normalizePost({ ...draft, sources: verifiedSources }, existing)
 
   await putPost(post)
   await updateLatestIndex(post)
   await synchronizeTopicIndexes(post, existing)
 
   return { post, operation: existing ? 'updated' : 'created' }
+}
+
+// Every source URL must be fetched and inspected at publication time. The
+// editor's claim that a source was checked is never trusted on its own: the
+// backend reopens the exact URL and records the result on the stored source.
+export async function verifyPostSources(
+  sources: PostDraft['sources'],
+): Promise<VerifiedPostSource[]> {
+  const checkedAt = new Date().toISOString()
+
+  const results = await Promise.allSettled(
+    sources.map((source) => validateSourceUrl(source.url)),
+  )
+
+  const verified: VerifiedPostSource[] = []
+  const failures: SourceFailure[] = []
+
+  results.forEach((result, index) => {
+    const source = sources[index]
+
+    if (!source) {
+      return
+    }
+
+    if (result.status === 'rejected') {
+      const reason = result.reason
+
+      if (reason instanceof SourceRejectedError && reason.check) {
+        failures.push({
+          url: source.url,
+          status: reason.check.status,
+          sourceStatus: reason.check.sourceStatus,
+        })
+      } else {
+        failures.push({
+          url: source.url,
+          status: null,
+          sourceStatus: 'temporarily_unavailable',
+        })
+      }
+
+      return
+    }
+
+    const check = result.value
+
+    verified.push({
+      title: source.title,
+      publisher: source.publisher,
+      url: source.url,
+      publishedAt: source.publishedAt,
+      lastCheckedAt: checkedAt,
+      lastSuccessfulAt: check.ok ? check.checkedAt : undefined,
+      httpStatus: check.status ?? 0,
+      finalUrl: check.finalUrl,
+      sourceStatus: check.sourceStatus,
+    })
+  })
+
+  if (failures.length > 0) {
+    throw new SourceRejectedError(
+      `Source verification failed for ${failures.length} source(s)`,
+      null,
+      failures,
+    )
+  }
+
+  return verified
 }
 
 export async function deletePost(slug: string) {
