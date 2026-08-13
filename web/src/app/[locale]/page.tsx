@@ -1,8 +1,3 @@
-import Link from 'next/link'
-import { ArrowDownRight, ArrowUpRight } from 'lucide-react'
-import { hasLocale } from 'next-intl'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { notFound } from 'next/navigation'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { SignalLedger } from '@/features/blog/signal-ledger'
@@ -13,6 +8,11 @@ import { TopicBands } from '@/features/landing/topic-bands'
 import { routing, type AppLocale } from '@/i18n/routing'
 import { listPosts } from '@/lib/content'
 import { compareByLatestUpdate } from '@/lib/date'
+import { ArrowDownRight, ArrowUpRight } from 'lucide-react'
+import { hasLocale } from 'next-intl'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 
@@ -31,6 +31,7 @@ export default async function HomePage({
   setRequestLocale(locale)
   const t = await getTranslations()
   const posts = await listPosts()
+  const homePath = locale === 'pt-BR' ? '/' : `/${locale}`
 
   return (
     <>
@@ -64,13 +65,13 @@ export default async function HomePage({
               <div className="mt-9 flex flex-wrap items-center gap-3">
                 <Link
                   href="/blog"
-                  className="flex items-center gap-2 rounded-(--radius-sm) bg-(--signal) px-4 py-2.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
+                  className="flex items-center gap-2 rounded-sm bg-(--signal) px-4 py-2.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
                 >
                   {t('hero.primary')}
                   <ArrowUpRight size={15} />
                 </Link>
                 <Link
-                  href={`/${locale}#process`}
+                  href={`${homePath}#process`}
                   className="flex items-center gap-2 px-3 py-2.5 text-sm text-(--muted-strong) hover:text-white"
                 >
                   {t('hero.secondary')}
@@ -127,7 +128,7 @@ export default async function HomePage({
                   {t('topics.description')}
                 </p>
               </div>
-              <TopicBands />
+              <TopicBands posts={posts} />
             </div>
           </div>
         </section>
@@ -162,9 +163,9 @@ export default async function HomePage({
             avgRelevance={
               posts.length > 0
                 ? (
-                    posts.reduce((sum, post) => sum + post.relevanceScore, 0) /
-                    posts.length
-                  ).toFixed(1)
+                  posts.reduce((sum, post) => sum + post.relevanceScore, 0) /
+                  posts.length
+                ).toFixed(1)
                 : '0.0'
             }
             labels={{

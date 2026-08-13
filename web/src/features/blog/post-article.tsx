@@ -1,11 +1,11 @@
-import { ArrowUpRight } from 'lucide-react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import { getTranslations } from 'next-intl/server'
-import type { Post } from '@nexsift/schemas/post'
 import { TrackedLink } from '@/analytics/tracked-link'
 import { formatDate } from '@/lib/date'
 import { getTopicMeta } from '@/lib/topics'
+import type { Post } from '@nexsift/schemas/post'
+import { ArrowUpRight } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { Breadcrumbs } from './breadcrumbs'
 
 export async function PostArticle({ post }: { post: Post }) {
@@ -22,12 +22,12 @@ export async function PostArticle({ post }: { post: Post }) {
 
   return (
     <article className="page-shell py-12 lg:py-20">
-      <div className="grid gap-10 lg:grid-cols-[13rem_minmax(0,48rem)_minmax(13rem,1fr)] lg:gap-12 xl:gap-16">
-        <aside className="order-3 lg:order-none lg:sticky lg:top-8 lg:self-start">
-          <Breadcrumbs
-            items={[...breadcrumbs, ...(topicCrumb ? [topicCrumb] : []), { label: post.title }]}
-            topic={primaryTopic}
-          />
+      <Breadcrumbs
+        items={[...breadcrumbs, ...(topicCrumb ? [topicCrumb] : []), { label: post.title }]}
+        topic={primaryTopic}
+      />
+      <div className="mt-6 grid gap-10 lg:grid-cols-[13rem_minmax(0,48rem)_minmax(13rem,1fr)] lg:gap-12 xl:gap-16">
+        <aside className="order-3 lg:order-0 lg:sticky lg:top-24 lg:self-start">
           <div className="border-t border-(--border) pt-4">
             <div className="eyebrow">{t('article.metadata')}</div>
             <dl className="mt-5 space-y-5 font-mono text-[10px] uppercase tracking-[0.08em]">
@@ -51,7 +51,7 @@ export async function PostArticle({ post }: { post: Post }) {
           </p>
         </aside>
 
-        <div className="order-first min-w-0 lg:order-none">
+        <div className="order-first min-w-0 lg:order-0">
           {primaryTopic && topicLabel ? (
             <div
               data-topic={primaryTopic}
@@ -83,7 +83,7 @@ export async function PostArticle({ post }: { post: Post }) {
           </section>
         </div>
 
-        <aside className="order-2 lg:order-none lg:sticky lg:top-8 lg:self-start">
+        <aside className="order-2 lg:order-0 lg:sticky lg:top-24 lg:self-start">
           <div className="border-t border-(--border) pt-4">
             <div className="eyebrow">{t('blog.sources')}</div>
             <div className="mt-5 space-y-3">
@@ -97,7 +97,7 @@ export async function PostArticle({ post }: { post: Post }) {
                   properties={{ post: post.slug, publisher: source.publisher }}
                   className="group block border-b border-(--border) pb-3"
                 >
-                  <div className="flex gap-2 font-mono text-[9px] uppercase tracking-[0.1em] text-(--muted)">
+                  <div className="flex gap-2 font-mono text-[9px] uppercase tracking-widest text-(--muted)">
                     <span>{String(index + 1).padStart(2, '0')}</span>
                     <span>{source.publisher}</span>
                   </div>

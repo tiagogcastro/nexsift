@@ -7,6 +7,7 @@ import {
   PostHogPageView,
   PostHogProvider,
 } from '@/analytics/posthog-provider'
+import { HashScroll } from '@/components/hash-scroll'
 import { siteConfig } from '@/config/site'
 import './globals.css'
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.defaultTitle,
-    template: `%s | ${siteConfig.name}`,
+    template: `${siteConfig.name} - %s`,
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
@@ -48,6 +49,7 @@ export default async function RootLayout({
           <Suspense fallback={null}>
             <PostHogPageView />
           </Suspense>
+          <HashScroll />
           {children}
         </PostHogProvider>
       </body>

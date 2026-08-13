@@ -61,7 +61,7 @@ export default async function TopicPage({
       />
       <main className="page-shell min-h-[75vh] py-16 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[0.55fr_1.45fr]">
-          <div data-topic={topic} className="topic-color lg:sticky lg:top-10 lg:self-start">
+          <div data-topic={topic} className="topic-color lg:sticky lg:top-24 lg:self-start">
             <Breadcrumbs
               items={[
                 { label: t('breadcrumb.home'), href: '/' },
@@ -78,6 +78,9 @@ export default async function TopicPage({
             </h1>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-(--muted)">
               {meta.description}
+            </p>
+            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.12em] text-(--topic-color)">
+              {t('topicPage.signalCount', { count: posts.length })}
             </p>
           </div>
           <LedgerConsole

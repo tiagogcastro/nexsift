@@ -28,7 +28,8 @@
   "topics": {
     "eyebrow": "FREQUÊNCIAS",
     "title": "Seis áreas, um único radar",
-    "description": "A cobertura é ampla. A seleção continua restrita ao que tem impacto técnico ou profissional real."
+    "description": "Frequências são as áreas de cobertura do radar. Sinais são os posts verificados publicados em cada frequência. A seleção continua restrita ao que tem impacto técnico ou profissional real.",
+    "count": "{count, plural, one {# sinal} other {# sinais}}"
   },
   "process": {
     "eyebrow": "PIPELINE",
@@ -97,7 +98,8 @@
     "signalFallback": "SINAL"
   },
   "topicPage": {
-    "frequency": "FREQUÊNCIA"
+    "frequency": "FREQUÊNCIA",
+    "signalCount": "{count, plural, one {# sinal publicado nesta frequência} other {# sinais publicados nesta frequência}}"
   },
   "article": {
     "metadata": "METADADOS DO SINAL",
@@ -131,7 +133,22 @@
   "footer": {
     "tagline": "Menos ruído. Mais sinal.",
     "builtBy": "Criado por Tiago Castro",
-    "rights": "NexSift"
+    "rights": "NexSift",
+    "privacy": "Privacidade"
+  },
+  "privacy": {
+    "eyebrow": "PRIVACIDADE",
+    "title": "Política de privacidade",
+    "intro": "Esta página explica o que o NexSift coleta e como os dados são tratados, em conformidade com a LGPD.",
+    "collectTitle": "Dados que coletamos",
+    "collectBody": "O NexSift usa PostHog para medir o uso do site com eventos anônimos, como páginas visitadas e cliques em fontes. Não há cadastro, login, cookies de publicidade ou compartilhamento com terceiros. Nenhum dado pessoal de identificação é coletado.",
+    "contentTitle": "Conteúdo editorial",
+    "contentBody": "Os posts são produzidos com apoio de IA a partir de fontes públicas oficiais e apontam para essas fontes. Antes de tomar decisões, revise o material original; erros podem ocorrer.",
+    "rightsTitle": "Seus direitos (LGPD)",
+    "rightsBody": "Você pode solicitar acesso, correção ou exclusão de quaisquer dados relacionados a você a qualquer momento, pelo e-mail de contato abaixo.",
+    "contactTitle": "Contato",
+    "contactBody": "Dúvidas ou solicitações: tiagogcastro1@gmail.com",
+    "updated": "A versão vigente desta política é a publicada nesta página."
   },
   "about": {
     "eyebrow": "SOBRE",
@@ -140,7 +157,10 @@
     "principleTitle": "Princípios editoriais",
     "principleA": "Fonte antes de opinião",
     "principleB": "Contexto antes de volume",
-    "principleC": "Impacto técnico antes de hype"
+    "principleC": "Impacto técnico antes de hype",
+    "creatorEyebrow": "QUEM ESTÁ POR TRÁS",
+    "creatorTitle": "Criado por quem vive o problema",
+    "creatorBody": "O NexSift foi criado por Tiago Castro, desenvolvedor fullstack e cloud. A motivação veio do custo de acompanhar tecnologia: feeds infinitos, hype e pouco contexto. O NexSift é o filtro que ele mesmo gostaria de ter: poucos sinais, fontes verificáveis e contexto direto sobre o que muda para quem constrói software."
   },
   "blog": {
     "eyebrow": "ARQUIVO",
