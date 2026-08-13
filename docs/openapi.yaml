@@ -296,6 +296,7 @@ components:
         - description
         - content
         - whyItMatters
+        - whatToWatch
         - topics
         - signalDate
         - signalType
@@ -324,6 +325,11 @@ components:
           type: string
           minLength: 30
           maxLength: 800
+        whatToWatch:
+          type: string
+          minLength: 30
+          maxLength: 500
+          description: What to watch next: the concrete follow-up (rollout, adoption, patch, migration, ecosystem response, breaking change).
         topics:
           type: array
           minItems: 1
@@ -373,6 +379,7 @@ components:
         - description
         - content
         - whyItMatters
+        - whatToWatch
         - topics
         - signalDate
         - signalType
@@ -395,6 +402,8 @@ components:
         content:
           type: string
         whyItMatters:
+          type: string
+        whatToWatch:
           type: string
         topics:
           type: array

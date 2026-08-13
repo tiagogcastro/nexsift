@@ -4,6 +4,7 @@
     "description": "Payload de exemplo para validar o modelo de sinal v2 no fluxo local.",
     "content": "## O sinal\n\nEste conteúdo existe apenas para validar o fluxo local de publicação.\n\n## O que mudou\n\nNada muda; é um payload de teste local.",
     "whyItMatters": "Este payload confirma que o contrato HTTP, a validação Zod, os gates e os índices do S3 funcionam juntos.",
+    "whatToWatch": "Observar o próximo ciclo da rotina local de publicação para confirmar que o campo passa pelos gates e índices.",
     "topics": ["devops"],
     "signalDate": "2026-08-12",
     "signalType": "release",

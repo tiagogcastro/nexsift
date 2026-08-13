@@ -16,6 +16,7 @@ const draftFields = {
   description: z.string().min(30).max(260),
   content: z.string().min(100),
   whyItMatters: z.string().min(30).max(800),
+  whatToWatch: z.string().min(30).max(500),
   topics: z.array(topicSchema).min(1).max(3),
   signalDate: z.iso.date(),
   signalType: signalTypeSchema,
