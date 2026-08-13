@@ -35,6 +35,7 @@ Ao receber o comando de rotina (ex.: "Rode a rotina editorial de hoje"), execute
 - Tópicos ativos: `ai`, `cloud`, `development`, `devops`, `career`.
 - `finance` entra somente quando houver sinal forte (ex.: salários, custos de cloud, funding relevante).
 - Cada post leva de 1 a 3 tópicos; o primeiro (`topics[0]`) é o tópico primário e define o slug.
+- Disciplina de tópicos: prefira 1 tópico (o primário). Inclua um segundo tópico apenas se ele for genuinamente central ao sinal (ex.: uma mudança de rede no GKE é `cloud` e `devops`). Nunca inclua um terceiro tópico por menção passageira de palavra-chave. Em dúvida, use apenas o primário. Exemplos do que evitar: um post sobre billing do Copilot não é `ai`; um post sobre Workers AI não é `development`.
 
 ### Regras de publicação
 
@@ -46,10 +47,11 @@ Ao receber o comando de rotina (ex.: "Rode a rotina editorial de hoje"), execute
 
 1. Novidade material: o acontecimento é das últimas 24-48h, ou é um desenvolvimento dos últimos dias ainda não coberto. As últimas 24-48h são prioridade, não requisito absoluto: um sinal forte dos últimos ~7 dias com fonte primária e impacto prático é publicável enquanto não estiver coberto no arquivo.
 2. Fonte primária verificável: documentação oficial, changelog, blog de engenharia, anúncio oficial ou research original. Reportagem secundária só quando não existir fonte primária.
-3. Impacto técnico ou profissional real para desenvolvedores fullstack/cloud.
-4. O texto responde às perguntas editoriais e é específico (nomes de serviço, versões, datas, valores).
-5. `relevanceScore >= 7`, justificado internamente por: impacto técnico, novidade, relevância prática, credibilidade da fonte e amplitude de devs afetados.
-6. Equilíbrio Brasil/exterior: não publique um sinal fraco só para ter cobertura nacional, nem ignore um sinal brasileiro forte.
+3. URLs verificadas: antes de publicar, acesse cada URL de fonte e confirme que responde 200. URL quebrada (404) deve ser substituída pela correta ou o sinal descartado. Nunca publique uma URL que você não verificou.
+4. Impacto técnico ou profissional real para desenvolvedores fullstack/cloud.
+5. O texto responde às perguntas editoriais e é específico (nomes de serviço, versões, datas, valores).
+6. `relevanceScore >= 7`, justificado internamente por: impacto técnico, novidade, relevância prática, credibilidade da fonte e amplitude de devs afetados.
+7. Equilíbrio Brasil/exterior: não publique um sinal fraco só para ter cobertura nacional, nem ignore um sinal brasileiro forte.
 
 Regra de volume para os primeiros dias: enquanto o arquivo estiver vazio ou quase vazio, o critério dominante é fonte primária + impacto prático. Um dia com 0 posts deve ser a exceção de um dia objetivamente fraco, não o resultado padrão: se houver ao menos 1 candidato forte e verificável no dia, publique-o. Não descarte tudo apenas porque os sinais têm mais de 48h.
 
@@ -96,7 +98,7 @@ Regras do contrato:
 - `slug`: `{topic-primario}-{YYYY-MM-DD}`. É estável: republicar com o mesmo slug atualiza o post existente em vez de duplicar. Use sempre a data do dia da rotina.
 - `title`: 8 a 140 caracteres. `description`: 30 a 260. `whyItMatters`: 30 a 800. `content`: markdown com mínimo de 100 caracteres.
 - `topics`: 1 a 3, apenas dos valores válidos: `ai`, `cloud`, `development`, `devops`, `career`, `finance`.
-- `tags`: até 10, em minúsculas (ex.: `aws`, `kubernetes`, `carreira`).
+- `tags`: até 10, em minúsculas, estritamente ligadas ao conteúdo do post (ex.: `aws`, `kubernetes`, `carreira`). Não use tags de tópicos que não são centrais ao conteúdo.
 - `sources`: 1 ou mais; cada um com `title`, `publisher` e `url` obrigatórios, `publishedAt` opcional em ISO 8601. Liste todas as fontes usadas e só URLs reais verificadas.
 - `relevanceScore`: 0 a 10. Abaixo de 7 não publica.
 

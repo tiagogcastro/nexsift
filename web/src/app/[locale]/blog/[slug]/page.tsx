@@ -30,7 +30,7 @@ export async function generateMetadata({
     openGraph: {
       type: 'article',
       url: canonical,
-      title: post.title,
+      title: `${siteConfig.name} - ${post.title}`,
       description: post.description,
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
@@ -39,7 +39,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title,
+      title: `${siteConfig.name} - ${post.title}`,
       description: post.description,
     },
   }

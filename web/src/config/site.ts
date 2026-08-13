@@ -10,7 +10,7 @@ if (!url) {
 
 export const siteConfig = {
   name: 'NexSift',
-  defaultTitle: 'NexSift | Menos ruído. Mais sinal.',
+  defaultTitle: 'NexSift - Menos ruído. Mais sinal.',
   description:
     'Inteligência tech para desenvolvedores. Sinais verificados sobre IA, cloud, desenvolvimento, DevOps e carreira.',
   url,

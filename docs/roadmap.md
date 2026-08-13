@@ -53,3 +53,8 @@ The future EventBridge + OpenAI API pipeline remains the path for scaling beyond
 10. guarded auto-publish
 
 Goal: automate only after the product and editorial process are proven.
+
+## Future non-core items
+
+- terms of use page
+- Vercel data cache purge webhook on publish (when freshness beyond the 10 min TTL matters)

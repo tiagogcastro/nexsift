@@ -35,11 +35,31 @@ export function NavLinks({
   const isAbout = pathname === '/about' || pathname.startsWith('/about/')
   const isTopics = pathname.startsWith('/topics/')
   const activeTopic = topicFromPath(pathname)
+  const homePath = locale === 'pt-BR' ? '/' : `/${locale}`
 
   const linkClass =
     'flex items-center gap-2 rounded-(--radius-sm) px-2.5 py-1.5 transition-colors hover:bg-(--surface-raised) hover:text-white'
   const activeClass = 'text-(--foreground)'
   const inactiveClass = 'text-(--muted-strong)'
+
+  const scrollToHash = (href: string) => {
+    const hashIndex = href.indexOf('#')
+
+    if (hashIndex === -1) {
+      return
+    }
+
+    const path = href.slice(0, hashIndex) || '/'
+    const hash = href.slice(hashIndex)
+
+    if (window.location.pathname !== path || window.location.hash !== hash) {
+      return
+    }
+
+    document
+      .querySelector(hash)
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   return (
     <nav className="hidden items-center gap-7 text-sm lg:flex">
@@ -51,13 +71,18 @@ export function NavLinks({
         {labels.blog}
       </Link>
       <Link
-        href={`/${locale}#topics`}
+        href={`${homePath}#topics`}
+        onClick={(event) => scrollToHash(event.currentTarget.getAttribute('href') ?? '')}
         className={`${linkClass} ${isTopics ? activeClass : inactiveClass}`}
       >
         {isTopics ? <ActiveDot topic={activeTopic} /> : null}
         {labels.topics}
       </Link>
-      <Link href={`/${locale}#process`} className={`${linkClass} ${inactiveClass}`}>
+      <Link
+        href={`${homePath}#process`}
+        onClick={(event) => scrollToHash(event.currentTarget.getAttribute('href') ?? '')}
+        className={`${linkClass} ${inactiveClass}`}
+      >
         {labels.process}
       </Link>
       <Link
