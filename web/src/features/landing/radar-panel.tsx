@@ -1,5 +1,7 @@
 import { getTopicMeta } from '@/lib/topics'
+import { verifiedSignalsRatio } from '@/lib/source-verification'
 import type { PostSummary } from '@nexsift/schemas/post'
+import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 
 export async function RadarPanel({
@@ -11,7 +13,8 @@ export async function RadarPanel({
 }) {
   const t = await getTranslations()
   const topicCount = new Set(posts.flatMap((post) => post.topics)).size
-  const verifiedPercentage = posts.length > 0 ? '100%' : '0%'
+  const verifiedRatio = verifiedSignalsRatio(topSignals)
+  const verifiedPercentage = `${Math.round(verifiedRatio * 100)}%`
 
   return (
     <div className="relative overflow-hidden border border-(--border) bg-(--surface-soft)">
@@ -49,21 +52,22 @@ export async function RadarPanel({
             }
 
             return (
-              <div
+              <Link
                 key={post.slug}
+                href={`/blog/${post.slug}`}
                 data-topic={topic}
-                className="topic-color grid grid-cols-[6rem_1fr_auto] items-center gap-3 border-t border-(--border) py-3"
+                className="topic-color radar-signal-row group grid grid-cols-[6rem_1fr_auto] items-center gap-3 border-t border-(--border) py-3"
               >
                 <span className="font-mono text-[10px] font-semibold text-(--topic-color)">
                   {getTopicMeta(t, topic).shortLabel}
                 </span>
-                <span className="truncate text-xs text-(--muted-strong)">
+                <span className="truncate text-xs text-(--muted-strong) transition-colors group-hover:text-(--foreground)">
                   {post.title}
                 </span>
                 <span className="font-mono text-xs font-bold text-(--foreground)">
                   {post.relevanceScore.toFixed(1)}
                 </span>
-              </div>
+              </Link>
             )
           })}
         </div>

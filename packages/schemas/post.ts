@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { depthSchema } from './depth'
-import { postSourceSchema } from './source'
+import { postSourceSchema, verifiedPostSourceSchema } from './source'
 import { signalTypeSchema } from './signal-type'
 import { topicSchema } from './topic'
 
@@ -47,6 +47,7 @@ const postFieldsSchema = draftBaseSchema.extend({
   updatedAt: z.iso.datetime().optional(),
   readingTime: z.number().int().positive(),
   locale: z.literal('pt-BR'),
+  sources: z.array(verifiedPostSourceSchema).min(1),
 })
 
 export const postSchema = postFieldsSchema.refine(

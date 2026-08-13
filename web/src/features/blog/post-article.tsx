@@ -7,6 +7,7 @@ import { getTranslations } from 'next-intl/server'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Breadcrumbs } from './breadcrumbs'
+import { EditorialLink } from './editorial-link'
 
 export async function PostArticle({ post }: { post: Post }) {
   const t = await getTranslations()
@@ -72,7 +73,12 @@ export async function PostArticle({ post }: { post: Post }) {
           <div className="my-10 h-px bg-(--border)" />
 
           <div className="prose-nexsift">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{ a: EditorialLink }}
+            >
+              {post.content}
+            </ReactMarkdown>
           </div>
 
           <section className="mt-14 border border-(--border) bg-(--signal-soft) p-6 md:p-8">
@@ -92,7 +98,7 @@ export async function PostArticle({ post }: { post: Post }) {
                   key={source.url}
                   href={source.url}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   event="source_clicked"
                   properties={{ post: post.slug, publisher: source.publisher }}
                   className="group block border-b border-(--border) pb-3"
@@ -108,6 +114,9 @@ export async function PostArticle({ post }: { post: Post }) {
                 </TrackedLink>
               ))}
             </div>
+            <p className="mt-5 font-mono text-[10px] leading-relaxed text-(--muted)">
+              {t('notice.sources')}
+            </p>
           </div>
         </aside>
       </div>

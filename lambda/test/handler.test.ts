@@ -2,6 +2,7 @@ import type { APIGatewayProxyEventV2 } from 'aws-lambda'
 import { postSummarySchema } from '@nexsift/schemas/post'
 import { handler } from '../src/publish/handler'
 import { NotFoundError } from '../src/publishing/publish-post'
+import { SourceRejectedError } from '../src/publishing/validate-source'
 import { getIndex, getPost } from '../src/storage/s3'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
@@ -15,7 +16,20 @@ vi.mock('../src/publishing/publish-post', () => ({
 vi.mock('../src/storage/s3', () => ({
   getIndex: vi.fn(),
   getPost: vi.fn(),
+  putPost: vi.fn(),
 }))
+
+const { mockedValidate } = vi.hoisted(() => ({
+  mockedValidate: vi.fn(),
+}))
+
+vi.mock('../src/publishing/validate-source', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../src/publishing/validate-source')>()
+  return {
+    ...actual,
+    validateSourceUrl: mockedValidate,
+  }
+})
 
 import {
   deletePost,
@@ -104,6 +118,17 @@ function makeDraftPayload() {
 beforeEach(() => {
   vi.clearAllMocks()
   vi.stubEnv('PUBLISH_TOKEN', 'secret')
+  mockedValidate.mockReset()
+  mockedValidate.mockResolvedValue({
+    ok: true,
+    requestedUrl: 'https://example.com',
+    finalUrl: 'https://example.com',
+    status: 200,
+    checkedAt: '2026-08-13T09:00:00.000Z',
+    pageTitle: 'Example',
+    contentType: 'text/html',
+    sourceStatus: 'healthy',
+  })
 })
 
 describe('handler auth', () => {
@@ -259,6 +284,95 @@ describe('DELETE /posts/{slug}', () => {
     )
 
     expect(result.statusCode).toBe(404)
+  })
+})
+
+describe('POST /validate-source', () => {
+  it('returns the check result for a valid source', async () => {
+    mockedValidate.mockResolvedValue({
+      ok: true,
+      requestedUrl: 'https://example.com/article',
+      finalUrl: 'https://example.com/article',
+      status: 200,
+      checkedAt: '2026-08-13T09:00:00.000Z',
+      pageTitle: 'Article',
+      contentType: 'text/html',
+      sourceStatus: 'healthy',
+    })
+
+    const result = await handler(
+      makeEvent({
+        requestContext: http('POST', '/validate-source'),
+        body: JSON.stringify({ url: 'https://example.com/article' }),
+      }),
+    )
+
+    expect(result.statusCode).toBe(200)
+    const body = JSON.parse(result.body ?? '{}') as { ok: boolean }
+    expect(body.ok).toBe(true)
+    expect(mockedValidate).toHaveBeenCalledWith('https://example.com/article')
+  })
+
+  it('returns 422 when the source is rejected', async () => {
+    mockedValidate.mockRejectedValue(
+      new SourceRejectedError('Source rejected: http 404', {
+        ok: false,
+        requestedUrl: 'https://example.com/missing',
+        finalUrl: 'https://example.com/missing',
+        status: 404,
+        checkedAt: '2026-08-13T09:00:00.000Z',
+        pageTitle: null,
+        contentType: null,
+        sourceStatus: 'broken',
+      }),
+    )
+
+    const result = await handler(
+      makeEvent({
+        requestContext: http('POST', '/validate-source'),
+        body: JSON.stringify({ url: 'https://example.com/missing' }),
+      }),
+    )
+
+    expect(result.statusCode).toBe(422)
+    const body = JSON.parse(result.body ?? '{}') as { error: string; check: { status: number } }
+    expect(body.error).toBe('Source rejected')
+    expect(body.check.status).toBe(404)
+  })
+
+  it('returns 422 when url is missing', async () => {
+    const result = await handler(
+      makeEvent({
+        requestContext: http('POST', '/validate-source'),
+        body: JSON.stringify({}),
+      }),
+    )
+
+    expect(result.statusCode).toBe(422)
+    expect(mockedValidate).not.toHaveBeenCalled()
+  })
+})
+
+describe('POST /audit-sources', () => {
+  it('reports the source audit result', async () => {
+    mockedGetIndex.mockResolvedValue([
+      makeSummary('ai-agentes-2026-08-12', ['ai'], '2026-08-12T10:00:00.000Z'),
+    ])
+    mockedGetPost.mockResolvedValue({
+      ...makeSummary('ai-agentes-2026-08-12', ['ai'], '2026-08-12T10:00:00.000Z'),
+      content: '## Conteúdo\n\nMais de cem caracteres para o schema de post.',
+      whyItMatters: 'Importa para quem constrói tecnologia.',
+    })
+
+    const result = await handler(
+      makeEvent({
+        requestContext: http('POST', '/audit-sources'),
+      }),
+    )
+
+    expect(result.statusCode).toBe(200)
+    const body = JSON.parse(result.body ?? '{}') as { checked: number }
+    expect(body.checked).toBe(1)
   })
 })
 

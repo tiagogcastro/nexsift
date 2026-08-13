@@ -171,6 +171,23 @@ button:not(:disabled),
   transition: transform 160ms ease;
 }
 
+.radar-signal-row {
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.radar-signal-row:hover {
+  background: color-mix(in srgb, var(--topic-color, var(--signal)) 5%, transparent);
+  border-color: var(--border-strong);
+}
+
+.radar-signal-row:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
 .prose-nexsift {
   color: var(--prose-body);
   font-size: clamp(1.05rem, 1.3vw, 1.18rem);

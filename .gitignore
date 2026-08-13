@@ -28,3 +28,6 @@ iac/local/
 
 .DS_Store
 Thumbs.db
+
+# Superpowers planning artifacts (internal dev tooling)
+docs/superpowers/

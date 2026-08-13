@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { siteConfig } from '@/config/site'
 import { PostArticle } from '@/features/blog/post-article'
+import { postAlternates } from '@/lib/alternates'
 import { getPostBySlug } from '@/lib/content'
 
 export const dynamic = 'force-dynamic'
@@ -26,7 +27,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.description,
-    alternates: { canonical },
+    alternates: postAlternates(post.slug),
     openGraph: {
       type: 'article',
       url: canonical,
@@ -36,11 +37,13 @@ export async function generateMetadata({
       modifiedTime: post.updatedAt,
       authors: [siteConfig.author],
       tags: post.tags,
+      images: ['/opengraph-image'],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${siteConfig.name} - ${post.title}`,
       description: post.description,
+      images: ['/opengraph-image'],
     },
   }
 }

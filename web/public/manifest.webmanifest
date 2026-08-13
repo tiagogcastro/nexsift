@@ -1,0 +1,21 @@
+{
+  "name": "NexSift - Menos ruído. Mais sinal.",
+  "short_name": "NexSift",
+  "description": "Inteligência tech para desenvolvedores. Sinais verificados sobre IA, cloud, desenvolvimento, DevOps e carreira.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090b0d",
+  "theme_color": "#090b0d",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

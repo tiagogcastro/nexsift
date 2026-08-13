@@ -40,7 +40,7 @@
     "verify": "Verificar",
     "context": "Contextualizar",
     "publish": "Publicar",
-    "rhythm": "Ritmo editorial: nuevas curadurías los lunes y jueves."
+    "rhythm": "Ritmo editorial: siempre actualizado con las novedades de la semana."
   },
   "trust": {
     "eyebrow": "BASADO EN FUENTES",
@@ -86,7 +86,8 @@
   },
   "notice": {
     "short": "Contenido generado con apoyo de IA a partir de fuentes oficiales. Puede contener errores.",
-    "article": "Este texto se produjo con apoyo de IA y se extrae de las fuentes oficiales citadas. Revisa las fuentes antes de tomar decisiones; pueden ocurrir errores."
+    "article": "Este texto se produjo con apoyo de IA y se extrae de las fuentes oficiales citadas. Revisa las fuentes antes de tomar decisiones; pueden ocurrir errores.",
+    "sources": "Una fuente puede dejar de existir en la web en cualquier momento. El equipo editorial puede revisar y actualizar la fuente o la señal cuando sea necesario."
   },
   "breadcrumb": {
     "home": "Inicio",
@@ -160,7 +161,7 @@
     "principleC": "Impacto técnico antes que hype",
     "creatorEyebrow": "DETRÁS DE TODO",
     "creatorTitle": "Creado por quien vive el problema",
-    "creatorBody": "NexSift fue creado por <name>Tiago Castro</name>, analista de sistemas con título en Análisis y Desarrollo de Sistemas y más de 5 años de mercado en desarrollo fullstack y cloud. La motivación vino del costo de seguir la tecnología: feeds infinitos, hype y poco contexto. NexSift es el filtro que él mismo quería: pocas señales, fuentes verificables y contexto directo sobre lo que cambia para quienes construyen software."
+    "creatorBody": "NexSift fue creado por <name>Tiago Castro</name>, desarrollador full stack cloud con título en Análisis y Desarrollo de Sistemas y más de 5 años de mercado construyendo y operando software. La motivación vino del costo de seguir la tecnología: feeds infinitos, hype y poco contexto. NexSift es el filtro que él mismo quería: pocas señales, fuentes verificables y contexto directo sobre lo que cambia para quienes construyen software."
   },
   "blog": {
     "eyebrow": "ARCHIVO",

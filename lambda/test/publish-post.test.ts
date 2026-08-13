@@ -5,6 +5,7 @@ import {
   NotFoundError,
   publishPost,
 } from '../src/publishing/publish-post'
+import { SourceRejectedError } from '../src/publishing/validate-source'
 import { getIndex, getPost } from '../src/storage/s3'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
@@ -50,10 +51,39 @@ vi.mock('@aws-sdk/client-s3', () => {
   }
 })
 
+const { mockedValidate } = vi.hoisted(() => ({
+  mockedValidate: vi.fn(),
+}))
+
+vi.mock('../src/publishing/validate-source', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../src/publishing/validate-source')>()
+  return {
+    ...actual,
+    validateSourceUrl: mockedValidate,
+  }
+})
+
+function validCheck(url: string) {
+  return {
+    ok: true,
+    requestedUrl: url,
+    finalUrl: url,
+    status: 200,
+    checkedAt: '2026-08-13T12:00:00.000Z',
+    pageTitle: 'Terraform changelog',
+    contentType: 'text/html',
+    sourceStatus: 'healthy' as const,
+  }
+}
+
 beforeEach(() => {
   store.clear()
   vi.stubEnv('CONTENT_BUCKET', 'test-bucket')
   vi.stubEnv('AWS_REGION', 'us-east-1')
+  mockedValidate.mockReset()
+  mockedValidate.mockImplementation((url: string) =>
+    Promise.resolve(validCheck(url)),
+  )
 })
 
 function makeDraft(signalDate = '2026-08-12', topics = ['devops'] as string[]) {
@@ -112,6 +142,55 @@ describe('publishPost', () => {
 
     const cloudIndex = await getIndex('public/indexes/topics/cloud.json')
     expect(cloudIndex).toHaveLength(0)
+  })
+})
+
+describe('source verification on publish', () => {
+  it('stores verification fields on every published source', async () => {
+    await publishPost(makeDraft())
+
+    const post = await getPost('devops-terraform-corrige-regressao-de-plan-2026-08-12')
+    const source = post?.sources[0]
+
+    expect(source).toMatchObject({
+      url: 'https://example.com/terraform',
+      lastCheckedAt: expect.any(String),
+      lastSuccessfulAt: expect.any(String),
+      httpStatus: 200,
+      finalUrl: 'https://example.com/terraform',
+      sourceStatus: 'healthy',
+    })
+  })
+
+  it('rejects publication when any source is broken', async () => {
+    const check = validCheck('https://example.com/terraform')
+    mockedValidate.mockRejectedValueOnce(
+      new SourceRejectedError(
+        'Source rejected: http 404',
+        { ...check, ok: false, status: 404, sourceStatus: 'broken' },
+      ),
+    )
+
+    await expect(publishPost(makeDraft())).rejects.toMatchObject({
+      name: 'SourceRejectedError',
+      failures: [
+        { url: 'https://example.com/terraform', status: 404, sourceStatus: 'broken' },
+      ],
+    })
+  })
+
+  it('rejects publication when the source times out', async () => {
+    const check = validCheck('https://example.com/terraform')
+    mockedValidate.mockRejectedValueOnce(
+      new SourceRejectedError(
+        'Source rejected: http 0',
+        { ...check, ok: false, status: 0, sourceStatus: 'temporarily_unavailable' },
+      ),
+    )
+
+    await expect(publishPost(makeDraft())).rejects.toMatchObject({
+      name: 'SourceRejectedError',
+    })
   })
 })
 

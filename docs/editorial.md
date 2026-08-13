@@ -21,7 +21,7 @@ Avoid clickbait, empty superlatives and claims that cannot be traced to a source
 
 - Sinal: the editorial unit NexSift publishes. A signal is a verifiable change in the technology ecosystem that alters a decision, risk, opportunity or mental map relevant to the audience. NexSift does not publish something just because it happened.
 - Tópico: the thematic category of a signal.
-- Ritmo editorial: the publication cadence. New curations are published on Mondays and Thursdays. The word "frequência" must not be used for topics or cadence.
+- Ritmo editorial: the publication cadence. NexSift is always updated with the week's news; strong signals are published as soon as they pass the gate, without waiting for a fixed edition. The word "frequência" must not be used for topics or cadence.
 - Internally, the API and schema may keep the `post` naming; product language always uses Sinal.
 
 ## Audience
@@ -76,7 +76,7 @@ Publication floor (enforced by the Lambda): `relevanceScore >= 6.5` and `confide
 
 ## Editorial cadence
 
-Main routine: Mondays and Thursdays. Research signals since the last edition. An older signal may be recovered when it is still relevant, has not been published, and still represents a material change.
+Main routine: publish strong signals as soon as they pass the gate; the default operational trigger runs twice a week, but it is not a publication limit. Research signals since the last edition. An older signal may be recovered when it is still relevant, has not been published, and still represents a material change.
 
 Geographic rule: actively search for signals from Brazil, Latin America and the rest of the world. Geographic origin does not change the editorial gate. Do not publish weak Brazilian content for diversity, and do not ignore strong Brazilian content.
 
