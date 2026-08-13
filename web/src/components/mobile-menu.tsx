@@ -34,9 +34,11 @@ export function MobileMenu({ locale, labels }: MobileMenuProps) {
   const pathname = usePathname()
   const isBlog = pathname === '/blog' || pathname.startsWith('/blog/')
   const isAbout = pathname === '/about' || pathname.startsWith('/about/')
-  const isTopics = pathname.startsWith('/topics/')
+  const isTopics =
+    pathname === '/topics' || pathname.startsWith('/topics/')
   const activeTopic = topicFromPath(pathname)
   const homePath = locale === 'pt-BR' ? '/' : `/${locale}`
+  const topicsPath = locale === 'pt-BR' ? '/topics' : `/${locale}/topics`
 
   const close = () => setOpen(false)
 
@@ -86,11 +88,8 @@ export function MobileMenu({ locale, labels }: MobileMenuProps) {
               {labels.blog}
             </Link>
             <Link
-              href={`${homePath}#topics`}
-              onClick={(event) => {
-                scrollToHash(event.currentTarget.getAttribute('href') ?? '')
-                close()
-              }}
+              href={topicsPath}
+              onClick={close}
               className={`${itemClass} ${isTopics ? 'text-(--foreground)' : 'text-(--muted-strong)'}`}
             >
               {isTopics ? <ActiveDot topic={activeTopic} /> : null}

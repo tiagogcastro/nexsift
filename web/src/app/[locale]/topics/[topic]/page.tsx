@@ -65,7 +65,7 @@ export default async function TopicPage({
             <Breadcrumbs
               items={[
                 { label: t('breadcrumb.home'), href: '/' },
-                { label: t('breadcrumb.topics'), href: '/#topics' },
+                { label: t('breadcrumb.topics'), href: '/topics' },
                 { label: meta.label },
               ]}
               topic={topic}
