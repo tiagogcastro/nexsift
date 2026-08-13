@@ -52,7 +52,7 @@
     "title": "Fuentes verificadas, no solo citadas.",
     "description": "Cada señal es rastreable hasta la fuente que la sustenta. Antes de publicar, NexSift reabre y verifica mecánicamente cada URL: la fuente es evidencia, no decoración.",
     "publicationLabel": "verificadas al publicar",
-    "publicationTooltip": "Porcentaje de fuentes verificadas al momento de la publicación. Todo señal nueva solo se publica cuando el 100% de sus fuentes pasan la verificación. Las señales publicadas antes de esta regla pueden estar por debajo del 100%.",
+    "publicationTooltip": "Porcentaje de fuentes verificadas al momento de la publicación. Toda señal nueva solo se publica cuando el 100% de sus fuentes pasan la verificación. Las señales publicadas antes de esta regla pueden estar por debajo del 100%.",
     "verifiableLabel": "fuentes verificables ahora",
     "verifiableTooltip": "Porcentaje de fuentes originales que siguen accesibles y verificables en este momento. Una fuente pudo haberse validado al publicar y luego ser eliminada, movida o quedar temporalmente no disponible.",
     "topicsLabel": "{count, plural, one {tema en el radar} other {temas en el radar}}"

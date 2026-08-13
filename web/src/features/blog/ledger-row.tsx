@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import type { PostSummary } from '@nexsift/schemas/post'
 import { formatCompactDate } from '@/lib/date'
+import { isSignalWithinDays } from '@/lib/recency'
 
 const NEW_BADGE_DAYS = 7
 
@@ -25,9 +26,7 @@ export function LedgerRow({
   fallbackLabel: string
 }) {
   const topic = post.topics[0]
-  const isNew =
-    Date.now() - new Date(post.publishedAt).getTime() <=
-    NEW_BADGE_DAYS * 24 * 60 * 60 * 1000
+  const isNew = isSignalWithinDays(post.publishedAt, NEW_BADGE_DAYS)
 
   return (
     <Link
