@@ -1,17 +1,17 @@
 {
   "nav": {
-    "blog": "Radar",
+    "blog": "Señales",
     "topics": "Temas",
     "process": "Cómo funciona",
     "about": "Sobre",
-    "today": "Ver radar"
+    "today": "Ver señales"
   },
   "hero": {
     "eyebrow": "Inteligencia tecnológica para quienes construyen y operan",
     "titleA": "Menos ruido.",
     "titleB": "Más señal.",
     "description": "NexSift filtra cambios relevantes en tecnología y muestra qué cambió, por qué importa y qué observar. Sin feed infinito: una selección corta, con contexto y fuentes verificadas.",
-    "primary": "Ver el radar ahora",
+    "primary": "Ver todas las señales",
     "secondary": "Cómo funciona"
   },
   "radar": {
@@ -19,7 +19,7 @@
     "title": "En el radar ahora",
     "description": "Cambios en tecnología que pasaron el filtro de NexSift y merecen tu atención.",
     "definition": "Una señal es un cambio relevante, verificado y puesto en contexto.",
-    "viewAll": "Ver el radar completo",
+    "viewAll": "Ver todas las señales",
     "newBadge": "Nuevo",
     "sourcesCount": "{count, plural, one {# fuente} other {# fuentes}}"
   },
@@ -31,7 +31,8 @@
   },
   "why": {
     "eyebrow": "POR QUÉ EXISTE",
-    "title": "La tecnología produce mucho ruido. NexSift busca cambios con consecuencias reales.",
+    "titleA": "La tecnología produce mucho ruido.",
+    "titleB": "Quedan las señales.",
     "description": "Feeds, newsletters y alertas compiten por tu atención. NexSift no intenta que consumas más: intenta que necesites leer menos para entender mejor lo que cambió."
   },
   "process": {
@@ -60,8 +61,8 @@
   "explore": {
     "eyebrow": "CONTINÚA",
     "title": "Sigue lo que cambia",
-    "fullRadar": "Radar completo",
-    "fullRadarBody": "Todas las señales que pasaron el filtro de NexSift.",
+    "fullRadar": "Todas las señales",
+    "fullRadarBody": "La lista completa de señales que pasaron el filtro de NexSift.",
     "topicsLink": "Temas",
     "topicsLinkBody": "Cada área como una lente propia.",
     "aboutLink": "Sobre",
@@ -119,7 +120,7 @@
   },
   "breadcrumb": {
     "home": "Inicio",
-    "blog": "Radar",
+    "blog": "Señales",
     "topics": "Temas"
   },
   "console": {
@@ -154,8 +155,8 @@
     }
   },
   "blog": {
-    "eyebrow": "RADAR",
-    "title": "Radar",
+    "eyebrow": "ARCHIVO",
+    "title": "Señales",
     "description": "Todas las señales que pasaron el filtro de NexSift.",
     "read": "Leer señal",
     "whatChanged": "Qué cambió",
@@ -165,14 +166,14 @@
     "sources": "Fuentes verificadas",
     "minutes": "min de lectura",
     "signalsPublished": "{count, plural, one {# señal publicada} other {# señales publicadas}}",
-    "metaTitle": "Radar - NexSift",
+    "metaTitle": "Señales - NexSift",
     "metaDescription": "Todas las señales de NexSift: cambios relevantes en tecnología, verificados y contextualizados."
   },
   "notFound": {
     "eyebrow": "404 / SIN SEÑAL",
     "title": "Tema no encontrado.",
     "body": "Esta dirección no apunta a una señal publicada por NexSift.",
-    "back": "Volver al radar"
+    "back": "Volver a las señales"
   },
   "footer": {
     "tagline": "Menos ruido. Más señal.",

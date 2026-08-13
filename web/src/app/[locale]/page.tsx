@@ -81,9 +81,9 @@ export default async function HomePage({
       <main>
         <section className="relative overflow-hidden border-b border-(--border)">
           <div className="pointer-events-none absolute inset-0 grid-line opacity-[0.14]" />
-          <div className="page-shell relative grid min-h-[calc(100vh-4rem)] place-items-center py-16 lg:py-24">
-            <div className="max-w-4xl text-center">
-              <div className="eyebrow flex items-center justify-center gap-3">
+          <div className="page-shell relative grid min-h-[calc(100vh-4rem)] items-center gap-12 py-16 lg:grid-cols-[1.12fr_0.88fr] lg:py-24">
+            <div>
+              <div className="eyebrow flex items-center gap-3">
                 <span className="signal-dot" />
                 {t('hero.eyebrow')}
               </div>
@@ -91,12 +91,15 @@ export default async function HomePage({
                 <span className="block">{t('hero.titleA')}</span>
                 <span className="block text-(--signal)">{t('hero.titleB')}</span>
               </h1>
-              <p className="mx-auto mt-9 max-w-2xl text-[clamp(1rem,1.7vw,1.28rem)] leading-relaxed text-(--muted-strong)">
+              <p className="mt-9 max-w-2xl text-[clamp(1rem,1.7vw,1.28rem)] leading-relaxed text-(--muted-strong)">
                 {t('hero.description')}
               </p>
-              <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+              <p className="mt-6 max-w-sm font-mono text-[10px] leading-relaxed text-(--muted)">
+                {t('radar.definition')}
+              </p>
+              <div className="mt-9 flex flex-wrap items-center gap-3">
                 <Link
-                  href={`${homePath}#radar`}
+                  href="/blog"
                   className="flex items-center gap-2 rounded-sm bg-(--signal) px-4 py-2.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
                 >
                   {t('hero.primary')}
@@ -111,34 +114,27 @@ export default async function HomePage({
                 </Link>
               </div>
             </div>
-          </div>
-        </section>
 
-        <section id="radar" className="page-shell py-20 lg:py-28">
-          <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
-            <div>
-              <div className="eyebrow flex items-center gap-3">
+            <div className="border border-(--border) bg-(--surface-soft)">
+              <div className="flex items-center gap-2 border-b border-(--border) px-5 py-4">
                 <span className="signal-dot" />
-                {t('radar.eyebrow')}
+                <span className="eyebrow text-(--foreground)">
+                  {t('radar.eyebrow')}
+                </span>
               </div>
-              <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
-                {t('radar.title')}
-              </h2>
-              <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
-                {t('radar.description')}
-              </p>
-              <p className="mt-5 max-w-sm font-mono text-[10px] leading-relaxed text-(--muted)">
-                {t('radar.definition')}
-              </p>
-              <Link
-                href="/blog"
-                className="mt-8 inline-flex items-center gap-2 border border-(--border) px-4 py-2.5 text-sm text-(--foreground) transition-colors hover:border-(--signal) hover:text-(--signal)"
-              >
-                {t('radar.viewAll')}
-                <ArrowUpRight size={15} />
-              </Link>
+              <div className="px-5">
+                <SignalLedger posts={radarSignals} limit={5} />
+              </div>
+              <div className="border-t border-(--border) px-5 py-4">
+                <Link
+                  href="/blog"
+                  className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-(--muted-strong) transition-colors hover:text-(--signal)"
+                >
+                  {t('radar.viewAll')}
+                  <ArrowUpRight size={13} />
+                </Link>
+              </div>
             </div>
-            <SignalLedger posts={radarSignals} />
           </div>
         </section>
 
@@ -163,8 +159,9 @@ export default async function HomePage({
           <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
             <div className="eyebrow text-(--signal)">{t('why.eyebrow')}</div>
             <div>
-              <h2 className="max-w-4xl text-[clamp(2.8rem,6vw,6rem)] font-medium leading-[0.96] tracking-[-0.065em]">
-                {t('why.title')}
+              <h2 className="max-w-4xl text-[clamp(2.4rem,5vw,4.2rem)] font-medium leading-[0.95] tracking-[-0.06em]">
+                <span className="block">{t('why.titleA')}</span>
+                <span className="block text-(--signal)">{t('why.titleB')}</span>
               </h2>
               <p className="mt-7 max-w-2xl text-lg leading-relaxed text-(--muted-strong)">
                 {t('why.description')}
@@ -228,7 +225,7 @@ export default async function HomePage({
             <div className="grid gap-px border-y border-(--border) bg-(--border) sm:grid-cols-3">
               <ExploreCard
                 href="/blog"
-                eyebrow="RADAR"
+                eyebrow="SINAIS"
                 title={t('explore.fullRadar')}
                 body={t('explore.fullRadarBody')}
               />

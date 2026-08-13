@@ -18,7 +18,7 @@ NexSift does not copy their layouts. The shared lessons are strong typography, u
 
 ## Core visual idea
 
-The primary editorial primitive is the signal radar. The home shows a short, recency-ordered list of signals ("No radar agora"); the archive is the full radar; topic pages are specialized radars. Each signal row communicates topic, type, what changed, relevance, date and source count in a dense, terminal-like scan pattern.
+The primary editorial primitive is the signal radar. The hero pairs the value proposition with a live "No radar agora" panel on the right; the archive ("Sinais") lists every published signal; topic pages are specialized radars. Each signal row communicates topic, type, what changed, relevance, date and source count in a dense, terminal-like scan pattern.
 
 Each row communicates:
 
