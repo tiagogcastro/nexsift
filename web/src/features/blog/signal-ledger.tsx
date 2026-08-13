@@ -25,6 +25,10 @@ export async function SignalLedger({
             post={post}
             index={index}
             shortLabel={shortLabel}
+            signalTypeLabel={t(`signalTypes.${post.signalType}`)}
+            relevanceLabel={t('article.relevance')}
+            newLabel={t('radar.newBadge')}
+            sourcesLabel={t('radar.sourcesCount', { count: post.sources.length })}
             fallbackLabel={t('console.signalFallback')}
           />
         )

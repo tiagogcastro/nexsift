@@ -3,6 +3,7 @@ import { Header } from '@/components/header'
 import { LedgerConsole } from '@/features/blog/ledger-console'
 import { listPosts } from '@/lib/content'
 import { getTopicMeta, topicOrder } from '@/lib/topics'
+import { signalTypeSchema, type SignalType } from '@nexsift/schemas/signal-type'
 import { topicSchema, type Topic } from '@nexsift/schemas/topic'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
@@ -32,10 +33,10 @@ export default async function BlogPage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>
-  searchParams: Promise<{ q?: string; topic?: string }>
+  searchParams: Promise<{ q?: string; topic?: string; type?: string }>
 }) {
   const { locale } = await params
-  const { q, topic: topicParam } = await searchParams
+  const { q, topic: topicParam, type: typeParam } = await searchParams
 
   if (locale !== 'pt-BR') {
     redirect('/blog')
@@ -44,6 +45,7 @@ export default async function BlogPage({
   const t = await getTranslations()
   const posts = await listPosts()
   const topicResult = topicParam ? topicSchema.safeParse(topicParam) : null
+  const typeResult = typeParam ? signalTypeSchema.safeParse(typeParam) : null
   const topicMeta = Object.fromEntries(
     topicOrder.map((topic) => {
       const meta = getTopicMeta(t, topic)
@@ -51,6 +53,9 @@ export default async function BlogPage({
       return [topic, { label: meta.label, shortLabel: meta.shortLabel }]
     }),
   ) as Record<Topic, { label: string; shortLabel: string }>
+  const typeMeta = Object.fromEntries(
+    signalTypeSchema.options.map((type) => [type, t(`signalTypes.${type}`)]),
+  ) as Record<SignalType, string>
 
   return (
     <>
@@ -85,14 +90,20 @@ export default async function BlogPage({
             labels={{
               searchPlaceholder: t('console.searchPlaceholder'),
               allTopics: t('console.allTopics'),
+              allTypes: t('console.allTypes'),
               countLabelOne: t('console.countLabelOne'),
               countLabelOther: t('console.countLabelOther'),
               loadMore: t('console.loadMore'),
               empty: t('console.empty'),
               signalFallback: t('console.signalFallback'),
+              relevanceLabel: t('article.relevance'),
+              newLabel: t('radar.newBadge'),
+              sourcesLabel: t('radar.sourcesCount', { count: 1 }),
             }}
             topicMeta={topicMeta}
+            typeLabels={typeMeta}
             initialTopic={topicResult?.success ? (topicResult.data as Topic) : undefined}
+            initialType={typeResult?.success ? (typeResult.data as SignalType) : undefined}
             initialQuery={q}
           />
         </div>
