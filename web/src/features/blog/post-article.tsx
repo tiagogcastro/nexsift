@@ -95,12 +95,14 @@ export async function PostArticle({
             </ReactMarkdown>
           </div>
 
-          <section className="mt-14 border border-(--border) bg-(--surface) p-6 md:p-8">
-            <div className="eyebrow text-(--signal)">{t('blog.whatToWatch')}</div>
-            <p className="mt-4 text-lg leading-relaxed text-(--foreground)">
-              {post.whatToWatch}
-            </p>
-          </section>
+          {post.whatToWatch ? (
+            <section className="mt-14 border border-(--border) bg-(--surface) p-6 md:p-8">
+              <div className="eyebrow text-(--signal)">{t('blog.whatToWatch')}</div>
+              <p className="mt-4 text-lg leading-relaxed text-(--foreground)">
+                {post.whatToWatch}
+              </p>
+            </section>
+          ) : null}
 
           {relatedPosts.length > 0 ? (
             <section className="mt-14 border-t border-(--border) pt-8">
