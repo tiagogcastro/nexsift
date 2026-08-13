@@ -109,18 +109,18 @@ paths:
         '500':
           description: Publication failed
   /posts/{slug}:
-    parameters:
-      - name: slug
-        in: path
-        required: true
-        schema:
-          type: string
-          pattern: ^(ai|development|cloud|devops|security|industry|design)-[a-z0-9]+(-[a-z0-9]+)*-\d{4}-\d{2}-\d{2}$
     get:
       operationId: getPost
       summary: Get the full signal by slug
       security:
         - bearerAuth: []
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^(ai|development|cloud|devops|security|industry|design)-[a-z0-9]+(-[a-z0-9]+)*-\d{4}-\d{2}-\d{2}$
       responses:
         '200':
           description: Full signal
@@ -137,6 +137,13 @@ paths:
       summary: Delete a signal by slug
       security:
         - bearerAuth: []
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^(ai|development|cloud|devops|security|industry|design)-[a-z0-9]+(-[a-z0-9]+)*-\d{4}-\d{2}-\d{2}$
       responses:
         '200':
           description: Signal deleted
