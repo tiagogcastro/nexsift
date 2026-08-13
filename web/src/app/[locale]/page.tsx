@@ -5,16 +5,38 @@ import { ProcessLine } from '@/features/landing/process-line'
 import { RadarPanel } from '@/features/landing/radar-panel'
 import { StatsBand } from '@/features/landing/stats-band'
 import { TopicBands } from '@/features/landing/topic-bands'
+import { localizedAlternates } from '@/lib/alternates'
 import { routing, type AppLocale } from '@/i18n/routing'
 import { listPosts } from '@/lib/content'
 import { selectHomeSignals } from '@/lib/home-selection'
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react'
 import { hasLocale } from 'next-intl'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import {
+  getTranslations,
+  setRequestLocale,
+} from 'next-intl/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale: rawLocale } = await params
+
+  if (!hasLocale(routing.locales, rawLocale)) {
+    return {}
+  }
+
+  const locale = rawLocale as AppLocale
+
+  return {
+    alternates: localizedAlternates(locale, '/'),
+  }
+}
 
 export default async function HomePage({
   params,
