@@ -125,6 +125,34 @@ describe('validateSourceUrl', () => {
     })
   })
 
+  it('classifies a 403 anti-bot response as blocked', async () => {
+    vi.mocked(fetch).mockResolvedValue(htmlResponse('Access denied', 403))
+
+    await validateSourceUrl('https://example.com/article').catch((error) => {
+      expect(error).toBeInstanceOf(SourceRejectedError)
+      expect(error.check.sourceStatus).toBe('blocked')
+      expect(error.check.status).toBe(403)
+    })
+  })
+
+  it('rejects a 410 as broken', async () => {
+    vi.mocked(fetch).mockResolvedValue(htmlResponse('Gone', 410))
+
+    await validateSourceUrl('https://example.com/removed').catch((error) => {
+      expect(error).toBeInstanceOf(SourceRejectedError)
+      expect(error.check.sourceStatus).toBe('broken')
+    })
+  })
+
+  it('rejects a 429 as temporarily_unavailable', async () => {
+    vi.mocked(fetch).mockResolvedValue(htmlResponse('Too many requests', 429))
+
+    await validateSourceUrl('https://example.com/article').catch((error) => {
+      expect(error).toBeInstanceOf(SourceRejectedError)
+      expect(error.check.sourceStatus).toBe('temporarily_unavailable')
+    })
+  })
+
   it('rejects a network failure as temporarily_unavailable', async () => {
     vi.mocked(fetch).mockRejectedValue(new Error('network down'))
 
