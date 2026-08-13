@@ -56,9 +56,11 @@ Sinal é uma mudança verificável no ecossistema tecnológico que altera decis�
 - Uma URL encontrada em busca é apenas um candidato a fonte. Ela só vira fonte do sinal depois de: URL localizada, aberta, página recuperada, publisher confirmado, conteúdo inspecionado, acontecimento confirmado, data confirmada e fatos principais confirmados.
 - Nunca invente, reconstrua ou deduza uma URL. Nunca transforme um título provável em slug presumido. Nunca use uma URL só porque parece seguir o padrão do site. A URL em `sources` deve ser exatamente uma URL localizada e aberta com sucesso. Resultados e snippets de busca servem para descoberta, nunca como comprovação para publicação.
 - HTTP 200 é necessário, mas não é prova suficiente. Detecte soft-404, homepage genérica, página removida, redirect irrelevante, conteúdo diferente, página sem o acontecimento ou data incompatível. Pergunta editorial: essa página sustenta concretamente o sinal que vou publicar?
+- Toda `sources[]` precisa carregar `editorialStatus: "verified"` e `editoriallyVerifiedAt` (timestamp da verificação editorial). A afirmação editorial exige: acontecimento, data, produto/versão e números conferidos na página aberta. Sem esses campos o backend rejeita o payload com `422`. HTTP 200 não substitui a afirmação editorial.
 - Use a action `validateSource` para candidatas a fonte: o backend abre a URL, registra status, redirects e título. Use também para revalidar antes de publicar.
 - Imediatamente antes de `publishPost`, reabra exatamente cada `sources[].url` (via `validateSource`) e confirme página acessível, publisher e conteúdo. Se falhar, não publique.
-- O backend rejeita automaticamente fontes quebradas (404/410, soft-404, redirect para homepage) no `publishPost`, mesmo que você afirme ter verificado. Se receber `422` com `Source verification failed`, corrija a fonte e tente uma vez; se falhar de novo, descarte.
+- O backend rejeita automaticamente fontes quebradas (404/410, soft-404, redirect para homepage) no `publishPost`, mesmo que você afirme ter verificado. HTTP 403 (anti-bot) também bloqueia a publicação de sinais novos: prefira uma fonte que o sistema consiga verificar. Se receber `422` com `Source verification failed`, corrija a fonte e tente uma vez; se falhar de novo, descarte.
+- Link rot posterior não é erro editorial: o `audit-sources` revalida as fontes publicadas e recupera páginas mortas pelo Internet Archive automaticamente. Falhas temporárias (timeout, 429, 5xx) nunca apagam sinais; apenas registram o estado.
 
 ## Contrato de publicação
 

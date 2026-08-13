@@ -17,7 +17,6 @@
   "signal": {
     "label": "CURRENT RADAR",
     "selected": "{count, plural, one {signal selected} other {signals selected}}",
-    "verified": "with traceable sources",
     "topics": "{count, plural, one {topic with content} other {topics with content}}"
   },
   "latest": {
@@ -113,12 +112,26 @@
     "updated": "Updated",
     "reading": "Reading",
     "author": "Author",
-    "authorValue": "NexSift Editorial"
+    "authorValue": "NexSift Editorial",
+    "sourceStatus": {
+      "healthy": "Healthy source",
+      "redirected": "Redirected",
+      "replaced": "Replaced",
+      "temporarilyUnavailable": "Unavailable right now",
+      "blocked": "Blocked from verification",
+      "linkRot": "Link broke after publication",
+      "compromised": "Compromised evidence",
+      "unknown": "Historical verification unknown"
+    }
   },
   "radar": {
     "badge": "CURATED / CURRENT",
     "frequencyHeader": "TOPIC / SIGNAL",
-    "scoreHeader": "score"
+    "scoreHeader": "score",
+    "verifiableLabel": "verifiable sources now",
+    "verifiableTooltip": "Share of original sources that remain accessible and verifiable right now. A source may have been validated at publication and later removed, moved or temporarily unavailable. A percentage below 100% does not by itself mean the signal was published without verification.",
+    "publicationLabel": "Verification at publication",
+    "publicationTooltip": "Share of sources that were verified at publication time. Every new signal is only published when 100% of its sources pass verification. Signals published before this rule took effect may sit below 100%."
   },
   "stats": {
     "signals": "{count, plural, one {signal published} other {signals published}}",

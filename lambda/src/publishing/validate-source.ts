@@ -83,6 +83,12 @@ export function classifySourceCheck(
     return 'temporarily_unavailable'
   }
 
+  // A 403 usually means the page exists for humans but blocks the checker.
+  // It is a limitation of the verification, not evidence the page is gone.
+  if (check.status === 403) {
+    return 'blocked'
+  }
+
   if (check.status >= 400) {
     return 'broken'
   }

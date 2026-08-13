@@ -55,7 +55,7 @@ Uma URL encontrada em busca é apenas um **candidato a fonte**. Ela só vira fon
 - Nunca invente, reconstrua ou deduza uma URL; a URL em `sources` deve ser exatamente uma URL que foi aberta com sucesso.
 - HTTP 200 é necessário, mas não é prova suficiente. Detecte soft-404 (página 200 com "not found" no título), homepage genérica, página removida, redirect irrelevante ou conteúdo diferente.
 - Use `validateSource` antes de publicar: o backend abre a URL, segue redirects (com proteção contra endereços privados), registra `finalUrl`, `httpStatus`, `pageTitle`, `contentType`, `checkedAt` e `sourceStatus`.
-- Estados de fonte: `healthy` (aberta e sem redirect), `redirected` (redirect válido para o conteúdo), `temporarily_unavailable` (erro 5xx, 429 ou falha de rede), `broken` (404/410, soft-404, redirect para homepage, host bloqueado), `replaced` (fonte substituída em auditoria).
+- Estados de fonte: `healthy` (aberta e sem redirect), `redirected` (redirect válido para o conteúdo), `temporarily_unavailable` (erro 5xx, 429 ou falha de rede), `broken` (404/410, soft-404, redirect para homepage, host bloqueado), `replaced` (fonte substituída via `replaceSource` ou auditoria).
 
 ## Validação no servidor
 
@@ -75,8 +75,9 @@ A Lambda valida o payload com Zod (schema `postDraftSchema`), aplica os gates ed
 - POST `/` (operationId `publishPost`): publica ou atualiza um sinal.
 - POST `/validate-source` (operationId `validateSource`): abre e valida uma URL candidata. Body: `{ "url": "https://..." }`. Resposta 200 com o resultado da verificação; 422 com o motivo quando a URL for rejeitada.
 - POST `/audit-sources` (operationId `auditSources`): revalida todas as fontes de todos os sinais publicados, atualiza o registro de verificação e devolve contagem por estado. Use periodicamente (ex.: semanal) para detectar link rot.
+- POST `/posts/{slug}/sources/{index}/replace` (operationId `replaceSource`): substitui a fonte no índice `index` do sinal por uma URL nova. Body: `{ "newUrl": "https://...", "reason": "..." }`. O backend abre e valida a URL antes de gravar; a URL original fica no histórico de substituições. Use no fluxo de link rot quando existir fonte primária equivalente.
 - DELETE `/posts/{slug}` (operationId `deletePost`): exclui um sinal.
 
 ## Link rot (fonte que deixa de existir)
 
-Fonte válida na publicação que vira 404 depois não significa automaticamente que o sinal esteja errado. Antes de remover o sinal, procure: nova URL oficial, changelog oficial, documentação oficial, release oficial ou fonte primária equivalente. Somente retire o sinal se a perda da evidência comprometer a confiabilidade factual. Para publicações novas, a regra é rígida: fonte quebrada não publica.
+Fonte válida na publicação que vira 404 depois não significa automaticamente que o sinal esteja errado. Antes de remover o sinal, procure: nova URL oficial, changelog oficial, documentação oficial, release oficial ou fonte primária equivalente. Se existir equivalente válida, use `replaceSource` para trocar a URL e preservar o sinal. Somente retire o sinal se a perda da evidência comprometer a confiabilidade factual. Para publicações novas, a regra é rígida: fonte quebrada não publica.

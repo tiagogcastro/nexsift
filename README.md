@@ -166,11 +166,15 @@ The published post appears in the signal ledger at `/` and at `/blog/{slug}`. `/
 ChatGPT / NexSift Editor
   -> user approval
   -> GPT Action
-  -> Lambda Function URL
-  -> Zod validation
+  -> API Gateway HTTP API
+  -> Lambda: auth, Zod validation, editorial gates, source verification
   -> S3
   -> NexSift
 ```
+
+The GPT Action contract is defined in the OpenAPI spec at `docs/openapi.yaml`. The ChatGPT step handles research, writing and review; the Lambda only validates, verifies and publishes.
+
+Production is fronted by an API Gateway HTTP API because ChatGPT Actions cannot reach `*.lambda-url.*.on.aws` domains; the Function URL remains for local flows and rollback.
 
 Locally, the direct publish command replaces the GPT Action step: it reads a JSON payload from `packages/dev-publish/payloads/` and invokes the Lambda through MiniStack.
 
@@ -196,24 +200,6 @@ AWS_REGION=us-east-1
 
 The site reads posts from S3, so publishing does not require a redeploy.
 
-## Assisted publication phase
-
-The next publishing flow is:
-
-```text
-ChatGPT / NexSift Editor
-  -> user approval
-  -> GPT Action
-  -> Lambda Function URL
-  -> Zod validation
-  -> S3
-  -> NexSift
-```
-
-The GPT Action contract is defined in the OpenAPI spec at `docs/openapi.yaml`.
-
-The ChatGPT step handles research, writing and review. The Lambda only validates and publishes.
-
 ## Future automated phase
 
 After the product is validated, the editorial source can change without changing the web or post contract:
@@ -238,18 +224,24 @@ Posts use JSON with Markdown in `content`.
 Core fields:
 
 ```text
-type
+id
 slug
 title
 description
 content
 whyItMatters
 topics
+signalDate
+signalType
+depth
 tags
 sources
-publishedAt
-readingTime
 relevanceScore
+confidenceScore
+featured
+publishedAt
+updatedAt
+readingTime
 locale
 ```
 
@@ -257,7 +249,7 @@ The runtime contract lives in `packages/schemas` and is validated by Zod.
 
 ## Content storage
 
-Target S3 layout:
+S3 layout:
 
 ```text
 public/
@@ -265,13 +257,9 @@ public/
 └── indexes/
     ├── latest.json
     └── topics/{topic}.json
-
-private/
-├── drafts/
-└── runs/
 ```
 
-A database is not part of the MVP.
+`private/drafts` and `private/runs` are planned but not implemented. A database is not part of the MVP.
 
 ## Product routes
 
@@ -280,12 +268,12 @@ A database is not part of the MVP.
 /about
 /blog
 /blog/{slug}
+/privacy
+/topics
 /topics/{topic}
 
-/en-US
-/en-US/about
-/es-ES
-/es-ES/about
+/en-US       same structure with prefix
+/es-ES       same structure with prefix
 
 /feed.xml
 /sitemap.xml
@@ -315,7 +303,6 @@ Read:
 ```bash
 yarn lint
 yarn typecheck
-yarn test
 yarn build
 ```
 

@@ -7,7 +7,6 @@
     "./post": "./post.ts",
     "./source": "./source.ts",
     "./topic": "./topic.ts",
-    "./signal-type": "./signal-type.ts",
-    "./depth": "./depth.ts"
+    "./signal-type": "./signal-type.ts"
   }
 }

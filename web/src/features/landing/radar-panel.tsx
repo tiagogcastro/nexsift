@@ -1,5 +1,8 @@
 import { getTopicMeta } from '@/lib/topics'
-import { verifiedSignalsRatio } from '@/lib/source-verification'
+import {
+  publicationVerifiedSourcesRatio,
+  verifiableSourcesRatio,
+} from '@/lib/source-verification'
 import type { PostSummary } from '@nexsift/schemas/post'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
@@ -13,8 +16,10 @@ export async function RadarPanel({
 }) {
   const t = await getTranslations()
   const topicCount = new Set(posts.flatMap((post) => post.topics)).size
-  const verifiedRatio = verifiedSignalsRatio(topSignals)
-  const verifiedPercentage = `${Math.round(verifiedRatio * 100)}%`
+  const verifiableRatio = verifiableSourcesRatio(topSignals)
+  const verifiablePercentage = `${Math.round(verifiableRatio * 100)}%`
+  const publicationRatio = publicationVerifiedSourcesRatio(topSignals)
+  const publicationPercentage = `${Math.round(publicationRatio * 100)}%`
 
   return (
     <div className="relative overflow-hidden border border-(--border) bg-(--surface-soft)">
@@ -35,7 +40,23 @@ export async function RadarPanel({
           value={String(topSignals.length)}
           label={t('signal.selected', { count: topSignals.length })}
         />
-        <Metric value={verifiedPercentage} label={t('signal.verified')} />
+        <Metric
+          value={verifiablePercentage}
+          label={t('radar.verifiableLabel')}
+          title={t('radar.verifiableTooltip')}
+        />
+      </div>
+
+      <div className="border-b border-(--border) px-5 py-3">
+        <p
+          className="font-mono text-[10px] leading-relaxed text-(--muted)"
+          title={t('radar.publicationTooltip')}
+        >
+          {t('radar.publicationLabel')}:{' '}
+          <span className="font-semibold text-(--foreground)">
+            {publicationPercentage}
+          </span>
+        </p>
       </div>
 
       <div className="p-5">
@@ -78,9 +99,20 @@ export async function RadarPanel({
   )
 }
 
-function Metric({ value, label }: { value: string; label: string }) {
+function Metric({
+  value,
+  label,
+  title,
+}: {
+  value: string
+  label: string
+  title?: string
+}) {
   return (
-    <div className="min-w-0 border-r border-(--border) p-4 last:border-r-0">
+    <div
+      title={title}
+      className="min-w-0 border-r border-(--border) p-4 last:border-r-0"
+    >
       <div className="font-mono text-xl font-semibold tracking-tighter text-(--foreground)">
         {value}
       </div>

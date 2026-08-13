@@ -7,7 +7,6 @@ node_modules/
 
 .next/
 dist/
-coverage/
 *.tsbuildinfo
 
 .env
@@ -22,9 +21,6 @@ iac/environments/prod/terraform.tfvars
 iac/local/
 
 data/
-iac/local/
-iac/local/
-iac/local/
 
 .DS_Store
 Thumbs.db

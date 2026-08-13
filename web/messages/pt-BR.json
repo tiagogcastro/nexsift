@@ -17,7 +17,6 @@
   "signal": {
     "label": "RADAR ATUAL",
     "selected": "{count, plural, one {sinal selecionado} other {sinais selecionados}}",
-    "verified": "com fontes verificáveis",
     "topics": "{count, plural, one {tópico com conteúdo} other {tópicos com conteúdo}}"
   },
   "latest": {
@@ -113,12 +112,26 @@
     "updated": "Atualizado",
     "reading": "Leitura",
     "author": "Autor",
-    "authorValue": "NexSift Editorial"
+    "authorValue": "NexSift Editorial",
+    "sourceStatus": {
+      "healthy": "Fonte saudável",
+      "redirected": "Redirecionada",
+      "replaced": "Substituída",
+      "temporarilyUnavailable": "Indisponível no momento",
+      "blocked": "Bloqueada para verificação",
+      "linkRot": "Link quebrado posteriormente",
+      "compromised": "Evidência comprometida",
+      "unknown": "Verificação histórica desconhecida"
+    }
   },
   "radar": {
     "badge": "CURADO / ATUAL",
     "frequencyHeader": "TÓPICO / SINAL",
-    "scoreHeader": "NOTA"
+    "scoreHeader": "NOTA",
+    "verifiableLabel": "fontes verificáveis agora",
+    "verifiableTooltip": "Percentual de fontes originais que continuam acessíveis e verificáveis neste momento. Uma fonte pode ter sido validada na publicação e depois ser removida, movida ou ficar temporariamente indisponível. Uma porcentagem abaixo de 100% não significa, por si só, que o sinal foi publicado sem verificação.",
+    "publicationLabel": "Verificação na publicação",
+    "publicationTooltip": "Percentual de fontes que foram verificadas no momento da publicação. Todo novo sinal só é publicado quando 100% das suas fontes passam na verificação. Sinais publicados antes dessa regra entrar em vigor podem ficar abaixo de 100%."
   },
   "stats": {
     "signals": "{count, plural, one {sinal publicado} other {sinais publicados}}",

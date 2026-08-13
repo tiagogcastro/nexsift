@@ -10,6 +10,8 @@ import {
   latestIndexKey,
   NotFoundError,
   publishPost,
+  replacePostSource,
+  SourceIndexError,
 } from '../publishing/publish-post'
 import { getIndex, getPost } from '../storage/s3'
 import {
@@ -107,6 +109,22 @@ export async function handler(
       return response(200, result)
     }
 
+    const replaceMatch = path.match(/^\/posts\/([^/]+)\/sources\/(\d+)\/replace$/)
+
+    if (method === 'POST' && replaceMatch) {
+      const slug = decodeURIComponent(replaceMatch[1] ?? '')
+      const index = Number.parseInt(replaceMatch[2] ?? '', 10)
+      const body = parseBody(event) as { newUrl?: unknown; reason?: unknown }
+
+      if (typeof body.newUrl !== 'string' || typeof body.reason !== 'string') {
+        return response(422, { error: 'newUrl and reason are required' })
+      }
+
+      const post = await replacePostSource(slug, index, body.newUrl, body.reason)
+
+      return response(200, post)
+    }
+
     if (method === 'POST' && path === '/') {
       const body = parseBody(event)
       const draft = postDraftSchema.parse(body.post)
@@ -140,6 +158,10 @@ export async function handler(
 
     if (error instanceof NotFoundError) {
       return response(404, { error: 'Signal not found' })
+    }
+
+    if (error instanceof SourceIndexError) {
+      return response(422, { error: error.message })
     }
 
     if (error instanceof SourceRejectedError) {

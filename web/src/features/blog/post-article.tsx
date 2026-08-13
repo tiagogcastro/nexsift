@@ -1,5 +1,6 @@
 import { TrackedLink } from '@/analytics/tracked-link'
 import { formatDate } from '@/lib/date'
+import { sourceStatusLabelKey } from '@/lib/source-verification'
 import { getTopicMeta } from '@/lib/topics'
 import type { Post } from '@nexsift/schemas/post'
 import { ArrowUpRight } from 'lucide-react'
@@ -93,26 +94,35 @@ export async function PostArticle({ post }: { post: Post }) {
           <div className="border-t border-(--border) pt-4">
             <div className="eyebrow">{t('blog.sources')}</div>
             <div className="mt-5 space-y-3">
-              {post.sources.map((source, index) => (
-                <TrackedLink
-                  key={source.url}
-                  href={source.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  event="source_clicked"
-                  properties={{ post: post.slug, publisher: source.publisher }}
-                  className="group block border-b border-(--border) pb-3"
-                >
-                  <div className="flex gap-2 font-mono text-[9px] uppercase tracking-widest text-(--muted)">
-                    <span>{String(index + 1).padStart(2, '0')}</span>
-                    <span>{source.publisher}</span>
-                  </div>
-                  <div className="mt-2 flex items-start gap-2 text-sm leading-snug text-(--muted-strong) transition-colors group-hover:text-(--foreground)">
-                    <span>{source.title}</span>
-                    <ArrowUpRight size={13} className="mt-0.5 shrink-0" />
-                  </div>
-                </TrackedLink>
-              ))}
+              {post.sources.map((source, index) => {
+                const statusKey = sourceStatusLabelKey(source)
+
+                return (
+                  <TrackedLink
+                    key={source.url}
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    event="source_clicked"
+                    properties={{ post: post.slug, publisher: source.publisher }}
+                    className="group block border-b border-(--border) pb-3"
+                  >
+                    <div className="flex gap-2 font-mono text-[9px] uppercase tracking-widest text-(--muted)">
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <span>{source.publisher}</span>
+                    </div>
+                    <div className="mt-2 flex items-start gap-2 text-sm leading-snug text-(--muted-strong) transition-colors group-hover:text-(--foreground)">
+                      <span>{source.title}</span>
+                      <ArrowUpRight size={13} className="mt-0.5 shrink-0" />
+                    </div>
+                    {statusKey !== 'unknown' ? (
+                      <span className="mt-2 inline-flex font-mono text-[9px] uppercase tracking-widest text-(--muted)">
+                        {t(`article.sourceStatus.${statusKey}`)}
+                      </span>
+                    ) : null}
+                  </TrackedLink>
+                )
+              })}
             </div>
             <p className="mt-5 font-mono text-[10px] leading-relaxed text-(--muted)">
               {t('notice.sources')}
