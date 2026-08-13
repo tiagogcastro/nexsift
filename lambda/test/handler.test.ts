@@ -6,17 +6,23 @@ import { SourceRejectedError } from '../src/publishing/validate-source'
 import { getIndex, getPost } from '../src/storage/s3'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-vi.mock('../src/publishing/publish-post', () => ({
-  latestIndexKey: 'public/indexes/latest.json',
-  NotFoundError: class NotFoundError extends Error {},
-  publishPost: vi.fn(),
-  deletePost: vi.fn(),
-}))
+vi.mock('../src/publishing/publish-post', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../src/publishing/publish-post')>()
+  return {
+    ...actual,
+    latestIndexKey: 'public/indexes/latest.json',
+    NotFoundError: class NotFoundError extends Error {},
+    publishPost: vi.fn(),
+    deletePost: vi.fn(),
+    replacePostSource: vi.fn(),
+  }
+})
 
 vi.mock('../src/storage/s3', () => ({
   getIndex: vi.fn(),
   getPost: vi.fn(),
   putPost: vi.fn(),
+  putIndex: vi.fn(),
 }))
 
 const { mockedValidate } = vi.hoisted(() => ({
