@@ -1,4 +1,4 @@
-const wordsPerMinute = 200
+const wordsPerMinute = 180
 
 export function calculateReadingTime(markdown: string) {
   const wordCount = markdown
