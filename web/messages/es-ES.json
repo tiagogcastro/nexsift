@@ -1,24 +1,24 @@
 {
   "nav": {
-    "blog": "Blog en portugués",
+    "blog": "Señales",
     "topics": "Temas",
     "process": "Cómo funciona",
     "about": "Sobre",
     "today": "Ver señales"
   },
   "hero": {
-    "eyebrow": "Inteligencia tech para desarrolladores",
+    "eyebrow": "Inteligencia tecnológica para quienes construyen y operan",
     "titleA": "Menos ruido.",
     "titleB": "Más señal.",
-    "description": "NexSift es un agregador de conocimiento directo al grano. Filtra, verifica y contextualiza lo que importa en IA, cloud, desarrollo y carrera tech, con cada señal vinculada a su fuente oficial.",
+    "description": "NexSift es una inteligencia tecnológica directa al grano. Filtra, verifica y contextualiza lo que importa en IA, cloud, desarrollo, DevOps y mercado tech, con cada señal rastreable hasta la fuente oficial.",
     "primary": "Ver señales",
     "secondary": "Ver el proceso"
   },
   "signal": {
     "label": "RADAR ACTUAL",
-    "frequencies": "frecuencias activas",
-    "selected": "señales seleccionadas",
-    "verified": "con fuentes rastreables"
+    "selected": "{count, plural, one {señal seleccionada} other {señales seleccionadas}}",
+    "verified": "con fuentes rastreables",
+    "topics": "{count, plural, one {tópico con contenido} other {tópicos con contenido}}"
   },
   "latest": {
     "eyebrow": "LEDGER DE SEÑALES",
@@ -26,25 +26,26 @@
     "description": "No es un portal de noticias. Es una selección corta de señales con contexto suficiente y fuente rastreable."
   },
   "topics": {
-    "eyebrow": "FRECUENCIAS",
-    "title": "Seis áreas, un solo radar",
-    "description": "Las frecuencias son las áreas de cobertura del radar. Las señales son los posts verificados publicados en cada frecuencia. La selección sigue enfocada en señales con impacto técnico o profesional real.",
+    "eyebrow": "TÓPICOS",
+    "title": "Siete áreas, un solo radar",
+    "description": "Los tópicos son las áreas de cobertura del radar. Las señales son las unidades que NexSift publica en cada tópico. La selección sigue restringida a lo que tiene impacto técnico o profesional real.",
     "count": "{count, plural, one {# señal} other {# señales}}"
   },
   "process": {
-    "eyebrow": "PIPELINE",
+    "eyebrow": "FLUJO",
     "title": "Curaduría antes de publicar",
-    "description": "La IA ayuda a investigar, organizar y revisar. El contenido debe permanecer vinculado a sus fuentes.",
+    "description": "La IA investiga, organiza y revisa. Cada señal publicada permanece rastreable hasta sus fuentes.",
     "research": "Investigar",
     "filter": "Filtrar",
     "verify": "Verificar",
     "context": "Contextualizar",
-    "publish": "Publicar"
+    "publish": "Publicar",
+    "rhythm": "Ritmo editorial: nuevas curadurías los lunes y jueves."
   },
   "trust": {
     "eyebrow": "BASADO EN FUENTES",
     "title": "IA asistida. Fuentes visibles.",
-    "description": "Cada análisis va directo al grano: qué pasó, qué cambió y por qué importa. NexSift no sustituye la fuente original; señala el material que sustenta el contenido y separa hechos de interpretación."
+    "description": "Cada señal va directa al grano: qué pasó, qué cambió y por qué importa. NexSift no reemplaza la fuente original; apunta al material que sustenta el contenido y separa hecho de interpretación."
   },
   "topicItems": {
     "ai": {
@@ -52,30 +53,35 @@
       "shortLabel": "IA",
       "description": "Modelos, agentes, herramientas y cambios prácticos en el ecosistema de IA."
     },
-    "cloud": {
-      "label": "Cloud",
-      "shortLabel": "CLOUD",
-      "description": "Infraestructura, servicios gestionados, arquitectura y costos en la nube."
-    },
     "development": {
       "label": "Desarrollo",
       "shortLabel": "DEV",
       "description": "Frameworks, runtimes, plataformas y prácticas de ingeniería de software."
+    },
+    "cloud": {
+      "label": "Cloud",
+      "shortLabel": "CLOUD",
+      "description": "Infraestructura, servicios administrados, arquitectura y costos en la nube."
     },
     "devops": {
       "label": "DevOps",
       "shortLabel": "OPS",
       "description": "CI/CD, IaC, observabilidad, automatización y operación de sistemas."
     },
-    "career": {
-      "label": "Carrera & Empleo",
-      "shortLabel": "CAREER",
-      "description": "Vacantes, salarios, entrevistas, habilidades y el mercado laboral tech."
+    "security": {
+      "label": "Seguridad",
+      "shortLabel": "SEC",
+      "description": "CVEs, incidentes, cadena de suministro y cambios de seguridad con impacto práctico."
     },
-    "finance": {
-      "label": "Finanzas",
-      "shortLabel": "FIN",
-      "description": "Inversiones, ingresos, divisas y decisiones financieras de quienes trabajan en tecnología."
+    "industry": {
+      "label": "Industria y Mercado",
+      "shortLabel": "IND",
+      "description": "Mercado tech: financiación, adquisiciones, regulación, carrera y movimientos estratégicos."
+    },
+    "design": {
+      "label": "Diseño",
+      "shortLabel": "DES",
+      "description": "Interfaces, sistemas de diseño y experiencia en productos de software."
     }
   },
   "notice": {
@@ -84,22 +90,21 @@
   },
   "breadcrumb": {
     "home": "Inicio",
-    "blog": "Blog",
+    "blog": "Señales",
     "topics": "Temas"
   },
   "console": {
     "searchPlaceholder": "Buscar por título, etiqueta o descripción",
     "allTopics": "Todos",
-    "sortRecent": "Recientes",
-    "sortUpdated": "Actualizados",
     "loadMore": "Cargar más señales",
     "empty": "Ninguna señal coincide con los filtros actuales.",
-    "countLabel": "señales en el radar",
-    "signalFallback": "SEÑAL"
+    "signalFallback": "SEÑAL",
+    "countLabelOne": "señal en el radar",
+    "countLabelOther": "señales en el radar"
   },
   "topicPage": {
-    "frequency": "FRECUENCIA",
-    "signalCount": "{count, plural, one {# señal publicada en esta frecuencia} other {# señales publicadas en esta frecuencia}}"
+    "frequency": "TÓPICO",
+    "signalCount": "{count, plural, one {# señal publicada en este tópico} other {# señales publicadas en este tópico}}"
   },
   "article": {
     "metadata": "METADATOS DE LA SEÑAL",
@@ -111,22 +116,17 @@
   },
   "radar": {
     "badge": "CURADO / ACTUAL",
-    "frequencyHeader": "FRECUENCIA / SEÑAL",
+    "frequencyHeader": "TÓPICO / SEÑAL",
     "scoreHeader": "NOTA"
   },
   "stats": {
-    "signals": "señales publicadas",
-    "frequencies": "frecuencias activas",
-    "avgRelevance": "relevancia media"
-  },
-  "recentlyUpdated": {
-    "eyebrow": "ACTUALIZADOS RECIENTEMENTE",
-    "title": "Señales revisadas por último",
-    "description": "Publicaciones corregidas o actualizadas con nuevas fuentes y contexto."
+    "signals": "{count, plural, one {señal publicada} other {señales publicadas}}",
+    "avgRelevance": "relevancia media",
+    "topics": "{count, plural, one {tópico con contenido} other {tópicos con contenido}}"
   },
   "notFound": {
     "eyebrow": "404 / SIN SEÑAL",
-    "title": "Frecuencia no encontrada.",
+    "title": "Tópico no encontrado.",
     "body": "Esta dirección no apunta a una señal publicada por NexSift.",
     "back": "Volver al radar"
   },
@@ -153,27 +153,27 @@
   "about": {
     "eyebrow": "SOBRE",
     "title": "Un filtro técnico, no otro feed infinito",
-    "body": "NexSift existe para reducir el costo de seguir la tecnología. En lugar de reproducir todo lo publicado, prioriza señales con impacto real para quienes construyen software, trabajan con cloud o siguen la evolución de la IA.",
+    "body": "NexSift nació para reducir el costo de seguir la tecnología. En lugar de reproducir todo lo publicado, prioriza señales con impacto real para quienes construyen, operan, diseñan o deciden sobre tecnología, con el desarrollo como principal sesgo editorial.",
     "principleTitle": "Principios editoriales",
     "principleA": "Fuente antes que opinión",
     "principleB": "Contexto antes que volumen",
     "principleC": "Impacto técnico antes que hype",
     "creatorEyebrow": "DETRÁS DE TODO",
     "creatorTitle": "Creado por quien vive el problema",
-    "creatorBody": "NexSift fue creado por Tiago Castro, desarrollador fullstack y cloud. La motivación vino del costo de seguir la tecnología: feeds infinitos, hype y poco contexto. NexSift es el filtro que él mismo quería tener: pocas señales, fuentes verificables y contexto directo sobre lo que cambia para quienes construyen software."
+    "creatorBody": "NexSift fue creado por <name>Tiago Castro</name>, analista de sistemas con título en Análisis y Desarrollo de Sistemas y más de 5 años de mercado en desarrollo fullstack y cloud. La motivación vino del costo de seguir la tecnología: feeds infinitos, hype y poco contexto. NexSift es el filtro que él mismo quería: pocas señales, fuentes verificables y contexto directo sobre lo que cambia para quienes construyen software."
   },
   "blog": {
     "eyebrow": "ARCHIVO",
-    "title": "Señales y análisis",
-    "description": "El contenido editorial se publica en portugués y se ordena por relevancia y actualidad.",
-    "read": "Leer análisis",
+    "title": "Señales",
+    "description": "Señales publicadas en portugués, ordenadas por relevancia y actualidad.",
+    "read": "Leer señal",
     "why": "Por qué importa",
     "sources": "Fuentes",
     "related": "Señales relacionadas",
     "minutes": "min de lectura",
     "score": "relevancia",
-    "signalsPublished": "{count} señales publicadas",
-    "metaTitle": "Blog",
-    "metaDescription": "Señales y análisis técnicos de NexSift en portugués."
+    "signalsPublished": "{count, plural, one {# señal publicada} other {# señales publicadas}}",
+    "metaTitle": "Señales",
+    "metaDescription": "Señales técnicas de NexSift en portugués."
   }
 }

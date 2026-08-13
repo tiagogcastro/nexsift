@@ -37,7 +37,7 @@ Goal: use the existing ChatGPT subscription for editorial work while keeping pub
 
 ## Milestone 4: autonomous editorial pipeline
 
-The current path uses ChatGPT Tasks: a scheduled GPT run drafts, self-reviews and publishes each weekday morning without human review. The GPT self-review loop, the relevance gate and the list of recent posts (GET action) keep the process autonomous and repetition-free.
+The current path uses ChatGPT Tasks: a scheduled GPT run drafts, self-reviews and publishes on Monday and Thursday mornings without human review. The self-review loop, the editorial gates (`relevanceScore >= 6.5`, `confidenceScore >= 7`) and the recent-signals query keep the process autonomous and repetition-free.
 
 The future EventBridge + OpenAI API pipeline remains the path for scaling beyond ChatGPT:
 
@@ -54,7 +54,24 @@ The future EventBridge + OpenAI API pipeline remains the path for scaling beyond
 
 Goal: automate only after the product and editorial process are proven.
 
+## Milestone 5: signal model v2
+
+1. official vocabulary (Sinal, Tópico, Ritmo editorial)
+2. seven-topic taxonomy (security, industry, design added; career and finance folded into industry)
+3. signalDate, depth, signalType, confidenceScore and recalibrated relevanceScore
+4. slug `{topic}-{signalDate}` with backend validation
+5. getPost, deletePost and filtered listRecentPosts
+6. editorial gates enforced in the Lambda
+7. diversified, daily-seeded home selection
+8. curation pipeline visual
+9. editor instructions rewritten for the signal model
+
 ## Future non-core items
 
 - terms of use page
 - Vercel data cache purge webhook on publish (when freshness beyond the 10 min TTL matters)
+- daily discovery (Scout) feeding a candidate pool (statuses discovered/verified/rejected/published/stale)
+- relations between signals
+- update badge (only if real usage appears)
+- new topics evaluated from the candidates found and discarded
+- Hardware topic (only with sufficient editorial volume)

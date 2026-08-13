@@ -5,25 +5,20 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { Breadcrumbs } from '@/features/blog/breadcrumbs'
 import { LedgerConsole } from '@/features/blog/ledger-console'
-import type { SortOrder } from '@/features/blog/order-toggle'
 import { listPostsByTopic } from '@/lib/content'
 import { getTopicMeta, topicOrder } from '@/lib/topics'
 
 export const dynamic = 'force-dynamic'
-
-function parseSort(value: string | undefined): SortOrder | undefined {
-  return value === 'updated' ? 'updated' : undefined
-}
 
 export default async function TopicPage({
   params,
   searchParams,
 }: {
   params: Promise<{ locale: string; topic: string }>
-  searchParams: Promise<{ q?: string; sort?: string }>
+  searchParams: Promise<{ q?: string }>
 }) {
   const { locale, topic: rawTopic } = await params
-  const { q, sort: sortParam } = await searchParams
+  const { q } = await searchParams
 
   if (locale !== 'pt-BR') {
     redirect(`/topics/${rawTopic}`)
@@ -89,17 +84,15 @@ export default async function TopicPage({
             labels={{
               searchPlaceholder: t('console.searchPlaceholder'),
               allTopics: t('console.allTopics'),
-              sortRecent: t('console.sortRecent'),
-              sortUpdated: t('console.sortUpdated'),
+              countLabelOne: t('console.countLabelOne'),
+              countLabelOther: t('console.countLabelOther'),
               loadMore: t('console.loadMore'),
               empty: t('console.empty'),
-              countLabel: t('console.countLabel'),
               signalFallback: t('console.signalFallback'),
             }}
             topicMeta={topicMeta}
             initialTopic={topic}
             initialQuery={q}
-            initialSort={parseSort(sortParam)}
           />
         </div>
       </main>

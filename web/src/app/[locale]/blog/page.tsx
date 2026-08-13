@@ -1,7 +1,6 @@
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { LedgerConsole } from '@/features/blog/ledger-console'
-import type { SortOrder } from '@/features/blog/order-toggle'
 import { listPosts } from '@/lib/content'
 import { getTopicMeta, topicOrder } from '@/lib/topics'
 import { topicSchema, type Topic } from '@nexsift/schemas/topic'
@@ -28,19 +27,15 @@ export async function generateMetadata({
   }
 }
 
-function parseSort(value: string | undefined): SortOrder | undefined {
-  return value === 'updated' ? 'updated' : undefined
-}
-
 export default async function BlogPage({
   params,
   searchParams,
 }: {
   params: Promise<{ locale: string }>
-  searchParams: Promise<{ q?: string; topic?: string; sort?: string }>
+  searchParams: Promise<{ q?: string; topic?: string }>
 }) {
   const { locale } = await params
-  const { q, topic: topicParam, sort: sortParam } = await searchParams
+  const { q, topic: topicParam } = await searchParams
 
   if (locale !== 'pt-BR') {
     redirect('/blog')
@@ -90,17 +85,15 @@ export default async function BlogPage({
             labels={{
               searchPlaceholder: t('console.searchPlaceholder'),
               allTopics: t('console.allTopics'),
-              sortRecent: t('console.sortRecent'),
-              sortUpdated: t('console.sortUpdated'),
+              countLabelOne: t('console.countLabelOne'),
+              countLabelOther: t('console.countLabelOther'),
               loadMore: t('console.loadMore'),
               empty: t('console.empty'),
-              countLabel: t('console.countLabel'),
               signalFallback: t('console.signalFallback'),
             }}
             topicMeta={topicMeta}
             initialTopic={topicResult?.success ? (topicResult.data as Topic) : undefined}
             initialQuery={q}
-            initialSort={parseSort(sortParam)}
           />
         </div>
       </main>

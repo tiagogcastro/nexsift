@@ -12,7 +12,7 @@
     "build": "yarn workspace @nexsift/lambda build && yarn workspace @nexsift/web build",
     "lint": "yarn workspace @nexsift/web lint",
     "typecheck": "yarn workspace @nexsift/lambda typecheck && yarn workspace @nexsift/web typecheck",
-    "test": "yarn workspace @nexsift/lambda test"
+    "test": "yarn workspace @nexsift/lambda test && yarn workspace @nexsift/web test"
   },
   "dependencies": {
     "tsx": "4.23.1"

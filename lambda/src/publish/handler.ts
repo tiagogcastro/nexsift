@@ -3,10 +3,25 @@ import type {
   APIGatewayProxyStructuredResultV2,
 } from 'aws-lambda'
 import { postDraftSchema } from '@nexsift/schemas/post'
-import { latestIndexKey, publishPost } from '../publishing/publish-post'
-import { getIndex } from '../storage/s3'
+import type { Topic } from '@nexsift/schemas/topic'
+import { validateEditorialGates } from '../publishing/gates'
+import {
+  deletePost,
+  latestIndexKey,
+  NotFoundError,
+  publishPost,
+} from '../publishing/publish-post'
+import { getIndex, getPost } from '../storage/s3'
 
-const recentLimit = 30
+const defaultRecentLimit = 30
+const maxRecentLimit = 100
+
+interface ListQuery {
+  since?: string | undefined
+  topic?: string | undefined
+  signalType?: string | undefined
+  limit?: string | undefined
+}
 
 export async function handler(
   event: APIGatewayProxyEventV2,
@@ -25,26 +40,73 @@ export async function handler(
       event.requestContext?.http?.method ??
       (event as { httpMethod?: string }).httpMethod
 
-    if (method === 'GET') {
-      const index = await getIndex(latestIndexKey)
-      return response(200, { posts: index.slice(0, recentLimit) })
+    const path =
+      event.rawPath ??
+      event.requestContext?.http?.path ??
+      (event as { path?: string }).path ??
+      '/'
+
+    const slug = extractSlug(path)
+
+    if (method === 'GET' && slug) {
+      const post = await getPost(slug)
+
+      if (!post) {
+        return response(404, { error: 'Signal not found' })
+      }
+
+      return response(200, post)
     }
 
-    const body = parseBody(event)
-    const draft = postDraftSchema.parse(body.post)
-    const post = await publishPost(draft)
+    if (method === 'DELETE' && slug) {
+      const result = await deletePost(slug)
+      return response(200, { ok: true, ...result })
+    }
 
-    return response(201, {
-      ok: true,
-      slug: post.slug,
-      publishedAt: post.publishedAt,
-      updatedAt: post.updatedAt,
-    })
+    if (method === 'GET' && path === '/') {
+      const query = event.queryStringParameters ?? {}
+      const posts = await listRecentPosts({
+        since: query.since,
+        topic: query.topic,
+        signalType: query.signalType,
+        limit: query.limit,
+      })
+      return response(200, { posts })
+    }
+
+    if (method === 'POST' && path === '/') {
+      const body = parseBody(event)
+      const draft = postDraftSchema.parse(body.post)
+      const gateIssues = validateEditorialGates(draft)
+
+      if (gateIssues.length > 0) {
+        return response(422, {
+          error: 'Editorial gate not met',
+          issues: gateIssues,
+        })
+      }
+
+      const result = await publishPost(draft)
+
+      return response(201, {
+        ok: true,
+        slug: result.post.slug,
+        operation: result.operation,
+        publishedAt: result.post.publishedAt,
+        updatedAt: result.post.updatedAt,
+      })
+    }
+
+    return response(404, { error: 'Route not found' })
   } catch (error) {
     console.error('publish_failed', error)
 
     if (error instanceof SyntaxError) {
       return response(400, { error: 'Invalid JSON payload' })
+    }
+
+    if (error instanceof NotFoundError) {
+      return response(404, { error: 'Signal not found' })
     }
 
     if (isValidationError(error)) {
@@ -53,6 +115,45 @@ export async function handler(
 
     return response(500, { error: 'Publication failed' })
   }
+}
+
+function extractSlug(path: string) {
+  const match = path.match(/^\/posts\/([^/]+)$/)
+  return match ? decodeURIComponent(match[1] ?? '') : null
+}
+
+async function listRecentPosts(query: ListQuery) {
+  const index = await getIndex(latestIndexKey)
+  const since = query.since ? new Date(query.since).getTime() : null
+  const limit = parseLimit(query.limit)
+
+  return index
+    .filter((post) => {
+      if (since !== null && new Date(post.publishedAt).getTime() < since) {
+        return false
+      }
+
+      if (query.topic && !post.topics.includes(query.topic as Topic)) {
+        return false
+      }
+
+      if (query.signalType && post.signalType !== query.signalType) {
+        return false
+      }
+
+      return true
+    })
+    .slice(0, limit)
+}
+
+function parseLimit(value?: string) {
+  const parsed = Number.parseInt(value ?? '', 10)
+
+  if (Number.isNaN(parsed)) {
+    return defaultRecentLimit
+  }
+
+  return Math.min(Math.max(parsed, 1), maxRecentLimit)
 }
 
 function parseBody(event: APIGatewayProxyEventV2) {

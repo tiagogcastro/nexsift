@@ -13,53 +13,72 @@ NexSift writing should be:
 - source grounded
 - skeptical of hype
 - clear about what changed
-- useful to developers and cloud professionals
+- useful to people who build, operate, design or decide about technology, with development as the main editorial bias
 
 Avoid clickbait, empty superlatives and claims that cannot be traced to a source.
 
-## Article questions
+## Vocabulary
 
-A useful article should answer most of these questions:
+- Sinal: the editorial unit NexSift publishes. A signal is a verifiable change in the technology ecosystem that alters a decision, risk, opportunity or mental map relevant to the audience. NexSift does not publish something just because it happened.
+- Tópico: the thematic category of a signal.
+- Ritmo editorial: the publication cadence. New curations are published on Mondays and Thursdays. The word "frequência" must not be used for topics or cadence.
+- Internally, the API and schema may keep the `post` naming; product language always uses Sinal.
 
-1. What happened?
-2. What changed technically?
-3. Why does it matter?
-4. Who is affected?
-5. What should a developer watch or do next?
-6. Which sources support the claims?
+## Audience
 
-## Content types
+People who build, operate, design or make decisions about technology. Developers remain the gravitational center: DevOps, SRE, platform engineers, security engineers, designers, engineering managers, technical founders, architects and infrastructure professionals are also part of the audience. NexSift is not a generic tech portal.
 
-### article
+## Signal structure
 
-A focused analysis of one development.
+A signal should answer:
 
-### daily-briefing
-
-A curated set of a few signals published as one briefing. The briefing is a future content format and uses the same post contract.
+1. O sinal: what happened.
+2. O que mudou: the concrete change.
+3. Por que importa: the practical consequence, without reproducing marketing.
+4. Quem deve prestar atenção: who is actually affected.
+5. O que observar agora: the next action, decision or relevant variable (test, update, migrate, benchmark, track, review cost, review security, wait for GA, no immediate action).
 
 ## Topics
 
 - `ai`
-- `cloud` (published label "Cloud"; covers AWS and other cloud providers)
 - `development`
+- `cloud`
 - `devops`
-- `career` (published label "Carreira & Vagas", covers jobs, salaries and market moves)
-- `finance`
+- `security`
+- `industry`
+- `design`
 
-## Relevance score
+`industry` means exclusively the technology industry, tech market and tech ecosystem: tech job market, acquisitions, relevant layoffs, relevant funding, open source governance, licensing, technology regulation, software/cloud/AI economics, platform strategy, moves by large technology companies, salaries and careers backed by strong data. It does not mean generic industry (oil, mining, agriculture, manufacturing, construction, heavy industry); those sectors only enter when there is a technology consequence directly relevant to the audience.
 
-`relevanceScore` ranges from 0 to 10. It is editorial data, not decoration.
+There are no topic quotas. The goal is to find the best signals of the period. A topic may have zero signals in an edition. Prefer at most 2 signals of the same topic per edition, with exceptions only when editorially justified. Never lower the gate to fill space.
 
-Future automated ranking should consider:
+## Classification
 
-- technical impact
-- novelty
-- practical relevance
-- source credibility
-- breadth of affected developers
+- `signalType`: `release` | `risk` | `shift` | `research` | `industry` | `opportunity`.
+- `depth`: `practical` (useful to a broad tech audience without being overly basic) or `deep` (architecture, protocols, infrastructure, internals, security, runtimes, research, or subjects requiring more technical context). There is no beginner level.
+- `signalDate`: the actual date of the event. `publishedAt` is when NexSift published it. `updatedAt` is when the published content received a material update. A signal only receives an update when there is material news (beta became GA, incident got a root cause, CVE got a patch, rollout paused, price changed, official information corrected, availability changed). Never update just because the editor reread the content.
 
-The score should not be presented when the system has no basis for it.
+## Relevance and confidence
+
+`relevanceScore` ranges from 0 to 10 and is editorial data, not decoration:
+
+- 9.0-10: exceptional
+- 8.0-8.9: strong
+- 7.0-7.9: relevant
+- 6.0-6.9: useful to a specific segment
+- below 6: do not publish
+
+Scoring considers impact, novelty, practicality, breadth and source credibility.
+
+`confidenceScore` ranges from 0 to 10 and measures how solid the evidence is and how reliable the interpretation is. High relevance does not compensate for low confidence.
+
+Publication floor (enforced by the Lambda): `relevanceScore >= 6.5` and `confidenceScore >= 7`.
+
+## Editorial cadence
+
+Main routine: Mondays and Thursdays. Research signals since the last edition. An older signal may be recovered when it is still relevant, has not been published, and still represents a material change.
+
+Geographic rule: actively search for signals from Brazil, Latin America and the rest of the world. Geographic origin does not change the editorial gate. Do not publish weak Brazilian content for diversity, and do not ignore strong Brazilian content.
 
 ## Source policy
 
@@ -74,22 +93,22 @@ Community posts can identify a signal but should not be the only basis for a mat
 
 ## AI policy
 
-The initial workflow is human approved:
+The assisted workflow is human approved:
 
 1. research in ChatGPT
 2. draft in pt-BR
 3. source review
 4. user approval
 5. GPT Action calls the publish Lambda
-6. Lambda validates and publishes
+6. Lambda validates, applies the editorial gates and publishes
 
 The autonomous workflow replaces steps 1 to 4 with a scheduled GPT run that self-reviews and publishes without human review:
 
-1. GET recent posts (anti-repetition)
+1. GET recent posts since the last edition (anti-repetition)
 2. research
 3. draft in pt-BR
-4. self-review loop (hype, source quality, novelty, schema limits)
-5. relevance gate (score >= 7)
+4. self-review loop (hype, source quality, novelty, contract limits)
+5. editorial gates (relevanceScore >= 6.5, confidenceScore >= 7)
 6. GPT Action calls the publish Lambda
 7. Lambda validates and publishes
 

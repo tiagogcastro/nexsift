@@ -1,18 +1,18 @@
 export function StatsBand({
   signals,
-  frequencies,
+  topics,
   avgRelevance,
   labels,
 }: {
   signals: number
-  frequencies: number
+  topics: number
   avgRelevance: string
-  labels: { signals: string; frequencies: string; avgRelevance: string }
+  labels: { signals: string; topics: string; avgRelevance: string }
 }) {
   return (
     <div className="grid grid-cols-3 border-y border-(--border)">
       <Stat value={String(signals)} label={labels.signals} />
-      <Stat value={String(frequencies)} label={labels.frequencies} />
+      <Stat value={String(topics)} label={labels.topics} />
       <Stat value={avgRelevance} label={labels.avgRelevance} />
     </div>
   )

@@ -23,7 +23,7 @@ The primary editorial primitive is a signal ledger.
 Each row communicates:
 
 1. position in the current set
-2. frequency or topic
+2. topic
 3. title and short context
 4. relevance score
 5. publication date
@@ -41,11 +41,13 @@ This creates a scan pattern closer to a market terminal, changelog or engineerin
 | muted | `#98A29A` | secondary text |
 | border | `#263029` | structure |
 | signal | `#C7F66B` | primary action and active signal |
-| cyan | `#6DE7E7` | cloud frequency |
-| orchid | `#C9A7FF` | AI frequency |
-| coral | `#FF9C73` | development frequency |
-| amber | `#FFD166` | career frequency |
-| finance green | `#7EE787` | finance frequency |
+| cyan | `#6DE7E7` | cloud topic |
+| orchid | `#C9A7FF` | ai topic |
+| coral | `#FF9C73` | development topic |
+| chartreuse | `#C7F66B` | devops topic |
+| salmon | `#FF8A7A` | security topic |
+| amber | `#FFD166` | industry topic |
+| pink | `#F0A6D8` | design topic |
 
 The primary accent is chartreuse instead of the common blue SaaS palette.
 
@@ -74,6 +76,10 @@ Motion should communicate state or navigation:
 - future pipeline progress animation
 
 Avoid background particles, parallax and cinematic page transitions.
+
+## Curation pipeline
+
+The curation process is rendered as an editorial pipeline, not as cards. Desktop shows five numbered nodes in a horizontal flow joined by connector lines; mobile stacks the same nodes vertically. Node fills progress from the surface color toward the signal color via `color-mix`, communicating discovery to publication. The nodes must never look like buttons: no heavy borders, no shadows, no hover affordances.
 
 ## Article layout
 

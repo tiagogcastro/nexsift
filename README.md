@@ -130,7 +130,15 @@ terraform -chdir=iac/environments/local apply
 yarn tsx --env-file=.env packages/dev-publish/publish.ts --file=packages/dev-publish/payloads/example.json
 ```
 
-The script POSTs the payload to the Lambda, which validates it with Zod, writes the post and updates the S3 indexes.
+The script POSTs the payload to the Lambda, which validates it with Zod, applies the editorial gates and updates the S3 indexes. The payload contract requires `signalDate`, `signalType`, `depth` and `confidenceScore` in addition to the base fields.
+
+To wipe local content (clean slate) before republishing under a new model:
+
+```bash
+yarn tsx --env-file=.env packages/dev-publish/reset.ts
+```
+
+The reset script lists recent signals and deletes each one. For production endpoints it requires `--allow-prod`; never use it to delete test content from prod.
 
 Check the objects in the local bucket:
 

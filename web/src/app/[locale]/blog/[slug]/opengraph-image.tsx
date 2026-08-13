@@ -7,11 +7,12 @@ export const contentType = 'image/png'
 
 const topicColors: Record<string, string> = {
   ai: '#c9a7ff',
-  cloud: '#6de7e7',
   development: '#ff9c73',
+  cloud: '#6de7e7',
   devops: '#c7f66b',
-  career: '#ffd166',
-  finance: '#7ee787',
+  security: '#ff8a7a',
+  industry: '#ffd166',
+  design: '#f0a6d8',
 }
 
 export default async function OpenGraphImage({
@@ -97,7 +98,7 @@ export default async function OpenGraphImage({
           maxWidth: 900,
         }}
       >
-        {post ? post.title : 'Frequência não encontrada'}
+        {post ? post.title : 'Tópico não encontrado'}
       </div>
       <div style={{ fontSize: 24, color: '#98a29a' }}>
         {post ? post.description : 'NexSift, menos ruído e mais sinal'}

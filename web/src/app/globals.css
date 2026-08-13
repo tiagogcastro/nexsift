@@ -22,8 +22,9 @@
   --topic-cloud: #6de7e7;
   --topic-development: #ff9c73;
   --topic-devops: #c7f66b;
-  --topic-career: #ffd166;
-  --topic-finance: #7ee787;
+  --topic-security: #ff8a7a;
+  --topic-industry: #ffd166;
+  --topic-design: #f0a6d8;
   --danger: #ff7979;
   --on-signal: #0b0d0a;
   --header-bg: rgba(9, 11, 13, 0.9);
@@ -128,12 +129,16 @@ button:not(:disabled),
   --topic-color: var(--topic-devops);
 }
 
-.topic-color[data-topic='career'] {
-  --topic-color: var(--topic-career);
+.topic-color[data-topic='security'] {
+  --topic-color: var(--topic-security);
 }
 
-.topic-color[data-topic='finance'] {
-  --topic-color: var(--topic-finance);
+.topic-color[data-topic='industry'] {
+  --topic-color: var(--topic-industry);
+}
+
+.topic-color[data-topic='design'] {
+  --topic-color: var(--topic-design);
 }
 
 .signal-ledger-row {
