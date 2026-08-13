@@ -1,4 +1,5 @@
 import {
+  postSchema,
   postSummarySchema,
   type Post,
   type PostDraft,
@@ -17,6 +18,7 @@ import { normalizePost } from './normalize-post'
 import { buildSignalSlug } from './signal-slug'
 import {
   SourceRejectedError,
+  type SourceCheck,
   type SourceFailure,
   validateSourceUrl,
 } from './validate-source'
@@ -34,6 +36,77 @@ export class NotFoundError extends Error {
     super(`Signal not found: ${slug}`)
     this.name = 'NotFoundError'
   }
+}
+
+export class SourceIndexError extends Error {
+  constructor(index: number) {
+    super(`Source index out of range: ${index}`)
+    this.name = 'SourceIndexError'
+  }
+}
+
+export function applySourceReplacement(
+  current: VerifiedPostSource,
+  newUrl: string,
+  check: SourceCheck,
+  reason: string,
+): VerifiedPostSource {
+  return {
+    ...current,
+    url: check.finalUrl,
+    finalUrl: check.finalUrl,
+    httpStatus: check.status ?? 0,
+    sourceStatus: 'replaced',
+    lastCheckedAt: check.checkedAt,
+    lastSuccessfulAt: check.checkedAt,
+    replacements: [
+      ...(current.replacements ?? []),
+      {
+        oldUrl: current.url,
+        newUrl: check.finalUrl,
+        replacedAt: check.checkedAt,
+        reason,
+      },
+    ],
+  }
+}
+
+// Replaces one source of a published signal after mechanically validating
+// the new URL. The original URL is preserved in the replacement history so
+// a later review can distinguish link rot from a source that never existed.
+export async function replacePostSource(
+  slug: string,
+  sourceIndex: number,
+  newUrl: string,
+  reason: string,
+): Promise<Post> {
+  const post = await getPost(slug)
+
+  if (!post) {
+    throw new NotFoundError(slug)
+  }
+
+  if (sourceIndex < 0 || sourceIndex >= post.sources.length) {
+    throw new SourceIndexError(sourceIndex)
+  }
+
+  const check = await validateSourceUrl(newUrl)
+  const current = post.sources[sourceIndex]
+
+  const sources = post.sources.map((source, index) => {
+    if (index !== sourceIndex || !current) {
+      return source
+    }
+
+    return applySourceReplacement(current, newUrl, check, reason)
+  })
+
+  const updated = postSchema.parse({ ...post, sources, updatedAt: new Date().toISOString() })
+  await putPost(updated)
+  await updateLatestIndex(updated)
+  await synchronizeTopicIndexes(updated, post)
+
+  return updated
 }
 
 export async function publishPost(draft: PostDraft): Promise<PublishResult> {
@@ -62,6 +135,15 @@ export async function verifyPostSources(
   sources: PostDraft['sources'],
 ): Promise<VerifiedPostSource[]> {
   const checkedAt = new Date().toISOString()
+  const editorialFailures = collectEditorialFailures(sources)
+
+  if (editorialFailures.length > 0) {
+    throw new SourceRejectedError(
+      `Editorial verification missing for ${editorialFailures.length} source(s)`,
+      null,
+      editorialFailures,
+    )
+  }
 
   const results = await Promise.allSettled(
     sources.map((source) => validateSourceUrl(source.url)),
@@ -104,6 +186,10 @@ export async function verifyPostSources(
       publisher: source.publisher,
       url: source.url,
       publishedAt: source.publishedAt,
+      editorialStatus: source.editorialStatus,
+      editoriallyVerifiedAt: source.editoriallyVerifiedAt,
+      firstVerifiedAt: checkedAt,
+      verifiedAtPublication: true,
       lastCheckedAt: checkedAt,
       lastSuccessfulAt: check.ok ? check.checkedAt : undefined,
       httpStatus: check.status ?? 0,
@@ -121,6 +207,28 @@ export async function verifyPostSources(
   }
 
   return verified
+}
+
+// The backend never derives editorial validity from HTTP status. The
+// editorial flow must assert, per source, that the page was read and that
+// its content sustains the signal (acontecimento, data, versões, números).
+// Without that assertion the publish gate stays closed.
+function collectEditorialFailures(
+  sources: PostDraft['sources'],
+): SourceFailure[] {
+  const failures: SourceFailure[] = []
+
+  for (const source of sources) {
+    if (source.editorialStatus !== 'verified' || !source.editoriallyVerifiedAt) {
+      failures.push({
+        url: source.url,
+        status: null,
+        sourceStatus: 'temporarily_unavailable',
+      })
+    }
+  }
+
+  return failures
 }
 
 export async function deletePost(slug: string) {
@@ -186,12 +294,12 @@ async function removeFromTopicIndexes(post: Post) {
   )
 }
 
-function upsertSummary(index: PostSummary[], post: Post) {
+export function upsertSummary(index: PostSummary[], post: Post) {
   const summary = postSummarySchema.parse(post)
   return [summary, ...index.filter((item) => item.slug !== post.slug)]
 }
 
-function sortByPublishedAt(first: PostSummary, second: PostSummary) {
+export function sortByPublishedAt(first: PostSummary, second: PostSummary) {
   return (
     new Date(second.publishedAt).getTime() -
     new Date(first.publishedAt).getTime()

@@ -4,6 +4,7 @@ import {
   latestIndexKey,
   NotFoundError,
   publishPost,
+  replacePostSource,
 } from '../src/publishing/publish-post'
 import { SourceRejectedError } from '../src/publishing/validate-source'
 import { getIndex, getPost } from '../src/storage/s3'
@@ -102,6 +103,8 @@ function makeDraft(signalDate = '2026-08-12', topics = ['devops'] as string[]) {
         title: 'Terraform changelog',
         publisher: 'HashiCorp',
         url: 'https://example.com/terraform',
+        editorialStatus: 'verified' as const,
+        editoriallyVerifiedAt: '2026-08-13T12:00:00.000Z',
       },
     ],
     relevanceScore: 7.5,
@@ -191,6 +194,153 @@ describe('source verification on publish', () => {
     await expect(publishPost(makeDraft())).rejects.toMatchObject({
       name: 'SourceRejectedError',
     })
+  })
+})
+
+describe('publication verification gate', () => {
+  it('rejects a source without an editorial assertion', async () => {
+    const draft = makeDraft()
+    draft.sources = [
+      { title: 'Terraform changelog', publisher: 'HashiCorp', url: 'https://example.com/terraform' },
+    ]
+
+    await expect(publishPost(draft)).rejects.toMatchObject({
+      name: 'SourceRejectedError',
+    })
+  })
+
+  it('rejects a source asserted unverified', async () => {
+    const draft = makeDraft()
+    draft.sources = [
+      {
+        title: 'Terraform changelog',
+        publisher: 'HashiCorp',
+        url: 'https://example.com/terraform',
+        editorialStatus: 'unverified',
+      },
+    ]
+
+    await expect(publishPost(draft)).rejects.toMatchObject({
+      name: 'SourceRejectedError',
+    })
+  })
+
+  it('records publication verification on every accepted source', async () => {
+    await publishPost(makeDraft())
+
+    const post = await getPost('devops-terraform-corrige-regressao-de-plan-2026-08-12')
+    expect(post?.sources[0]).toMatchObject({
+      verifiedAtPublication: true,
+      firstVerifiedAt: expect.any(String),
+      editorialStatus: 'verified',
+      editoriallyVerifiedAt: '2026-08-13T12:00:00.000Z',
+      sourceStatus: 'healthy',
+    })
+  })
+
+  it('publishes with two healthy sources and records both', async () => {
+    const draft = makeDraft()
+    draft.sources = [
+      {
+        title: 'Terraform changelog',
+        publisher: 'HashiCorp',
+        url: 'https://example.com/terraform',
+        editorialStatus: 'verified',
+        editoriallyVerifiedAt: '2026-08-13T12:00:00.000Z',
+      },
+      {
+        title: 'HashiCorp blog',
+        publisher: 'HashiCorp',
+        url: 'https://example.com/blog',
+        editorialStatus: 'verified',
+        editoriallyVerifiedAt: '2026-08-13T12:00:00.000Z',
+      },
+    ]
+
+    const result = await publishPost(draft)
+
+    expect(result.post.sources).toHaveLength(2)
+    expect(result.post.sources.every((source) => source.verifiedAtPublication === true)).toBe(true)
+  })
+
+  it('rejects when one of two sources is broken', async () => {
+    const draft = makeDraft()
+    draft.sources = [
+      {
+        title: 'Terraform changelog',
+        publisher: 'HashiCorp',
+        url: 'https://example.com/terraform',
+        editorialStatus: 'verified',
+        editoriallyVerifiedAt: '2026-08-13T12:00:00.000Z',
+      },
+      {
+        title: 'HashiCorp blog',
+        publisher: 'HashiCorp',
+        url: 'https://example.com/blog',
+        editorialStatus: 'verified',
+        editoriallyVerifiedAt: '2026-08-13T12:00:00.000Z',
+      },
+    ]
+    mockedValidate
+      .mockResolvedValueOnce(validCheck('https://example.com/terraform'))
+      .mockRejectedValueOnce(
+        new SourceRejectedError('Source rejected: http 404', {
+          ...validCheck('https://example.com/blog'),
+          ok: false,
+          status: 404,
+          sourceStatus: 'broken',
+        }),
+      )
+
+    await expect(publishPost(draft)).rejects.toMatchObject({
+      name: 'SourceRejectedError',
+      failures: [{ url: 'https://example.com/blog', status: 404, sourceStatus: 'broken' }],
+    })
+  })
+})
+
+describe('replacePostSource', () => {
+  it('replaces a source, keeps history and refreshes the index', async () => {
+    const created = await publishPost(makeDraft())
+    mockedValidate.mockResolvedValue(validCheck('https://example.com/terraform-new'))
+
+    const updated = await replacePostSource(
+      created.post.slug,
+      0,
+      'https://example.com/terraform-new',
+      'link rot',
+    )
+
+    const source = updated.sources[0]
+    expect(source?.url).toBe('https://example.com/terraform-new')
+    expect(source?.sourceStatus).toBe('replaced')
+    expect(source?.replacements ?? []).toEqual([
+      {
+        oldUrl: 'https://example.com/terraform',
+        newUrl: 'https://example.com/terraform-new',
+        replacedAt: expect.any(String),
+        reason: 'link rot',
+      },
+    ])
+
+    const latest = await getIndex(latestIndexKey)
+    expect(latest[0]?.sources[0]?.url).toBe('https://example.com/terraform-new')
+  })
+
+  it('rejects a replacement whose new URL fails validation', async () => {
+    const created = await publishPost(makeDraft())
+    mockedValidate.mockRejectedValue(
+      new SourceRejectedError('Source rejected: http 404', {
+        ...validCheck('https://example.com/terraform-new'),
+        ok: false,
+        status: 404,
+        sourceStatus: 'broken',
+      }),
+    )
+
+    await expect(
+      replacePostSource(created.post.slug, 0, 'https://example.com/terraform-new', 'link rot'),
+    ).rejects.toBeInstanceOf(SourceRejectedError)
   })
 })
 
