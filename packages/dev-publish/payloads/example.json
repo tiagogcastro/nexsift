@@ -1,19 +1,23 @@
 {
   "post": {
-    "type": "article",
-    "title": "Exemplo de publicação do NexSift",
-    "description": "Payload mínimo para validar a integração entre a Function URL, a Lambda de publicação e o S3 local.",
-    "content": "## Exemplo\n\nEste conteúdo existe apenas para validar o fluxo local de publicação. Ele pode ser removido depois do primeiro teste.",
-    "whyItMatters": "Este payload confirma que o contrato HTTP, a validação Zod, a Lambda e os índices do S3 estão funcionando juntos.",
-    "topics": ["development"],
+    "title": "Exemplo de sinal do NexSift",
+    "description": "Payload de exemplo para validar o modelo de sinal v2 no fluxo local.",
+    "content": "## O sinal\n\nEste conteúdo existe apenas para validar o fluxo local de publicação.\n\n## O que mudou\n\nNada muda; é um payload de teste local.",
+    "whyItMatters": "Este payload confirma que o contrato HTTP, a validação Zod, os gates e os índices do S3 funcionam juntos.",
+    "topics": ["devops"],
+    "signalDate": "2026-08-12",
+    "signalType": "release",
+    "depth": "practical",
     "tags": ["nexsift", "local"],
     "sources": [
       {
         "title": "NexSift local integration",
         "publisher": "NexSift",
-        "url": "https://example.com"
+        "url": "https://example.com",
+        "publishedAt": "2026-08-12T10:00:00Z"
       }
     ],
-    "relevanceScore": 1
+    "relevanceScore": 7.5,
+    "confidenceScore": 9
   }
 }
