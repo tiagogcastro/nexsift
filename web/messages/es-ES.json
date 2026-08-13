@@ -86,7 +86,8 @@
   },
   "notice": {
     "short": "Contenido generado con apoyo de IA a partir de fuentes oficiales. Puede contener errores.",
-    "article": "Este texto se produjo con apoyo de IA y se extrae de las fuentes oficiales citadas. Revisa las fuentes antes de tomar decisiones; pueden ocurrir errores."
+    "article": "Este texto se produjo con apoyo de IA y se extrae de las fuentes oficiales citadas. Revisa las fuentes antes de tomar decisiones; pueden ocurrir errores.",
+    "sources": "Una fuente puede dejar de existir en la web en cualquier momento. El equipo editorial puede revisar y actualizar la fuente o la señal cuando sea necesario."
   },
   "breadcrumb": {
     "home": "Inicio",

@@ -86,7 +86,8 @@
   },
   "notice": {
     "short": "Content produced with AI support from official sources. Errors may occur.",
-    "article": "This text was produced with AI support and is extracted from the official sources cited below. Review the sources before making decisions; errors may occur."
+    "article": "This text was produced with AI support and is extracted from the official sources cited below. Review the sources before making decisions; errors may occur.",
+    "sources": "A source may disappear from the web at any time. The editorial team may review and update the source or the signal when needed."
   },
   "breadcrumb": {
     "home": "Home",
