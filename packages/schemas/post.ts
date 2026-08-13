@@ -41,15 +41,21 @@ export const postDraftSchema = draftBaseSchema.refine(
   },
 )
 
-const postFieldsSchema = draftBaseSchema.extend({
-  id: z.string().min(1),
-  slug: z.string().regex(signalSlugRegex),
-  publishedAt: z.iso.datetime(),
-  updatedAt: z.iso.datetime().optional(),
-  readingTime: z.number().int().positive(),
-  locale: z.literal('pt-BR'),
-  sources: z.array(verifiedPostSourceSchema).min(1),
-})
+// whatToWatch is required on publish (draft gate) but optional on stored
+// posts so legacy records without the field can be read, migrated and
+// re-published before the field is filled.
+const postFieldsSchema = draftBaseSchema
+  .omit({ whatToWatch: true })
+  .extend({
+    id: z.string().min(1),
+    slug: z.string().regex(signalSlugRegex),
+    publishedAt: z.iso.datetime(),
+    updatedAt: z.iso.datetime().optional(),
+    readingTime: z.number().int().positive(),
+    locale: z.literal('pt-BR'),
+    whatToWatch: z.string().min(30).max(500).optional(),
+    sources: z.array(verifiedPostSourceSchema).min(1),
+  })
 
 export const postSchema = postFieldsSchema.refine(
   (post) =>
