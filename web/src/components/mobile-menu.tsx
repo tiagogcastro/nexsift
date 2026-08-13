@@ -36,8 +36,28 @@ export function MobileMenu({ locale, labels }: MobileMenuProps) {
   const isAbout = pathname === '/about' || pathname.startsWith('/about/')
   const isTopics = pathname.startsWith('/topics/')
   const activeTopic = topicFromPath(pathname)
+  const homePath = locale === 'pt-BR' ? '/' : `/${locale}`
 
   const close = () => setOpen(false)
+
+  const scrollToHash = (href: string) => {
+    const hashIndex = href.indexOf('#')
+
+    if (hashIndex === -1) {
+      return
+    }
+
+    const path = href.slice(0, hashIndex) || '/'
+    const hash = href.slice(hashIndex)
+
+    if (window.location.pathname !== path || window.location.hash !== hash) {
+      return
+    }
+
+    document
+      .querySelector(hash)
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   const itemClass =
     'flex min-h-12 items-center gap-3 border-b border-(--border) px-5 text-base transition-colors last:border-b-0'
@@ -66,16 +86,22 @@ export function MobileMenu({ locale, labels }: MobileMenuProps) {
               {labels.blog}
             </Link>
             <Link
-              href={`/${locale}#topics`}
-              onClick={close}
+              href={`${homePath}#topics`}
+              onClick={(event) => {
+                scrollToHash(event.currentTarget.getAttribute('href') ?? '')
+                close()
+              }}
               className={`${itemClass} ${isTopics ? 'text-(--foreground)' : 'text-(--muted-strong)'}`}
             >
               {isTopics ? <ActiveDot topic={activeTopic} /> : null}
               {labels.topics}
             </Link>
             <Link
-              href={`/${locale}#process`}
-              onClick={close}
+              href={`${homePath}#process`}
+              onClick={(event) => {
+                scrollToHash(event.currentTarget.getAttribute('href') ?? '')
+                close()
+              }}
               className={`${itemClass} text-(--muted-strong)`}
             >
               {labels.process}
