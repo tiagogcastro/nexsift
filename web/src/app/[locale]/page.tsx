@@ -7,7 +7,7 @@ import { StatsBand } from '@/features/landing/stats-band'
 import { TopicBands } from '@/features/landing/topic-bands'
 import { routing, type AppLocale } from '@/i18n/routing'
 import { listPosts } from '@/lib/content'
-import { compareByLatestUpdate } from '@/lib/date'
+import { selectHomeSignals } from '@/lib/home-selection'
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react'
 import { hasLocale } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
@@ -31,6 +31,8 @@ export default async function HomePage({
   setRequestLocale(locale)
   const t = await getTranslations()
   const posts = await listPosts()
+  const homeSignals = selectHomeSignals(posts, { limit: 5 })
+  const topicCount = new Set(posts.flatMap((post) => post.topics)).size
   const homePath = locale === 'pt-BR' ? '/' : `/${locale}`
 
   return (
@@ -80,7 +82,7 @@ export default async function HomePage({
               </div>
             </div>
 
-            <RadarPanel posts={posts} />
+            <RadarPanel posts={posts} topSignals={homeSignals} />
           </div>
         </section>
 
@@ -95,24 +97,7 @@ export default async function HomePage({
                 {t('latest.description')}
               </p>
             </div>
-            <SignalLedger posts={posts} limit={5} />
-          </div>
-        </section>
-
-        <section className="page-shell py-20 lg:py-28">
-          <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
-            <div>
-              <div className="eyebrow">{t('recentlyUpdated.eyebrow')}</div>
-              <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
-                {t('recentlyUpdated.title')}
-              </h2>
-              <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
-                {t('recentlyUpdated.description')}
-              </p>
-            </div>
-            <SignalLedger
-              posts={[...posts].sort(compareByLatestUpdate).slice(0, 5)}
-            />
+            <SignalLedger posts={homeSignals} limit={5} />
           </div>
         </section>
 
@@ -143,6 +128,9 @@ export default async function HomePage({
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
                 {t('process.description')}
               </p>
+              <p className="mt-5 font-mono text-xs text-(--muted)">
+                {t('process.rhythm')}
+              </p>
             </div>
             <ProcessLine
               steps={[
@@ -159,7 +147,7 @@ export default async function HomePage({
         <section className="page-shell py-20 lg:py-28">
           <StatsBand
             signals={posts.length}
-            frequencies={new Set(posts.flatMap((post) => post.topics)).size}
+            topics={topicCount}
             avgRelevance={
               posts.length > 0
                 ? (
@@ -169,8 +157,8 @@ export default async function HomePage({
                 : '0.0'
             }
             labels={{
-              signals: t('stats.signals'),
-              frequencies: t('stats.frequencies'),
+              signals: t('stats.signals', { count: posts.length }),
+              topics: t('stats.topics', { count: topicCount }),
               avgRelevance: t('stats.avgRelevance'),
             }}
           />

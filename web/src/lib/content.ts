@@ -61,6 +61,10 @@ export async function listPosts() {
       return []
     }
 
+    if (isZodError(error)) {
+      return []
+    }
+
     throw error
   }
 }
@@ -69,8 +73,16 @@ export async function getPostBySlug(slug: string) {
   try {
     const value = await cachedReadJsonObject(`public/posts/${slug}.json`)()
     return postSchema.parse(value)
-  } catch {
-    return null
+  } catch (error) {
+    if (error instanceof Error && error.name === 'NoSuchKey') {
+      return null
+    }
+
+    if (isZodError(error)) {
+      return null
+    }
+
+    throw error
   }
 }
 
@@ -83,6 +95,19 @@ export async function listPostsByTopic(topic: Topic) {
       return []
     }
 
+    if (isZodError(error)) {
+      return []
+    }
+
     throw error
   }
+}
+
+function isZodError(error: unknown) {
+  return Boolean(
+    error &&
+      typeof error === 'object' &&
+      'issues' in error &&
+      Array.isArray((error as { issues?: unknown }).issues),
+  )
 }

@@ -4,10 +4,8 @@ import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { PostSummary } from '@nexsift/schemas/post'
 import type { Topic } from '@nexsift/schemas/topic'
-import { compareByLatestUpdate } from '@/lib/date'
 import { topicOrder } from '@/lib/topics'
 import { LedgerRow } from './ledger-row'
-import { OrderToggle, type SortOrder } from './order-toggle'
 
 interface TopicMeta {
   label: string
@@ -17,11 +15,10 @@ interface TopicMeta {
 interface ConsoleLabels {
   searchPlaceholder: string
   allTopics: string
-  sortRecent: string
-  sortUpdated: string
+  countLabelOne: string
+  countLabelOther: string
   loadMore: string
   empty: string
-  countLabel: string
   signalFallback: string
 }
 
@@ -32,7 +29,6 @@ interface LedgerConsoleProps {
   topicMeta: Record<Topic, TopicMeta>
   initialTopic: Topic | undefined
   initialQuery: string | undefined
-  initialSort: SortOrder | undefined
   pageSize?: number
 }
 
@@ -43,13 +39,11 @@ export function LedgerConsole({
   topicMeta,
   initialTopic,
   initialQuery,
-  initialSort,
   pageSize = 20,
 }: LedgerConsoleProps) {
   const router = useRouter()
   const [query, setQuery] = useState(initialQuery ?? '')
   const [topic, setTopic] = useState<Topic | null>(fixedTopic ?? initialTopic ?? null)
-  const [sort, setSort] = useState<SortOrder>(initialSort ?? 'recent')
   const [visibleCount, setVisibleCount] = useState(pageSize)
 
   function resetPage() {
@@ -68,10 +62,6 @@ export function LedgerConsole({
         params.set('topic', topic)
       }
 
-      if (sort !== 'recent') {
-        params.set('sort', sort)
-      }
-
       const basePath = fixedTopic ? `/topics/${fixedTopic}` : '/blog'
       const queryString = params.toString()
 
@@ -81,7 +71,7 @@ export function LedgerConsole({
     }, 250)
 
     return () => clearTimeout(timeoutId)
-  }, [query, topic, sort, router, fixedTopic])
+  }, [query, topic, router, fixedTopic])
 
   const counts = useMemo(() => {
     const result = {} as Record<Topic, number>
@@ -112,12 +102,12 @@ export function LedgerConsole({
 
         return haystack.includes(normalizedQuery)
       })
-      .sort((first, second) =>
-        sort === 'updated'
-          ? compareByLatestUpdate(first, second)
-          : new Date(second.publishedAt).getTime() - new Date(first.publishedAt).getTime(),
+      .sort(
+        (first, second) =>
+          new Date(second.publishedAt).getTime() -
+          new Date(first.publishedAt).getTime(),
       )
-  }, [posts, query, topic, sort])
+  }, [posts, query, topic])
 
   const visiblePosts = filtered.slice(0, visibleCount)
 
@@ -135,7 +125,8 @@ export function LedgerConsole({
           className="w-full border border-(--border) bg-(--surface) px-4 py-2.5 font-mono text-sm text-(--foreground) outline-none transition-colors placeholder:text-(--muted) focus:border-(--signal) md:max-w-md lg:max-w-lg"
         />
         <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-(--muted)">
-          {filtered.length} {labels.countLabel}
+          {filtered.length}{' '}
+          {filtered.length === 1 ? labels.countLabelOne : labels.countLabelOther}
         </span>
       </div>
 
@@ -175,17 +166,6 @@ export function LedgerConsole({
           ))}
         </div>
       ) : null}
-
-      <div className="flex items-center py-4">
-        <OrderToggle
-          value={sort}
-          onChange={(nextSort) => {
-            setSort(nextSort)
-            resetPage()
-          }}
-          labels={{ recent: labels.sortRecent, updated: labels.sortUpdated }}
-        />
-      </div>
 
       {visiblePosts.length > 0 ? (
         <div>

@@ -3,11 +3,12 @@ import type { getTranslations } from 'next-intl/server'
 
 export const topicOrder: readonly Topic[] = [
   'ai',
-  'cloud',
   'development',
+  'cloud',
   'devops',
-  'career',
-  'finance',
+  'security',
+  'industry',
+  'design',
 ] as const
 
 export interface TopicMeta {
@@ -44,17 +45,23 @@ export function getTopicMeta(t: Translator, topic: Topic): TopicMeta {
         shortLabel: t('topicItems.devops.shortLabel'),
         description: t('topicItems.devops.description'),
       }
-    case 'career':
+    case 'security':
       return {
-        label: t('topicItems.career.label'),
-        shortLabel: t('topicItems.career.shortLabel'),
-        description: t('topicItems.career.description'),
+        label: t('topicItems.security.label'),
+        shortLabel: t('topicItems.security.shortLabel'),
+        description: t('topicItems.security.description'),
       }
-    case 'finance':
+    case 'industry':
       return {
-        label: t('topicItems.finance.label'),
-        shortLabel: t('topicItems.finance.shortLabel'),
-        description: t('topicItems.finance.description'),
+        label: t('topicItems.industry.label'),
+        shortLabel: t('topicItems.industry.shortLabel'),
+        description: t('topicItems.industry.description'),
+      }
+    case 'design':
+      return {
+        label: t('topicItems.design.label'),
+        shortLabel: t('topicItems.design.shortLabel'),
+        description: t('topicItems.design.description'),
       }
   }
 }

@@ -2,10 +2,15 @@ import { getTopicMeta } from '@/lib/topics'
 import type { PostSummary } from '@nexsift/schemas/post'
 import { getTranslations } from 'next-intl/server'
 
-export async function RadarPanel({ posts }: { posts: PostSummary[] }) {
+export async function RadarPanel({
+  posts,
+  topSignals,
+}: {
+  posts: PostSummary[]
+  topSignals: PostSummary[]
+}) {
   const t = await getTranslations()
-  const topSignals = posts.slice(0, 5)
-  const frequencyCount = new Set(posts.flatMap((post) => post.topics)).size
+  const topicCount = new Set(posts.flatMap((post) => post.topics)).size
   const verifiedPercentage = posts.length > 0 ? '100%' : '0%'
 
   return (
@@ -19,8 +24,14 @@ export async function RadarPanel({ posts }: { posts: PostSummary[] }) {
       </div>
 
       <div className="grid grid-cols-3 border-b border-(--border)">
-        <Metric value={String(frequencyCount)} label={t('signal.frequencies')} />
-        <Metric value={String(topSignals.length)} label={t('signal.selected')} />
+        <Metric
+          value={String(topicCount)}
+          label={t('signal.topics', { count: topicCount })}
+        />
+        <Metric
+          value={String(topSignals.length)}
+          label={t('signal.selected', { count: topSignals.length })}
+        />
         <Metric value={verifiedPercentage} label={t('signal.verified')} />
       </div>
 

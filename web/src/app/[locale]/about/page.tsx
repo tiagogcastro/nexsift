@@ -69,7 +69,19 @@ export default async function AboutPage({
                 {t('about.creatorTitle')}
               </h2>
               <p className="mt-5 max-w-3xl text-lg leading-relaxed text-(--muted-strong)">
-                {t('about.creatorBody')}
+                {t.rich('about.creatorBody', {
+                  name: (chunks) => (
+                    <a
+                      href={siteConfig.linkedinUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 font-medium text-(--signal) hover:underline"
+                    >
+                      {chunks}
+                      <ArrowUpRight size={14} />
+                    </a>
+                  ),
+                })}
               </p>
               <div className="mt-6 flex gap-5 text-sm text-(--muted-strong)">
                 <a
