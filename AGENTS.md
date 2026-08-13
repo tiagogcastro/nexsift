@@ -25,6 +25,7 @@ Do not introduce new top-level layers without a concrete need.
 
 - Node 22 (`.nvmrc`), Yarn 4.9.2 via Corepack. Yarn is not committed, so run `corepack enable` before `yarn install` on a fresh machine.
 - `web/.env.local` and `.env` come from their `.env.example`; `.env` holds the local MiniStack publish URL and token.
+- `.opencode/opencode.json` is local-only (gitignored); never track it and never inline API keys in it, use `{env:...}` or file references outside the repo.
 - Full MiniStack + publish + dev-server runbook is in `README.md` (sections "Full local AWS simulation" and "Publish flow").
 
 ## Commands

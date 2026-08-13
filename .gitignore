@@ -22,6 +22,9 @@ iac/local/
 
 data/
 
+# Local opencode config; never track it or inline keys in it
+.opencode/opencode.json
+
 .DS_Store
 Thumbs.db
 
