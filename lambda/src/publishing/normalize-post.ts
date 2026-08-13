@@ -1,22 +1,19 @@
-import {
-  postSchema,
-  type Post,
-  type PostDraft,
-} from '@nexsift/schemas/post'
+import { postSchema, type Post, type PostDraft } from '@nexsift/schemas/post'
 import { calculateReadingTime } from './reading-time'
-import { createSlug } from './slug'
+import { buildSignalSlug } from './signal-slug'
 
 export function normalizePost(
   draft: PostDraft,
   existing: Post | null,
   now = new Date(),
 ) {
-  const slug = draft.slug ? createSlug(draft.slug) : createSlug(draft.title)
+  const primaryTopic = draft.topics[0]
 
-  if (!slug) {
-    throw new Error('Unable to create a valid slug')
+  if (!primaryTopic) {
+    throw new Error('A post needs at least one topic')
   }
 
+  const slug = buildSignalSlug(primaryTopic, draft.title, draft.signalDate)
   const timestamp = now.toISOString()
   const post = {
     ...draft,

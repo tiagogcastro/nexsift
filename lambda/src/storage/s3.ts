@@ -1,4 +1,5 @@
 import {
+  DeleteObjectCommand,
   GetObjectCommand,
   PutObjectCommand,
   S3Client,
@@ -56,6 +57,12 @@ export async function getPost(slug: string) {
 
 export async function putPost(post: Post) {
   await writeJson(`public/posts/${post.slug}.json`, post)
+}
+
+export async function deleteObject(key: string) {
+  await getS3Client().send(
+    new DeleteObjectCommand({ Bucket: getBucket(), Key: key }),
+  )
 }
 
 export async function getIndex(key: string): Promise<PostSummary[]> {
