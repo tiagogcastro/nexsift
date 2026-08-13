@@ -2,11 +2,12 @@ import { z } from 'zod'
 
 export const topicSchema = z.enum([
   'ai',
-  'cloud',
   'development',
+  'cloud',
   'devops',
-  'career',
-  'finance',
+  'security',
+  'industry',
+  'design',
 ])
 
 export type Topic = z.infer<typeof topicSchema>

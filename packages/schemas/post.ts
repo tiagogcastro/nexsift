@@ -1,51 +1,86 @@
 import { z } from 'zod'
+import { depthSchema } from './depth'
 import { postSourceSchema } from './source'
+import { signalTypeSchema } from './signal-type'
 import { topicSchema } from './topic'
 
-export const contentTypeSchema = z.enum(['daily-briefing', 'article'])
+export const signalSlugRegex = new RegExp(
+  `^(${topicSchema.options.join('|')})-[a-z0-9]+(-[a-z0-9]+)*-\\d{4}-\\d{2}-\\d{2}$`,
+)
 
-export const postDraftSchema = z.object({
-  type: contentTypeSchema.default('article'),
+// Zod 4 forbids .extend() and .pick() on object schemas that carry
+// refinements, so the refinements attach to plain base schemas.
+const draftFields = {
   slug: z.string().min(3).optional(),
   title: z.string().min(8).max(140),
   description: z.string().min(30).max(260),
   content: z.string().min(100),
   whyItMatters: z.string().min(30).max(800),
   topics: z.array(topicSchema).min(1).max(3),
+  signalDate: z.iso.date(),
+  signalType: signalTypeSchema,
+  depth: depthSchema,
   tags: z.array(z.string().min(1)).max(10).default([]),
   sources: z.array(postSourceSchema).min(1),
   relevanceScore: z.number().min(0).max(10),
+  confidenceScore: z.number().min(0).max(10),
   featured: z.boolean().optional(),
-})
+}
 
-export const postSchema = postDraftSchema.extend({
+const draftBaseSchema = z.object(draftFields)
+
+export const postDraftSchema = draftBaseSchema.refine(
+  (draft) =>
+    draft.slug === undefined ||
+    (draft.slug.startsWith(`${draft.topics[0]}-`) &&
+      draft.slug.endsWith(`-${draft.signalDate}`)),
+  {
+    message: 'slug must start with {topics[0]}- and end with -{signalDate}',
+    path: ['slug'],
+  },
+)
+
+const postFieldsSchema = draftBaseSchema.extend({
   id: z.string().min(1),
-  slug: z.string().min(3),
+  slug: z.string().regex(signalSlugRegex),
   publishedAt: z.iso.datetime(),
   updatedAt: z.iso.datetime().optional(),
   readingTime: z.number().int().positive(),
   locale: z.literal('pt-BR'),
 })
 
-export const postSummarySchema = postSchema.pick({
+export const postSchema = postFieldsSchema.refine(
+  (post) =>
+    post.slug.startsWith(`${post.topics[0]}-`) &&
+    post.slug.endsWith(`-${post.signalDate}`),
+  {
+    message: 'slug must start with {topics[0]}- and end with -{signalDate}',
+    path: ['slug'],
+  },
+)
+
+export const postSummarySchema = postFieldsSchema.pick({
   id: true,
-  type: true,
   slug: true,
   title: true,
   description: true,
   topics: true,
   tags: true,
+  signalDate: true,
   publishedAt: true,
   updatedAt: true,
   readingTime: true,
   relevanceScore: true,
-  locale: true,
+  confidenceScore: true,
+  signalType: true,
+  depth: true,
   featured: true,
+  locale: true,
+  sources: true,
 })
 
 export const postIndexSchema = z.array(postSummarySchema)
 
-export type ContentType = z.infer<typeof contentTypeSchema>
 export type PostDraft = z.infer<typeof postDraftSchema>
 export type Post = z.infer<typeof postSchema>
 export type PostSummary = z.infer<typeof postSummarySchema>

@@ -6,6 +6,8 @@
   "exports": {
     "./post": "./post.ts",
     "./source": "./source.ts",
-    "./topic": "./topic.ts"
+    "./topic": "./topic.ts",
+    "./signal-type": "./signal-type.ts",
+    "./depth": "./depth.ts"
   }
 }
