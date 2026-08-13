@@ -81,6 +81,7 @@ API Gateway HTTP API (Function URL for local testing)
   |
   +--> bearer token validation
   +--> Zod validation
+  +--> editorial gates (relevanceScore >= 6.5, confidenceScore >= 7)
   +--> normalization
   +--> post write
   +--> index updates
@@ -89,12 +90,12 @@ API Gateway HTTP API (Function URL for local testing)
 S3
 ```
 
-The Lambda does not call OpenAI. The publication endpoint also exposes GET, returning the most recent published posts so the editor can avoid repeating signals across days. Production uses an API Gateway HTTP API because the ChatGPT Actions gateway does not reach `*.lambda-url.*.on.aws` domains; the Lambda Function URL is kept for local flows and rollback.
+The Lambda does not call OpenAI. The publication endpoint also exposes GET with optional filters (`since`, `topic`, `signalType`, `limit`), returning the most recently published signals so the editor can avoid repeating signals across days. Production uses an API Gateway HTTP API because the ChatGPT Actions gateway does not reach `*.lambda-url.*.on.aws` domains; the Lambda Function URL is kept for local flows and rollback.
 
 ## Autonomous publication via ChatGPT Tasks
 
 ```text
-ChatGPT Tasks (weekday morning)
+ChatGPT Tasks (Monday and Thursday morning)
   |
   v
 NexSift Editor GPT
@@ -103,7 +104,7 @@ NexSift Editor GPT
   +--> research
   +--> draft
   +--> self-review loop
-  +--> relevance gate (score >= 7)
+  +--> editorial gates (relevanceScore >= 6.5, confidenceScore >= 7)
   |
   v
 POST /publish (same contract)
@@ -112,7 +113,7 @@ POST /publish (same contract)
 S3
 ```
 
-The editor runs without human review and publishes at most one post per topic per day, only when a signal passes the editorial gate. Re-publishing with the same slug updates the post instead of duplicating it.
+The editor runs without human review and publishes the best signals of the edition, preferably at most two per topic, without topic quotas, only when a signal passes the editorial gates. Re-publishing with the same slug updates the signal instead of duplicating it.
 
 ## Future autonomous publication via OpenAI API
 
@@ -150,11 +151,22 @@ private/
   runs/
 ```
 
-There is no database in the MVP.
+There is no database in the MVP. `indexes/latest.json` is capped at 100 summaries.
+
+## Publication endpoints
+
+All routes require `Authorization: Bearer <PUBLISH_TOKEN>`.
+
+- `GET /` (`listRecentPosts`): returns `{ posts: PostSummary[] }` from `indexes/latest.json`; optional query filters `since` (ISO 8601), `topic`, `signalType`, `limit` (default 30, max 100).
+- `GET /posts/{slug}` (`getPost`): returns the full signal or 404.
+- `POST /` (`publishPost`): upserts a signal. The slug is derived as `{topics[0]}-{slugified title, max 40 chars}-{signalDate}`; publishing the same slug again updates the signal. Rejects drafts below the editorial gates (422). Returns 201 with `{ ok, slug, operation: created|updated, publishedAt, updatedAt }`.
+- `DELETE /posts/{slug}` (`deletePost`): removes the post object and cleans the latest and topic indexes; 404 when the slug does not exist.
+
+The API Gateway `$default` route and the Lambda Function URL both forward any path to the same handler, which routes on method + path.
 
 ## Schemas
 
-Shared Zod schemas live in `packages/schemas` as a plain folder (not a workspace). Both `web` and `lambda` import from it via the `@nexsift/schemas/*` path alias. Changing a schema affects both consumers at type-check time, which is intended: the schema is the contract between publisher and site.
+Shared Zod schemas live in `packages/schemas` as a yarn workspace resolved through `node_modules`. It exports `./post`, `./source`, `./topic`, `./signal-type` and `./depth`. Both `web` and `lambda` import the raw TypeScript sources. Changing a schema affects both consumers at type-check time, which is intended: the schema is the contract between publisher and site.
 
 ## Environments
 
