@@ -6,9 +6,11 @@ import { LedgerRow } from './ledger-row'
 export async function SignalLedger({
   posts,
   limit,
+  compact = false,
 }: {
   posts: PostSummary[]
   limit?: number
+  compact?: boolean
 }) {
   const t = await getTranslations()
   const visiblePosts = typeof limit === 'number' ? posts.slice(0, limit) : posts
@@ -30,6 +32,7 @@ export async function SignalLedger({
             newLabel={t('radar.newBadge')}
             sourcesLabel={t('radar.sourcesCount', { count: post.sources.length })}
             fallbackLabel={t('console.signalFallback')}
+            compact={compact}
           />
         )
       })}

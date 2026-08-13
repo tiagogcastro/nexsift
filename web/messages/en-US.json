@@ -21,7 +21,7 @@
     "definition": "A <sinal>signal</sinal> is a relevant change, verified and placed in context.",
     "viewAll": "View all signals",
     "newBadge": "New",
-    "sourcesCount": "{count, plural, one {# source} other {# sources}}"
+    "sourcesCount": "{count, plural, one {source} other {sources}}"
   },
   "topics": {
     "eyebrow": "TOPICS",
@@ -73,7 +73,7 @@
     "risk": "Risk",
     "shift": "Shift",
     "research": "Research",
-    "industry": "Industry",
+    "industry": "Market",
     "opportunity": "Opportunity"
   },
   "topicItems": {

@@ -87,7 +87,7 @@ export default async function HomePage({
                 <span className="signal-dot" />
                 {t('hero.eyebrow')}
               </div>
-              <h1 className="mt-8 text-[clamp(4rem,9vw,9rem)] font-medium leading-[0.82] tracking-[-0.085em]">
+              <h1 className="mt-8 text-[clamp(3.2rem,6.5vw,6.8rem)] font-medium leading-[0.84] tracking-[-0.08em]">
                 <span className="block">{t('hero.titleA')}</span>
                 <span className="block text-(--signal)">{t('hero.titleB')}</span>
               </h1>
@@ -127,7 +127,7 @@ export default async function HomePage({
                 </span>
               </div>
               <div className="px-5">
-                <SignalLedger posts={radarSignals} limit={5} />
+                <SignalLedger posts={radarSignals} limit={4} compact />
               </div>
               <div className="border-t border-(--border) px-5 py-4">
                 <Link

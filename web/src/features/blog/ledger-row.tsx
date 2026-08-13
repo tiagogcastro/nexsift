@@ -15,6 +15,7 @@ export function LedgerRow({
   newLabel,
   sourcesLabel,
   fallbackLabel,
+  compact = false,
 }: {
   post: PostSummary
   index: number
@@ -24,6 +25,7 @@ export function LedgerRow({
   newLabel: string
   sourcesLabel: string
   fallbackLabel: string
+  compact?: boolean
 }) {
   const topic = post.topics[0]
   const isNew = isSignalWithinDays(post.publishedAt, NEW_BADGE_DAYS)
@@ -54,9 +56,11 @@ export function LedgerRow({
         <h3 className="signal-title mt-2 text-[clamp(1rem,1.4vw,1.22rem)] font-medium leading-snug tracking-[-0.025em] text-(--foreground)">
           {post.title}
         </h3>
-        <p className="mt-1.5 hidden max-w-3xl text-sm leading-relaxed text-(--muted) md:block">
-          {post.description}
-        </p>
+        {!compact ? (
+          <p className="mt-1.5 hidden max-w-3xl text-sm leading-relaxed text-(--muted) md:block">
+            {post.description}
+          </p>
+        ) : null}
       </div>
       <div className="flex flex-col items-end gap-1 pl-2 text-right">
         <span className="font-mono text-xs font-semibold text-(--foreground)">

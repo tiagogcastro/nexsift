@@ -71,9 +71,9 @@ export default async function TopicPage({
               topic={topic}
             />
             <div className="eyebrow text-(--topic-color)">
-              {t('topicPage.frequency')} / {meta.shortLabel}
+              {t('topicPage.frequency')}
             </div>
-            <h1 className="mt-5 text-[clamp(3.5rem,7vw,7rem)] font-medium leading-[0.9] tracking-[-0.075em]">
+            <h1 className="mt-5 text-[clamp(2.4rem,4.8vw,4.2rem)] font-medium leading-[0.95] tracking-[-0.05em]">
               {t('topicPage.radarTitle', { topic: meta.label })}
             </h1>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-(--muted)">

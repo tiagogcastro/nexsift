@@ -21,7 +21,7 @@
     "definition": "Una <sinal>señal</sinal> es un cambio relevante, verificado y puesto en contexto.",
     "viewAll": "Ver todas las señales",
     "newBadge": "Nuevo",
-    "sourcesCount": "{count, plural, one {# fuente} other {# fuentes}}"
+    "sourcesCount": "{count, plural, one {fuente} other {fuentes}}"
   },
   "topics": {
     "eyebrow": "TEMAS",
@@ -73,7 +73,7 @@
     "risk": "Riesgo",
     "shift": "Cambio",
     "research": "Investigación",
-    "industry": "Industria",
+    "industry": "Mercado",
     "opportunity": "Oportunidad"
   },
   "topicItems": {
