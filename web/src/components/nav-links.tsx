@@ -33,9 +33,11 @@ export function NavLinks({
   const pathname = usePathname()
   const isBlog = pathname === '/blog' || pathname.startsWith('/blog/')
   const isAbout = pathname === '/about' || pathname.startsWith('/about/')
-  const isTopics = pathname.startsWith('/topics/')
+  const isTopics =
+    pathname === '/topics' || pathname.startsWith('/topics/')
   const activeTopic = topicFromPath(pathname)
   const homePath = locale === 'pt-BR' ? '/' : `/${locale}`
+  const topicsPath = locale === 'pt-BR' ? '/topics' : `/${locale}/topics`
 
   const linkClass =
     'flex items-center gap-2 rounded-(--radius-sm) px-2.5 py-1.5 transition-colors hover:bg-(--surface-raised) hover:text-white'
@@ -71,8 +73,7 @@ export function NavLinks({
         {labels.blog}
       </Link>
       <Link
-        href={`${homePath}#topics`}
-        onClick={(event) => scrollToHash(event.currentTarget.getAttribute('href') ?? '')}
+        href={topicsPath}
         className={`${linkClass} ${isTopics ? activeClass : inactiveClass}`}
       >
         {isTopics ? <ActiveDot topic={activeTopic} /> : null}
