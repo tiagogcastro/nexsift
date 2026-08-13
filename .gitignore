@@ -15,6 +15,7 @@ coverage/
 !.env.example
 
 .terraform/
+.worktrees/
 *.tfstate
 *.tfstate.*
 iac/environments/prod/terraform.tfvars
