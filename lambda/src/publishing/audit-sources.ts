@@ -25,6 +25,7 @@ export interface SourceAuditResult {
   temporarily_unavailable: number
   broken: number
   replaced: number
+  blocked: number
   entries: SourceAuditEntry[]
 }
 
@@ -42,6 +43,7 @@ export async function auditAllSources(): Promise<SourceAuditResult> {
     temporarily_unavailable: 0,
     broken: 0,
     replaced: 0,
+    blocked: 0,
   }
   const entries: SourceAuditEntry[] = []
 

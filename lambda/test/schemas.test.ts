@@ -4,6 +4,13 @@ import {
   postSummarySchema,
   type PostDraft,
 } from '@nexsift/schemas/post'
+import {
+  editorialStatusSchema,
+  postSourceSchema,
+  sourceReplacementSchema,
+  sourceStatusSchema,
+  verifiedPostSourceSchema,
+} from '@nexsift/schemas/source'
 import { topicSchema } from '@nexsift/schemas/topic'
 import { describe, expect, it } from 'vitest'
 
@@ -129,5 +136,65 @@ describe('postSummarySchema', () => {
     expect(summary.signalType).toBe('risk')
     expect(summary.depth).toBe('practical')
     expect(summary.confidenceScore).toBe(9)
+  })
+})
+
+describe('source schema verification fields', () => {
+  it('accepts the blocked source status', () => {
+    expect(sourceStatusSchema.safeParse('blocked').success).toBe(true)
+  })
+
+  it('parses a verified draft source with an editorial assertion', () => {
+    const draft = postSourceSchema.parse({
+      title: 'Release notes',
+      publisher: 'HashiCorp',
+      url: 'https://example.com/release',
+      editorialStatus: 'verified',
+      editoriallyVerifiedAt: '2026-08-13T12:00:00.000Z',
+    })
+    expect(draft.editorialStatus).toBe('verified')
+  })
+
+  it('parses a stored source with publication and replacement history', () => {
+    const stored = verifiedPostSourceSchema.parse({
+      title: 'Release notes',
+      publisher: 'HashiCorp',
+      url: 'https://web.archive.org/web/20260101000000/https://example.com/release',
+      editorialStatus: 'verified',
+      editoriallyVerifiedAt: '2026-08-13T12:00:00.000Z',
+      firstVerifiedAt: '2026-08-13T12:00:00.000Z',
+      verifiedAtPublication: true,
+      lastCheckedAt: '2026-08-20T12:00:00.000Z',
+      lastSuccessfulAt: '2026-08-20T12:00:00.000Z',
+      httpStatus: 200,
+      finalUrl: 'https://web.archive.org/web/20260101000000/https://example.com/release',
+      sourceStatus: 'replaced',
+      replacements: [
+        {
+          oldUrl: 'https://example.com/release',
+          newUrl: 'https://web.archive.org/web/20260101000000/https://example.com/release',
+          replacedAt: '2026-08-20T12:00:00.000Z',
+          reason: 'link rot',
+        },
+      ],
+    })
+    expect(stored.replacements ?? []).toHaveLength(1)
+    expect(sourceReplacementSchema.safeParse(stored.replacements?.[0]).success).toBe(true)
+  })
+
+  it('rejects an editorial assertion without a timestamp', () => {
+    const result = postSourceSchema.safeParse({
+      title: 'Release notes',
+      publisher: 'HashiCorp',
+      url: 'https://example.com/release',
+      editorialStatus: 'verified',
+    })
+    expect(result.success).toBe(false)
+  })
+
+  it('accepts the three editorial statuses', () => {
+    expect(editorialStatusSchema.safeParse('verified').success).toBe(true)
+    expect(editorialStatusSchema.safeParse('unverified').success).toBe(true)
+    expect(editorialStatusSchema.safeParse('unknown').success).toBe(true)
   })
 })
