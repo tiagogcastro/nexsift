@@ -112,7 +112,17 @@
     "updated": "Actualizado",
     "reading": "Lectura",
     "author": "Autor",
-    "authorValue": "NexSift Editorial"
+    "authorValue": "NexSift Editorial",
+    "sourceStatus": {
+      "healthy": "Fuente saludable",
+      "redirected": "Redirigida",
+      "replaced": "Reemplazada",
+      "temporarilyUnavailable": "No disponible por ahora",
+      "blocked": "Bloqueada para verificación",
+      "linkRot": "Enlace roto posteriormente",
+      "compromised": "Evidencia comprometida",
+      "unknown": "Verificación histórica desconocida"
+    }
   },
   "radar": {
     "badge": "CURADO / ACTUAL",
