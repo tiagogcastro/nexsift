@@ -73,9 +73,12 @@ export default async function TopicPage({
             <div className="eyebrow text-(--topic-color)">
               {t('topicPage.frequency')}
             </div>
-            <h1 className="mt-5 text-[clamp(2.4rem,4.8vw,4.2rem)] font-medium leading-[0.95] tracking-[-0.05em]">
-              {t('topicPage.radarTitle', { topic: meta.label })}
+            <h1 className="mt-5 text-[clamp(2.8rem,5.5vw,5rem)] font-medium leading-[0.9] tracking-[-0.06em]">
+              {meta.label}
             </h1>
+            <p className="mt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-(--topic-color)">
+              {t('topicPage.radarTitle', { topic: meta.shortLabel })}
+            </p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-(--muted)">
               {meta.description}
             </p>
