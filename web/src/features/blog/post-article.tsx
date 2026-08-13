@@ -104,7 +104,9 @@ export async function PostArticle({
 
           {relatedPosts.length > 0 ? (
             <section className="mt-14 border-t border-(--border) pt-8">
-              <div className="eyebrow">{t('blog.continueOnRadar')}</div>
+              <div className="eyebrow text-(--signal)">
+                {t('blog.continueOnRadar')}
+              </div>
               <div className="mt-5">
                 {relatedPosts.map((related, index) => {
                   const relatedTopic = related.topics[0]
@@ -141,7 +143,7 @@ export async function PostArticle({
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div className="border-t border-(--border) pt-4">
-            <div className="eyebrow">{t('blog.sources')}</div>
+            <div className="eyebrow text-(--signal)">{t('blog.sources')}</div>
             <div className="mt-5 space-y-3">
               {post.sources.map((source, index) => {
                 const statusKey = sourceStatusLabelKey(source)

@@ -18,7 +18,7 @@
     "eyebrow": "EN EL RADAR AHORA",
     "title": "En el radar ahora",
     "description": "Cambios en tecnología que pasaron el filtro de NexSift y merecen tu atención.",
-    "definition": "Una señal es un cambio relevante, verificado y puesto en contexto.",
+    "definition": "Una <sinal>señal</sinal> es un cambio relevante, verificado y puesto en contexto.",
     "viewAll": "Ver todas las señales",
     "newBadge": "Nuevo",
     "sourcesCount": "{count, plural, one {# fuente} other {# fuentes}}"

@@ -59,16 +59,29 @@ export default async function AboutPage({
                   t('about.criteriaA'),
                   t('about.criteriaB'),
                   t('about.criteriaC'),
-                ].map((criterion, index) => (
-                  <div key={criterion} className="bg-(--background) p-6">
-                    <div className="font-mono text-[10px] text-(--muted)">
-                      0{index + 1}
+                ].map((criterion, index) => {
+                  const colonIndex = criterion.indexOf(':')
+
+                  return (
+                    <div key={criterion} className="bg-(--background) p-6">
+                      <div className="font-mono text-[10px] text-(--muted)">
+                        0{index + 1}
+                      </div>
+                      <p className="mt-10 text-base leading-relaxed tracking-[-0.015em]">
+                        {colonIndex === -1 ? (
+                          criterion
+                        ) : (
+                          <>
+                            <span className="font-semibold text-(--signal)">
+                              {criterion.slice(0, colonIndex)}
+                            </span>
+                            {criterion.slice(colonIndex)}
+                          </>
+                        )}
+                      </p>
                     </div>
-                    <p className="mt-10 text-base leading-relaxed tracking-[-0.015em]">
-                      {criterion}
-                    </p>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
 

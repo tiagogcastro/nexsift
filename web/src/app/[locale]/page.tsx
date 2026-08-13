@@ -95,7 +95,11 @@ export default async function HomePage({
                 {t('hero.description')}
               </p>
               <p className="mt-6 max-w-sm font-mono text-[10px] leading-relaxed text-(--muted)">
-                {t('radar.definition')}
+                {t.rich('radar.definition', {
+                  sinal: (chunks) => (
+                    <span className="font-semibold text-(--signal)">{chunks}</span>
+                  ),
+                })}
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-3">
                 <Link
@@ -118,7 +122,7 @@ export default async function HomePage({
             <div className="border border-(--border) bg-(--surface-soft)">
               <div className="flex items-center gap-2 border-b border-(--border) px-5 py-4">
                 <span className="signal-dot" />
-                <span className="eyebrow text-(--foreground)">
+                <span className="eyebrow text-(--signal)">
                   {t('radar.eyebrow')}
                 </span>
               </div>
