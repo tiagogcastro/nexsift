@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
+import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { siteConfig } from '@/config/site'
 import type { AppLocale } from '@/i18n/routing'
@@ -27,6 +28,12 @@ export async function Footer({
             </p>
           </div>
           <div className="flex gap-5 text-sm text-(--muted-strong)">
+            <Link
+              href={`/${locale}/privacy`}
+              className="hover:text-white"
+            >
+              {t('footer.privacy')}
+            </Link>
             <a
               href={siteConfig.githubUrl}
               target="_blank"

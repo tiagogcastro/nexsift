@@ -1,8 +1,10 @@
+import { ArrowUpRight } from 'lucide-react'
 import { hasLocale } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
+import { siteConfig } from '@/config/site'
 import { routing, type AppLocale } from '@/i18n/routing'
 
 export default async function AboutPage({
@@ -58,6 +60,34 @@ export default async function AboutPage({
                     <p className="mt-10 text-lg tracking-[-0.025em]">{principle}</p>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            <div className="mt-16 border-t border-(--border) pt-6">
+              <div className="eyebrow text-(--signal)">{t('about.creatorEyebrow')}</div>
+              <h2 className="mt-6 text-3xl font-medium tracking-[-0.05em] md:text-4xl">
+                {t('about.creatorTitle')}
+              </h2>
+              <p className="mt-5 max-w-3xl text-lg leading-relaxed text-(--muted-strong)">
+                {t('about.creatorBody')}
+              </p>
+              <div className="mt-6 flex gap-5 text-sm text-(--muted-strong)">
+                <a
+                  href={siteConfig.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1 hover:text-white"
+                >
+                  GitHub <ArrowUpRight size={13} />
+                </a>
+                <a
+                  href={siteConfig.linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1 hover:text-white"
+                >
+                  LinkedIn <ArrowUpRight size={13} />
+                </a>
               </div>
             </div>
           </div>
