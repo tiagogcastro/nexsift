@@ -237,6 +237,52 @@ paths:
           description: Invalid publication token
         '404':
           description: Signal not found
+  /posts/{slug}/sources/{index}/replace:
+    post:
+      operationId: replaceSource
+      summary: Replace one source after mechanically validating the new URL
+      description: The new URL is opened and validated by the backend before the replacement is recorded. The original URL stays in the replacement history, so link rot can be distinguished from a source that never existed.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^(ai|development|cloud|devops|security|industry|design)-[a-z0-9]+(-[a-z0-9]+)*-\d{4}-\d{2}-\d{2}$
+        - name: index
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [newUrl, reason]
+              properties:
+                newUrl:
+                  type: string
+                  format: uri
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Updated signal with the replaced source
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '401':
+          description: Invalid publication token
+        '404':
+          description: Signal not found
+        '422':
+          description: Invalid newUrl, missing reason or source index out of range
 components:
   securitySchemes:
     bearerAuth:
@@ -399,6 +445,21 @@ components:
         publishedAt:
           type: string
           format: date-time
+        editorialStatus:
+          type: string
+          enum: [verified, unverified, unknown]
+          description: Editorial assertion that the page sustains the signal. Drafts must send verified plus editoriallyVerifiedAt; the backend never derives it from HTTP status.
+        editoriallyVerifiedAt:
+          type: string
+          format: date-time
+          description: When the editorial flow asserted the page sustains the signal. Required when editorialStatus is verified.
+        firstVerifiedAt:
+          type: string
+          format: date-time
+          description: When this URL was first verified mechanically.
+        verifiedAtPublication:
+          type: boolean
+          description: True when the source was verified immediately before the post was stored.
         lastCheckedAt:
           type: string
           format: date-time
@@ -416,8 +477,28 @@ components:
           description: URL after redirects (equals url when there are none).
         sourceStatus:
           type: string
-          enum: [healthy, redirected, temporarily_unavailable, broken, replaced]
-          description: Health state recorded by the backend.
+          enum: [healthy, redirected, temporarily_unavailable, broken, replaced, blocked]
+          description: Health state recorded by the backend. Blocked means anti-bot 403, not evidence the page is gone.
+        replacements:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceReplacement'
+          description: History of URL replacements for link rot recovery.
+    SourceReplacement:
+      type: object
+      required: [oldUrl, newUrl, replacedAt, reason]
+      properties:
+        oldUrl:
+          type: string
+          format: uri
+        newUrl:
+          type: string
+          format: uri
+        replacedAt:
+          type: string
+          format: date-time
+        reason:
+          type: string
     SourceCheck:
       type: object
       properties:
@@ -457,10 +538,13 @@ components:
           nullable: true
         sourceStatus:
           type: string
-          enum: [healthy, redirected, temporarily_unavailable, broken, replaced]
+          enum: [healthy, redirected, temporarily_unavailable, broken, replaced, blocked]
         checkedAt:
           type: string
           format: date-time
+        needsReplacement:
+          type: boolean
+          description: True when the source is broken or blocked and no validated replacement is recorded yet.
     PostSummary:
       type: object
       required:
