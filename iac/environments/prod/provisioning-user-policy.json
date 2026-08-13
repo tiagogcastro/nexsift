@@ -60,6 +60,7 @@
         "iam:ListAttachedUserPolicies",
         "iam:CreateAccessKey",
         "iam:ListAccessKeys",
+        "iam:GetAccessKeyLastUsed",
         "iam:DeleteAccessKey",
         "iam:UpdateAccessKey"
       ],
