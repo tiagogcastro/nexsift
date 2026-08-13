@@ -2,6 +2,7 @@ import type { APIGatewayProxyEventV2 } from 'aws-lambda'
 import { postSummarySchema } from '@nexsift/schemas/post'
 import { handler } from '../src/publish/handler'
 import { NotFoundError } from '../src/publishing/publish-post'
+import { SourceIndexError } from '../src/publishing/publish-post'
 import { SourceRejectedError } from '../src/publishing/validate-source'
 import { getIndex, getPost } from '../src/storage/s3'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
@@ -40,10 +41,12 @@ vi.mock('../src/publishing/validate-source', async (importOriginal) => {
 import {
   deletePost,
   publishPost,
+  replacePostSource,
 } from '../src/publishing/publish-post'
 
 const mockedPublishPost = vi.mocked(publishPost)
 const mockedDeletePost = vi.mocked(deletePost)
+const mockedReplacePostSource = vi.mocked(replacePostSource)
 const mockedGetIndex = vi.mocked(getIndex)
 const mockedGetPost = vi.mocked(getPost)
 
@@ -379,6 +382,81 @@ describe('POST /audit-sources', () => {
     expect(result.statusCode).toBe(200)
     const body = JSON.parse(result.body ?? '{}') as { checked: number }
     expect(body.checked).toBe(1)
+  })
+})
+
+describe('POST /posts/{slug}/sources/{index}/replace', () => {
+  it('replaces a source and returns the updated post', async () => {
+    const original = makeSummary(
+      'devops-nova-release-2026-08-12',
+      ['devops'],
+      '2026-08-12T10:00:00.000Z',
+    ).sources[0]
+
+    mockedReplacePostSource.mockResolvedValue({
+      ...makeSummary('devops-nova-release-2026-08-12', ['devops'], '2026-08-12T10:00:00.000Z'),
+      content: '## Conteúdo\n\nMais de cem caracteres para o schema de post.',
+      whyItMatters: 'Importa para quem constrói tecnologia.',
+      sources: [
+        {
+          title: original?.title ?? 'Source',
+          publisher: original?.publisher ?? 'Publisher',
+          url: 'https://web.archive.org/web/20260101000000/https://example.com/terraform',
+          sourceStatus: 'replaced',
+          replacements: [
+            {
+              oldUrl: 'https://example.com/terraform',
+              newUrl: 'https://web.archive.org/web/20260101000000/https://example.com/terraform',
+              replacedAt: '2026-08-13T09:00:00.000Z',
+              reason: 'link rot',
+            },
+          ],
+        },
+      ],
+    })
+
+    const result = await handler(
+      makeEvent({
+        requestContext: http('POST', '/posts/devops-nova-release-2026-08-12/sources/0/replace'),
+        body: JSON.stringify({
+          newUrl: 'https://web.archive.org/web/20260101000000/https://example.com/terraform',
+          reason: 'link rot',
+        }),
+      }),
+    )
+
+    expect(result.statusCode).toBe(200)
+    expect(mockedReplacePostSource).toHaveBeenCalledWith(
+      'devops-nova-release-2026-08-12',
+      0,
+      'https://web.archive.org/web/20260101000000/https://example.com/terraform',
+      'link rot',
+    )
+  })
+
+  it('returns 422 for a bad index', async () => {
+    mockedReplacePostSource.mockRejectedValue(new SourceIndexError(5))
+
+    const result = await handler(
+      makeEvent({
+        requestContext: http('POST', '/posts/devops-nova-release-2026-08-12/sources/5/replace'),
+        body: JSON.stringify({ newUrl: 'https://example.com/new', reason: 'link rot' }),
+      }),
+    )
+
+    expect(result.statusCode).toBe(422)
+  })
+
+  it('returns 422 when newUrl or reason is missing', async () => {
+    const result = await handler(
+      makeEvent({
+        requestContext: http('POST', '/posts/devops-nova-release-2026-08-12/sources/0/replace'),
+        body: JSON.stringify({ newUrl: 'https://example.com/new' }),
+      }),
+    )
+
+    expect(result.statusCode).toBe(422)
+    expect(mockedReplacePostSource).not.toHaveBeenCalled()
   })
 })
 
