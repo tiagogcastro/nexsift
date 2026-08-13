@@ -45,12 +45,24 @@ export default async function PrivacyPage({
 
             <div className="mt-14 space-y-12 border-t border-(--border) pt-8">
               <Section
+                eyebrow={t('privacy.productTitle')}
+                body={t('privacy.productBody')}
+              />
+              <Section
                 eyebrow={t('privacy.collectTitle')}
                 body={t('privacy.collectBody')}
               />
               <Section
+                eyebrow={t('privacy.notCollectTitle')}
+                body={t('privacy.notCollectBody')}
+              />
+              <Section
                 eyebrow={t('privacy.contentTitle')}
                 body={t('privacy.contentBody')}
+              />
+              <Section
+                eyebrow={t('privacy.retentionTitle')}
+                body={t('privacy.retentionBody')}
               />
               <Section
                 eyebrow={t('privacy.rightsTitle')}

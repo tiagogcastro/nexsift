@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { PostSummary } from '@nexsift/schemas/post'
+import { signalTypeSchema, type SignalType } from '@nexsift/schemas/signal-type'
 import type { Topic } from '@nexsift/schemas/topic'
 import { topicOrder } from '@/lib/topics'
 import { LedgerRow } from './ledger-row'
@@ -15,11 +16,15 @@ interface TopicMeta {
 interface ConsoleLabels {
   searchPlaceholder: string
   allTopics: string
+  allTypes: string
   countLabelOne: string
   countLabelOther: string
   loadMore: string
   empty: string
   signalFallback: string
+  relevanceLabel: string
+  newLabel: string
+  sourcesLabel: string
 }
 
 interface LedgerConsoleProps {
@@ -27,7 +32,9 @@ interface LedgerConsoleProps {
   fixedTopic: Topic | undefined
   labels: ConsoleLabels
   topicMeta: Record<Topic, TopicMeta>
+  typeLabels: Record<SignalType, string>
   initialTopic: Topic | undefined
+  initialType: SignalType | undefined
   initialQuery: string | undefined
   pageSize?: number
 }
@@ -37,13 +44,18 @@ export function LedgerConsole({
   fixedTopic,
   labels,
   topicMeta,
+  typeLabels,
   initialTopic,
+  initialType,
   initialQuery,
   pageSize = 20,
 }: LedgerConsoleProps) {
   const router = useRouter()
   const [query, setQuery] = useState(initialQuery ?? '')
   const [topic, setTopic] = useState<Topic | null>(fixedTopic ?? initialTopic ?? null)
+  const [signalType, setSignalType] = useState<SignalType | null>(
+    initialType ?? null,
+  )
   const [visibleCount, setVisibleCount] = useState(pageSize)
 
   function resetPage() {
@@ -62,6 +74,10 @@ export function LedgerConsole({
         params.set('topic', topic)
       }
 
+      if (signalType) {
+        params.set('type', signalType)
+      }
+
       const basePath = fixedTopic ? `/topics/${fixedTopic}` : '/blog'
       const queryString = params.toString()
 
@@ -71,7 +87,7 @@ export function LedgerConsole({
     }, 250)
 
     return () => clearTimeout(timeoutId)
-  }, [query, topic, router, fixedTopic])
+  }, [query, topic, signalType, router, fixedTopic])
 
   const counts = useMemo(() => {
     const result = {} as Record<Topic, number>
@@ -94,6 +110,10 @@ export function LedgerConsole({
           return false
         }
 
+        if (signalType && post.signalType !== signalType) {
+          return false
+        }
+
         if (!normalizedQuery) {
           return true
         }
@@ -107,7 +127,7 @@ export function LedgerConsole({
           new Date(second.publishedAt).getTime() -
           new Date(first.publishedAt).getTime(),
       )
-  }, [posts, query, topic])
+  }, [posts, query, topic, signalType])
 
   const visiblePosts = filtered.slice(0, visibleCount)
 
@@ -167,6 +187,40 @@ export function LedgerConsole({
         </div>
       ) : null}
 
+      <div className="flex flex-wrap items-center gap-2 border-b border-(--border) py-4">
+        <button
+          type="button"
+          onClick={() => {
+            setSignalType(null)
+            resetPage()
+          }}
+          className={`rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
+            signalType === null
+              ? 'bg-(--signal) text-black'
+              : 'text-(--muted) hover:text-(--foreground)'
+          }`}
+        >
+          {labels.allTypes}
+        </button>
+        {signalTypeSchema.options.map((typeKey) => (
+          <button
+            key={typeKey}
+            type="button"
+            onClick={() => {
+              setSignalType(signalType === typeKey ? null : typeKey)
+              resetPage()
+            }}
+            className={`rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
+              signalType === typeKey
+                ? 'bg-(--signal) text-black'
+                : 'text-(--muted) hover:text-(--foreground)'
+            }`}
+          >
+            {typeLabels[typeKey]}
+          </button>
+        ))}
+      </div>
+
       {visiblePosts.length > 0 ? (
         <div>
           {visiblePosts.map((post, index) => {
@@ -181,6 +235,10 @@ export function LedgerConsole({
                 post={post}
                 index={index}
                 shortLabel={shortLabel}
+                signalTypeLabel={typeLabels[post.signalType]}
+                relevanceLabel={labels.relevanceLabel}
+                newLabel={labels.newLabel}
+                sourcesLabel={labels.sourcesLabel}
                 fallbackLabel={labels.signalFallback}
               />
             )

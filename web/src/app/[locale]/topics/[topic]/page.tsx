@@ -1,4 +1,5 @@
 import { topicSchema, type Topic } from '@nexsift/schemas/topic'
+import { signalTypeSchema, type SignalType } from '@nexsift/schemas/signal-type'
 import { getTranslations } from 'next-intl/server'
 import { notFound, redirect } from 'next/navigation'
 import { Footer } from '@/components/footer'
@@ -15,10 +16,10 @@ export default async function TopicPage({
   searchParams,
 }: {
   params: Promise<{ locale: string; topic: string }>
-  searchParams: Promise<{ q?: string }>
+  searchParams: Promise<{ q?: string; type?: string }>
 }) {
   const { locale, topic: rawTopic } = await params
-  const { q } = await searchParams
+  const { q, type: typeParam } = await searchParams
 
   if (locale !== 'pt-BR') {
     redirect(`/topics/${rawTopic}`)
@@ -41,6 +42,10 @@ export default async function TopicPage({
       return [topicKey, { label: topicKeyMeta.label, shortLabel: topicKeyMeta.shortLabel }]
     }),
   ) as Record<Topic, { label: string; shortLabel: string }>
+  const typeResult = typeParam ? signalTypeSchema.safeParse(typeParam) : null
+  const typeMeta = Object.fromEntries(
+    signalTypeSchema.options.map((type) => [type, t(`signalTypes.${type}`)]),
+  ) as Record<SignalType, string>
 
   return (
     <>
@@ -66,11 +71,14 @@ export default async function TopicPage({
               topic={topic}
             />
             <div className="eyebrow text-(--topic-color)">
-              {t('topicPage.frequency')} / {meta.shortLabel}
+              {t('topicPage.frequency')}
             </div>
-            <h1 className="mt-5 text-[clamp(3.5rem,7vw,7rem)] font-medium leading-[0.9] tracking-[-0.075em]">
+            <h1 className="mt-5 text-[clamp(2.8rem,5.5vw,5rem)] font-medium leading-[0.9] tracking-[-0.06em]">
               {meta.label}
             </h1>
+            <p className="mt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-(--topic-color)">
+              {t('topicPage.radarTitle', { topic: meta.shortLabel })}
+            </p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-(--muted)">
               {meta.description}
             </p>
@@ -84,14 +92,20 @@ export default async function TopicPage({
             labels={{
               searchPlaceholder: t('console.searchPlaceholder'),
               allTopics: t('console.allTopics'),
+              allTypes: t('console.allTypes'),
               countLabelOne: t('console.countLabelOne'),
               countLabelOther: t('console.countLabelOther'),
               loadMore: t('console.loadMore'),
               empty: t('console.empty'),
               signalFallback: t('console.signalFallback'),
+              relevanceLabel: t('article.relevance'),
+              newLabel: t('radar.newBadge'),
+              sourcesLabel: t('radar.sourcesCount', { count: 1 }),
             }}
             topicMeta={topicMeta}
+            typeLabels={typeMeta}
             initialTopic={topic}
+            initialType={typeResult?.success ? (typeResult.data as SignalType) : undefined}
             initialQuery={q}
           />
         </div>

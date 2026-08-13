@@ -10,82 +10,112 @@
     "eyebrow": "Inteligencia tecnológica para quienes construyen y operan",
     "titleA": "Menos ruido.",
     "titleB": "Más señal.",
-    "description": "NexSift es una inteligencia tecnológica directa al grano. Filtra, verifica y contextualiza lo que importa en IA, cloud, desarrollo, DevOps y mercado tech, con cada señal rastreable hasta la fuente oficial.",
-    "primary": "Ver señales",
-    "secondary": "Ver el proceso"
+    "description": "NexSift filtra cambios relevantes en tecnología y muestra qué cambió, por qué importa y qué observar. Sin feed infinito: una selección corta, con contexto y fuentes verificadas.",
+    "primary": "Ver todas las señales",
+    "secondary": "Cómo funciona"
   },
-  "signal": {
-    "label": "RADAR ACTUAL",
-    "selected": "{count, plural, one {señal seleccionada} other {señales seleccionadas}}",
-    "topics": "{count, plural, one {tópico con contenido} other {tópicos con contenido}}"
-  },
-  "latest": {
-    "eyebrow": "LEDGER DE SEÑALES",
-    "title": "Lo que merece tu atención ahora",
-    "description": "No es un portal de noticias. Es una selección corta de señales con contexto suficiente y fuente rastreable."
+  "radar": {
+    "eyebrow": "EN EL RADAR AHORA",
+    "title": "En el radar ahora",
+    "description": "Cambios en tecnología que pasaron el filtro de NexSift y merecen tu atención.",
+    "definition": "Una <sinal>señal</sinal> es un cambio relevante, verificado y puesto en contexto.",
+    "viewAll": "Ver todas las señales",
+    "newBadge": "Nuevo",
+    "sourcesCount": "{count, plural, one {fuente} other {fuentes}}"
   },
   "topics": {
-    "eyebrow": "TÓPICOS",
+    "eyebrow": "TEMAS",
     "title": "Siete áreas, un solo radar",
-    "description": "Los tópicos son las áreas de cobertura del radar. Las señales son las unidades que NexSift publica en cada tópico. La selección sigue restringida a lo que tiene impacto técnico o profesional real.",
+    "description": "Cada tema es una lente sobre lo que está cambiando. Elige un área para ver lo que merece atención en ella.",
     "count": "{count, plural, one {# señal} other {# señales}}"
   },
+  "why": {
+    "eyebrow": "POR QUÉ EXISTE",
+    "titleA": "La tecnología produce mucho ruido.",
+    "titleB": "Quedan las señales.",
+    "description": "Feeds, newsletters y alertas compiten por tu atención. NexSift no intenta que consumas más: intenta que necesites leer menos para entender mejor lo que cambió."
+  },
   "process": {
-    "eyebrow": "FLUJO",
-    "title": "Curaduría antes de publicar",
-    "description": "La IA investiga, organiza y revisa. Cada señal publicada permanece rastreable hasta sus fuentes.",
-    "research": "Investigar",
-    "filter": "Filtrar",
-    "verify": "Verificar",
-    "context": "Contextualizar",
-    "publish": "Publicar",
-    "rhythm": "Ritmo editorial: siempre actualizado con las novedades de la semana."
+    "eyebrow": "CÓMO FUNCIONA",
+    "title": "No todo lo que pasa merece tu atención.",
+    "description": "NexSift es un tamiz editorial: mucho pasa, casi nada entra. Solo entra al radar lo que cambia una decisión, un riesgo, una oportunidad o el entendimiento.",
+    "steps": [
+      "Mucho pasa",
+      "¿Esto realmente cambió algo?",
+      "¿Hay evidencia?",
+      "¿Tiene consecuencias?",
+      "SEÑAL"
+    ],
+    "scarcity": "La escasez es la propuesta: publicar menos es mejor que bajar el estándar."
   },
   "trust": {
-    "eyebrow": "BASADO EN FUENTES",
-    "title": "IA asistida. Fuentes visibles.",
-    "description": "Cada señal va directa al grano: qué pasó, qué cambió y por qué importa. NexSift no reemplaza la fuente original; apunta al material que sustenta el contenido y separa hecho de interpretación."
+    "eyebrow": "CONFIANZA Y FUENTES",
+    "title": "Fuentes verificadas, no solo citadas.",
+    "description": "Cada señal es rastreable hasta la fuente que la sustenta. Antes de publicar, NexSift reabre y verifica mecánicamente cada URL: la fuente es evidencia, no decoración.",
+    "publicationLabel": "verificadas al publicar",
+    "publicationTooltip": "Porcentaje de fuentes verificadas al momento de la publicación. Toda señal nueva solo se publica cuando el 100% de sus fuentes pasan la verificación. Las señales publicadas antes de esta regla pueden estar por debajo del 100%.",
+    "verifiableLabel": "fuentes verificables ahora",
+    "verifiableTooltip": "Porcentaje de fuentes originales que siguen accesibles y verificables en este momento. Una fuente pudo haberse validado al publicar y luego ser eliminada, movida o quedar temporalmente no disponible.",
+    "topicsLabel": "{count, plural, one {tema en el radar} other {temas en el radar}}"
+  },
+  "explore": {
+    "eyebrow": "CONTINÚA",
+    "title": "Sigue lo que cambia",
+    "fullRadar": "Todas las señales",
+    "fullRadarBody": "La lista completa de señales que pasaron el filtro de NexSift.",
+    "topicsLink": "Temas",
+    "topicsLinkBody": "Cada área como una lente propia.",
+    "aboutLink": "Sobre",
+    "aboutLinkBody": "Filosofía editorial, criterios y metodología."
+  },
+  "signalTypes": {
+    "release": "Release",
+    "risk": "Riesgo",
+    "shift": "Cambio",
+    "research": "Investigación",
+    "industry": "Mercado",
+    "opportunity": "Oportunidad"
   },
   "topicItems": {
     "ai": {
       "label": "Inteligencia Artificial",
       "shortLabel": "IA",
-      "description": "Modelos, agentes, herramientas y cambios prácticos en el ecosistema de IA."
+      "description": "Lo que NexSift observa: modelos, agentes, herramientas y cambios de precio y costo que alteran cómo se construye IA."
     },
     "development": {
       "label": "Desarrollo",
       "shortLabel": "DEV",
-      "description": "Frameworks, runtimes, plataformas y prácticas de ingeniería de software."
+      "description": "Lo que NexSift observa: frameworks, runtimes y lenguajes, con releases, breaking changes y prácticas que cambian la ingeniería."
     },
     "cloud": {
       "label": "Cloud",
       "shortLabel": "CLOUD",
-      "description": "Infraestructura, servicios administrados, arquitectura y costos en la nube."
+      "description": "Lo que NexSift observa: servicios gestionados, arquitectura y costos, y lo que cambia en la forma de operar en la nube."
     },
     "devops": {
       "label": "DevOps",
       "shortLabel": "OPS",
-      "description": "CI/CD, IaC, observabilidad, automatización y operación de sistemas."
+      "description": "Lo que NexSift observa: CI/CD, IaC, observabilidad y automatización que afectan cómo se entregan y operan los sistemas."
     },
     "security": {
       "label": "Seguridad",
       "shortLabel": "SEC",
-      "description": "CVEs, incidentes, cadena de suministro y cambios de seguridad con impacto práctico."
+      "description": "Lo que NexSift observa: CVEs, incidentes y supply chain que exigen acción, parche o atención inmediata."
     },
     "industry": {
-      "label": "Industria y Mercado",
+      "label": "Industria Tech",
       "shortLabel": "IND",
-      "description": "Mercado tech: financiación, adquisiciones, regulación, carrera y movimientos estratégicos."
+      "description": "Lo que NexSift observa: el ecosistema de tecnología, con adquisiciones, layoffs, funding, open source governance, regulación y economía de software, cloud e IA."
     },
     "design": {
       "label": "Diseño",
       "shortLabel": "DES",
-      "description": "Interfaces, sistemas de diseño y experiencia en productos de software."
+      "description": "Lo que NexSift observa: interfaces, sistemas de diseño y experiencia en producto, y lo que cambia en la forma de diseñar."
     }
   },
   "notice": {
-    "short": "Contenido generado con apoyo de IA a partir de fuentes oficiales. Puede contener errores.",
-    "article": "Este texto se produjo con apoyo de IA y se extrae de las fuentes oficiales citadas. Revisa las fuentes antes de tomar decisiones; pueden ocurrir errores.",
+    "short": "Contenido generado con apoyo de IA a partir de fuentes verificadas. Puede contener errores.",
+    "article": "Este texto fue producido con apoyo de IA y se extrae de las fuentes verificadas citadas abajo. Antes de tomar decisiones, revisa las fuentes; pueden ocurrir errores.",
     "sources": "Una fuente puede dejar de existir en la web en cualquier momento. El equipo editorial puede revisar y actualizar la fuente o la señal cuando sea necesario."
   },
   "breadcrumb": {
@@ -94,8 +124,9 @@
     "topics": "Temas"
   },
   "console": {
-    "searchPlaceholder": "Buscar por título, etiqueta o descripción",
+    "searchPlaceholder": "Buscar por título, tag o descripción",
     "allTopics": "Todos",
+    "allTypes": "Todos los tipos",
     "loadMore": "Cargar más señales",
     "empty": "Ninguna señal coincide con los filtros actuales.",
     "signalFallback": "SEÑAL",
@@ -103,16 +134,15 @@
     "countLabelOther": "señales en el radar"
   },
   "topicPage": {
-    "frequency": "TÓPICO",
-    "signalCount": "{count, plural, one {# señal publicada en este tópico} other {# señales publicadas en este tópico}}"
+    "frequency": "TEMA",
+    "radarTitle": "Cambios en {topic} que merecen atención",
+    "signalCount": "{count, plural, one {# señal publicada en este tema} other {# señales publicadas en este tema}}"
   },
   "article": {
-    "metadata": "METADATOS DE LA SEÑAL",
     "published": "Publicado",
     "updated": "Actualizado",
     "reading": "Lectura",
-    "author": "Autor",
-    "authorValue": "NexSift Editorial",
+    "relevance": "Relevancia",
     "sourceStatus": {
       "healthy": "Fuente saludable",
       "redirected": "Redirigida",
@@ -124,25 +154,26 @@
       "unknown": "Verificación histórica desconocida"
     }
   },
-  "radar": {
-    "badge": "CURADO / ACTUAL",
-    "frequencyHeader": "TÓPICO / SEÑAL",
-    "scoreHeader": "NOTA",
-    "verifiableLabel": "fuentes verificables ahora",
-    "verifiableTooltip": "Porcentaje de fuentes originales que siguen accesibles y verificables en este momento. Una fuente puede haber sido validada en la publicación y luego ser eliminada, movida o quedar temporalmente indisponible. Un porcentaje inferior al 100% no significa por sí solo que la señal se publicó sin verificación.",
-    "publicationLabel": "Verificación en la publicación",
-    "publicationTooltip": "Porcentaje de fuentes verificadas en el momento de la publicación. Toda señal nueva solo se publica cuando el 100% de sus fuentes pasa la verificación. Las señales publicadas antes de esta regla pueden estar por debajo del 100%."
-  },
-  "stats": {
-    "signals": "{count, plural, one {señal publicada} other {señales publicadas}}",
-    "avgRelevance": "relevancia media",
-    "topics": "{count, plural, one {tópico con contenido} other {tópicos con contenido}}"
+  "blog": {
+    "eyebrow": "ARCHIVO",
+    "title": "Señales",
+    "description": "Todas las señales que pasaron el filtro de NexSift.",
+    "read": "Leer señal",
+    "whatChanged": "Qué cambió",
+    "why": "Por qué importa",
+    "whatToWatch": "Qué observar ahora",
+    "continueOnRadar": "Continúa en el radar",
+    "sources": "Fuentes verificadas",
+    "minutes": "min de lectura",
+    "signalsPublished": "{count, plural, one {# señal publicada} other {# señales publicadas}}",
+    "metaTitle": "Señales - NexSift",
+    "metaDescription": "Todas las señales de NexSift: cambios relevantes en tecnología, verificados y contextualizados."
   },
   "notFound": {
     "eyebrow": "404 / SIN SEÑAL",
-    "title": "Tópico no encontrado.",
+    "title": "Tema no encontrado.",
     "body": "Esta dirección no apunta a una señal publicada por NexSift.",
-    "back": "Volver al radar"
+    "back": "Volver a las señales"
   },
   "footer": {
     "tagline": "Menos ruido. Más señal.",
@@ -154,12 +185,18 @@
     "eyebrow": "PRIVACIDAD",
     "title": "Política de privacidad",
     "intro": "Esta página explica qué recopila NexSift y cómo se tratan los datos, en conformidad con la LGPD.",
+    "productTitle": "Qué es NexSift",
+    "productBody": "NexSift es un producto editorial de inteligencia tecnológica. No tiene registro, inicio de sesión ni ninguna forma de cuenta; no hay personalización por usuario ni recomendaciones basadas en perfil.",
     "collectTitle": "Datos que recopilamos",
-    "collectBody": "NexSift usa PostHog para medir el uso del sitio con eventos anónimos, como páginas visitadas y clics en fuentes. No hay registro, inicio de sesión, cookies de publicidad ni compartición con terceros. No se recopilan datos personales de identificación.",
-    "contentTitle": "Contenido editorial",
-    "contentBody": "Los posts se producen con apoyo de IA a partir de fuentes públicas oficiales y apuntan a esas fuentes. Antes de tomar decisiones, revise el material original; pueden ocurrir errores.",
-    "rightsTitle": "Sus derechos (LGPD)",
-    "rightsBody": "Puede solicitar acceso, corrección o eliminación de cualquier dato relacionado con usted en cualquier momento, a través del correo de contacto abajo.",
+    "collectBody": "NexSift usa PostHog para medir el uso del sitio con eventos anónimos: páginas visitadas, clics en fuentes externas y acciones de navegación. Los datos son agregados y no te identifican individualmente.",
+    "notCollectTitle": "Lo que no recopilamos",
+    "notCollectBody": "No recopilamos nombre, correo, número de documento, ubicación precisa ni datos de navegación fuera de NexSift. No usamos cookies publicitarias ni compartimos datos con terceros.",
+    "contentTitle": "Contenido editorial y fuentes",
+    "contentBody": "Las señales se producen con apoyo de IA a partir de fuentes públicas verificadas y apuntan a esas fuentes. La verificación es automatizada por el propio sistema y no recopila datos de quienes leen el sitio. Al acceder a enlaces externos, sales de NexSift y quedas sujeto a las políticas de privacidad de los sitios respectivos.",
+    "retentionTitle": "Retención y finalidad",
+    "retentionBody": "Los eventos anónimos se usan solo para entender el uso del producto y mejorar el sitio. No hay perfilado, publicidad dirigida ni venta de datos.",
+    "rightsTitle": "Tus derechos (LGPD)",
+    "rightsBody": "Puedes solicitar acceso, corrección o eliminación de cualquier dato relacionado contigo en cualquier momento, por el correo de contacto abajo.",
     "contactTitle": "Contacto",
     "contactBody": "Dudas o solicitudes: tiagogcastro1@gmail.com",
     "updated": "La versión vigente de esta política es la publicada en esta página."
@@ -168,26 +205,21 @@
     "eyebrow": "SOBRE",
     "title": "Un filtro técnico, no otro feed infinito",
     "body": "NexSift nació para reducir el costo de seguir la tecnología. En lugar de reproducir todo lo publicado, prioriza señales con impacto real para quienes construyen, operan, diseñan o deciden sobre tecnología, con el desarrollo como principal sesgo editorial.",
-    "principleTitle": "Principios editoriales",
-    "principleA": "Fuente antes que opinión",
-    "principleB": "Contexto antes que volumen",
-    "principleC": "Impacto técnico antes que hype",
-    "creatorEyebrow": "DETRÁS DE TODO",
+    "signalTitle": "Qué es una señal",
+    "signalBody": "Una señal es un cambio relevante, verificado y puesto en contexto. No todo lo que pasa es una señal: el cambio debe ser real, tener evidencia y alterar una decisión, un riesgo, una oportunidad o el entendimiento de quienes construyen u operan tecnología.",
+    "criteriaTitle": "Criterios editoriales",
+    "criteriaIntro": "Una señal solo se publica cuando pasa todos estos criterios:",
+    "criteriaA": "Fuente antes que opinión: la evidencia sustenta cada hecho y la fuente se cita.",
+    "criteriaB": "Contexto antes que volumen: publicar menos es mejor que bajar el estándar.",
+    "criteriaC": "Impacto técnico antes que hype: la consecuencia concreta vale más que la novedad llamativa.",
+    "aiTitle": "Uso de IA",
+    "aiBody": "La IA investiga, organiza y redacta con apoyo; NexSift verifica. Ninguna afirmación se publica sin fuente verificada, y el texto apunta al material que la sustenta. Antes de tomar decisiones, revisa las fuentes originales; pueden ocurrir errores.",
+    "relevanceTitle": "Relevancia y confianza",
+    "relevanceBody": "Cada señal recibe una relevancia (cuánto importa para quienes construyen y operan tecnología) y una confianza (la solidez de la evidencia y la interpretación). Solo entran al radar señales con relevancia 6,5 o más y confianza 7 o más.",
+    "methodTitle": "Cómo funciona la curaduría",
+    "methodBody": "El flujo es un tamiz: mucho pasa, casi nada entra. NexSift pregunta si el cambio es real, si hay evidencia y si tiene consecuencias. Lo que queda se convierte en señal, y cada señal termina indicando qué observar a continuación.",
+    "creatorEyebrow": "QUIÉN ESTÁ DETRÁS",
     "creatorTitle": "Creado por quien vive el problema",
-    "creatorBody": "NexSift fue creado por <name>Tiago Castro</name>, desarrollador full stack cloud con título en Análisis y Desarrollo de Sistemas y más de 5 años de mercado construyendo y operando software. La motivación vino del costo de seguir la tecnología: feeds infinitos, hype y poco contexto. NexSift es el filtro que él mismo quería: pocas señales, fuentes verificables y contexto directo sobre lo que cambia para quienes construyen software."
-  },
-  "blog": {
-    "eyebrow": "ARCHIVO",
-    "title": "Señales",
-    "description": "Señales publicadas en portugués, ordenadas por relevancia y actualidad.",
-    "read": "Leer señal",
-    "why": "Por qué importa",
-    "sources": "Fuentes",
-    "related": "Señales relacionadas",
-    "minutes": "min de lectura",
-    "score": "relevancia",
-    "signalsPublished": "{count, plural, one {# señal publicada} other {# señales publicadas}}",
-    "metaTitle": "Señales",
-    "metaDescription": "Señales técnicas de NexSift en portugués."
+    "creatorBody": "NexSift fue creado por <name>Tiago Castro</name>, desarrollador full stack cloud graduado en Análisis y Desarrollo de Sistemas, con más de 5 años de mercado construyendo y operando software. La motivación vino del costo de seguir la tecnología: feeds infinitos, hype y poco contexto. NexSift es el filtro que él mismo quería tener: pocas señales, fuentes verificables y contexto directo sobre lo que cambia para quienes construyen software."
   }
 }

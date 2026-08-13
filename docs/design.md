@@ -18,15 +18,15 @@ NexSift does not copy their layouts. The shared lessons are strong typography, u
 
 ## Core visual idea
 
-The primary editorial primitive is a signal ledger.
+The primary editorial primitive is the signal radar. The hero pairs the value proposition with a live "No radar agora" panel on the right; the archive ("Sinais") lists every published signal; topic pages are specialized radars. Each signal row communicates topic, type, what changed, relevance, date and source count in a dense, terminal-like scan pattern.
 
 Each row communicates:
 
 1. position in the current set
-2. topic
+2. topic and signal type
 3. title and short context
-4. relevance score
-5. publication date
+4. relevance score (auxiliary)
+5. publication date (always visible) and source count
 
 This creates a scan pattern closer to a market terminal, changelog or engineering index than a traditional blog.
 
@@ -77,16 +77,10 @@ Motion should communicate state or navigation:
 
 Avoid background particles, parallax and cinematic page transitions.
 
-## Curation pipeline
+## Curation funnel
 
-The curation process is rendered as an editorial pipeline, not as cards. Desktop shows five numbered nodes in a horizontal flow joined by connector lines; mobile stacks the same nodes vertically. Node fills progress from the surface color toward the signal color via `color-mix`, communicating discovery to publication. The nodes must never look like buttons: no heavy borders, no shadows, no hover affordances.
+The curation process is rendered as an editorial funnel, not a linear pipeline: "Muito acontece" opens wide and each gate question narrows the bar (Isso realmente mudou algo? Há evidência? Tem consequência?) until only "SINAL" remains, in the signal color. The bars are non-interactive: no heavy borders, no shadows, no hover affordances.
 
 ## Article layout
 
-Desktop articles use three information zones:
-
-1. sticky metadata rail
-2. central editorial column
-3. sticky source rail
-
-The source rail keeps traceability visible while reading and makes source grounding part of the interface, not a footnote.
+Signals use a two-zone layout: a single editorial column (topic, type, date; title; "O que mudou"; "Por que importa"; development; "O que observar agora"; "Continue no radar") and a sticky source rail that keeps traceability visible while reading. Metadata is a discreet mono line under the title, not a rail.

@@ -11,6 +11,7 @@ Arquivo de referência para anexar em **Conhecimento** no GPT "NexSift Editor". 
     "description": "Resumo de 1-2 frases sobre o que mudou.",
     "content": "Markdown do sinal completo em pt-BR.",
     "whyItMatters": "Por que isso muda algo para quem constrói, opera, projeta ou decide sobre tecnologia.",
+    "whatToWatch": "O que observar agora: acompanhar o rollout, a adoção, o patch, a migração ou a resposta do ecossistema.",
     "topics": ["security", "cloud"],
     "signalDate": "2026-08-11",
     "signalType": "risk",
@@ -39,7 +40,8 @@ Arquivo de referência para anexar em **Conhecimento** no GPT "NexSift Editor". 
 - `title`: 8 a 140 caracteres.
 - `description`: 30 a 260 caracteres.
 - `whyItMatters`: 30 a 800 caracteres.
-- `content`: markdown em pt-BR, mínimo de 100 caracteres. Sem imagens. Links para as fontes inline no ponto da afirmação, além do array `sources`. Não é necessário ter todos os campos acima do mínimo: densidade, não comprimento. Explique pelo menos uma consequência técnica, operacional, econômica ou estratégica concreta e feche com o que observar agora.
+- `whatToWatch`: 30 a 500 caracteres, obrigatório. O próximo movimento concreto para acompanhar (rollout, adoção, patch, migração, resposta do ecossistema, breaking change). Não repita a `description`.
+- `content`: markdown em pt-BR, mínimo de 100 caracteres. Sem imagens. Links para as fontes inline no ponto da afirmação, além do array `sources`. Não é necessário ter todos os campos acima do mínimo: densidade, não comprimento. Explique pelo menos uma consequência técnica, operacional, econômica ou estratégica concreta. O que observar agora vive no campo estruturado `whatToWatch`, não no markdown.
 - `topics`: 1 a 3, apenas dos valores válidos: `ai`, `development`, `cloud`, `devops`, `security`, `industry`, `design`. O primeiro é o tópico primário e define o slug.
 - `tags`: até 10, em minúsculas, estritamente ligadas ao conteúdo do sinal.
 - `sources`: 1 ou mais; cada um com `title`, `publisher` e `url` obrigatórios; `publishedAt` opcional em ISO 8601. Liste todas as fontes usadas. O `title` deve ser o título real da página.

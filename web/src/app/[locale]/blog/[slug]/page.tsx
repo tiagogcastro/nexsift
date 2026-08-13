@@ -6,7 +6,7 @@ import { Header } from '@/components/header'
 import { siteConfig } from '@/config/site'
 import { PostArticle } from '@/features/blog/post-article'
 import { postAlternates } from '@/lib/alternates'
-import { getPostBySlug } from '@/lib/content'
+import { getPostBySlug, listPosts } from '@/lib/content'
 
 export const dynamic = 'force-dynamic'
 
@@ -65,6 +65,29 @@ export default async function PostPage({
     notFound()
   }
 
+  const allPosts = await listPosts()
+  const primaryTopic = post.topics[0]
+  const relatedPosts = allPosts
+    .filter((candidate) => candidate.slug !== post.slug)
+    .sort((first, second) => {
+      const firstMatches = primaryTopic
+        ? first.topics.includes(primaryTopic)
+        : false
+      const secondMatches = primaryTopic
+        ? second.topics.includes(primaryTopic)
+        : false
+
+      if (firstMatches !== secondMatches) {
+        return firstMatches ? -1 : 1
+      }
+
+      return (
+        new Date(second.publishedAt).getTime() -
+        new Date(first.publishedAt).getTime()
+      )
+    })
+    .slice(0, 4)
+
   const t = await getTranslations()
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -103,7 +126,7 @@ export default async function PostPage({
           __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
         }}
       />
-      <PostArticle post={post} />
+      <PostArticle post={post} relatedPosts={relatedPosts} />
       <Footer
         locale="pt-BR"
         tagline={t('footer.tagline')}

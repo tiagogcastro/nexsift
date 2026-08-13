@@ -46,21 +46,58 @@ export default async function AboutPage({
             </p>
 
             <div className="mt-16 border-t border-(--border) pt-6">
-              <div className="eyebrow">{t('about.principleTitle')}</div>
+              <Section eyebrow={t('about.signalTitle')} body={t('about.signalBody')} />
+            </div>
+
+            <div className="mt-16 border-t border-(--border) pt-6">
+              <div className="eyebrow">{t('about.criteriaTitle')}</div>
+              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-(--muted)">
+                {t('about.criteriaIntro')}
+              </p>
               <div className="mt-6 grid gap-px bg-(--border) md:grid-cols-3">
                 {[
-                  t('about.principleA'),
-                  t('about.principleB'),
-                  t('about.principleC'),
-                ].map((principle, index) => (
-                  <div key={principle} className="bg-(--background) p-6">
-                    <div className="font-mono text-[10px] text-(--muted)">
-                      0{index + 1}
+                  t('about.criteriaA'),
+                  t('about.criteriaB'),
+                  t('about.criteriaC'),
+                ].map((criterion, index) => {
+                  const colonIndex = criterion.indexOf(':')
+
+                  return (
+                    <div key={criterion} className="bg-(--background) p-6">
+                      <div className="font-mono text-[10px] text-(--muted)">
+                        0{index + 1}
+                      </div>
+                      <p className="mt-10 text-base leading-relaxed tracking-[-0.015em]">
+                        {colonIndex === -1 ? (
+                          criterion
+                        ) : (
+                          <>
+                            <span className="font-semibold text-(--signal)">
+                              {criterion.slice(0, colonIndex)}
+                            </span>
+                            {criterion.slice(colonIndex)}
+                          </>
+                        )}
+                      </p>
                     </div>
-                    <p className="mt-10 text-lg tracking-[-0.025em]">{principle}</p>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
+            </div>
+
+            <div className="mt-16 border-t border-(--border) pt-6">
+              <Section eyebrow={t('about.aiTitle')} body={t('about.aiBody')} />
+            </div>
+
+            <div className="mt-16 border-t border-(--border) pt-6">
+              <Section
+                eyebrow={t('about.relevanceTitle')}
+                body={t('about.relevanceBody')}
+              />
+            </div>
+
+            <div className="mt-16 border-t border-(--border) pt-6">
+              <Section eyebrow={t('about.methodTitle')} body={t('about.methodBody')} />
             </div>
 
             <div className="mt-16 border-t border-(--border) pt-6">
@@ -111,5 +148,14 @@ export default async function AboutPage({
         builtBy={t('footer.builtBy')}
       />
     </>
+  )
+}
+
+function Section({ eyebrow, body }: { eyebrow: string; body: string }) {
+  return (
+    <section>
+      <div className="eyebrow text-(--signal)">{eyebrow}</div>
+      <p className="mt-4 max-w-3xl leading-relaxed text-(--muted-strong)">{body}</p>
+    </section>
   )
 }
