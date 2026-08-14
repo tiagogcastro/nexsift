@@ -3,20 +3,18 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { PostSummary } from '@nexsift/schemas/post'
-import { signalTypeSchema, type SignalType } from '@nexsift/schemas/signal-type'
 import type { Topic } from '@nexsift/schemas/topic'
+import { topicIcons } from '@/lib/topic-icons'
 import { topicOrder } from '@/lib/topics'
 import { LedgerRow } from './ledger-row'
 
 interface TopicMeta {
   label: string
-  shortLabel: string
 }
 
 interface ConsoleLabels {
   searchPlaceholder: string
   allTopics: string
-  allTypes: string
   countLabelOne: string
   countLabelOther: string
   loadMore: string
@@ -32,9 +30,7 @@ interface LedgerConsoleProps {
   fixedTopic: Topic | undefined
   labels: ConsoleLabels
   topicMeta: Record<Topic, TopicMeta>
-  typeLabels: Record<SignalType, string>
   initialTopic: Topic | undefined
-  initialType: SignalType | undefined
   initialQuery: string | undefined
   pageSize?: number
 }
@@ -44,18 +40,13 @@ export function LedgerConsole({
   fixedTopic,
   labels,
   topicMeta,
-  typeLabels,
   initialTopic,
-  initialType,
   initialQuery,
   pageSize = 20,
 }: LedgerConsoleProps) {
   const router = useRouter()
   const [query, setQuery] = useState(initialQuery ?? '')
   const [topic, setTopic] = useState<Topic | null>(fixedTopic ?? initialTopic ?? null)
-  const [signalType, setSignalType] = useState<SignalType | null>(
-    initialType ?? null,
-  )
   const [visibleCount, setVisibleCount] = useState(pageSize)
 
   function resetPage() {
@@ -74,10 +65,6 @@ export function LedgerConsole({
         params.set('topic', topic)
       }
 
-      if (signalType) {
-        params.set('type', signalType)
-      }
-
       const basePath = fixedTopic ? `/topics/${fixedTopic}` : '/blog'
       const queryString = params.toString()
 
@@ -87,7 +74,7 @@ export function LedgerConsole({
     }, 250)
 
     return () => clearTimeout(timeoutId)
-  }, [query, topic, signalType, router, fixedTopic])
+  }, [query, topic, router, fixedTopic])
 
   const counts = useMemo(() => {
     const result = {} as Record<Topic, number>
@@ -110,10 +97,6 @@ export function LedgerConsole({
           return false
         }
 
-        if (signalType && post.signalType !== signalType) {
-          return false
-        }
-
         if (!normalizedQuery) {
           return true
         }
@@ -127,7 +110,7 @@ export function LedgerConsole({
           new Date(second.publishedAt).getTime() -
           new Date(first.publishedAt).getTime(),
       )
-  }, [posts, query, topic, signalType])
+  }, [posts, query, topic])
 
   const visiblePosts = filtered.slice(0, visibleCount)
 
@@ -158,7 +141,7 @@ export function LedgerConsole({
               setTopic(null)
               resetPage()
             }}
-            className={`rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
+            className={`flex items-center gap-1.5 rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
               topic === null
                 ? 'bg-(--signal) text-black'
                 : 'text-(--muted) hover:text-(--foreground)'
@@ -166,67 +149,42 @@ export function LedgerConsole({
           >
             {labels.allTopics}
           </button>
-          {topicOrder.map((topicKey) => (
-            <button
-              key={topicKey}
-              type="button"
-              data-topic={topicKey}
-              onClick={() => {
-                setTopic(topic === topicKey ? null : topicKey)
-                resetPage()
-              }}
-              className={`topic-color rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
-                topic === topicKey
-                  ? 'bg-(--topic-color) text-black'
-                  : 'text-(--muted) hover:text-(--topic-color)'
-              }`}
-            >
-              {topicMeta[topicKey].shortLabel} {counts[topicKey] ?? 0}
-            </button>
-          ))}
+          {topicOrder.map((topicKey) => {
+            const TopicIcon = topicIcons[topicKey]
+
+            return (
+              <button
+                key={topicKey}
+                type="button"
+                data-topic={topicKey}
+                onClick={() => {
+                  setTopic(topic === topicKey ? null : topicKey)
+                  resetPage()
+                }}
+                className={`topic-color flex items-center gap-1.5 rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
+                  topic === topicKey
+                    ? 'bg-(--topic-color) text-black'
+                    : 'text-(--muted) hover:text-(--topic-color)'
+                }`}
+              >
+                <TopicIcon
+                  size={11}
+                  strokeWidth={2}
+                  className={topic === topicKey ? undefined : 'text-(--topic-color)'}
+                />
+                {topicMeta[topicKey].label} {counts[topicKey] ?? 0}
+              </button>
+            )
+          })}
         </div>
       ) : null}
-
-      <div className="flex flex-wrap items-center gap-2 border-b border-(--border) py-4">
-        <button
-          type="button"
-          onClick={() => {
-            setSignalType(null)
-            resetPage()
-          }}
-          className={`rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
-            signalType === null
-              ? 'bg-(--signal) text-black'
-              : 'text-(--muted) hover:text-(--foreground)'
-          }`}
-        >
-          {labels.allTypes}
-        </button>
-        {signalTypeSchema.options.map((typeKey) => (
-          <button
-            key={typeKey}
-            type="button"
-            onClick={() => {
-              setSignalType(signalType === typeKey ? null : typeKey)
-              resetPage()
-            }}
-            className={`rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
-              signalType === typeKey
-                ? 'bg-(--signal) text-black'
-                : 'text-(--muted) hover:text-(--foreground)'
-            }`}
-          >
-            {typeLabels[typeKey]}
-          </button>
-        ))}
-      </div>
 
       {visiblePosts.length > 0 ? (
         <div>
           {visiblePosts.map((post, index) => {
             const postTopic = post.topics[0]
-            const shortLabel = postTopic
-              ? topicMeta[postTopic].shortLabel
+            const topicLabel = postTopic
+              ? topicMeta[postTopic].label
               : undefined
 
             return (
@@ -234,8 +192,7 @@ export function LedgerConsole({
                 key={post.slug}
                 post={post}
                 index={index}
-                shortLabel={shortLabel}
-                signalTypeLabel={typeLabels[post.signalType]}
+                topicLabel={topicLabel}
                 relevanceLabel={labels.relevanceLabel}
                 newLabel={labels.newLabel}
                 sourcesLabel={labels.sourcesLabel}

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { Layers, Radar, Route, User } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { topicSchema, type Topic } from '@nexsift/schemas/topic'
 
@@ -69,14 +70,14 @@ export function NavLinks({
         href="/blog"
         className={`${linkClass} ${isBlog ? activeClass : inactiveClass}`}
       >
-        {isBlog ? <ActiveDot topic={activeTopic} /> : null}
+        {isBlog ? <ActiveDot topic={activeTopic} /> : <Radar size={14} strokeWidth={1.8} />}
         {labels.blog}
       </Link>
       <Link
         href={topicsPath}
         className={`${linkClass} ${isTopics ? activeClass : inactiveClass}`}
       >
-        {isTopics ? <ActiveDot topic={activeTopic} /> : null}
+        {isTopics ? <ActiveDot topic={activeTopic} /> : <Layers size={14} strokeWidth={1.8} />}
         {labels.topics}
       </Link>
       <Link
@@ -84,13 +85,14 @@ export function NavLinks({
         onClick={(event) => scrollToHash(event.currentTarget.getAttribute('href') ?? '')}
         className={`${linkClass} ${inactiveClass}`}
       >
+        <Route size={14} strokeWidth={1.8} />
         {labels.process}
       </Link>
       <Link
         href={`/${locale}/about`}
         className={`${linkClass} ${isAbout ? activeClass : inactiveClass}`}
       >
-        {isAbout ? <ActiveDot topic={undefined} /> : null}
+        {isAbout ? <ActiveDot topic={undefined} /> : <User size={14} strokeWidth={1.8} />}
         {labels.about}
       </Link>
     </nav>

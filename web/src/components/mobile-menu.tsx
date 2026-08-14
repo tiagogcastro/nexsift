@@ -1,7 +1,7 @@
 'use client'
 
 import { topicSchema, type Topic } from '@nexsift/schemas/topic'
-import { Menu, X } from 'lucide-react'
+import { Layers, Menu, Radar, Route, User, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -84,7 +84,7 @@ export function MobileMenu({ locale, labels }: MobileMenuProps) {
               onClick={close}
               className={`${itemClass} ${isBlog ? 'text-(--foreground)' : 'text-(--muted-strong)'}`}
             >
-              {isBlog ? <ActiveDot topic={activeTopic} /> : null}
+              {isBlog ? <ActiveDot topic={activeTopic} /> : <Radar size={16} strokeWidth={1.8} />}
               {labels.blog}
             </Link>
             <Link
@@ -92,7 +92,7 @@ export function MobileMenu({ locale, labels }: MobileMenuProps) {
               onClick={close}
               className={`${itemClass} ${isTopics ? 'text-(--foreground)' : 'text-(--muted-strong)'}`}
             >
-              {isTopics ? <ActiveDot topic={activeTopic} /> : null}
+              {isTopics ? <ActiveDot topic={activeTopic} /> : <Layers size={16} strokeWidth={1.8} />}
               {labels.topics}
             </Link>
             <Link
@@ -103,6 +103,7 @@ export function MobileMenu({ locale, labels }: MobileMenuProps) {
               }}
               className={`${itemClass} text-(--muted-strong)`}
             >
+              <Route size={16} strokeWidth={1.8} />
               {labels.process}
             </Link>
             <Link
@@ -110,7 +111,7 @@ export function MobileMenu({ locale, labels }: MobileMenuProps) {
               onClick={close}
               className={`${itemClass} ${isAbout ? 'text-(--foreground)' : 'text-(--muted-strong)'}`}
             >
-              {isAbout ? <ActiveDot topic={undefined} /> : null}
+              {isAbout ? <ActiveDot topic={undefined} /> : <User size={16} strokeWidth={1.8} />}
               {labels.about}
             </Link>
             <div className="p-5">

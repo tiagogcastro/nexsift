@@ -11,6 +11,7 @@
     "titleA": "Menos ruído.",
     "titleB": "Mais sinal.",
     "description": "O NexSift filtra mudanças relevantes em tecnologia e mostra o que mudou, por que importa e o que observar. Sem feed infinito: uma seleção curta, com contexto e fontes verificadas.",
+    "pain": "Acompanhar tecnologia virou um trabalho de filtragem: <b>quanto mais você lê</b>, menos entende, e <b>ninguém verifica</b> o que circula.",
     "primary": "Ver todos os sinais",
     "secondary": "Como funciona"
   },
@@ -20,6 +21,7 @@
     "description": "Mudanças em tecnologia que passaram pelo filtro do NexSift e merecem sua atenção.",
     "definition": "Um <sinal>sinal</sinal> é uma mudança relevante, verificada e colocada em contexto.",
     "viewAll": "Ver todos os sinais",
+    "viewAllCount": "Ver todos os {count, plural, one {# sinal} other {# sinais}}",
     "newBadge": "Novo",
     "sourcesCount": "{count, plural, one {fonte} other {fontes}}"
   },
@@ -56,7 +58,8 @@
     "publicationTooltip": "Percentual de fontes que foram verificadas no momento da publicação. Todo novo sinal só é publicado quando 100% das suas fontes passam na verificação. Sinais publicados antes dessa regra entrar em vigor podem ficar abaixo de 100%.",
     "verifiableLabel": "fontes verificáveis agora",
     "verifiableTooltip": "Percentual de fontes originais que continuam acessíveis e verificáveis neste momento. Uma fonte pode ter sido validada na publicação e depois ser removida, movida ou ficar temporariamente indisponível.",
-    "topicsLabel": "{count, plural, one {tópico no radar} other {tópicos no radar}}"
+    "topicsLabel": "{count, plural, one {tópico no radar} other {tópicos no radar}}",
+    "signalsLabel": "{count, plural, one {sinal no radar} other {sinais no radar}}"
   },
   "explore": {
     "eyebrow": "CONTINUE",
@@ -143,6 +146,8 @@
     "updated": "Atualizado",
     "reading": "Leitura",
     "relevance": "Relevância",
+    "byline": "Por",
+    "bylineRole": "Criador do NexSift",
     "sourceStatus": {
       "healthy": "Fonte saudável",
       "redirected": "Redirecionada",
@@ -178,6 +183,8 @@
   "footer": {
     "tagline": "Menos ruído. Mais sinal.",
     "builtBy": "Criado por Tiago Castro",
+    "product": "Produto",
+    "contact": "Contato",
     "rights": "NexSift",
     "privacy": "Privacidade"
   },
