@@ -1,6 +1,8 @@
 import { hasLocale } from 'next-intl'
-import { setRequestLocale } from 'next-intl/server'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { LeadModalProvider } from '@/features/lead/lead-modal-provider'
 import { routing } from '@/i18n/routing'
 
 export function generateStaticParams() {
@@ -21,6 +23,11 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(locale)
+  const messages = await getMessages()
 
-  return children
+  return (
+    <NextIntlClientProvider messages={messages}>
+      <LeadModalProvider>{children}</LeadModalProvider>
+    </NextIntlClientProvider>
+  )
 }

@@ -5,6 +5,7 @@ import { Brand } from './brand'
 import { LocaleSwitcher } from './locale-switcher'
 import { MobileMenu } from './mobile-menu'
 import { NavLinks } from './nav-links'
+import { LeadModalTrigger } from '@/features/lead/lead-modal-trigger'
 
 interface HeaderLabels {
   blog: string
@@ -30,6 +31,7 @@ export function Header({
 
         <div className="flex items-center gap-3">
           <LocaleSwitcher locale={locale} />
+          <LeadModalTrigger variant="header" />
           <MobileMenu locale={locale} labels={labels} />
           <Link
             href="/blog"

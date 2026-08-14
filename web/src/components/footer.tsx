@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { siteConfig } from '@/config/site'
+import { LeadModalTrigger } from '@/features/lead/lead-modal-trigger'
 import type { AppLocale } from '@/i18n/routing'
 import { Brand } from './brand'
 
@@ -23,7 +24,7 @@ export async function Footer({
   return (
     <footer className="border-t border-(--border) pb-10">
       <div className="page-shell pt-12">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr] lg:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr] lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div className="space-y-4">
             <Brand locale={locale} />
             <p className="max-w-sm text-sm text-(--muted)">{tagline}</p>
@@ -97,6 +98,16 @@ export async function Footer({
                 </Link>
               </li>
             </ul>
+          </div>
+
+          <div>
+            <div className="eyebrow">{t('footer.updates')}</div>
+            <p className="mt-4 max-w-xs text-sm text-(--muted-strong)">
+              {t('footer.updatesBody')}
+            </p>
+            <div className="mt-5">
+              <LeadModalTrigger variant="footer" />
+            </div>
           </div>
         </div>
         <div className="mt-10 border-t border-(--border) pt-5">

@@ -71,6 +71,7 @@ Goal: automate only after the product and editorial process are proven.
 ## Future non-core items
 
 - terms of use page
+- lead email digest (needs a sender domain and the ESP integration, see `docs/leads.md`)
 - Vercel data cache purge webhook on publish (when freshness beyond the 10 min TTL matters)
 - daily discovery (Scout) feeding a candidate pool (statuses discovered/verified/rejected/published/stale)
 - relations between signals
