@@ -35,7 +35,7 @@ export function LedgerRow({
       key={post.slug}
       href={`/blog/${post.slug}`}
       data-topic={topic}
-      className="signal-ledger-row topic-color"
+      className={`signal-ledger-row topic-color ${compact ? 'ledger-row-compact' : ''}`}
     >
       <span className="font-mono text-[11px] text-(--muted)">
         {String(index + 1).padStart(2, '0')}

@@ -266,6 +266,22 @@ button:not(:disabled),
     gap: 0.6rem;
     padding-block: 1.1rem;
   }
+
+  .ledger-row-compact {
+    min-height: 4.75rem;
+    gap: 0.5rem;
+    padding-block: 0.7rem;
+  }
+
+  .ledger-row-compact > div:nth-child(2) {
+    padding-block: 0.45rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .radar-panel .signal-ledger-row:nth-child(n + 3) {
+    display: none;
+  }
 }
 
 .topic-chip {
