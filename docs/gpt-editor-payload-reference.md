@@ -9,7 +9,7 @@ Arquivo de referência embutido na ferramenta `editorialInstructions` do connect
   "post": {
     "title": "Título claro e direto do sinal",
     "description": "Resumo de 1-2 frases sobre o que mudou.",
-    "content": "Markdown do sinal completo em pt-BR.",
+    "content": "Markdown do sinal completo em pt-BR. Imagens inline (`![alt](url)`) podem ser usadas no ponto exato em que ajudam a leitura: o backend baixa, valida e guarda cada uma, reescrevendo o markdown para a cópia local. Ex.: `![Diagrama da migração](https://exemplo.com/diagrama.png)`.",
     "whyItMatters": "Por que isso muda algo para quem constrói, opera, projeta ou decide sobre tecnologia.",
     "whatToWatch": "O que observar agora: acompanhar o rollout, a adoção, o patch, a migração ou a resposta do ecossistema.",
     "topics": ["security", "cloud"],
@@ -17,6 +17,11 @@ Arquivo de referência embutido na ferramenta `editorialInstructions` do connect
     "signalType": "risk",
     "depth": "practical",
     "tags": ["openssl", "cve"],
+    "coverImage": {
+      "url": "https://www.openssl.org/blog/openssl-3.5-release.png",
+      "alt": "Visão geral das mudanças do OpenSSL 3.5",
+      "caption": "Fonte: blog oficial do OpenSSL"
+    },
     "sources": [
       {
         "title": "Título exato da fonte",
@@ -41,7 +46,8 @@ Arquivo de referência embutido na ferramenta `editorialInstructions` do connect
 - `description`: 30 a 260 caracteres.
 - `whyItMatters`: 30 a 800 caracteres.
 - `whatToWatch`: 30 a 500 caracteres, obrigatório. O próximo movimento concreto para acompanhar (rollout, adoção, patch, migração, resposta do ecossistema, breaking change). Não repita a `description`.
-- `content`: markdown em pt-BR, mínimo de 100 caracteres. Sem imagens. Links para as fontes inline no ponto da afirmação, além do array `sources`. Não é necessário ter todos os campos acima do mínimo: densidade, não comprimento. Explique pelo menos uma consequência técnica, operacional, econômica ou estratégica concreta. O que observar agora vive no campo estruturado `whatToWatch`, não no markdown.
+- `content`: markdown em pt-BR, mínimo de 100 caracteres. Imagens inline com `![alt](url)` são permitidas e renderizadas no ponto exato em que aparecem no texto: use-as para ilustrar no meio do sinal (diagrama, gráfico, screenshot). Cada imagem recebe a mesma validação da capa (ver `coverImage` abaixo) e o backend reescreve o markdown para uma cópia local no bucket; falha em qualquer uma rejeita a publicação com `422` `Cover image rejected` e o motivo (incluindo a URL). Links para as fontes inline no ponto da afirmação, além do array `sources`. Não é necessário ter todos os campos acima do mínimo: densidade, não comprimento. Explique pelo menos uma consequência técnica, operacional, econômica ou estratégica concreta. O que observar agora vive no campo estruturado `whatToWatch`, não no markdown.
+- `coverImage` (opcional, recomendada): a imagem de abertura, renderizada acima do "O que mudou". Use quando uma imagem forte merece abrir o sinal; se a imagem ilustrar apenas um ponto do texto, prefira colocá-la inline no `content`. Objeto com `url`, `alt` (1-200 caracteres, obrigatório) e `caption` (até 300, opcional). A `url` deve ser a de uma imagem aberta com sucesso em uma das páginas de fonte do sinal (diagrama, gráfico ou screenshot que ilustre o sinal; nunca logotipo genérico da empresa). O backend baixa a imagem na publicação, valida e guarda uma cópia no bucket: formatos aceitos jpeg, png, webp, avif e gif, máximo 5MB, sem SVG. Se o download ou a validação falhar, a publicação é rejeitada com `422` `Cover image rejected` e o motivo: corrija a URL ou republique sem a capa. Para reutilizar imagens, prefira aquelas da própria página da fonte.
 - `topics`: 1 a 3, apenas dos valores válidos: `ai`, `development`, `cloud`, `devops`, `security`, `industry`, `design`. O primeiro é o tópico primário e define o slug.
 - `tags`: até 10, em minúsculas, estritamente ligadas ao conteúdo do sinal.
 - `sources`: 1 ou mais; cada um com `title`, `publisher` e `url` obrigatórios; `publishedAt` opcional em ISO 8601. Liste todas as fontes usadas. O `title` deve ser o título real da página.
@@ -67,7 +73,7 @@ A Lambda valida o payload com Zod (schema `postDraftSchema`), aplica os gates ed
 - `400`: JSON malformado.
 - `401`: token inválido.
 - `404`: sinal não encontrado (em `getPost` e `deletePost`).
-- `422`: payload inválido, gate não atendido ou `Source verification failed` com a lista de fontes rejeitadas (corrija e tente uma vez; se falhar de novo, descarte).
+- `422`: payload inválido, gate não atendido, `Source verification failed` com a lista de fontes rejeitadas ou `Cover image rejected` com o motivo (corrija e tente uma vez; se falhar de novo, descarte ou publique sem a capa).
 - `500`: falha de publicação.
 
 ## Endpoints

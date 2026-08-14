@@ -83,7 +83,7 @@ server.registerTool(
   async ({ post }) => {
     const { status, text } = await callApi('/', {
       method: 'POST',
-      body: JSON.stringify(post),
+      body: JSON.stringify({ post }),
     })
     return toolResult(status, text)
   },

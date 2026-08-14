@@ -19,6 +19,7 @@ import {
   validateSourceUrl,
 } from '../publishing/validate-source'
 import { auditAllSources } from '../publishing/audit-sources'
+import { ImageRejectedError } from '../publishing/fetch-image'
 
 const defaultRecentLimit = 30
 const maxRecentLimit = 100
@@ -168,6 +169,13 @@ export async function handler(
       return response(422, {
         error: 'Source verification failed',
         issues: error.failures,
+      })
+    }
+
+    if (error instanceof ImageRejectedError) {
+      return response(422, {
+        error: 'Cover image rejected',
+        reason: error.reason,
       })
     }
 

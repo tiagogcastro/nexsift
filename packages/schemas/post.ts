@@ -10,6 +10,24 @@ export const signalSlugRegex = new RegExp(
 
 // Zod 4 forbids .extend() and .pick() on object schemas that carry
 // refinements, so the refinements attach to plain base schemas.
+export const coverImageDraftSchema = z.object({
+  url: z.url(),
+  alt: z.string().min(1).max(200),
+  caption: z.string().max(300).optional(),
+})
+
+// The stored cover image is a snapshot: the backend downloads the image at
+// publication time and keeps a copy in the content bucket, so the site never
+// hotlinks the source host.
+export const coverImageSchema = z.object({
+  objectKey: z.string().min(1),
+  sourceUrl: z.url(),
+  contentType: z.string().min(1),
+  alt: z.string().min(1).max(200),
+  caption: z.string().max(300).optional(),
+  checkedAt: z.iso.datetime(),
+})
+
 const draftFields = {
   slug: z.string().min(3).optional(),
   title: z.string().min(8).max(140),
@@ -26,6 +44,7 @@ const draftFields = {
   relevanceScore: z.number().min(0).max(10),
   confidenceScore: z.number().min(0).max(10),
   featured: z.boolean().optional(),
+  coverImage: coverImageDraftSchema.optional(),
 }
 
 const draftBaseSchema = z.object(draftFields)
@@ -55,6 +74,7 @@ const postFieldsSchema = draftBaseSchema
     locale: z.literal('pt-BR'),
     whatToWatch: z.string().min(30).max(500).optional(),
     sources: z.array(verifiedPostSourceSchema).min(1),
+    coverImage: coverImageSchema.optional(),
   })
 
 export const postSchema = postFieldsSchema.refine(
@@ -92,3 +112,5 @@ export const postIndexSchema = z.array(postSummarySchema)
 export type PostDraft = z.infer<typeof postDraftSchema>
 export type Post = z.infer<typeof postSchema>
 export type PostSummary = z.infer<typeof postSummarySchema>
+export type CoverImageDraft = z.infer<typeof coverImageDraftSchema>
+export type CoverImage = z.infer<typeof coverImageSchema>

@@ -75,7 +75,7 @@ O contrato completo, o exemplo de payload e os endpoints estão no anexo `gpt-ed
 
 - Sem `slug` no payload: o backend gera `{topic-primario}-{titulo-em-slug}-{signalDate}` (título até 40 caracteres). Mesmo slug = mesmo sinal (atualiza, não duplica).
 - Antes de publicar, chame `getPost` com o slug previsto. Se existir, é o mesmo sinal: atualize só com novidade material (beta virou GA, incidente ganhou root cause, CVE ganhou patch, rollout pausado, preço mudou, correção oficial, disponibilidade mudou). Nunca atualize só porque releu.
-- `title` 8-140; `description` 30-260; `whyItMatters` 30-800; `whatToWatch` 30-500 (obrigatório: o próximo movimento concreto para acompanhar, sem repetir a `description`); `content` markdown pt-BR mínimo 100 caracteres, sem imagens, links inline.
+- `title` 8-140; `description` 30-260; `whyItMatters` 30-800; `whatToWatch` 30-500 (obrigatório: o próximo movimento concreto para acompanhar, sem repetir a `description`); `content` markdown pt-BR mínimo 100 caracteres, com imagens inline permitidas (ver seção "Imagens no sinal"), links inline; `coverImage` opcional (ver seção própria).
 - `topics` 1-3 dos 7 oficiais; `tags` até 10 minúsculas; `sources` 1+ (title, publisher, url obrigatórios). Use mais de uma fonte quando fatos distintos vierem de páginas primárias diferentes (anúncio + changelog + release, por exemplo); cada URL é verificada individualmente no backend.
 - Não invente nomes, versões, datas, valores ou números.
 - Mais completo não significa prolixo: sem história genérica da empresa, definições básicas para leitor tech, contexto enciclopédico, repetição da `description`, frases de preenchimento ou previsões especulativas. O objetivo é densidade, não comprimento.
@@ -95,11 +95,26 @@ Se o sinal só repete o anúncio da empresa, não está pronto.
 4. Identifique duplicidades com sinais publicados.
 5. Classifique tópico, `signalType`, `depth`; calcule os scores.
 6. Compare os candidatos e selecione os melhores. Nunca reduza o gate para preencher espaço.
-7. DATA CHECK e redija cada sinal em pt-BR.
+7. DATA CHECK e redija cada sinal em pt-BR; escolha as imagens seguindo a seção "Imagens no sinal" (capa e/ou inline no ponto exato).
 8. Autocrítica: é hype? A fonte sustenta? Novidade real? Linguagem precisa? Contrato respeitado? Qualidade final? Máximo 2 rodadas por sinal.
 9. `getPost` para o slug previsto de cada aprovado.
 10. Revalide exatamente cada `sources[].url` (via `validateSource`) imediatamente antes de publicar.
 11. Publique os aprovados e apresente o relatório editorial.
+
+## Imagens no sinal
+
+- Imagens são opcionais e nunca obrigatórias: publique sem imagem quando nenhuma página de fonte tiver uma que acrescente informação. Imagem decorativa ou logo genérico é pior que imagem nenhuma.
+- Dois lugares possíveis, decididos por você:
+  - `coverImage`: abertura do sinal, renderizada acima do "O que mudou". Use quando uma imagem forte abre bem a leitura (ex.: gráfico central do post, screenshot do produto).
+  - Inline no `content` (`![alt](url)`): o ponto exato do texto em que a imagem ajuda (ex.: diagrama de arquitetura junto do parágrafo que o explica).
+- A `url` deve ser de uma imagem aberta com sucesso em uma das páginas de fonte do sinal: diagrama, gráfico, screenshot de produto ou figura da página. Nunca logotipos genéricos, avatares, memes, imagens decorativas ou URLs deduzidas. Prefira a imagem mais próxima do fato (ex.: o gráfico do post, não o header do blog).
+- `alt` obrigatório (descreva o conteúdo da imagem, não o sinal); `caption` opcional apenas na `coverImage`.
+- O backend baixa cada imagem na publicação e guarda uma cópia no bucket (jpeg, png, webp, avif, gif; máximo 5MB; sem SVG), inclusive as inline do `content`, que são reescritas para a cópia local. Falha de download ou validação rejeita a publicação com `422` `Cover image rejected` e o motivo: troque a URL ou publique sem a imagem.
+- A mesma imagem não deve ser repetida no mesmo sinal (capa + inline do mesmo gráfico, por exemplo): escolha o melhor lugar.
+
+## Retrofit de imagens nos sinais publicados
+
+Para adicionar imagens aos sinais já publicados (ex.: pedido único "adicione imagens aos sinais publicados"), use `listRecentPosts` (limit 100) e `getPost` de cada sinal, escolha capa e/ou imagens inline seguindo as regras acima e republicue com `coverImage` e/ou `![alt](url)` no `content`, preservando exatamente `title`, `topics` e `signalDate` (o slug é derivado desses três: mudar qualquer um cria um sinal novo). O mesmo slug significa o mesmo sinal: o resultado será `201` com `operation: "updated"`. O backend remove automaticamente as imagens antigas que o novo conteúdo não usa mais. Atenção: republicar revalida mecanicamente todas as `sources[].url`; se alguma estiver quebrada, o `publishPost` falha e o sinal não atualiza. Nesse caso, use `replaceSource` para trocar a fonte ou pule o sinal.
 
 ## Tratamento de erros
 

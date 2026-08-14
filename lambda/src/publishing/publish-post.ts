@@ -1,6 +1,7 @@
 import {
   postSchema,
   postSummarySchema,
+  type CoverImage,
   type Post,
   type PostDraft,
   type PostSummary,
@@ -11,9 +12,13 @@ import {
   deleteObject,
   getIndex,
   getPost,
+  listObjects,
   putIndex,
+  putObject,
   putPost,
 } from '../storage/s3'
+import { downloadImage } from './fetch-image'
+import { resolveInlineImages } from './inline-images'
 import { normalizePost } from './normalize-post'
 import { buildSignalSlug } from './signal-slug'
 import {
@@ -116,16 +121,85 @@ export async function publishPost(draft: PostDraft): Promise<PublishResult> {
     throw new Error('A post needs at least one topic')
   }
 
-  const verifiedSources = await verifyPostSources(draft.sources)
   const slug = buildSignalSlug(primaryTopic, draft.title, draft.signalDate)
+  const verifiedSources = await verifyPostSources(draft.sources)
   const existing = await getPost(slug)
-  const post = normalizePost({ ...draft, sources: verifiedSources }, existing)
+  const coverImage = await resolveCoverImage(draft, slug, existing)
+  const inline = await resolveInlineImages(draft.content, slug)
+  const post = normalizePost(
+    {
+      ...draft,
+      sources: verifiedSources,
+      content: inline.content,
+      coverImage,
+    },
+    existing,
+  )
 
   await putPost(post)
+  await removeOrphanImages(slug, [
+    ...inline.objectKeys,
+    ...(coverImage ? [coverImage.objectKey] : []),
+  ])
   await updateLatestIndex(post)
   await synchronizeTopicIndexes(post, existing)
 
   return { post, operation: existing ? 'updated' : 'created' }
+}
+
+// Deletes stored images of a slug that the published post no longer
+// references. The prefix split on '-' and '.' avoids matching a different
+// signal whose slug starts with this one.
+async function removeOrphanImages(slug: string, usedKeys: string[]) {
+  const used = new Set(usedKeys)
+  const keys = [
+    ...(await listObjects(`public/images/${slug}-`)),
+    ...(await listObjects(`public/images/${slug}.`)),
+  ]
+
+  for (const key of keys) {
+    if (!used.has(key)) {
+      await deleteObject(key)
+    }
+  }
+}
+
+// Downloads the draft cover image into the content bucket as a snapshot, so
+// the site never hotlinks the source host. A draft without a cover image
+// removes the stored copy of a previous publish; a changed image deletes the
+// stale object after the new one is written.
+async function resolveCoverImage(
+  draft: PostDraft,
+  slug: string,
+  existing: Post | null,
+): Promise<CoverImage | undefined> {
+  const previous = existing?.coverImage
+
+  if (!draft.coverImage) {
+    if (previous) {
+      await deleteObject(previous.objectKey)
+    }
+
+    return undefined
+  }
+
+  const downloaded = await downloadImage(draft.coverImage.url)
+  const objectKey = `public/images/${slug}${downloaded.extension}`
+
+  if (previous && previous.objectKey !== objectKey) {
+    await deleteObject(previous.objectKey)
+  }
+
+  await putObject(objectKey, downloaded.buffer, downloaded.contentType)
+
+  return {
+    objectKey,
+    sourceUrl: downloaded.finalUrl,
+    contentType: downloaded.contentType,
+    alt: draft.coverImage.alt,
+    caption: draft.coverImage.caption,
+    checkedAt: new Date().toISOString(),
+  }
 }
 
 // Every source URL must be fetched and inspected at publication time. The
