@@ -65,6 +65,22 @@ export async function deleteObject(key: string) {
   )
 }
 
+export async function putObject(
+  key: string,
+  body: Buffer,
+  contentType: string,
+) {
+  await getS3Client().send(
+    new PutObjectCommand({
+      Bucket: getBucket(),
+      Key: key,
+      Body: body,
+      ContentType: contentType,
+      CacheControl: 'public, max-age=86400',
+    }),
+  )
+}
+
 export async function getIndex(key: string): Promise<PostSummary[]> {
   try {
     const value = await readJson(key)

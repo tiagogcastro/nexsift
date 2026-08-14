@@ -1,9 +1,14 @@
-import { postSchema, type Post, type PostDraft } from '@nexsift/schemas/post'
+import {
+  postSchema,
+  type CoverImage,
+  type Post,
+  type PostDraft,
+} from '@nexsift/schemas/post'
 import { calculateReadingTime } from './reading-time'
 import { buildSignalSlug } from './signal-slug'
 
 export function normalizePost(
-  draft: PostDraft,
+  draft: Omit<PostDraft, 'coverImage'> & { coverImage: CoverImage | undefined },
   existing: Post | null,
   now = new Date(),
 ) {

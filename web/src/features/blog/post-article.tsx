@@ -72,6 +72,22 @@ export async function PostArticle({
 
           <div className="my-10 h-px bg-(--border)" />
 
+          {post.coverImage ? (
+            <figure className="my-10 border border-(--border) bg-(--surface)">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/s3/${post.coverImage.objectKey}`}
+                alt={post.coverImage.alt}
+                className="aspect-[16/9] w-full object-cover"
+              />
+              {post.coverImage.caption ? (
+                <figcaption className="px-4 py-3 font-mono text-[10px] uppercase tracking-[0.1em] text-(--muted)">
+                  {post.coverImage.caption}
+                </figcaption>
+              ) : null}
+            </figure>
+          ) : null}
+
           <section>
             <div className="eyebrow text-(--signal)">{t('blog.whatChanged')}</div>
             <p className="mt-4 text-lg leading-relaxed text-(--muted-strong) md:text-xl">

@@ -244,7 +244,7 @@ export async function validateSourceUrl(
   return check
 }
 
-function parseHttpUrl(value: string) {
+export function parseHttpUrl(value: string) {
   try {
     const parsed = new URL(value)
     return parsed.protocol === 'http:' || parsed.protocol === 'https:'
@@ -259,7 +259,7 @@ function parseHttpUrl(value: string) {
 // cloud metadata ranges, before any request is made. IP literals are checked
 // directly without a DNS roundtrip. Hostnames that resolve to multiple
 // addresses are allowed only if every address is public.
-async function assertPublicHost(hostname: string) {
+export async function assertPublicHost(hostname: string) {
   if (isIpLiteral(hostname)) {
     if (isPrivateAddress(hostname)) {
       throw new Error(`Blocked non-public address ${hostname}`)

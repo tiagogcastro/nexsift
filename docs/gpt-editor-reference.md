@@ -75,7 +75,7 @@ O contrato completo, o exemplo de payload e os endpoints estão no anexo `gpt-ed
 
 - Sem `slug` no payload: o backend gera `{topic-primario}-{titulo-em-slug}-{signalDate}` (título até 40 caracteres). Mesmo slug = mesmo sinal (atualiza, não duplica).
 - Antes de publicar, chame `getPost` com o slug previsto. Se existir, é o mesmo sinal: atualize só com novidade material (beta virou GA, incidente ganhou root cause, CVE ganhou patch, rollout pausado, preço mudou, correção oficial, disponibilidade mudou). Nunca atualize só porque releu.
-- `title` 8-140; `description` 30-260; `whyItMatters` 30-800; `whatToWatch` 30-500 (obrigatório: o próximo movimento concreto para acompanhar, sem repetir a `description`); `content` markdown pt-BR mínimo 100 caracteres, sem imagens, links inline.
+- `title` 8-140; `description` 30-260; `whyItMatters` 30-800; `whatToWatch` 30-500 (obrigatório: o próximo movimento concreto para acompanhar, sem repetir a `description`); `content` markdown pt-BR mínimo 100 caracteres, sem imagens no markdown, links inline; `coverImage` opcional (ver seção própria abaixo).
 - `topics` 1-3 dos 7 oficiais; `tags` até 10 minúsculas; `sources` 1+ (title, publisher, url obrigatórios). Use mais de uma fonte quando fatos distintos vierem de páginas primárias diferentes (anúncio + changelog + release, por exemplo); cada URL é verificada individualmente no backend.
 - Não invente nomes, versões, datas, valores ou números.
 - Mais completo não significa prolixo: sem história genérica da empresa, definições básicas para leitor tech, contexto enciclopédico, repetição da `description`, frases de preenchimento ou previsões especulativas. O objetivo é densidade, não comprimento.
@@ -95,11 +95,23 @@ Se o sinal só repete o anúncio da empresa, não está pronto.
 4. Identifique duplicidades com sinais publicados.
 5. Classifique tópico, `signalType`, `depth`; calcule os scores.
 6. Compare os candidatos e selecione os melhores. Nunca reduza o gate para preencher espaço.
-7. DATA CHECK e redija cada sinal em pt-BR.
+7. DATA CHECK e redija cada sinal em pt-BR; escolha a `coverImage` seguindo as regras da seção própria.
 8. Autocrítica: é hype? A fonte sustenta? Novidade real? Linguagem precisa? Contrato respeitado? Qualidade final? Máximo 2 rodadas por sinal.
 9. `getPost` para o slug previsto de cada aprovado.
 10. Revalide exatamente cada `sources[].url` (via `validateSource`) imediatamente antes de publicar.
 11. Publique os aprovados e apresente o relatório editorial.
+
+## Capa de imagem
+
+- `coverImage` é opcional, mas recomendada: uma capa boa suaviza a leitura e torna o sinal reconhecível. Publique sem capa quando não existir uma imagem que acrescente informação.
+- A `url` deve ser de uma imagem aberta com sucesso em uma das páginas de fonte do sinal: diagrama, gráfico, screenshot de produto ou figura da página. Nunca logotipos genéricos, avatares, memes, imagens decorativas ou URLs deduzidas. Prefira a imagem mais próxima do fato (ex.: o gráfico do post, não o header do blog).
+- `alt` obrigatório (descreva o conteúdo da imagem, não o sinal); `caption` opcional para crédito ou contexto.
+- O backend baixa a imagem na publicação e guarda uma cópia no bucket (jpeg, png, webp, avif, gif; máximo 5MB; sem SVG). Falha de download ou validação rejeita a publicação com `422` `Cover image rejected` e o motivo: troque a URL ou publique sem capa.
+- Não cole imagens no markdown do `content`: a capa é o único elemento visual do sinal.
+
+## Retrofit de capas nos sinais publicados
+
+Para adicionar capa aos sinais já publicados (ex.: pedido único "adicione capa aos sinais publicados"), use `listRecentPosts` (limit 100) e `getPost` de cada sinal, escolha a capa seguindo as regras acima e republicue com `coverImage`, preservando exatamente `title`, `topics` e `signalDate` (o slug é derivado desses três: mudar qualquer um cria um sinal novo). O mesmo slug significa o mesmo sinal: o resultado será `201` com `operation: "updated"`. Atenção: republicar revalida mecanicamente todas as `sources[].url`; se alguma estiver quebrada, o `publishPost` falha e o sinal não atualiza. Nesse caso, use `replaceSource` para trocar a fonte ou pule o sinal.
 
 ## Tratamento de erros
 

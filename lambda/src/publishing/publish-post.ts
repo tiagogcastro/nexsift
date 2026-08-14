@@ -1,6 +1,7 @@
 import {
   postSchema,
   postSummarySchema,
+  type CoverImage,
   type Post,
   type PostDraft,
   type PostSummary,
@@ -12,8 +13,10 @@ import {
   getIndex,
   getPost,
   putIndex,
+  putObject,
   putPost,
 } from '../storage/s3'
+import { downloadCoverImage } from './fetch-image'
 import { normalizePost } from './normalize-post'
 import { buildSignalSlug } from './signal-slug'
 import {
@@ -116,16 +119,58 @@ export async function publishPost(draft: PostDraft): Promise<PublishResult> {
     throw new Error('A post needs at least one topic')
   }
 
-  const verifiedSources = await verifyPostSources(draft.sources)
   const slug = buildSignalSlug(primaryTopic, draft.title, draft.signalDate)
+  const verifiedSources = await verifyPostSources(draft.sources)
   const existing = await getPost(slug)
-  const post = normalizePost({ ...draft, sources: verifiedSources }, existing)
+  const coverImage = await resolveCoverImage(draft, slug, existing)
+  const post = normalizePost(
+    { ...draft, sources: verifiedSources, coverImage },
+    existing,
+  )
 
   await putPost(post)
   await updateLatestIndex(post)
   await synchronizeTopicIndexes(post, existing)
 
   return { post, operation: existing ? 'updated' : 'created' }
+}
+
+// Downloads the draft cover image into the content bucket as a snapshot, so
+// the site never hotlinks the source host. A draft without a cover image
+// removes the stored copy of a previous publish; a changed image deletes the
+// stale object after the new one is written.
+async function resolveCoverImage(
+  draft: PostDraft,
+  slug: string,
+  existing: Post | null,
+): Promise<CoverImage | undefined> {
+  const previous = existing?.coverImage
+
+  if (!draft.coverImage) {
+    if (previous) {
+      await deleteObject(previous.objectKey)
+    }
+
+    return undefined
+  }
+
+  const downloaded = await downloadCoverImage(draft.coverImage)
+  const objectKey = `public/images/${slug}${downloaded.extension}`
+
+  if (previous && previous.objectKey !== objectKey) {
+    await deleteObject(previous.objectKey)
+  }
+
+  await putObject(objectKey, downloaded.buffer, downloaded.contentType)
+
+  return {
+    objectKey,
+    sourceUrl: downloaded.finalUrl,
+    contentType: downloaded.contentType,
+    alt: draft.coverImage.alt,
+    caption: draft.coverImage.caption,
+    checkedAt: new Date().toISOString(),
+  }
 }
 
 // Every source URL must be fetched and inspected at publication time. The

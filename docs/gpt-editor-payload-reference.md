@@ -17,6 +17,11 @@ Arquivo de referência embutido na ferramenta `editorialInstructions` do connect
     "signalType": "risk",
     "depth": "practical",
     "tags": ["openssl", "cve"],
+    "coverImage": {
+      "url": "https://www.openssl.org/blog/openssl-3.5-release.png",
+      "alt": "Visão geral das mudanças do OpenSSL 3.5",
+      "caption": "Fonte: blog oficial do OpenSSL"
+    },
     "sources": [
       {
         "title": "Título exato da fonte",
@@ -41,7 +46,8 @@ Arquivo de referência embutido na ferramenta `editorialInstructions` do connect
 - `description`: 30 a 260 caracteres.
 - `whyItMatters`: 30 a 800 caracteres.
 - `whatToWatch`: 30 a 500 caracteres, obrigatório. O próximo movimento concreto para acompanhar (rollout, adoção, patch, migração, resposta do ecossistema, breaking change). Não repita a `description`.
-- `content`: markdown em pt-BR, mínimo de 100 caracteres. Sem imagens. Links para as fontes inline no ponto da afirmação, além do array `sources`. Não é necessário ter todos os campos acima do mínimo: densidade, não comprimento. Explique pelo menos uma consequência técnica, operacional, econômica ou estratégica concreta. O que observar agora vive no campo estruturado `whatToWatch`, não no markdown.
+- `content`: markdown em pt-BR, mínimo de 100 caracteres. Sem imagens no markdown: a imagem do sinal é a `coverImage`, renderizada como capa acima do conteúdo. Links para as fontes inline no ponto da afirmação, além do array `sources`. Não é necessário ter todos os campos acima do mínimo: densidade, não comprimento. Explique pelo menos uma consequência técnica, operacional, econômica ou estratégica concreta. O que observar agora vive no campo estruturado `whatToWatch`, não no markdown.
+- `coverImage` (opcional, recomendada): objeto com `url`, `alt` (1-200 caracteres, obrigatório) e `caption` (até 300, opcional). A `url` deve ser a de uma imagem aberta com sucesso em uma das páginas de fonte do sinal (diagrama, gráfico ou screenshot que ilustre o sinal; nunca logotipo genérico da empresa). O backend baixa a imagem na publicação, valida e guarda uma cópia no bucket: formatos aceitos jpeg, png, webp, avif e gif, máximo 5MB, sem SVG. Se o download ou a validação falhar, a publicação é rejeitada com `422` `Cover image rejected` e o motivo: corrija a URL ou republique sem a capa. Para reutilizar imagens, prefira aquelas da própria página da fonte.
 - `topics`: 1 a 3, apenas dos valores válidos: `ai`, `development`, `cloud`, `devops`, `security`, `industry`, `design`. O primeiro é o tópico primário e define o slug.
 - `tags`: até 10, em minúsculas, estritamente ligadas ao conteúdo do sinal.
 - `sources`: 1 ou mais; cada um com `title`, `publisher` e `url` obrigatórios; `publishedAt` opcional em ISO 8601. Liste todas as fontes usadas. O `title` deve ser o título real da página.
@@ -67,7 +73,7 @@ A Lambda valida o payload com Zod (schema `postDraftSchema`), aplica os gates ed
 - `400`: JSON malformado.
 - `401`: token inválido.
 - `404`: sinal não encontrado (em `getPost` e `deletePost`).
-- `422`: payload inválido, gate não atendido ou `Source verification failed` com a lista de fontes rejeitadas (corrija e tente uma vez; se falhar de novo, descarte).
+- `422`: payload inválido, gate não atendido, `Source verification failed` com a lista de fontes rejeitadas ou `Cover image rejected` com o motivo (corrija e tente uma vez; se falhar de novo, descarte ou publique sem a capa).
 - `500`: falha de publicação.
 
 ## Endpoints
