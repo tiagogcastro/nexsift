@@ -163,20 +163,20 @@ The published post appears in the signal ledger at `/` and at `/blog/{slug}`. `/
 ## Publish flow
 
 ```text
-ChatGPT / NexSift Editor
-  -> user approval
-  -> GPT Action
+ChatGPT Task (daily schedule)
+  -> MCP connector (mcp Lambda Function URL)
+  -> editorialInstructions tool (sources of truth)
   -> API Gateway HTTP API
   -> Lambda: auth, Zod validation, editorial gates, source verification
   -> S3
   -> NexSift
 ```
 
-The GPT Action contract is defined in the OpenAPI spec at `docs/openapi.yaml`. The ChatGPT step handles research, writing and review; the Lambda only validates, verifies and publishes.
+Interactive sessions can still use the NexSift Editor GPT Action; the contract is defined in the OpenAPI spec at `docs/openapi.yaml`. The ChatGPT step handles research, writing and review; the Lambda only validates, verifies and publishes.
 
-Production is fronted by an API Gateway HTTP API because ChatGPT Actions cannot reach `*.lambda-url.*.on.aws` domains; the Function URL remains for local flows and rollback.
+ChatGPT Tasks cannot use Custom GPTs or Actions, so the scheduled routine runs through a private MCP connector: the `mcp` Lambda exposes the publication contract as MCP tools and bundles the editorial docs into `editorialInstructions` (see `docs/gpt-editor-instructions.md`). Production is fronted by an API Gateway HTTP API because ChatGPT cannot reach `*.lambda-url.*.on.aws` domains; the Function URLs remain for local flows and rollback.
 
-Locally, the direct publish command replaces the GPT Action step: it reads a JSON payload from `packages/dev-publish/payloads/` and invokes the Lambda through MiniStack.
+Locally, the direct publish command replaces the ChatGPT step: it reads a JSON payload from `packages/dev-publish/payloads/` and invokes the Lambda through MiniStack.
 
 ## Vercel MVP
 

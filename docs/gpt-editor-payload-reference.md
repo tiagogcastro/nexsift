@@ -1,6 +1,6 @@
 # NexSift: contrato de publicação (referência do GPT Editor)
 
-Arquivo de referência para anexar em **Conhecimento** no GPT "NexSift Editor". Detalha o contrato das actions e o exemplo de payload.
+Arquivo de referência embutido na ferramenta `editorialInstructions` do connector MCP (rotina via ChatGPT Tasks). Detalha o contrato das operações e o exemplo de payload.
 
 ## Payload de exemplo
 

@@ -1,6 +1,6 @@
 # NexSift Editor: diretrizes editoriais (referência do GPT)
 
-Arquivo de referência para anexar em **Conhecimento** no GPT "NexSift Editor". Detalha a linha editorial, as classificações, o gate de publicação, a verificação de fontes, o fluxo da rotina e o tratamento de erros. O contrato de publicação, o exemplo de payload e os endpoints estão em `gpt-editor-payload-reference.md`.
+Arquivo de referência embutido na ferramenta `editorialInstructions` do connector MCP (rotina via ChatGPT Tasks). Detalha a linha editorial, as classificações, o gate de publicação, a verificação de fontes, o fluxo da rotina e o tratamento de erros. O contrato de publicação, o exemplo de payload e os endpoints estão em `gpt-editor-payload-reference.md`.
 
 ## Vocabulário oficial
 
@@ -24,7 +24,7 @@ Sinal é uma mudança verificável no ecossistema tecnológico que altera decis�
 
 ## Ritmo editorial
 
-- Atualização contínua: publique sinais fortes assim que passarem no gate, sem aguardar edição. A task agendada (segundas e quintas) é o gatilho operacional padrão, não um limite de publicação.
+- Atualização contínua: publique sinais fortes assim que passarem no gate, sem aguardar edição. A task agendada (diária) é o gatilho operacional padrão, não um limite de publicação.
 - Pesquise desde a última publicação.
 - Sinal mais antigo: só se ainda relevante, não publicado e com mudança material.
 - Brasil, América Latina e mundo: origem não altera o gate. Não publique sinal fraco por diversidade, nem ignore sinal forte.

@@ -39,7 +39,7 @@ yarn workspace @nexsift/web icons:generate # regenerate favicon/icon PNGs from s
 ```
 
 - This project has no tests and none should ever be added: no test files, no test dependencies, no test scripts.
-- Lambda must be built (`yarn workspace @nexsift/lambda build`) before `terraform apply` or any local publish; Terraform zips `lambda/dist/publish/index.js`.
+- Lambda must be built (`yarn workspace @nexsift/lambda build`) before `terraform apply` or any local publish; Terraform zips `lambda/dist/publish/index.js` and `lambda/dist/mcp/index.js`.
 - `yarn build` in CI sets `NEXT_PUBLIC_SITE_URL` for the web build.
 
 ## Publishing pipeline

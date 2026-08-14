@@ -80,6 +80,10 @@ output "publish_api_url" {
   value = module.content_stack.publish_api_url
 }
 
+output "mcp_function_url" {
+  value = module.content_stack.mcp_function_url
+}
+
 output "vercel_reader_access_key_id" {
   value     = module.content_stack.vercel_reader_access_key_id
   sensitive = true
