@@ -77,10 +77,14 @@ Motion should communicate state or navigation:
 
 Avoid background particles, parallax and cinematic page transitions.
 
-## Curation funnel
+## Curation path
 
-The curation process is rendered as an editorial funnel, not a linear pipeline: "Muito acontece" opens wide and each gate question narrows the bar (Isso realmente mudou algo? Há evidência? Tem consequência?) until only "SINAL" remains, in the signal color. The bars are non-interactive: no heavy borders, no shadows, no hover affordances.
+The curation process is rendered as a winding trail, not a linear pipeline: "Muito acontece" starts the path and each gate question curves toward the next (Isso realmente mudou algo? Há evidência? Tem consequência?) until only "SINAL" remains, drawn in the signal color with a glow. The trail is a smooth SVG curve with numbered nodes; the last segment glows in the signal color. Nodes are non-interactive: no heavy borders, no shadows, no hover affordances. On mobile the trail collapses into a vertical path with a curving rail on the left.
+
+## Topics
+
+Topics are represented by a monochrome lucide icon (brain for AI, cpu for development, cloud, terminal for DevOps, shield for security, factory for industry, pen tool for design) plus their full label. Abbreviated short labels are not used in the UI.
 
 ## Article layout
 
-Signals use a two-zone layout: a single editorial column (topic, type, date; title; "O que mudou"; "Por que importa"; development; "O que observar agora"; "Continue no radar") and a sticky source rail that keeps traceability visible while reading. Metadata is a discreet mono line under the title, not a rail.
+Signals use a two-zone layout: a single editorial column (topic chip with icon; title; byline row; "O que mudou"; "Por que importa"; development; "O que observar agora"; "Continue no radar") and a sticky source rail that keeps traceability visible while reading. Metadata is a discreet mono line under the title, not a rail. Each source is a small bordered card with its verification status as a colored badge. The "Continue no radar" rows carry the related topic chip and source count.

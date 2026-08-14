@@ -19,15 +19,14 @@ export async function SignalLedger({
     <div>
       {visiblePosts.map((post, index) => {
         const topic = post.topics[0]
-        const shortLabel = topic ? getTopicMeta(t, topic).shortLabel : undefined
+        const label = topic ? getTopicMeta(t, topic).label : undefined
 
         return (
           <LedgerRow
             key={post.slug}
             post={post}
             index={index}
-            shortLabel={shortLabel}
-            signalTypeLabel={t(`signalTypes.${post.signalType}`)}
+            topicLabel={label}
             relevanceLabel={t('article.relevance')}
             newLabel={t('radar.newBadge')}
             sourcesLabel={t('radar.sourcesCount', { count: post.sources.length })}

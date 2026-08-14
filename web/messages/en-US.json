@@ -12,7 +12,8 @@
     "titleB": "More signal.",
     "description": "NexSift filters relevant changes in technology and shows what changed, why it matters and what to watch. No infinite feed: a short selection, with context and verified sources.",
     "primary": "View all signals",
-    "secondary": "How it works"
+    "secondary": "How it works",
+    "pain": "Keeping up with technology became a filtering job: the <b>more you read</b>, the less you understand, and <b>nobody verifies</b> what circulates."
   },
   "radar": {
     "eyebrow": "ON THE RADAR NOW",
@@ -21,7 +22,8 @@
     "definition": "A <sinal>signal</sinal> is a relevant change, verified and placed in context.",
     "viewAll": "View all signals",
     "newBadge": "New",
-    "sourcesCount": "{count, plural, one {source} other {sources}}"
+    "sourcesCount": "{count, plural, one {source} other {sources}}",
+    "viewAllCount": "View all {count, plural, one {# signal} other {# signals}}"
   },
   "topics": {
     "eyebrow": "TOPICS",
@@ -56,7 +58,8 @@
     "publicationTooltip": "Share of sources that were verified at publication time. Every new signal is only published when 100% of its sources pass verification. Signals published before this rule took effect may sit below 100%.",
     "verifiableLabel": "sources verifiable now",
     "verifiableTooltip": "Share of original sources that remain accessible and verifiable right now. A source may have been validated at publication and later removed, moved or temporarily unavailable.",
-    "topicsLabel": "{count, plural, one {topic on the radar} other {topics on the radar}}"
+    "topicsLabel": "{count, plural, one {topic on the radar} other {topics on the radar}}",
+    "signalsLabel": "{count, plural, one {signal on the radar} other {signals on the radar}}"
   },
   "explore": {
     "eyebrow": "KEEP GOING",
@@ -152,7 +155,9 @@
       "linkRot": "Link broke after publication",
       "compromised": "Compromised evidence",
       "unknown": "Historical verification unknown"
-    }
+    },
+    "byline": "By",
+    "bylineRole": "Creator of NexSift"
   },
   "blog": {
     "eyebrow": "ARCHIVE",
@@ -179,7 +184,9 @@
     "tagline": "Less noise. More signal.",
     "builtBy": "Built by Tiago Castro",
     "rights": "NexSift",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "product": "Product",
+    "contact": "Contact"
   },
   "privacy": {
     "eyebrow": "PRIVACY",

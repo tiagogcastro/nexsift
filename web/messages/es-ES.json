@@ -12,7 +12,8 @@
     "titleB": "Más señal.",
     "description": "NexSift filtra cambios relevantes en tecnología y muestra qué cambió, por qué importa y qué observar. Sin feed infinito: una selección corta, con contexto y fuentes verificadas.",
     "primary": "Ver todas las señales",
-    "secondary": "Cómo funciona"
+    "secondary": "Cómo funciona",
+    "pain": "Seguir la tecnología se volvió un trabajo de filtrado: <b>cuanto más lees</b>, menos entiendes, y <b>nadie verifica</b> lo que circula."
   },
   "radar": {
     "eyebrow": "EN EL RADAR AHORA",
@@ -21,7 +22,8 @@
     "definition": "Una <sinal>señal</sinal> es un cambio relevante, verificado y puesto en contexto.",
     "viewAll": "Ver todas las señales",
     "newBadge": "Nuevo",
-    "sourcesCount": "{count, plural, one {fuente} other {fuentes}}"
+    "sourcesCount": "{count, plural, one {fuente} other {fuentes}}",
+    "viewAllCount": "Ver todos los {count, plural, one {# señal} other {# señales}}"
   },
   "topics": {
     "eyebrow": "TEMAS",
@@ -56,7 +58,8 @@
     "publicationTooltip": "Porcentaje de fuentes verificadas al momento de la publicación. Toda señal nueva solo se publica cuando el 100% de sus fuentes pasan la verificación. Las señales publicadas antes de esta regla pueden estar por debajo del 100%.",
     "verifiableLabel": "fuentes verificables ahora",
     "verifiableTooltip": "Porcentaje de fuentes originales que siguen accesibles y verificables en este momento. Una fuente pudo haberse validado al publicar y luego ser eliminada, movida o quedar temporalmente no disponible.",
-    "topicsLabel": "{count, plural, one {tema en el radar} other {temas en el radar}}"
+    "topicsLabel": "{count, plural, one {tema en el radar} other {temas en el radar}}",
+    "signalsLabel": "{count, plural, one {señal en el radar} other {señales en el radar}}"
   },
   "explore": {
     "eyebrow": "CONTINÚA",
@@ -152,7 +155,9 @@
       "linkRot": "Enlace roto posteriormente",
       "compromised": "Evidencia comprometida",
       "unknown": "Verificación histórica desconocida"
-    }
+    },
+    "byline": "Por",
+    "bylineRole": "Creador de NexSift"
   },
   "blog": {
     "eyebrow": "ARCHIVO",
@@ -179,7 +184,9 @@
     "tagline": "Menos ruido. Más señal.",
     "builtBy": "Creado por Tiago Castro",
     "rights": "NexSift",
-    "privacy": "Privacidad"
+    "privacy": "Privacidad",
+    "product": "Producto",
+    "contact": "Contacto"
   },
   "privacy": {
     "eyebrow": "PRIVACIDAD",

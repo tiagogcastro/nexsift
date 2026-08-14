@@ -143,9 +143,9 @@ button:not(:disabled),
 
 .signal-ledger-row {
   display: grid;
-  grid-template-columns: 3rem minmax(0, 4fr) auto auto;
+  grid-template-columns: 1.75rem minmax(0, 4fr) auto auto;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
   min-height: 6.4rem;
   border-top: 1px solid var(--border);
   transition:
@@ -262,12 +262,104 @@ button:not(:disabled),
 
 @media (max-width: 760px) {
   .signal-ledger-row {
-    grid-template-columns: 2rem minmax(0, 1fr) auto;
-    gap: 0.75rem;
-    padding-block: 1.2rem;
+    grid-template-columns: 1.5rem minmax(0, 1fr) auto;
+    gap: 0.6rem;
+    padding-block: 1.1rem;
   }
+}
 
-  .signal-ledger-topic {
-    display: none;
-  }
+.topic-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid color-mix(in srgb, var(--topic-color, var(--signal)) 45%, transparent);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--topic-color, var(--signal)) 10%, transparent);
+  padding: 0.15rem 0.45rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--topic-color, var(--signal));
+}
+
+.stat-bar {
+  height: 2px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--signal);
+  box-shadow: 0 0 10px var(--signal-glow);
+  transition: width 600ms ease;
+}
+
+.hero-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(60px);
+}
+
+.path-trail-line {
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.path-trail-line-progress {
+  stroke: var(--signal);
+  stroke-width: 1.5;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.path-trail-line-thick {
+  stroke-width: 2;
+}
+
+.path-trail-line-active {
+  stroke: var(--signal);
+  stroke-width: 1.5;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 6px var(--signal-glow));
+}
+
+.source-status[data-status='healthy'] {
+  color: var(--signal);
+  border-color: color-mix(in srgb, var(--signal) 45%, transparent);
+  background: color-mix(in srgb, var(--signal) 10%, transparent);
+}
+
+.source-status[data-status='redirected'] {
+  color: var(--topic-cloud);
+  border-color: color-mix(in srgb, var(--topic-cloud) 45%, transparent);
+  background: color-mix(in srgb, var(--topic-cloud) 10%, transparent);
+}
+
+.source-status[data-status='replaced'] {
+  color: var(--topic-industry);
+  border-color: color-mix(in srgb, var(--topic-industry) 45%, transparent);
+  background: color-mix(in srgb, var(--topic-industry) 10%, transparent);
+}
+
+.source-status[data-status='temporarilyUnavailable'] {
+  color: var(--muted-strong);
+  border-color: var(--border-strong);
+  background: var(--surface-raised);
+}
+
+.source-status[data-status='blocked'],
+.source-status[data-status='linkRot'],
+.source-status[data-status='compromised'] {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 45%, transparent);
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
 }

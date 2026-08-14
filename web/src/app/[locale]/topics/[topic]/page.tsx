@@ -1,5 +1,4 @@
 import { topicSchema, type Topic } from '@nexsift/schemas/topic'
-import { signalTypeSchema, type SignalType } from '@nexsift/schemas/signal-type'
 import { getTranslations } from 'next-intl/server'
 import { notFound, redirect } from 'next/navigation'
 import { Footer } from '@/components/footer'
@@ -16,10 +15,10 @@ export default async function TopicPage({
   searchParams,
 }: {
   params: Promise<{ locale: string; topic: string }>
-  searchParams: Promise<{ q?: string; type?: string }>
+  searchParams: Promise<{ q?: string }>
 }) {
   const { locale, topic: rawTopic } = await params
-  const { q, type: typeParam } = await searchParams
+  const { q } = await searchParams
 
   if (locale !== 'pt-BR') {
     redirect(`/topics/${rawTopic}`)
@@ -39,13 +38,9 @@ export default async function TopicPage({
     topicOrder.map((topicKey) => {
       const topicKeyMeta = getTopicMeta(t, topicKey)
 
-      return [topicKey, { label: topicKeyMeta.label, shortLabel: topicKeyMeta.shortLabel }]
+      return [topicKey, { label: topicKeyMeta.label }]
     }),
-  ) as Record<Topic, { label: string; shortLabel: string }>
-  const typeResult = typeParam ? signalTypeSchema.safeParse(typeParam) : null
-  const typeMeta = Object.fromEntries(
-    signalTypeSchema.options.map((type) => [type, t(`signalTypes.${type}`)]),
-  ) as Record<SignalType, string>
+  ) as Record<Topic, { label: string }>
 
   return (
     <>
@@ -77,7 +72,7 @@ export default async function TopicPage({
               {meta.label}
             </h1>
             <p className="mt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-(--topic-color)">
-              {t('topicPage.radarTitle', { topic: meta.shortLabel })}
+              {t('topicPage.radarTitle', { topic: meta.label })}
             </p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-(--muted)">
               {meta.description}
@@ -92,7 +87,6 @@ export default async function TopicPage({
             labels={{
               searchPlaceholder: t('console.searchPlaceholder'),
               allTopics: t('console.allTopics'),
-              allTypes: t('console.allTypes'),
               countLabelOne: t('console.countLabelOne'),
               countLabelOther: t('console.countLabelOther'),
               loadMore: t('console.loadMore'),
@@ -103,9 +97,7 @@ export default async function TopicPage({
               sourcesLabel: t('radar.sourcesCount', { count: 1 }),
             }}
             topicMeta={topicMeta}
-            typeLabels={typeMeta}
             initialTopic={topic}
-            initialType={typeResult?.success ? (typeResult.data as SignalType) : undefined}
             initialQuery={q}
           />
         </div>
