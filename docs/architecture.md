@@ -96,11 +96,12 @@ The Lambda does not call OpenAI. The publication endpoint also exposes GET with 
 ## Autonomous publication via ChatGPT Tasks
 
 ```text
-ChatGPT Tasks (Monday and Thursday morning; operational trigger)
+ChatGPT Task (daily; operational trigger)
   |
   v
-NexSift Editor GPT
+ChatGPT connector (MCP over the mcp Lambda Function URL)
   |
+  +--> editorialInstructions (editorial sources of truth)
   +--> GET recent posts (anti-repetition)
   +--> research
   +--> source validation
@@ -115,7 +116,9 @@ POST /publish (same contract)
 S3
 ```
 
-The editor runs without human review and publishes strong signals as soon as they pass the editorial gates. Publication is continuous: the scheduled Tasks are the operational trigger, not a limit (see `docs/editorial.md`). Re-publishing with the same slug updates the signal instead of duplicating it.
+The editor runs without human review and publishes strong signals as soon as they pass the editorial gates. Publication is continuous: the scheduled Task is the operational trigger, not a limit (see `docs/editorial.md`). Re-publishing with the same slug updates the signal instead of duplicating it.
+
+The `mcp` Lambda exposes the publication contract as MCP tools (stateless streamable HTTP transport, JSON responses, Function URL in BUFFERED mode) and bundles the editorial instructions (`docs/gpt-editor-instructions.md`, `docs/gpt-editor-reference.md`, `docs/gpt-editor-payload-reference.md`) into the `editorialInstructions` tool. ChatGPT Tasks cannot use Custom GPTs or Actions, so the connector replaces the GPT Action for scheduled runs; the GPT Action remains available for interactive sessions.
 
 ## Future autonomous publication via OpenAI API
 

@@ -94,7 +94,7 @@ paths:
         '401':
           description: Invalid publication token
         '422':
-          description: Invalid payload, editorial gate not met, or source verification failed
+          description: Invalid payload, editorial gate not met, source verification failed, or cover image rejected
           content:
             application/json:
               schema:
@@ -320,7 +320,7 @@ components:
         content:
           type: string
           minLength: 100
-          description: Markdown content in pt-BR.
+          description: Markdown content in pt-BR. Inline images (![alt](url)) are downloaded, validated and stored by the backend at publication time; the stored content references the local copies.
         whyItMatters:
           type: string
           minLength: 30
@@ -370,6 +370,52 @@ components:
           description: Editorial gate. Below 7 the payload is rejected.
         featured:
           type: boolean
+        coverImage:
+          $ref: '#/components/schemas/CoverImageDraft'
+    CoverImageDraft:
+      type: object
+      required:
+        - url
+        - alt
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of an image opened on one of the source pages. The backend downloads it, validates it (jpeg/png/webp/avif/gif, max 5MB, no SVG) and stores a copy in the content bucket.
+        alt:
+          type: string
+          minLength: 1
+          maxLength: 200
+        caption:
+          type: string
+          maxLength: 300
+    CoverImage:
+      type: object
+      required:
+        - objectKey
+        - sourceUrl
+        - contentType
+        - alt
+        - checkedAt
+      properties:
+        objectKey:
+          type: string
+          description: Stored copy key under public/images/ in the content bucket.
+        sourceUrl:
+          type: string
+          format: uri
+        contentType:
+          type: string
+        alt:
+          type: string
+          minLength: 1
+          maxLength: 200
+        caption:
+          type: string
+          maxLength: 300
+        checkedAt:
+          type: string
+          format: date-time
     Post:
       type: object
       required:
@@ -440,6 +486,8 @@ components:
           type: string
         featured:
           type: boolean
+        coverImage:
+          $ref: '#/components/schemas/CoverImage'
     PostSource:
       type: object
       required: [title, publisher, url]

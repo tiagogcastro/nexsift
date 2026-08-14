@@ -37,7 +37,9 @@ Goal: use the existing ChatGPT subscription for editorial work while keeping pub
 
 ## Milestone 4: autonomous editorial pipeline
 
-The current path uses ChatGPT Tasks: a scheduled GPT run drafts, self-reviews and publishes on Monday and Thursday mornings without human review. The self-review loop, the editorial gates (`relevanceScore >= 6.5`, `confidenceScore >= 7`) and the recent-signals query keep the process autonomous and repetition-free.
+The current path uses a scheduled ChatGPT Task connected to NexSift through a private MCP connector (the `mcp` Lambda behind a Function URL): the task runs the editorial routine daily and publishes without human review. The self-review loop, the editorial gates (`relevanceScore >= 6.5`, `confidenceScore >= 7`) and the recent-signals query keep the process autonomous and repetition-free.
+
+ChatGPT Tasks cannot use Custom GPTs or their Actions, so the editor routine moved to a Task prompt plus the MCP connector; the previous GPT Action remains for interactive sessions.
 
 The future EventBridge + OpenAI API pipeline remains the path for scaling beyond ChatGPT:
 

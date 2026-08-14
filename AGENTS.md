@@ -39,7 +39,7 @@ yarn workspace @nexsift/web icons:generate # regenerate favicon/icon PNGs from s
 ```
 
 - This project has no tests and none should ever be added: no test files, no test dependencies, no test scripts.
-- Lambda must be built (`yarn workspace @nexsift/lambda build`) before `terraform apply` or any local publish; Terraform zips `lambda/dist/publish/index.js`.
+- Lambda must be built (`yarn workspace @nexsift/lambda build`) before `terraform apply` or any local publish; Terraform zips `lambda/dist/publish/index.js` and `lambda/dist/mcp/index.js`.
 - `yarn build` in CI sets `NEXT_PUBLIC_SITE_URL` for the web build.
 
 ## Publishing pipeline
@@ -48,6 +48,7 @@ yarn workspace @nexsift/web icons:generate # regenerate favicon/icon PNGs from s
 - Editorial gates: `relevanceScore >= 6.5` and `confidenceScore >= 7`; drafts below the gates are rejected with 422.
 - Slug is derived as `{topics[0]}-{slugified title, max 40 chars}-{signalDate}`; republishing the same slug updates the signal.
 - Sources are mechanically verified before publication (`validate-source.ts`, `audit-sources.ts`); verification fields, editorial status and source replacement are part of the post contract. Changing the Lambda contract also means updating `docs/openapi.yaml` and the `docs/gpt-editor-*.md` files.
+- Cover images (`coverImage`) and inline images in the markdown content are downloaded and validated at publication time and stored as snapshots in the content bucket (`fetch-image.ts`, `inline-images.ts`); the site serves them from its own origin via the `/s3/[...key]` route instead of hotlinking the source host. Stored copies a post no longer references are deleted on republish.
 - Prod is fronted by an API Gateway HTTP API, not the Function URL (ChatGPT Actions cannot reach `*.lambda-url.*.on.aws`); the Function URL remains for local flows and rollback.
 
 ## Code conventions

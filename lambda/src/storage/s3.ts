@@ -1,6 +1,7 @@
 import {
   DeleteObjectCommand,
   GetObjectCommand,
+  ListObjectsV2Command,
   PutObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3'
@@ -63,6 +64,35 @@ export async function deleteObject(key: string) {
   await getS3Client().send(
     new DeleteObjectCommand({ Bucket: getBucket(), Key: key }),
   )
+}
+
+export async function putObject(
+  key: string,
+  body: Buffer,
+  contentType: string,
+) {
+  await getS3Client().send(
+    new PutObjectCommand({
+      Bucket: getBucket(),
+      Key: key,
+      Body: body,
+      ContentType: contentType,
+      CacheControl: 'public, max-age=86400',
+    }),
+  )
+}
+
+export async function listObjects(prefix: string) {
+  const response = await getS3Client().send(
+    new ListObjectsV2Command({
+      Bucket: getBucket(),
+      Prefix: prefix,
+    }),
+  )
+
+  return (response.Contents ?? [])
+    .map((item) => item.Key)
+    .filter((key): key is string => Boolean(key))
 }
 
 export async function getIndex(key: string): Promise<PostSummary[]> {

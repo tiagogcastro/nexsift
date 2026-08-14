@@ -1,0 +1,31 @@
+{
+  "post": {
+    "title": "Exemplo de sinal com capa do NexSift",
+    "description": "Payload de exemplo para validar a capa de imagem no fluxo local de publicação.",
+    "content": "## O sinal\n\nEste conteúdo valida o download da capa, o armazenamento no bucket e o render no site local.\n\n## O que mudou\n\nNada muda; é um payload de teste local com capa de imagem.\n\n![Diagrama de exemplo](https://www.gstatic.com/webp/gallery/1.jpg)",
+    "whyItMatters": "Confirma que a capa é baixada na publicação, validada e servida pelo site sem hotlink da origem.",
+    "whatToWatch": "Observar o próximo ciclo da rotina local para confirmar que a capa passa pelos gates e persiste no sinal.",
+    "topics": ["devops"],
+    "signalDate": "2026-08-13",
+    "signalType": "release",
+    "depth": "practical",
+    "tags": ["nexsift", "local"],
+    "coverImage": {
+      "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+      "alt": "Logo de exemplo usado como capa de teste",
+      "caption": "Imagem de teste"
+    },
+    "sources": [
+      {
+        "title": "NexSift local integration",
+        "publisher": "NexSift",
+        "url": "https://example.com",
+        "publishedAt": "2026-08-13T10:00:00Z",
+        "editorialStatus": "verified",
+        "editoriallyVerifiedAt": "2026-08-13T09:55:00Z"
+      }
+    ],
+    "relevanceScore": 7.5,
+    "confidenceScore": 9
+  }
+}
