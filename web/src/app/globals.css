@@ -279,7 +279,7 @@ button:not(:disabled),
 }
 
 @media (max-width: 639px) {
-  .radar-panel .signal-ledger-row:nth-child(n + 3) {
+  .radar-panel .signal-ledger-row:nth-child(4) {
     display: none;
   }
 }

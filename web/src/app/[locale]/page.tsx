@@ -156,7 +156,7 @@ export default async function HomePage({
               <div className="px-4 lg:px-5">
                 <SignalLedger posts={radarSignals} limit={4} compact />
               </div>
-              <div className="border-t border-(--border) px-4 py-2.5 lg:px-5 lg:py-4">
+              <div className="hidden border-t border-(--border) px-4 py-2.5 lg:block lg:px-5 lg:py-4">
                 <Link
                   href="/blog"
                   className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-(--muted-strong) transition-colors hover:text-(--signal)"
