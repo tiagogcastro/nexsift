@@ -90,8 +90,9 @@ export default async function HomePage({
           <div className="pointer-events-none absolute inset-0 grid-line opacity-[0.16]" />
           <div className="hero-glow -right-32 -top-32 size-96 bg-(--signal) opacity-[0.1]" />
           <div className="hero-glow -bottom-40 left-1/4 size-96 bg-(--cyan) opacity-[0.07]" />
-          <div className="page-shell relative grid min-h-[calc(100vh-4rem)] items-center gap-12 py-16 lg:grid-cols-[1.12fr_0.88fr] lg:py-24">
-            <div>
+          <div className="page-shell relative grid items-center gap-6 py-8 lg:min-h-[calc(100vh-4rem)] lg:grid-cols-[1.12fr_0.88fr] lg:gap-12 lg:py-24">
+            {/* Desktop: coluna original intacta + radar à direita */}
+            <div className="hidden lg:block">
               <div className="eyebrow flex items-center gap-3">
                 <span className="signal-dot" />
                 {t('hero.eyebrow')}
@@ -137,17 +138,25 @@ export default async function HomePage({
               </div>
             </div>
 
-            <div className="border border-(--border) bg-(--surface-soft) shadow-[0_0_60px_rgba(199,246,107,0.05)]">
-              <div className="flex items-center gap-2 border-b border-(--border) px-5 py-4">
+            {/* Mobile: título antes do radar; CTAs e textos depois */}
+            <div className="order-1 lg:hidden">
+              <div className="text-center text-[clamp(2.1rem,9vw,4.4rem)] font-medium leading-[0.84] tracking-[-0.08em]">
+                <span className="block">{t('hero.titleA')}</span>
+                <span className="block text-(--signal)">{t('hero.titleB')}</span>
+              </div>
+            </div>
+
+            <div className="radar-panel order-2 border border-(--border) bg-(--surface-soft) shadow-[0_0_60px_rgba(199,246,107,0.05)]">
+              <div className="flex items-center gap-2 border-b border-(--border) px-4 py-2.5 lg:px-5 lg:py-4">
                 <span className="signal-dot" />
                 <span className="eyebrow text-(--signal)">
                   {t('radar.eyebrow')}
                 </span>
               </div>
-              <div className="px-5">
+              <div className="px-4 lg:px-5">
                 <SignalLedger posts={radarSignals} limit={4} compact />
               </div>
-              <div className="border-t border-(--border) px-5 py-4">
+              <div className="border-t border-(--border) px-4 py-2.5 lg:px-5 lg:py-4">
                 <Link
                   href="/blog"
                   className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-(--muted-strong) transition-colors hover:text-(--signal)"
@@ -156,6 +165,35 @@ export default async function HomePage({
                   <ArrowUpRight size={13} />
                 </Link>
               </div>
+            </div>
+
+            <div className="order-3 flex flex-col lg:hidden">
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/blog"
+                  className="flex items-center gap-2 rounded-sm bg-(--signal) px-3 py-2 text-[13px] font-semibold text-black shadow-[0_0_28px_var(--signal-glow)] transition-transform hover:-translate-y-0.5"
+                >
+                  {t('radar.viewAllCount', { count: posts.length })}
+                  <ArrowUpRight size={15} />
+                </Link>
+                <Link
+                  href={`${homePath}#process`}
+                  className="flex items-center gap-2 px-3 py-2 text-[13px] text-(--muted-strong) hover:text-white"
+                >
+                  {t('hero.secondary')}
+                  <ArrowDownRight size={15} />
+                </Link>
+              </div>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-(--muted-strong)">
+                {t('hero.description')}
+              </p>
+              <p className="mt-3 max-w-sm font-mono text-[13px] leading-relaxed text-(--muted)">
+                {t.rich('radar.definition', {
+                  sinal: (chunks) => (
+                    <span className="font-semibold text-(--signal)">{chunks}</span>
+                  ),
+                })}
+              </p>
             </div>
           </div>
         </section>
