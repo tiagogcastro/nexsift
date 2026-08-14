@@ -320,7 +320,7 @@ components:
         content:
           type: string
           minLength: 100
-          description: Markdown content in pt-BR.
+          description: Markdown content in pt-BR. Inline images (![alt](url)) are downloaded, validated and stored by the backend at publication time; the stored content references the local copies.
         whyItMatters:
           type: string
           minLength: 30

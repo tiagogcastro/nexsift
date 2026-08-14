@@ -1,4 +1,3 @@
-import type { CoverImageDraft } from '@nexsift/schemas/post'
 import { assertPublicHost, parseHttpUrl } from './validate-source'
 
 export class ImageRejectedError extends Error {
@@ -29,13 +28,12 @@ const contentTypeExtensions = new Map([
   ['image/gif', '.gif'],
 ])
 
-// Fetches the cover image the editor referenced and keeps a snapshot in the
-// content bucket. Redirects follow the same public-host rules as source
-// validation, so the download cannot be pointed at private networks.
-export async function downloadCoverImage(
-  draft: CoverImageDraft,
-): Promise<DownloadedImage> {
-  const parsed = parseHttpUrl(draft.url)
+// Fetches an image the editor referenced and keeps a snapshot in the content
+// bucket. Redirects follow the same public-host rules as source validation,
+// so the download cannot be pointed at private networks. Used by both the
+// cover image and inline images inside the markdown content.
+export async function downloadImage(url: string): Promise<DownloadedImage> {
+  const parsed = parseHttpUrl(url)
 
   if (!parsed) {
     throw new ImageRejectedError('invalid url')
@@ -47,8 +45,7 @@ export async function downloadCoverImage(
     throw new ImageRejectedError('non-public host')
   }
 
-  let currentUrl = draft.url
-  let finalContentType: string | null = null
+  let currentUrl = url
 
   try {
     for (let attempt = 0; attempt <= maxRedirects; attempt++) {
@@ -90,7 +87,7 @@ export async function downloadCoverImage(
         throw new ImageRejectedError(`http ${response.status}`)
       }
 
-      finalContentType = response.headers.get('content-type')
+      const finalContentType = response.headers.get('content-type')
       const declaredLength = response.headers.get('content-length')
       const numericLength = declaredLength
         ? Number.parseInt(declaredLength, 10)

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Suspense } from 'react'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
@@ -21,7 +21,6 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   authors: [{ name: siteConfig.author }],
   creator: siteConfig.creator,
-  themeColor: '#090b0d',
   manifest: '/manifest.webmanifest',
   icons: {
     icon: [
@@ -49,6 +48,10 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: ['/opengraph-image'],
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#090b0d',
 }
 
 export default async function RootLayout({

@@ -8,8 +8,21 @@ import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import type { ImgHTMLAttributes } from 'react'
 import { Breadcrumbs } from './breadcrumbs'
 import { EditorialLink } from './editorial-link'
+
+function InlineArticleImage({ src, alt }: ImgHTMLAttributes<HTMLImageElement>) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      className="my-10 max-h-[75vh] w-full border border-(--border) bg-(--surface) object-contain"
+    />
+  )
+}
 
 export async function PostArticle({
   post,
@@ -78,7 +91,7 @@ export async function PostArticle({
               <img
                 src={`/s3/${post.coverImage.objectKey}`}
                 alt={post.coverImage.alt}
-                className="aspect-[16/9] w-full object-cover"
+                className="max-h-[75vh] w-full object-contain"
               />
               {post.coverImage.caption ? (
                 <figcaption className="px-4 py-3 font-mono text-[10px] uppercase tracking-[0.1em] text-(--muted)">
@@ -105,7 +118,7 @@ export async function PostArticle({
           <div className="prose-nexsift mt-12">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
-              components={{ a: EditorialLink }}
+              components={{ a: EditorialLink, img: InlineArticleImage }}
             >
               {post.content}
             </ReactMarkdown>

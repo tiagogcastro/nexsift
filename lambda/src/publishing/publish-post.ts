@@ -12,11 +12,13 @@ import {
   deleteObject,
   getIndex,
   getPost,
+  listObjects,
   putIndex,
   putObject,
   putPost,
 } from '../storage/s3'
-import { downloadCoverImage } from './fetch-image'
+import { downloadImage } from './fetch-image'
+import { resolveInlineImages } from './inline-images'
 import { normalizePost } from './normalize-post'
 import { buildSignalSlug } from './signal-slug'
 import {
@@ -123,16 +125,43 @@ export async function publishPost(draft: PostDraft): Promise<PublishResult> {
   const verifiedSources = await verifyPostSources(draft.sources)
   const existing = await getPost(slug)
   const coverImage = await resolveCoverImage(draft, slug, existing)
+  const inline = await resolveInlineImages(draft.content, slug)
   const post = normalizePost(
-    { ...draft, sources: verifiedSources, coverImage },
+    {
+      ...draft,
+      sources: verifiedSources,
+      content: inline.content,
+      coverImage,
+    },
     existing,
   )
 
   await putPost(post)
+  await removeOrphanImages(slug, [
+    ...inline.objectKeys,
+    ...(coverImage ? [coverImage.objectKey] : []),
+  ])
   await updateLatestIndex(post)
   await synchronizeTopicIndexes(post, existing)
 
   return { post, operation: existing ? 'updated' : 'created' }
+}
+
+// Deletes stored images of a slug that the published post no longer
+// references. The prefix split on '-' and '.' avoids matching a different
+// signal whose slug starts with this one.
+async function removeOrphanImages(slug: string, usedKeys: string[]) {
+  const used = new Set(usedKeys)
+  const keys = [
+    ...(await listObjects(`public/images/${slug}-`)),
+    ...(await listObjects(`public/images/${slug}.`)),
+  ]
+
+  for (const key of keys) {
+    if (!used.has(key)) {
+      await deleteObject(key)
+    }
+  }
 }
 
 // Downloads the draft cover image into the content bucket as a snapshot, so
@@ -154,7 +183,7 @@ async function resolveCoverImage(
     return undefined
   }
 
-  const downloaded = await downloadCoverImage(draft.coverImage)
+  const downloaded = await downloadImage(draft.coverImage.url)
   const objectKey = `public/images/${slug}${downloaded.extension}`
 
   if (previous && previous.objectKey !== objectKey) {
