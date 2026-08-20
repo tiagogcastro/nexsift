@@ -1,9 +1,10 @@
 import type { Post } from '@nexsift/schemas/post'
 import type { SourceStatus, VerifiedPostSource } from '@nexsift/schemas/source'
-import { getIndex, getPost, putIndex, putPost } from '../storage/s3'
+import { getIndex, getPost, listPostSlugs, putIndex, putPost } from '../storage/s3'
 import {
   applySourceReplacement,
   latestIndexKey,
+  latestLimit,
   sortByPublishedAt,
   upsertSummary,
 } from './publish-post'
@@ -12,6 +13,7 @@ import {
   SourceRejectedError,
   validateSourceUrl,
 } from './validate-source'
+import type { RequestContext } from '../runtime/observability'
 
 export interface SourceAuditEntry {
   slug: string
@@ -48,8 +50,13 @@ const archiveDiscoveryTimeoutMs = 10_000
 // or rewrite a signal; it only flags the source for review. Because the
 // frontend and listRecentPosts read the index files, every audit refreshes
 // them, otherwise stored posts and index entries drift apart.
-export async function auditAllSources(): Promise<SourceAuditResult> {
-  const index = await getIndex(latestIndexKey)
+export async function auditAllSources(
+  requestContext?: RequestContext,
+): Promise<SourceAuditResult> {
+  const slugs = await listPostSlugs()
+  const posts = (await Promise.all(slugs.map((slug) => getPost(slug)))).filter(
+    (post): post is Post => Boolean(post),
+  )
   const checkedAt = new Date().toISOString()
   const counts: AuditCounts = {
     checked: 0,
@@ -64,14 +71,14 @@ export async function auditAllSources(): Promise<SourceAuditResult> {
   }
   const entries: SourceAuditEntry[] = []
 
-  for (const summary of index) {
-    const post = await getPost(summary.slug)
-
-    if (!post) {
-      continue
-    }
-
-    const updated = await auditPostSources(post, checkedAt, counts, entries)
+  for (const post of posts.sort((first, second) => sortByPublishedAt(first, second))) {
+    const updated = await auditPostSources(
+      post,
+      checkedAt,
+      counts,
+      entries,
+      requestContext,
+    )
     await putPost(updated)
     await refreshIndexes(updated)
   }
@@ -83,7 +90,7 @@ async function refreshIndexes(post: Post) {
   const latest = await getIndex(latestIndexKey)
   await putIndex(
     latestIndexKey,
-    upsertSummary(latest, post).sort(sortByPublishedAt),
+    upsertSummary(latest, post).sort(sortByPublishedAt).slice(0, latestLimit),
   )
 
   await Promise.all(
@@ -100,9 +107,10 @@ async function auditPostSources(
   checkedAt: string,
   counts: AuditCounts,
   entries: SourceAuditEntry[],
+  requestContext?: RequestContext,
 ): Promise<Post> {
   const results = await Promise.allSettled(
-    post.sources.map((source) => validateSourceUrl(source.url)),
+    post.sources.map((source) => validateSourceUrl(source.url, { requestContext })),
   )
 
   const sources: VerifiedPostSource[] = []
@@ -127,9 +135,9 @@ async function auditPostSources(
         ...source,
         lastCheckedAt: check.checkedAt,
         lastSuccessfulAt: check.ok ? check.checkedAt : source.lastSuccessfulAt,
-        httpStatus: check.status ?? source.httpStatus,
         finalUrl: check.finalUrl,
         sourceStatus: storedStatus,
+        ...(isHttpStatus(check.status) ? { httpStatus: check.status } : {}),
       })
       continue
     }
@@ -138,6 +146,7 @@ async function auditPostSources(
     const check = reason instanceof SourceRejectedError ? reason.check : null
 
     if (!check) {
+      counts.checked += 1
       counts.temporarily_unavailable += 1
       entries.push({
         slug: post.slug,
@@ -164,7 +173,7 @@ async function auditPostSources(
     counts[failedStatus] += 1
     entries.push(makeEntry(post, source, check, failedStatus, needsReplacement))
 
-    const recovered = await recoverBrokenSource(source, check, counts)
+    const recovered = await recoverBrokenSource(source, check, counts, requestContext)
 
     if (recovered) {
       sources.push(recovered)
@@ -174,9 +183,9 @@ async function auditPostSources(
     sources.push({
       ...source,
       lastCheckedAt: check.checkedAt,
-      httpStatus: check.status ?? source.httpStatus,
       finalUrl: check.finalUrl,
       sourceStatus: failedStatus,
+      ...(isHttpStatus(check.status) ? { httpStatus: check.status } : {}),
     })
   }
 
@@ -223,9 +232,9 @@ async function recoverBrokenSource(
   source: VerifiedPostSource,
   check: SourceCheck,
   counts: AuditCounts,
+  requestContext?: RequestContext,
 ): Promise<VerifiedPostSource | null> {
   if (check.sourceStatus !== 'broken') {
-    counts.replacementCandidates += 1
     return null
   }
 
@@ -236,7 +245,7 @@ async function recoverBrokenSource(
     return null
   }
 
-  const snapshotCheck = await validateSourceUrl(archived)
+  const snapshotCheck = await validateSourceUrl(archived, { requestContext })
 
   if (!snapshotCheck.ok || !titlesMatch(snapshotCheck.pageTitle, source.title)) {
     counts.replacementCandidates += 1
@@ -253,6 +262,10 @@ async function recoverBrokenSource(
     snapshotCheck,
     'recovered from Internet Archive',
   )
+}
+
+function isHttpStatus(status: number | null): status is number {
+  return status !== null && status >= 100 && status <= 599
 }
 
 export async function discoverArchivedCopy(url: string): Promise<string | null> {

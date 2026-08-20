@@ -1,5 +1,8 @@
 import { lookup } from 'node:dns/promises'
 import type { SourceStatus } from '@nexsift/schemas/source'
+import { fetchWithRetry, UpstreamRequestError } from '../http/fetch-with-retry'
+import type { RequestContext } from '../runtime/observability'
+import { logInfo } from '../runtime/observability'
 
 export interface SourceCheck {
   ok: boolean
@@ -10,6 +13,13 @@ export interface SourceCheck {
   pageTitle: string | null
   contentType: string | null
   sourceStatus: SourceStatus
+  attempts: number
+  retryable: boolean
+  errorCode?:
+    | 'RATE_LIMITED'
+    | 'UPSTREAM_TIMEOUT'
+    | 'SOURCE_UNAVAILABLE'
+    | 'SOURCE_REJECTED'
 }
 
 export class SourceRejectedError extends Error {
@@ -27,6 +37,10 @@ export interface SourceFailure {
   url: string
   status: number | null
   sourceStatus: SourceStatus
+  retryable?: boolean | undefined
+  errorCode?: string | undefined
+  reason?: string | undefined
+  attempts?: number | undefined
 }
 
 const defaultTimeoutMs = 10_000
@@ -35,7 +49,7 @@ const maxRedirects = 5
 const softNotFoundPatterns = [
   /\b404\b/,
   /page not found/i,
-  /p[ÃÃ¢]gina n[ãa]o encontrada/i,
+  /p(?:a|\u00e1)gina n(?:a|\u00e3)o encontrada/i,
   /does not exist/i,
   /no longer exists/i,
   /nothing here/i,
@@ -65,13 +79,19 @@ export function classifySourceCheck(
     soft404?: boolean
     homepageRedirect?: boolean
     blockedRedirect?: boolean
+    invalidRedirect?: boolean
   } = {},
 ): SourceStatus {
   if (check.status === null || check.status === 0) {
     return 'temporarily_unavailable'
   }
 
-  if (extra.soft404 || extra.homepageRedirect || extra.blockedRedirect) {
+  if (
+    extra.soft404 ||
+    extra.homepageRedirect ||
+    extra.blockedRedirect ||
+    extra.invalidRedirect
+  ) {
     return 'broken'
   }
 
@@ -110,11 +130,15 @@ function softNotFoundTitle(title: string | null) {
 
 export async function validateSourceUrl(
   url: string,
-  options: { timeoutMs?: number } = {},
+  options: {
+    timeoutMs?: number
+    requestContext?: RequestContext | undefined
+  } = {},
 ): Promise<SourceCheck> {
   const timeoutMs = options.timeoutMs ?? defaultTimeoutMs
   const parsed = parseHttpUrl(url)
   const checkedAt = new Date().toISOString()
+  const startedAt = Date.now()
 
   const base: SourceCheck = {
     ok: false,
@@ -125,16 +149,38 @@ export async function validateSourceUrl(
     pageTitle: null,
     contentType: null,
     sourceStatus: 'temporarily_unavailable',
+    attempts: 0,
+    retryable: false,
   }
 
   if (!parsed) {
-    return { ...base, sourceStatus: 'broken' }
+    return rejectSource(
+      'Source rejected: invalid url',
+      {
+        ...base,
+        sourceStatus: 'broken',
+        attempts: 1,
+        errorCode: 'SOURCE_REJECTED',
+      },
+      options.requestContext,
+      startedAt,
+    )
   }
 
   try {
     await assertPublicHost(parsed.hostname)
   } catch {
-    return { ...base, sourceStatus: 'broken' }
+    return rejectSource(
+      'Source rejected: non-public host',
+      {
+        ...base,
+        sourceStatus: 'broken',
+        attempts: 1,
+        errorCode: 'SOURCE_REJECTED',
+      },
+      options.requestContext,
+      startedAt,
+    )
   }
 
   let currentUrl = url
@@ -143,27 +189,34 @@ export async function validateSourceUrl(
   let finalContentType: string | null = null
   let redirected = false
   let redirectBlocked = false
+  let invalidRedirect = false
+  let totalAttempts = 0
+  let upstreamErrorCode: SourceCheck['errorCode'] | undefined
 
   try {
-    for (let attempt = 0; attempt <= maxRedirects; attempt++) {
-      const response = await fetch(currentUrl, {
-        method: 'GET',
-        headers: {
-          'user-agent':
-            'NexSift-Source-Validator/1.0 (+https://nexsift.com)',
-          accept: 'text/html,text/plain,application/json',
+    for (let redirectCount = 0; redirectCount <= maxRedirects; redirectCount++) {
+      const { response, attempt } = await fetchWithRetry(
+        currentUrl,
+        {
+          method: 'GET',
+          headers: {
+            'user-agent':
+              'NexSift-Source-Validator/1.0 (+https://nexsift.com)',
+            accept: 'text/html,text/plain,application/json',
+          },
+          redirect: 'manual',
         },
-        redirect: 'manual',
-        signal: AbortSignal.timeout(timeoutMs),
-      })
+        { timeoutMs },
+      )
 
+      totalAttempts += attempt
       finalStatus = response.status
 
       if (response.status >= 300 && response.status < 400) {
         const location = response.headers.get('location')
 
         if (!location) {
-          finalStatus = 0
+          invalidRedirect = true
           break
         }
 
@@ -196,8 +249,14 @@ export async function validateSourceUrl(
 
       break
     }
-  } catch {
-    finalStatus = finalStatus ?? null
+  } catch (error) {
+    if (error instanceof UpstreamRequestError) {
+      totalAttempts += error.attempt
+      upstreamErrorCode = error.code
+      finalStatus = null
+    } else {
+      throw error
+    }
   }
 
   const finalParsed = parseHttpUrl(currentUrl)
@@ -208,40 +267,129 @@ export async function validateSourceUrl(
 
   const isHttpOk = finalStatus !== null && finalStatus >= 200 && finalStatus < 300
   const soft404 = isHttpOk && softNotFoundTitle(finalTitle)
-
-  const ok = isHttpOk && !soft404 && !homeRedirect && !redirectBlocked
-
-  const status = finalStatus ?? 0
+  const ok =
+    isHttpOk &&
+    !soft404 &&
+    !homeRedirect &&
+    !redirectBlocked &&
+    !invalidRedirect
 
   const check: SourceCheck = {
     ok,
     requestedUrl: url,
     finalUrl: currentUrl,
-    status,
+    status: finalStatus,
     checkedAt,
     pageTitle: finalTitle,
     contentType: finalContentType,
     sourceStatus: 'temporarily_unavailable',
+    attempts: Math.max(totalAttempts, 1),
+    retryable: false,
   }
 
   check.sourceStatus = classifySourceCheck(check, {
     soft404,
     homepageRedirect: homeRedirect,
     blockedRedirect: redirectBlocked,
+    invalidRedirect,
   })
 
-  if (!ok) {
-    const reason = soft404
-      ? 'soft-404'
-      : homeRedirect
-        ? 'redirected to homepage'
-        : redirectBlocked
-          ? 'redirect to blocked host'
-          : `http ${status}`
-    throw new SourceRejectedError(`Source rejected: ${reason}`, check)
+  const errorCode = resolveErrorCode(check, upstreamErrorCode)
+  const retryable =
+    errorCode === 'RATE_LIMITED' ||
+    errorCode === 'UPSTREAM_TIMEOUT' ||
+    errorCode === 'SOURCE_UNAVAILABLE'
+
+  if (errorCode) {
+    check.errorCode = errorCode
   }
 
-  return check
+  check.retryable = retryable
+
+  if (ok) {
+    logSourceCheck(check, options.requestContext, startedAt)
+    return check
+  }
+
+  const reason = soft404
+    ? 'soft-404'
+    : homeRedirect
+      ? 'redirected to homepage'
+      : redirectBlocked
+        ? 'redirect to blocked host'
+        : invalidRedirect
+          ? 'redirect without valid location'
+          : finalStatus === 429
+            ? 'http 429'
+            : finalStatus === null
+              ? 'upstream unavailable'
+              : `http ${finalStatus}`
+
+  return rejectSource(
+    `Source rejected: ${reason}`,
+    check,
+    options.requestContext,
+    startedAt,
+  )
+}
+
+function rejectSource(
+  message: string,
+  check: SourceCheck,
+  requestContext: RequestContext | undefined,
+  startedAt: number,
+): never {
+  logSourceCheck(check, requestContext, startedAt)
+  throw new SourceRejectedError(message, check)
+}
+
+function resolveErrorCode(
+  check: SourceCheck,
+  upstreamErrorCode: SourceCheck['errorCode'] | undefined,
+): SourceCheck['errorCode'] | undefined {
+  if (upstreamErrorCode) {
+    return upstreamErrorCode
+  }
+
+  if (check.status === 429) {
+    return 'RATE_LIMITED'
+  }
+
+  if (check.status !== null && check.status >= 500) {
+    return 'SOURCE_UNAVAILABLE'
+  }
+
+  if (check.sourceStatus === 'temporarily_unavailable') {
+    return 'SOURCE_UNAVAILABLE'
+  }
+
+  if (!check.ok) {
+    return 'SOURCE_REJECTED'
+  }
+
+  return undefined
+}
+
+function logSourceCheck(
+  check: SourceCheck,
+  requestContext: RequestContext | undefined,
+  startedAt: number,
+) {
+  const host =
+    parseHttpUrl(check.finalUrl)?.hostname ?? parseHttpUrl(check.requestedUrl)?.hostname
+
+  logInfo('source_validation', {
+    operation: 'validateSource',
+    requestId: requestContext?.requestId,
+    correlationId: requestContext?.correlationId,
+    host,
+    httpStatus: check.status,
+    sourceStatus: check.sourceStatus,
+    attempt: check.attempts,
+    retryable: check.retryable,
+    errorCode: check.errorCode,
+    durationMs: Date.now() - startedAt,
+  })
 }
 
 export function parseHttpUrl(value: string) {
@@ -320,9 +468,9 @@ export function isPrivateAddress(address: string) {
     first === 0 ||
     first === 10 ||
     first === 127 ||
-    first === 169 && second === 254 ||
-    first === 172 && second >= 16 && second <= 31 ||
-    first === 192 && second === 168 ||
+    (first === 169 && second === 254) ||
+    (first === 172 && second >= 16 && second <= 31) ||
+    (first === 192 && second === 168) ||
     first >= 224
   )
 }

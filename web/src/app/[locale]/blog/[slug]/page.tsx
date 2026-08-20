@@ -23,6 +23,9 @@ export async function generateMetadata({
   }
 
   const canonical = `/blog/${post.slug}`
+  const images = post.coverImage
+    ? [`${siteConfig.url}/s3/${post.coverImage.objectKey}`]
+    : [`${siteConfig.url}/opengraph-image`]
 
   return {
     title: post.title,
@@ -37,13 +40,13 @@ export async function generateMetadata({
       modifiedTime: post.updatedAt,
       authors: [siteConfig.author],
       tags: post.tags,
-      images: ['/opengraph-image'],
+      images,
     },
     twitter: {
       card: 'summary_large_image',
       title: `${siteConfig.name} - ${post.title}`,
       description: post.description,
-      images: ['/opengraph-image'],
+      images,
     },
   }
 }
@@ -105,6 +108,9 @@ export default async function PostPage({
       name: siteConfig.name,
       url: siteConfig.url,
     },
+    image: post.coverImage
+      ? [`${siteConfig.url}/s3/${post.coverImage.objectKey}`]
+      : undefined,
     mainEntityOfPage: `${siteConfig.url}/blog/${post.slug}`,
   }
 

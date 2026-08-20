@@ -166,6 +166,8 @@ The published post appears in the signal ledger at `/` and at `/blog/{slug}`. `/
 ChatGPT Task (daily schedule)
   -> MCP connector (mcp Lambda Function URL)
   -> editorialInstructions tool (sources of truth)
+  -> listRecentPosts(detail=compact) for coverage check
+  -> resolvePost for exact deduplication
   -> API Gateway HTTP API
   -> Lambda: auth, Zod validation, editorial gates, source verification
   -> S3
@@ -254,6 +256,7 @@ S3 layout:
 ```text
 public/
 ├── posts/{slug}.json
+├── images/*
 └── indexes/
     ├── latest.json
     └── topics/{topic}.json

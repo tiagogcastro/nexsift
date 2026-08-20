@@ -1,7 +1,20 @@
+import { fetchWithRetry, UpstreamRequestError } from '../http/fetch-with-retry'
+import type { RequestContext } from '../runtime/observability'
+import { logInfo } from '../runtime/observability'
 import { assertPublicHost, parseHttpUrl } from './validate-source'
 
 export class ImageRejectedError extends Error {
-  constructor(public readonly reason: string) {
+  constructor(
+    public readonly reason: string,
+    public readonly code:
+      | 'IMAGE_REJECTED'
+      | 'RATE_LIMITED'
+      | 'UPSTREAM_TIMEOUT'
+      | 'SOURCE_UNAVAILABLE' = 'IMAGE_REJECTED',
+    public readonly retryable = false,
+    public readonly status: number | null = null,
+    public readonly attempts = 1,
+  ) {
     super(`Cover image rejected: ${reason}`)
     this.name = 'ImageRejectedError'
   }
@@ -32,59 +45,81 @@ const contentTypeExtensions = new Map([
 // bucket. Redirects follow the same public-host rules as source validation,
 // so the download cannot be pointed at private networks. Used by both the
 // cover image and inline images inside the markdown content.
-export async function downloadImage(url: string): Promise<DownloadedImage> {
+export async function downloadImage(
+  url: string,
+  options: {
+    timeoutMs?: number
+    requestContext?: RequestContext | undefined
+  } = {},
+): Promise<DownloadedImage> {
+  const timeoutMs = options.timeoutMs ?? defaultTimeoutMs
   const parsed = parseHttpUrl(url)
+  const startedAt = Date.now()
 
   if (!parsed) {
-    throw new ImageRejectedError('invalid url')
+    throw rejectImage('invalid url')
   }
 
   try {
     await assertPublicHost(parsed.hostname)
   } catch {
-    throw new ImageRejectedError('non-public host')
+    throw rejectImage('non-public host')
   }
 
   let currentUrl = url
+  let attempts = 0
 
   try {
-    for (let attempt = 0; attempt <= maxRedirects; attempt++) {
-      const response = await fetch(currentUrl, {
-        method: 'GET',
-        headers: {
-          'user-agent': 'NexSift-Source-Validator/1.0 (+https://nexsift.com)',
-          accept: 'image/avif,image/webp,image/jpeg,image/png,image/gif',
+    for (let redirectCount = 0; redirectCount <= maxRedirects; redirectCount++) {
+      const { response, attempt } = await fetchWithRetry(
+        currentUrl,
+        {
+          method: 'GET',
+          headers: {
+            'user-agent': 'NexSift-Source-Validator/1.0 (+https://nexsift.com)',
+            accept: 'image/avif,image/webp,image/jpeg,image/png,image/gif',
+          },
+          redirect: 'manual',
         },
-        redirect: 'manual',
-        signal: AbortSignal.timeout(defaultTimeoutMs),
-      })
+        { timeoutMs },
+      )
+
+      attempts += attempt
 
       if (response.status >= 300 && response.status < 400) {
         const location = response.headers.get('location')
 
         if (!location) {
-          throw new ImageRejectedError('redirect without location')
+          throw rejectImage('redirect without location', 'IMAGE_REJECTED', false, response.status, attempts)
         }
 
         const nextUrl = new URL(location, currentUrl).toString()
         const nextParsed = parseHttpUrl(nextUrl)
 
         if (!nextParsed) {
-          throw new ImageRejectedError('redirect to invalid url')
+          throw rejectImage('redirect to invalid url', 'IMAGE_REJECTED', false, response.status, attempts)
         }
 
         try {
           await assertPublicHost(nextParsed.hostname)
         } catch {
-          throw new ImageRejectedError('redirect to non-public host')
+          throw rejectImage('redirect to non-public host', 'IMAGE_REJECTED', false, response.status, attempts)
         }
 
         currentUrl = nextUrl
         continue
       }
 
+      if (response.status === 429) {
+        throw rejectImage('http 429', 'RATE_LIMITED', true, response.status, attempts)
+      }
+
+      if (response.status >= 500) {
+        throw rejectImage('upstream unavailable', 'SOURCE_UNAVAILABLE', true, response.status, attempts)
+      }
+
       if (response.status < 200 || response.status >= 300) {
-        throw new ImageRejectedError(`http ${response.status}`)
+        throw rejectImage(`http ${response.status}`, 'IMAGE_REJECTED', false, response.status, attempts)
       }
 
       const finalContentType = response.headers.get('content-type')
@@ -94,26 +129,38 @@ export async function downloadImage(url: string): Promise<DownloadedImage> {
         : null
 
       if (numericLength !== null && numericLength > maxBytes) {
-        throw new ImageRejectedError('image too large')
+        throw rejectImage('image too large', 'IMAGE_REJECTED', false, response.status, attempts)
       }
 
       const bytes = Buffer.from(await response.arrayBuffer())
 
       if (bytes.byteLength > maxBytes) {
-        throw new ImageRejectedError('image too large')
+        throw rejectImage('image too large', 'IMAGE_REJECTED', false, response.status, attempts)
       }
 
       const contentType = normalizeContentType(finalContentType)
 
       if (!contentType) {
-        throw new ImageRejectedError('not an image')
+        throw rejectImage('not an image', 'IMAGE_REJECTED', false, response.status, attempts)
       }
 
       const extension = contentTypeExtensions.get(contentType)
 
       if (!extension) {
-        throw new ImageRejectedError('unsupported image type')
+        throw rejectImage('unsupported image type', 'IMAGE_REJECTED', false, response.status, attempts)
       }
+
+      logInfo('image_download', {
+        operation: 'downloadImage',
+        requestId: options.requestContext?.requestId,
+        correlationId: options.requestContext?.correlationId,
+        sourceUrl: url,
+        finalUrl: currentUrl,
+        httpStatus: response.status,
+        contentType,
+        attempt: attempts,
+        durationMs: Date.now() - startedAt,
+      })
 
       return {
         buffer: bytes,
@@ -124,13 +171,60 @@ export async function downloadImage(url: string): Promise<DownloadedImage> {
     }
   } catch (error) {
     if (error instanceof ImageRejectedError) {
+      logInfo('image_download', {
+        operation: 'downloadImage',
+        requestId: options.requestContext?.requestId,
+        correlationId: options.requestContext?.correlationId,
+        sourceUrl: url,
+        finalUrl: currentUrl,
+        httpStatus: error.status,
+        errorCode: error.code,
+        retryable: error.retryable,
+        attempt: error.attempts,
+        durationMs: Date.now() - startedAt,
+      })
       throw error
     }
 
-    throw new ImageRejectedError('download failed')
+    if (error instanceof UpstreamRequestError) {
+      const rejected = rejectImage(
+        error.code === 'UPSTREAM_TIMEOUT' ? 'download timed out' : 'download failed',
+        error.code,
+        true,
+        null,
+        attempts + error.attempt,
+      )
+
+      logInfo('image_download', {
+        operation: 'downloadImage',
+        requestId: options.requestContext?.requestId,
+        correlationId: options.requestContext?.correlationId,
+        sourceUrl: url,
+        finalUrl: currentUrl,
+        httpStatus: null,
+        errorCode: rejected.code,
+        retryable: rejected.retryable,
+        attempt: rejected.attempts,
+        durationMs: Date.now() - startedAt,
+      })
+
+      throw rejected
+    }
+
+    throw rejectImage('download failed', 'SOURCE_UNAVAILABLE', true, null, Math.max(attempts, 1))
   }
 
-  throw new ImageRejectedError('too many redirects')
+  throw rejectImage('too many redirects')
+}
+
+function rejectImage(
+  reason: string,
+  code: ImageRejectedError['code'] = 'IMAGE_REJECTED',
+  retryable = false,
+  status: number | null = null,
+  attempts = 1,
+) {
+  return new ImageRejectedError(reason, code, retryable, status, attempts)
 }
 
 function normalizeContentType(value: string | null) {

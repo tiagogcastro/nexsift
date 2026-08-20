@@ -27,13 +27,15 @@ import {
   type SourceFailure,
   validateSourceUrl,
 } from './validate-source'
+import type { RequestContext } from '../runtime/observability'
 
 export const latestIndexKey = 'public/indexes/latest.json'
-const latestLimit = 100
+export const latestLimit = 100
 
 export type PublishResult = {
   post: Post
   operation: 'created' | 'updated'
+  imageCount: number
 }
 
 export class NotFoundError extends Error {
@@ -84,6 +86,7 @@ export async function replacePostSource(
   sourceIndex: number,
   newUrl: string,
   reason: string,
+  requestContext?: RequestContext,
 ): Promise<Post> {
   const post = await getPost(slug)
 
@@ -95,7 +98,7 @@ export async function replacePostSource(
     throw new SourceIndexError(sourceIndex)
   }
 
-  const check = await validateSourceUrl(newUrl)
+  const check = await validateSourceUrl(newUrl, { requestContext })
   const current = post.sources[sourceIndex]
 
   const sources = post.sources.map((source, index) => {
@@ -114,7 +117,10 @@ export async function replacePostSource(
   return updated
 }
 
-export async function publishPost(draft: PostDraft): Promise<PublishResult> {
+export async function publishPost(
+  draft: PostDraft,
+  requestContext?: RequestContext,
+): Promise<PublishResult> {
   const primaryTopic = draft.topics[0]
 
   if (!primaryTopic) {
@@ -122,10 +128,10 @@ export async function publishPost(draft: PostDraft): Promise<PublishResult> {
   }
 
   const slug = buildSignalSlug(primaryTopic, draft.title, draft.signalDate)
-  const verifiedSources = await verifyPostSources(draft.sources)
+  const verifiedSources = await verifyPostSources(draft.sources, requestContext)
   const existing = await getPost(slug)
-  const coverImage = await resolveCoverImage(draft, slug, existing)
-  const inline = await resolveInlineImages(draft.content, slug)
+  const coverImage = await resolveCoverImage(draft, slug, existing, requestContext)
+  const inline = await resolveInlineImages(draft.content, slug, requestContext)
   const post = normalizePost(
     {
       ...draft,
@@ -144,7 +150,11 @@ export async function publishPost(draft: PostDraft): Promise<PublishResult> {
   await updateLatestIndex(post)
   await synchronizeTopicIndexes(post, existing)
 
-  return { post, operation: existing ? 'updated' : 'created' }
+  return {
+    post,
+    operation: existing ? 'updated' : 'created',
+    imageCount: inline.objectKeys.length + (coverImage ? 1 : 0),
+  }
 }
 
 // Deletes stored images of a slug that the published post no longer
@@ -172,6 +182,7 @@ async function resolveCoverImage(
   draft: PostDraft,
   slug: string,
   existing: Post | null,
+  requestContext?: RequestContext,
 ): Promise<CoverImage | undefined> {
   const previous = existing?.coverImage
 
@@ -183,7 +194,7 @@ async function resolveCoverImage(
     return undefined
   }
 
-  const downloaded = await downloadImage(draft.coverImage.url)
+  const downloaded = await downloadImage(draft.coverImage.url, { requestContext })
   const objectKey = `public/images/${slug}${downloaded.extension}`
 
   if (previous && previous.objectKey !== objectKey) {
@@ -207,6 +218,7 @@ async function resolveCoverImage(
 // backend reopens the exact URL and records the result on the stored source.
 export async function verifyPostSources(
   sources: PostDraft['sources'],
+  requestContext?: RequestContext,
 ): Promise<VerifiedPostSource[]> {
   const checkedAt = new Date().toISOString()
   const editorialFailures = collectEditorialFailures(sources)
@@ -220,7 +232,7 @@ export async function verifyPostSources(
   }
 
   const results = await Promise.allSettled(
-    sources.map((source) => validateSourceUrl(source.url)),
+    sources.map((source) => validateSourceUrl(source.url, { requestContext })),
   )
 
   const verified: VerifiedPostSource[] = []
@@ -241,12 +253,17 @@ export async function verifyPostSources(
           url: source.url,
           status: reason.check.status,
           sourceStatus: reason.check.sourceStatus,
+          retryable: reason.check.retryable,
+          errorCode: reason.check.errorCode,
+          attempts: reason.check.attempts,
         })
       } else {
         failures.push({
           url: source.url,
           status: null,
           sourceStatus: 'temporarily_unavailable',
+          retryable: true,
+          errorCode: 'SOURCE_UNAVAILABLE',
         })
       }
 
@@ -298,6 +315,9 @@ function collectEditorialFailures(
         url: source.url,
         status: null,
         sourceStatus: 'temporarily_unavailable',
+        retryable: false,
+        errorCode: 'VALIDATION_ERROR',
+        reason: 'editorial assertion missing',
       })
     }
   }
@@ -313,6 +333,7 @@ export async function deletePost(slug: string) {
   }
 
   await deleteObject(`public/posts/${slug}.json`)
+  await removeOrphanImages(slug, [])
   await removeFromLatestIndex(slug)
   await removeFromTopicIndexes(existing)
 

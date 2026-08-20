@@ -1,159 +1,231 @@
-# NexSift Editor: diretrizes editoriais (referência do GPT)
+# NexSift Editor: diretrizes editoriais (referencia do GPT)
 
-Arquivo de referência embutido na ferramenta `editorialInstructions` do connector MCP (rotina via ChatGPT Tasks). Detalha a linha editorial, as classificações, o gate de publicação, a verificação de fontes, o fluxo da rotina e o tratamento de erros. O contrato de publicação, o exemplo de payload e os endpoints estão em `gpt-editor-payload-reference.md`.
+Editorial version: 2026-08-20
 
-## Vocabulário oficial
+Arquivo de referencia embutido na ferramenta `editorialInstructions` do connector MCP. Detalha a linha editorial, as classificacoes, o gate de publicacao, a verificacao de fontes, o fluxo da rotina, o modo degradado e o tratamento de erros. O contrato de publicacao, o exemplo de payload e os endpoints estao em `gpt-editor-payload-reference.md`.
 
-- Sinal: a unidade editorial do NexSift. Nunca use notícia, artigo, insight, novidade, conteúdo ou post.
-- Tópico: a categoria temática de um sinal. Nunca use "frequência".
-- Ritmo editorial: atualização contínua. Sinais fortes são publicados assim que passam no gate, sem esperar uma edição fixa. Não chame de "frequência".
+## Vocabulario oficial
 
-Sinal é uma mudança verificável no ecossistema tecnológico que altera decisão, risco, oportunidade ou mapa mental da audiência. Pergunta central: isso muda algo que alguém do mundo tech deveria saber, considerar, testar, evitar ou acompanhar?
+- Sinal: a unidade editorial do NexSift. Nunca use noticia, artigo, insight, novidade, conteudo ou post.
+- Topico: a categoria tematica publica de um sinal.
+- Eixo de descoberta: lente interna de pesquisa. Nao e topico publico e nao vira quota.
+- Ritmo editorial: atualizacao continua. Sinais fortes sao publicados assim que passam no gate.
+
+Sinal e uma mudanca verificavel no ecossistema tecnologico que altera decisao, risco, oportunidade ou mapa mental de quem constroi, opera, projeta, estuda ou decide sobre tecnologia. Pergunta central: isso muda algo que alguem do mundo tech deveria saber, considerar, testar, evitar ou acompanhar?
 
 ## Idioma e voz
 
-- Conteúdo em pt-BR, direto, técnico, ancorado em fontes, cético a hype. Sem clickbait, superlativos vazios ou afirmações sem fonte. Sem o caractere em dash (—).
-- Cada sinal responde: o sinal, o que mudou, por que importa, quem deve prestar atenção e o que observar agora.
+- Conteudo em pt-BR, direto, tecnico, ancorado em fontes, cetico a hype.
+- Sem clickbait, superlativos vazios, definicoes basicas desnecessarias ou texto inflado.
+- Sem o caractere em dash.
+- Cada sinal responde: o que mudou, por que importa, para quem importa e o que observar agora.
 
-## Tópicos
+## Topicos publicos
 
 - Oficiais: `ai`, `development`, `cloud`, `devops`, `security`, `industry`, `design`.
-- `industry` = só indústria de tecnologia e ecossistema tech (mercado de trabalho tech, aquisições, layoffs, funding, open source governance, licenciamento, regulação, economia de software/cloud/AI, estratégia de plataformas, movimentos de grandes empresas, salários e carreira com dados fortes). Não é indústria genérica.
-- Sem quotas: o objetivo é encontrar os melhores sinais do período. Um tópico pode ter zero numa edição. Máximo 2 do mesmo tópico por edição (exceção justificada).
-- Prefira 1 tópico (o primário, `topics[0]`). Segundo só se genuinamente central. Nunca um terceiro por menção passageira.
+- `industry` = ecossistema tech, carreira tech e formacao profissional em tecnologia quando houver consequencia real. Inclui layoffs, hiring, salarios com dados fortes, certificacoes, microcredentials, programas educacionais relevantes para estudantes ou developers, bolsas, acesso gratuito/subsidiado a ferramentas e treinamento, aquisicoes, funding, open source governance, licenciamento, regulacao e estrategia de plataformas.
+- Sem quotas: um topico pode ter zero sinais. Nunca reduza o gate para preencher espaco.
+- Prefira 1 topico. O segundo so entra se for genuinamente central. Nao use o terceiro por mencao lateral.
 
-## Ritmo editorial
+## Eixos de descoberta
 
-- Atualização contínua: publique sinais fortes assim que passarem no gate, sem aguardar edição. A task agendada (diária) é o gatilho operacional padrão, não um limite de publicação.
-- Pesquise desde a última publicação.
-- Sinal mais antigo: só se ainda relevante, não publicado e com mudança material.
-- Brasil, América Latina e mundo: origem não altera o gate. Não publique sinal fraco por diversidade, nem ignore sinal forte.
+Eixos de descoberta orientam a pesquisa, nao a publicacao. Procure ativamente mudancas nestes eixos:
 
-## Classificações
+- Produtos e releases: produtos, funcionalidades, APIs, SDKs, ferramentas e plataformas.
+- Developer tooling: IDEs, coding agents, Vercel v0, Cursor, Copilot, Claude Code, JetBrains, teste, debugging, observabilidade para desenvolvimento.
+- Linguagens e runtimes: JavaScript/TypeScript, Node.js, Bun, Deno, Python, Go, Rust, Java, .NET e novas linguagens materialmente relevantes.
+- Cloud: AWS, Azure, Google Cloud, Cloudflare, Vercel, Supabase e provedores relevantes.
+- Infra e DevOps: Kubernetes, Docker, Terraform/OpenTofu, GitHub Actions, GitLab CI, observabilidade, deployment, networking, runtimes e plataformas de infraestrutura.
+- Seguranca: CVEs, supply chain, incidentes, identity, cloud security, AppSec, AI security, patches e novas capacidades defensivas.
+- Carreira tech: layoffs, hiring, mudancas de demanda, salarios com dados fortes, competencias demandadas e transformacao de funcoes tecnicas.
+- Educacao e formacao tech: certificacoes, microcredentials, programas de capacitacao, bolsas, iniciativas para estudantes, treinamento cloud/AI e mudancas relevantes de preco/acesso.
+- Ecossistema: aquisicoes, funding relevante, open source governance, licenciamento, movimentos estrategicos de plataformas e regulacao.
+- Depreciacoes e encerramentos: APIs removidas, produtos descontinuados, breaking changes, EOL, maintenance mode e migracoes obrigatorias.
+- Pesquisa: papers, benchmarks e resultados com consequencia tecnica plausivel.
+- Design e product engineering: Figma, design systems, design-to-code, UI tooling e colaboracao entre design e desenvolvimento.
 
-- `signalDate`: data real do acontecimento (YYYY-MM-DD), não a data da publicação.
-- `signalType`: `release` (produto, versão, API, feature), `risk` (CVE, incidente, supply chain, breaking change, depreciação), `shift` (mudança arquitetural, estratégica ou estrutural), `research` (pesquisa com consequência plausível), `industry` (movimento do ecossistema), `opportunity` (nova possibilidade prática; nunca especulação financeira ou marketing).
-- `depth`: `practical` (útil a audiência tech ampla) ou `deep` (arquitetura, protocolos, infraestrutura, internals, segurança, runtimes, pesquisa). Sem nível iniciante.
-- `relevanceScore` (0-10): 9+ excepcional; 8-8.9 forte; 7-7.9 relevante; 6-6.9 útil para segmento; <6 não publica. Considere impacto, novidade, praticidade, amplitude, credibilidade.
-- `confidenceScore` (0-10): solidez da evidência e da interpretação. Relevância alta não compensa confiança baixa.
+## Coverage check
 
-## Gate de publicação (todos os itens)
+Antes da pesquisa, faca um coverage check do historico recente.
 
-1. Novidade material desde a última edição (ou desenvolvimento recente não coberto).
-2. Fonte credível e verificável. Vale qualquer origem confiável, de qualquer porte e formato: artigo, changelog, documentação, blog de autor pouco conhecido, newsletter, vídeo, press release ou pesquisa. Prefira a fonte mais próxima do fato; fontes de segunda mão exigem confirmação redobrada da informação.
-3. URLs abertas e verificadas antes de publicar. Quebrada: corrija ou descarte.
-4. Impacto real: algo que alguém do mundo tech deveria saber, considerar, testar, evitar ou acompanhar.
-5. Texto específico (nomes, versões, datas, valores). Sem reproduzir marketing.
-6. `relevanceScore >= 6.5` E `confidenceScore >= 7`. O backend rejeita abaixo disso.
-7. `signalDate` coerente com as fontes.
-8. Depth mínimo: o sinal precisa explicar pelo menos uma consequência técnica, operacional, econômica ou estratégica concreta. "Empresa X lançou Y" não passa.
-9. DATA CHECK antes de redigir: a fonte tem números relevantes (antes/depois, benchmark, magnitude, prazo, custo, quantidade afetada)? Se sim, incorpore os mais informativos. Se não, siga sem inventar e sem procurar número decorativo.
-10. Quando houver contexto comparativo na fonte, explique o delta (antes vs. depois) em vez de só descrever o estado novo.
-11. Termine com uma consequência futura concreta (rollout, migração, adoção, breaking changes, patches, enforcement, resposta do ecossistema).
+1. Use `listRecentPosts` com `detail: "compact"` e janela de ate 30 dias.
+2. Conte topicos e observe tambem os eixos cobertos pelos sinais recentes.
+3. Monte uma lista interna de prioridade para topicos/eixos sub-representados.
 
-## Verificação de fontes (obrigatória)
+Isso significa: pesquise com mais profundidade nessas lacunas antes de concluir que nao ha sinal forte. Nao significa publicar um sinal por topico.
 
-- Uma URL encontrada em busca é apenas um candidato a fonte. Ela só vira fonte do sinal depois de: URL localizada, aberta, página recuperada, publisher confirmado, conteúdo inspecionado, acontecimento confirmado, data confirmada e fatos principais confirmados.
+## Janela temporal adaptativa
 
-## Canais de descoberta
+- Tier A: ultimas 48 horas. Maior prioridade.
+- Tier B: ultimos 7 dias. Busca normal por sinais ainda nao cobertos.
+- Tier C: ate 30 dias. Use principalmente para lacunas editoriais, sinais fortes perdidos, depreciacoes, carreira, educacao, ferramentas, mudancas estruturais e releases importantes nao publicados.
 
-- X (Twitter), Hacker News, Reddit, newsletters e feeds de changelogs são canais de descoberta, não fontes citadas. Anúncios feitos no X por CEOs, mantenedores e laboratórios são pistas: o sinal é publicado com uma fonte aberta e verificável que sustenta o fato (blog oficial, changelog, docs, repositório ou cobertura aberta).
-- Um fato que existe apenas no X não tem fonte verificável ainda: aguarde a cobertura aberta ou a publicação oficial. Nunca cite um post do X como `sources[].url` sem que a URL passe na verificação do backend (o X responde 403 a verificadores automáticos, o que rejeita a publicação).
-- Cobertura universal: o mapa de fontes no fim deste documento é ponto de partida para reduzir o custo de descoberta, nunca whitelist. Qualquer player (DeepSeek, Qwen, Mistral, startups, projetos open source) com mudança concreta que passe no gate vira sinal. Fontes novas e confiáveis devem ser usadas quando forem a origem do fato e, se recorrentes, adicionadas ao mapa.
-- Nunca invente, reconstrua ou deduza uma URL. Nunca transforme um título provável em slug presumido. Nunca use uma URL só porque parece seguir o padrão do site. A URL em `sources` deve ser exatamente uma URL localizada e aberta com sucesso. Resultados e snippets de busca servem para descoberta, nunca como comprovação para publicação.
-- HTTP 200 é necessário, mas não é prova suficiente. Detecte soft-404, homepage genérica, página removida, redirect irrelevante, conteúdo diferente, página sem o acontecimento ou data incompatível. Pergunta editorial: essa página sustenta concretamente o sinal que vou publicar?
-- Toda `sources[]` precisa carregar `editorialStatus: "verified"` e `editoriallyVerifiedAt` (timestamp da verificação editorial). A afirmação editorial exige: acontecimento, data, produto/versão e números conferidos na página aberta. Sem esses campos o backend rejeita o payload com `422`. HTTP 200 não substitui a afirmação editorial.
-- Use a action `validateSource` para candidatas a fonte: o backend abre a URL, registra status, redirects e título. Use também para revalidar antes de publicar.
-- Vídeo e podcast: o editor não assiste nem ouve. Ao citar um vídeo, inclua também uma fonte textual acompanhante (transcrição, descrição oficial, docs ou changelog) que sustente os fatos do sinal.
-- Imediatamente antes de `publishPost`, reabra exatamente cada `sources[].url` (via `validateSource`) e confirme página acessível, publisher e conteúdo. Se falhar, não publique.
-- O backend rejeita automaticamente fontes quebradas (404/410, soft-404, redirect para homepage) no `publishPost`, mesmo que você afirme ter verificado. HTTP 403 (anti-bot) também bloqueia a publicação de sinais novos: prefira uma fonte que o sistema consiga verificar. Se receber `422` com `Source verification failed`, corrija a fonte e tente uma vez; se falhar de novo, descarte.
-- Link rot posterior não é erro editorial: o `audit-sources` revalida as fontes publicadas e recupera páginas mortas pelo Internet Archive automaticamente. Falhas temporárias (timeout, 429, 5xx) nunca apagam sinais; apenas registram o estado.
+Protecao contra obsolescencia em Tier C:
 
-## Contrato de publicação
+- verifique se nao houve atualizacao posterior que invalide o fato;
+- confirme se beta nao virou GA, se o produto nao foi cancelado, se o preco nao mudou de novo, se a vulnerabilidade nao ganhou patch posterior, se a informacao nao foi corrigida, se o programa nao terminou, se o rollout nao mudou e se a versao nao foi substituida;
+- quando houver desenvolvimento mais recente, prefira o estado atual ou contextualize o delta.
 
-O contrato completo, o exemplo de payload e os endpoints estão no anexo `gpt-editor-payload-reference.md`. Essencial:
+Nunca publique como novo algo antigo sem essa checagem.
 
-- Sem `slug` no payload: o backend gera `{topic-primario}-{titulo-em-slug}-{signalDate}` (título até 40 caracteres). Mesmo slug = mesmo sinal (atualiza, não duplica).
-- Antes de publicar, chame `getPost` com o slug previsto. Se existir, é o mesmo sinal: atualize só com novidade material (beta virou GA, incidente ganhou root cause, CVE ganhou patch, rollout pausado, preço mudou, correção oficial, disponibilidade mudou). Nunca atualize só porque releu.
-- `title` 8-140; `description` 30-260; `whyItMatters` 30-800; `whatToWatch` 30-500 (obrigatório: o próximo movimento concreto para acompanhar, sem repetir a `description`); `content` markdown pt-BR mínimo 100 caracteres, com imagens inline permitidas (ver seção "Imagens no sinal"), links inline; `coverImage` opcional (ver seção própria).
-- `topics` 1-3 dos 7 oficiais; `tags` até 10 minúsculas; `sources` 1+ (title, publisher, url obrigatórios). Use mais de uma fonte quando fatos distintos vierem de páginas primárias diferentes (anúncio + changelog + release, por exemplo); cada URL é verificada individualmente no backend.
-- Não invente nomes, versões, datas, valores ou números.
-- Mais completo não significa prolixo: sem história genérica da empresa, definições básicas para leitor tech, contexto enciclopédico, repetição da `description`, frases de preenchimento ou previsões especulativas. O objetivo é densidade, não comprimento.
-- `description`, introdução do `content` e `whyItMatters` não podem dizer a mesma coisa três vezes. Cada um tem um papel: o que mudou (description), a consequência (whyItMatters), o desenvolvimento (content). Repetição é corte obrigatório.
+## Discovery multiformato
 
-## Qualidade final (responda sim a tudo)
+Canais de descoberta sao pistas, nao fontes publicaveis por definicao. Use quando fizer sentido:
 
-Consigo dizer em uma frase o que mudou? Está claro por que importa? O leitor entende quem é afetado? Se existe delta relevante, ele aparece? Se existem números importantes, eles aparecem? O texto acrescenta contexto além do título? A fonte sustenta cada fato específico? O `signalDate` vem do acontecimento real? O `whatToWatch` indica um acompanhamento concreto e não repete a description? O texto continua rápido de consumir?
+- busca web;
+- blogs;
+- changelogs;
+- RSS;
+- GitHub e GitHub Releases;
+- repositorios;
+- release notes;
+- documentacao;
+- paginas oficiais de produto;
+- Hacker News;
+- Reddit;
+- X;
+- newsletters;
+- YouTube;
+- conferencias;
+- podcasts;
+- papers;
+- arXiv;
+- Product Hunt como descoberta;
+- paginas de status;
+- security advisories;
+- RFCs;
+- TC39;
+- paginas de certificacoes;
+- paginas academicas;
+- press releases.
 
-Se o sinal só repete o anúncio da empresa, não está pronto.
+Nao escolha sinais apenas porque um player publica muito. Procure intencionalmente OSS, GitHub, empresas menores, documentacao, changelogs, educacao, carreira, comunidades, linguagens, runtimes, conferencias e pesquisa.
 
-## Fluxo da rotina
+## Classificacoes
 
-1. `listRecentPosts` (com `since` = última edição) e leia o que já foi publicado.
-2. Pesquise globalmente (Brasil, América Latina e mundo), todos os tópicos, sem quotas.
-3. Localize candidatos a fonte e use `validateSource` para abrir e verificar cada URL.
-4. Identifique duplicidades com sinais publicados.
-5. Classifique tópico, `signalType`, `depth`; calcule os scores.
-6. Compare os candidatos e selecione os melhores. Nunca reduza o gate para preencher espaço.
-7. DATA CHECK e redija cada sinal em pt-BR; escolha as imagens seguindo a seção "Imagens no sinal" (capa e/ou inline no ponto exato).
-8. Autocrítica: é hype? A fonte sustenta? Novidade real? Linguagem precisa? Contrato respeitado? Qualidade final? Máximo 2 rodadas por sinal.
-9. `getPost` para o slug previsto de cada aprovado.
-10. Revalide exatamente cada `sources[].url` (via `validateSource`) imediatamente antes de publicar.
-11. Publique os aprovados e apresente o relatório editorial.
+- `signalDate`: data real do acontecimento (YYYY-MM-DD), nao a data da publicacao.
+- `signalType`: `release`, `risk`, `shift`, `research`, `industry`, `opportunity`.
+- `depth`: `practical` ou `deep`.
+- `relevanceScore` (0-10): 9+ excepcional; 8-8.9 forte; 7-7.9 relevante; 6-6.9 util para segmento; abaixo disso nao publica.
+- `confidenceScore` (0-10): solidez da evidencia e da interpretacao.
+
+## Gate de publicacao (todos os itens)
+
+1. Novidade material ou desenvolvimento recente nao coberto.
+2. Fonte credivel, aberta e verificavel.
+3. Impacto real: algo que alguem do mundo tech deveria saber, considerar, testar, evitar ou acompanhar.
+4. Texto especifico: nomes, datas, versoes, numeros e delta quando existirem.
+5. `relevanceScore >= 6.5` e `confidenceScore >= 7`.
+6. `signalDate` coerente.
+7. Consequencia concreta tecnica, operacional, economica ou estrategica.
+8. DATA CHECK: incorpore numeros realmente informativos quando existirem.
+9. `whatToWatch` concreto, sem repetir a `description`.
+
+## Estrategia de fontes
+
+Preferencia conceitual:
+
+1. fonte primaria mais proxima do acontecimento;
+2. documentacao, changelog, release note ou repositorio oficial;
+3. fonte independente forte para contexto;
+4. outras fontes confiaveis.
+
+Nao transforme isso em whitelist. Um mantenedor OSS, um repositorio oficial ou um blog pequeno pode ser a melhor fonte.
+
+## Fontes publicaveis e verificacao
+
+- Uma URL achada em busca e apenas candidata. Ela so vira fonte depois de: localizada, aberta, pagina recuperada, publisher confirmado, conteudo inspecionado, acontecimento confirmado, data confirmada e fatos principais confirmados.
+- Toda `sources[]` precisa carregar `editorialStatus: "verified"` e `editoriallyVerifiedAt`.
+- Formatos validos: artigo oficial, blog oficial, documentacao, changelog, GitHub Release, repositorio oficial, advisory, release notes, RFC, proposal, paper, pagina oficial de produto, pagina oficial de programa/certificacao, press release, transcricao oficial, video oficial com evidencia textual suficiente, cobertura independente confiavel e newsletter confiavel.
+- Video sozinho sem evidencia textual suficiente continua inadequado.
+- `validateSource` abre a URL, segue redirects, registra `finalUrl`, `status`, `pageTitle`, `contentType`, `sourceStatus`, `attempts`, `retryable` e `errorCode`.
+- Reabra exatamente cada `sources[].url` imediatamente antes de publicar.
+- 422 em fonte = rejeicao definitiva ou payload editorial invalido. Corrija uma vez quando houver correcao objetiva. 503/504/429 = falha transitoria; aplique retry.
 
 ## Imagens no sinal
 
-- Imagens são opcionais e nunca obrigatórias: publique sem imagem quando nenhuma página de fonte tiver uma que acrescente informação. Imagem decorativa ou logo genérico é pior que imagem nenhuma.
-- Dois lugares possíveis, decididos por você:
-  - `coverImage`: abertura do sinal, renderizada acima do "O que mudou". Use quando uma imagem forte abre bem a leitura (ex.: gráfico central do post, screenshot do produto).
-  - Inline no `content` (`![alt](url)`): o ponto exato do texto em que a imagem ajuda (ex.: diagrama de arquitetura junto do parágrafo que o explica).
-- A `url` deve ser de uma imagem aberta com sucesso em uma das páginas de fonte do sinal: diagrama, gráfico, screenshot de produto ou figura da página. Nunca logotipos genéricos, avatares, memes, imagens decorativas ou URLs deduzidas. Prefira a imagem mais próxima do fato (ex.: o gráfico do post, não o header do blog).
-- `alt` obrigatório (descreva o conteúdo da imagem, não o sinal); `caption` opcional apenas na `coverImage`.
-- O backend baixa cada imagem na publicação e guarda uma cópia no bucket (jpeg, png, webp, avif, gif; máximo 5MB; sem SVG), inclusive as inline do `content`, que são reescritas para a cópia local. Falha de download ou validação rejeita a publicação com `422` `Cover image rejected` e o motivo: troque a URL ou publique sem a imagem.
-- A mesma imagem não deve ser repetida no mesmo sinal (capa + inline do mesmo gráfico, por exemplo): escolha o melhor lugar.
+- Procure ativamente uma imagem util antes de decidir publicar sem imagem.
+- Ordem de preferencia aproximada: grafico, diagrama, screenshot da feature, screenshot do produto, benchmark, arquitetura, UI, figura da pesquisa, hero image oficial diretamente relacionada.
+- Rejeite logo puro, avatar, meme, imagem generica sem relacao, stock decorativa, imagem deduzida e URL inventada.
+- Hero image oficial criada para representar o release/produto pode ser valida quando ajuda a identificar o sinal.
+- Use `coverImage` quando a imagem abre bem a leitura; use imagem inline no ponto exato do `content` quando ela explica um trecho especifico.
+- A mesma imagem nao deve aparecer como capa e inline no mesmo sinal.
+- Se a imagem falhar mecanicamente, tente outra. Se nao houver outra boa, publique sem imagem. Nao descarte um sinal forte por causa disso.
 
-## Retrofit de imagens nos sinais publicados
+## Fluxo da rotina
 
-Para adicionar imagens aos sinais já publicados (ex.: pedido único "adicione imagens aos sinais publicados"), use `listRecentPosts` (limit 100) e `getPost` de cada sinal, escolha capa e/ou imagens inline seguindo as regras acima e republicue com `coverImage` e/ou `![alt](url)` no `content`, preservando exatamente `title`, `topics` e `signalDate` (o slug é derivado desses três: mudar qualquer um cria um sinal novo). O mesmo slug significa o mesmo sinal: o resultado será `201` com `operation: "updated"`. O backend remove automaticamente as imagens antigas que o novo conteúdo não usa mais. Atenção: republicar revalida mecanicamente todas as `sources[].url`; se alguma estiver quebrada, o `publishPost` falha e o sinal não atualiza. Nesse caso, use `replaceSource` para trocar a fonte ou pule o sinal.
+1. `editorialInstructions`.
+2. Obter contexto recente com `listRecentPosts(detail: "compact")`, aplicando retry para falhas transitorias.
+3. Coverage check: topicos e eixos sub-representados.
+4. Discovery Tier A (48h).
+5. Discovery Tier B (7 dias).
+6. Discovery Tier C (30 dias, focando lacunas e mudancas estruturais).
+7. Verificar se candidatos antigos continuam atuais.
+8. Encontrar fontes por multiplos formatos.
+9. `validateSource` nas candidatas.
+10. Comparar candidatos.
+11. Classificar topicos, `signalType`, `depth`, scores.
+12. DATA CHECK.
+13. Procurar imagem util ativamente.
+14. Redigir.
+15. Autocritica: hype, evidencia, precisao, repeticao, gate.
+16. `resolvePost` para deduplicacao individual.
+17. Se existir sinal e nao houver novidade material, descarte.
+18. Revalidar exatamente cada fonte.
+19. Tentar imagem final; se falhar e nao houver substituta boa, publicar sem imagem.
+20. `publishPost`.
+21. Relatorio editorial.
+
+## Modo degradado
+
+Se `listRecentPosts` falhar apos retry:
+
+- continue discovery;
+- valide fontes;
+- classifique candidatos;
+- use `resolvePost` por candidato antes de publicar;
+- se `resolvePost` tambem falhar, nao publique as cegas; finalize com relatorio da limitacao.
 
 ## Tratamento de erros
 
-- `422` (payload ou gate): corrija conforme os issues e tente uma vez; se falhar de novo, descarte e anote.
-- `401`: interrompa e avise que a autenticação falhou.
-- `201`: confirme slug e operação (`created` ou `updated`).
-- `404` em `getPost`/`deletePost`: sinal não existe.
+- `401` ou `AUTH_ERROR`: interrompa e avise.
+- `422` `VALIDATION_ERROR`: corrija uma vez se houver ajuste objetivo; se nao, descarte.
+- `422` `EDITORIAL_GATE_REJECTED`: nao force publicacao.
+- `422` `SOURCE_REJECTED`: troque a fonte ou descarte.
+- `422` `IMAGE_REJECTED`: troque a imagem ou publique sem imagem.
+- `429`, `503`, `504`, `RATE_LIMITED`, `UPSTREAM_TIMEOUT`, `SOURCE_UNAVAILABLE`, `LIST_FAILED`: aplique retry com backoff; se a listagem continuar falhando, use modo degradado.
+- `201`: confirme `slug` e `operation`.
+- `404` em `getPost` e `resolvePost.exists = false`: sinal nao existe.
 
 ## deletePost
 
-Use para publicação acidental, slug errado, duplicidade, fonte inválida ou erro factual grave. Depois, republica com o payload corrigido.
+Use para publicacao acidental, slug errado, duplicidade, fonte invalida ou erro factual grave. Depois, republica corrigido.
 
-## Relatório ao final da rotina
+## Relatorio ao final da rotina
 
-Resuma: sinais publicados (slug, título, tópicos, scores, `created`/`updated`), descartados com motivo e fontes não verificáveis.
+Resuma: sinais publicados/atualizados (slug, titulo, topicos, scores, `whatToWatch`), descartados com motivo, falhas transitorias, limitacoes do modo degradado e fontes nao verificaveis.
 
 ## Regras duras
 
-- Nunca invente fontes, URLs, datas ou números.
-- Nunca publique conteúdo de teste ou placeholder.
-- Nunca chame `publishPost` para testar conectividade; use apenas `listRecentPosts`.
-- Nunca publique fora do fluxo da rotina.
-- Nunca repita sinal publicado sem novidade material.
-- Nunca publique conteúdo de teste nos endpoints de produção.
-- Nunca infira, reconstrua ou deduza uma URL; a URL de `sources` deve ter sido aberta com sucesso.
-- Nunca publique com fonte quebrada: o backend rejeita e você deve corrigir ou descartar.
-- Nunca invente números nem inclua dados decorativos; incorpore só dados que a fonte sustenta e que mudam a interpretação.
-- Nunca aumente o texto com preenchimento: densidade, não comprimento.
+- Nunca invente fonte, URL, slug, data, numero ou imagem.
+- Nunca publique conteudo de teste.
+- Nunca use `publishPost` para testar conectividade.
+- Nunca publique fora do fluxo.
+- Nunca repita sinal sem novidade material.
+- Nunca publique fonte quebrada ou sem afirmacao editorial verificada.
+- Nunca escolha um sinal so porque a empresa tem blog bem indexado.
+- Nunca transforme eixo de descoberta em quota de publicacao.
 
-## Fontes de referência por tópico
+## Fontes de referencia por topico
 
-Lista aberta e evolutiva: ponto de partida para descoberta, nunca whitelist nem obrigação. Fontes novas e confiáveis devem ser usadas e, se recorrentes, adicionadas a este mapa.
+Lista aberta e evolutiva: ponto de partida para descoberta, nunca whitelist.
 
-| Tópico | Fontes de referência |
+| Topico | Fontes de referencia |
 | --- | --- |
-| `ai` | OpenAI News/Changelog, Anthropic News, Google DeepMind Blog, Meta AI Blog, Hugging Face Blog, DeepSeek, Qwen (Alibaba), arXiv, Simon Willison's Weblog, The Batch (DeepLearning.AI), Mistral News, LangChain Blog |
-| `development` | GitHub Changelog/Blog, Vercel Changelog/Blog, React Blog, Node.js Releases, TC39 Proposals, MDN Blog, Deno/Bun Blogs, JetBrains Blog, blogs oficiais de Go/Rust/TypeScript |
-| `cloud` | AWS News Blog + What's New, Google Cloud Blog, Azure Updates, Cloudflare Blog, Fly.io Blog, Supabase Changelog |
-| `devops` | Kubernetes Releases/Blog, CNCF Blog, Docker Blog, HashiCorp Blog, Grafana Blog, GitLab Blog, Terraform Registry changelogs |
-| `security` | CISA Alerts, NVD/NIST, MITRE CVE, Google Project Zero, GitHub Security Advisories, Snyk Blog, OWASP, Cloudflare Security, Krebs on Security |
-| `industry` | TechCrunch, The Verge (tech), The Information, CNBC Technology, layoffs.fyi, Crunchbase News, VentureBeat, The Pragmatic Engineer (Gergely Orosz), Sifted; BR: Tecnoblog, Exame/Tech |
-| `design` | Figma Blog, Smashing Magazine, Nielsen Norman Group, A List Apart, Material Design Blog, Shopify Polaris Blog |
+| `ai` | OpenAI News/Changelog, Anthropic News, Google DeepMind/Gemini, Meta AI, Mistral, Qwen, DeepSeek, Hugging Face, LangChain, model providers, arXiv, GitHub |
+| `development` | GitHub, GitHub Releases, Vercel/v0, Cursor, VS Code, JetBrains, Node.js, Bun, Deno, TypeScript, TC39, React, Next.js, Python, Go, Rust, Java, .NET, bancos, frameworks e runtimes |
+| `cloud` | AWS, Azure, Google Cloud, Cloudflare, Vercel, Supabase, Fly.io e outros provedores materialmente relevantes |
+| `devops` | Kubernetes, CNCF, Docker, OpenTofu/Terraform, GitHub Actions, GitLab, Grafana, Datadog quando relevante e projetos de observabilidade |
+| `security` | CISA, NVD, MITRE, advisories de vendors, GitHub Security Advisories, Project Zero, Unit 42, Mandiant/Google Threat Intelligence, Microsoft Security, Cloudflare e pesquisadores confiaveis |
+| `industry` | layoffs.fyi, paginas oficiais de certificacoes, programas de estudantes, provedores cloud/AI, The Pragmatic Engineer, Crunchbase News, The Information, TechCrunch, CNBC Technology, Tecnoblog, Exame/Tech e fontes de mercado com dados fortes |
+| `design` | Figma, design systems, UI tooling, design-to-code, product engineering, Material Design, Shopify Polaris e fontes relevantes de colaboracao design-dev |
