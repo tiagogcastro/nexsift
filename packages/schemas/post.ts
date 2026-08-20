@@ -49,6 +49,12 @@ const draftFields = {
 
 const draftBaseSchema = z.object(draftFields)
 
+export const postIdentitySchema = z.object({
+  title: draftFields.title,
+  primaryTopic: topicSchema,
+  signalDate: draftFields.signalDate,
+})
+
 export const postDraftSchema = draftBaseSchema.refine(
   (draft) =>
     draft.slug === undefined ||
@@ -105,6 +111,21 @@ export const postSummarySchema = postFieldsSchema.pick({
   featured: true,
   locale: true,
   sources: true,
+  coverImage: true,
+})
+
+export const postListItemSchema = postFieldsSchema.pick({
+  slug: true,
+  title: true,
+  description: true,
+  topics: true,
+  signalDate: true,
+  signalType: true,
+  depth: true,
+  publishedAt: true,
+  updatedAt: true,
+  relevanceScore: true,
+  confidenceScore: true,
 })
 
 export const postIndexSchema = z.array(postSummarySchema)
@@ -112,5 +133,7 @@ export const postIndexSchema = z.array(postSummarySchema)
 export type PostDraft = z.infer<typeof postDraftSchema>
 export type Post = z.infer<typeof postSchema>
 export type PostSummary = z.infer<typeof postSummarySchema>
+export type PostIdentity = z.infer<typeof postIdentitySchema>
+export type PostListItem = z.infer<typeof postListItemSchema>
 export type CoverImageDraft = z.infer<typeof coverImageDraftSchema>
 export type CoverImage = z.infer<typeof coverImageSchema>

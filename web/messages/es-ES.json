@@ -108,7 +108,7 @@
     "industry": {
       "label": "Industria Tech",
       "shortLabel": "IND",
-      "description": "Lo que NexSift observa: el ecosistema de tecnología, con adquisiciones, layoffs, funding, open source governance, regulación y economía de software, cloud e IA."
+      "description": "Lo que NexSift observa: el ecosistema de tecnología, con adquisiciones, layoffs, carrera, formación, certificaciones, open source governance, regulación y economía de software, cloud e IA."
     },
     "design": {
       "label": "Diseño",
@@ -146,6 +146,10 @@
     "updated": "Actualizado",
     "reading": "Lectura",
     "relevance": "Relevancia",
+    "sourcesIntroTitle": "Sigue en la fuente",
+    "sourcesIntroBody": "NexSift sintetiza el cambio y su impacto. Consulta la fuente original para documentación, detalles técnicos y contexto completo.",
+    "openSource": "Abrir fuente original ↗",
+    "sourcePublished": "Publicado",
     "sourceStatus": {
       "healthy": "Fuente saludable",
       "redirected": "Redirigida",

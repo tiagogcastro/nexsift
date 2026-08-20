@@ -1,4 +1,5 @@
 import { putObject } from '../storage/s3'
+import type { RequestContext } from '../runtime/observability'
 import { downloadImage, ImageRejectedError } from './fetch-image'
 
 // Markdown image reference: ![alt](url). URLs with parentheses are rare in
@@ -16,6 +17,7 @@ export interface InlineImagesResult {
 export async function resolveInlineImages(
   content: string,
   slug: string,
+  requestContext?: RequestContext,
 ): Promise<InlineImagesResult> {
   const matches = [...content.matchAll(inlineImagePattern)]
 
@@ -33,7 +35,7 @@ export async function resolveInlineImages(
     let downloaded
 
     try {
-      downloaded = await downloadImage(url)
+        downloaded = await downloadImage(url, { requestContext })
     } catch (error) {
       if (error instanceof ImageRejectedError) {
         throw new ImageRejectedError(`${error.reason} (url: ${url})`)

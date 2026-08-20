@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: NexSift Publisher
-  version: 2.0.0
+  version: 2.1.0
   description: Publishes validated pt-BR NexSift signals and lists recently published signals.
 servers:
   - url: https://oh4qzz4ivd.execute-api.us-east-1.amazonaws.com/
@@ -39,6 +39,14 @@ paths:
             type: integer
             default: 30
             maximum: 100
+        - name: detail
+          in: query
+          required: false
+          description: Full summaries for UI-like consumers or compact editorial items for coverage/discovery.
+          schema:
+            type: string
+            enum: [full, compact]
+            default: full
       responses:
         '200':
           description: Recent signals
@@ -50,9 +58,17 @@ paths:
                   posts:
                     type: array
                     items:
-                      $ref: '#/components/schemas/PostSummary'
+                      oneOf:
+                        - $ref: '#/components/schemas/PostSummary'
+                        - $ref: '#/components/schemas/PostListItem'
         '401':
           description: Invalid publication token
+        '503':
+          description: Recent-list retrieval failed temporarily
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
     post:
       operationId: publishPost
       summary: Publish or update a NexSift signal
@@ -98,14 +114,19 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                  issues:
-                    type: array
-                    items:
-                      type: object
+                $ref: '#/components/schemas/ApiError'
+        '503':
+          description: Retryable upstream/source/image failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '504':
+          description: Upstream timeout during verification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
         '500':
           description: Publication failed
   /validate-source:
@@ -136,16 +157,23 @@ paths:
         '401':
           description: Invalid publication token
         '422':
-          description: Source rejected (404, soft-404, homepage redirect, private host, temporary failure)
+          description: Source rejected permanently (404, soft-404, homepage redirect, blocked host or unsuitable content)
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                  check:
-                    $ref: '#/components/schemas/SourceCheck'
+                $ref: '#/components/schemas/ApiError'
+        '503':
+          description: Retryable upstream failure while validating the source
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '504':
+          description: Upstream timeout while validating the source
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
   /audit-sources:
     post:
       operationId: auditSources
@@ -176,12 +204,53 @@ paths:
                     type: integer
                   replaced:
                     type: integer
+                  blocked:
+                    type: integer
+                  replacements:
+                    type: integer
+                  replacementCandidates:
+                    type: integer
                   entries:
                     type: array
                     items:
                       $ref: '#/components/schemas/SourceAuditEntry'
         '401':
           description: Invalid publication token
+  /posts/resolve:
+    post:
+      operationId: resolvePost
+      summary: Resolve a signal identity with the backend slug function
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostIdentity'
+      responses:
+        '200':
+          description: Signal identity resolved
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [exists, slug]
+                properties:
+                  exists:
+                    type: boolean
+                  slug:
+                    type: string
+                  post:
+                    $ref: '#/components/schemas/Post'
+        '401':
+          description: Invalid publication token
+        '422':
+          description: Invalid identity payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
   /posts/{slug}:
     get:
       operationId: getPost
@@ -283,12 +352,66 @@ paths:
           description: Signal not found
         '422':
           description: Invalid newUrl, missing reason or source index out of range
+        '503':
+          description: Retryable upstream failure while validating the replacement source
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '504':
+          description: Upstream timeout while validating the replacement source
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
   schemas:
+    ApiError:
+      type: object
+      required: [error, code, requestId, correlationId]
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+        requestId:
+          type: string
+        correlationId:
+          type: string
+        retryable:
+          type: boolean
+        reason:
+          type: string
+        attempt:
+          type: integer
+        upstreamStatus:
+          type: integer
+          nullable: true
+        check:
+          $ref: '#/components/schemas/SourceCheck'
+        issues:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    PostIdentity:
+      type: object
+      required: [title, primaryTopic, signalDate]
+      properties:
+        title:
+          type: string
+          minLength: 8
+          maxLength: 140
+        primaryTopic:
+          type: string
+          enum: [ai, development, cloud, devops, security, industry, design]
+        signalDate:
+          type: string
+          format: date
     PostDraft:
       type: object
       required:
@@ -307,7 +430,7 @@ components:
       properties:
         slug:
           type: string
-          description: Optional; when present it must start with {topics[0]}- and end with -{signalDate}. The backend derives the slug itself as {topics[0]}-{slugified title, max 40 chars}-{signalDate}.
+          description: Optional; when present it must start with {topics[0]}- and end with -{signalDate}. The backend derives the slug itself as {topics[0]}-{slugified title, max 40 chars}-{signalDate}. Use resolvePost for exact deduplication instead of reproducing the slug logic manually.
           pattern: ^(ai|development|cloud|devops|security|industry|design)-[a-z0-9]+(-[a-z0-9]+)*-\d{4}-\d{2}-\d{2}$
         title:
           type: string
@@ -567,6 +690,7 @@ components:
           type: string
         status:
           type: integer
+          nullable: true
         checkedAt:
           type: string
           format: date-time
@@ -578,7 +702,14 @@ components:
           nullable: true
         sourceStatus:
           type: string
-          enum: [healthy, redirected, temporarily_unavailable, broken, replaced]
+          enum: [healthy, redirected, temporarily_unavailable, broken, replaced, blocked]
+        attempts:
+          type: integer
+        retryable:
+          type: boolean
+        errorCode:
+          type: string
+          enum: [RATE_LIMITED, UPSTREAM_TIMEOUT, SOURCE_UNAVAILABLE, SOURCE_REJECTED]
     SourceAuditEntry:
       type: object
       properties:
@@ -664,3 +795,46 @@ components:
           type: string
         featured:
           type: boolean
+        coverImage:
+          $ref: '#/components/schemas/CoverImage'
+    PostListItem:
+      type: object
+      required:
+        - slug
+        - title
+        - description
+        - topics
+        - signalDate
+        - signalType
+        - depth
+        - publishedAt
+        - relevanceScore
+        - confidenceScore
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        topics:
+          type: array
+          items:
+            type: string
+        signalDate:
+          type: string
+          format: date
+        signalType:
+          type: string
+        depth:
+          type: string
+        publishedAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        relevanceScore:
+          type: number
+        confidenceScore:
+          type: number

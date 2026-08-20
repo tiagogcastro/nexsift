@@ -24,7 +24,7 @@ function InlineArticleImage({ src, alt }: ImgHTMLAttributes<HTMLImageElement>) {
       src={src}
       alt={alt}
       loading="lazy"
-      className="my-10 max-h-[75vh] w-full border border-(--border) bg-(--surface) object-contain"
+      className="my-12 max-h-[78vh] w-full border border-(--border) bg-(--surface-soft) object-contain"
     />
   )
 }
@@ -218,7 +218,16 @@ export async function PostArticle({
           ) : null}
         </div>
 
-        <aside className="lg:sticky lg:top-24 lg:self-start">
+        <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
+          <div className="border border-(--border) bg-(--surface) p-5">
+            <div className="eyebrow text-(--signal)">
+              {t('article.sourcesIntroTitle')}
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-(--muted)">
+              {t('article.sourcesIntroBody')}
+            </p>
+          </div>
+
           <div className="border border-(--border) bg-(--surface-soft) p-5">
             <div className="flex items-center justify-between gap-3">
               <div className="eyebrow text-(--signal)">{t('blog.sources')}</div>
@@ -232,19 +241,19 @@ export async function PostArticle({
                 const statusKey = sourceStatusLabelKey(source)
 
                 return (
-                  <TrackedLink
-                    key={source.url}
-                    href={source.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    event="source_clicked"
-                    properties={{ post: post.slug, publisher: source.publisher }}
-                    className="group block border border-(--border) bg-(--surface) p-3 transition-colors hover:border-(--border-strong)"
-                  >
-                    <div className="flex items-center justify-between gap-2 font-mono text-[9px] uppercase tracking-widest text-(--muted)">
-                      <span className="flex items-center gap-2">
-                        <span>{String(index + 1).padStart(2, '0')}</span>
-                        <span className="text-(--muted-strong)">{source.publisher}</span>
+                    <TrackedLink
+                      key={source.url}
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      event="source_clicked"
+                      properties={{ post: post.slug, publisher: source.publisher }}
+                      className="group block border border-(--border) bg-(--surface) p-3.5 transition-colors hover:border-(--border-strong)"
+                    >
+                      <div className="flex items-center justify-between gap-2 font-mono text-[9px] uppercase tracking-widest text-(--muted)">
+                        <span className="flex items-center gap-2">
+                          <span>{String(index + 1).padStart(2, '0')}</span>
+                          <span className="text-(--muted-strong)">{source.publisher}</span>
                       </span>
                       {statusKey !== 'unknown' ? (
                         <span
@@ -255,13 +264,24 @@ export async function PostArticle({
                         </span>
                       ) : null}
                     </div>
-                    <div className="mt-2.5 flex items-start gap-2 text-sm leading-snug text-(--muted-strong) transition-colors group-hover:text-(--foreground)">
-                      <span>{source.title}</span>
-                      <ArrowUpRight size={13} className="mt-0.5 shrink-0" />
-                    </div>
-                  </TrackedLink>
-                )
-              })}
+                      <div className="mt-2.5 flex items-start gap-2 text-sm leading-snug text-(--muted-strong) transition-colors group-hover:text-(--foreground)">
+                        <span>{source.title}</span>
+                        <ArrowUpRight size={13} className="mt-0.5 shrink-0" />
+                      </div>
+
+                      <div className="mt-3 flex items-center justify-between gap-3 border-t border-(--border) pt-3 font-mono text-[9px] uppercase tracking-[0.08em]">
+                        <span className="text-(--muted)">
+                          {source.publishedAt
+                            ? `${t('article.sourcePublished')} ${formatDate(source.publishedAt)}`
+                            : source.publisher}
+                        </span>
+                        <span className="text-(--signal)">
+                          {t('article.openSource')}
+                        </span>
+                      </div>
+                    </TrackedLink>
+                  )
+                })}
             </div>
             <p className="mt-4 flex items-start gap-1.5 font-mono text-[10px] leading-relaxed text-(--muted)">
               <Clock size={11} className="mt-0.5 shrink-0" />

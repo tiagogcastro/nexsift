@@ -83,16 +83,38 @@ export async function putObject(
 }
 
 export async function listObjects(prefix: string) {
-  const response = await getS3Client().send(
-    new ListObjectsV2Command({
-      Bucket: getBucket(),
-      Prefix: prefix,
-    }),
-  )
+  const keys: string[] = []
+  let continuationToken: string | undefined
 
-  return (response.Contents ?? [])
-    .map((item) => item.Key)
-    .filter((key): key is string => Boolean(key))
+  do {
+    const response = await getS3Client().send(
+      new ListObjectsV2Command({
+        Bucket: getBucket(),
+        Prefix: prefix,
+        ContinuationToken: continuationToken,
+      }),
+    )
+
+    keys.push(
+      ...(response.Contents ?? [])
+        .map((item) => item.Key)
+        .filter((key): key is string => Boolean(key)),
+    )
+
+    continuationToken = response.IsTruncated
+      ? response.NextContinuationToken
+      : undefined
+  } while (continuationToken)
+
+  return keys
+}
+
+export async function listPostSlugs() {
+  const keys = await listObjects('public/posts/')
+
+  return keys
+    .filter((key) => key.endsWith('.json'))
+    .map((key) => key.slice('public/posts/'.length, -'.json'.length))
 }
 
 export async function getIndex(key: string): Promise<PostSummary[]> {

@@ -120,6 +120,8 @@ The editor runs without human review and publishes strong signals as soon as the
 
 The `mcp` Lambda exposes the publication contract as MCP tools (stateless streamable HTTP transport, JSON responses, Function URL in BUFFERED mode) and bundles the editorial instructions (`docs/gpt-editor-instructions.md`, `docs/gpt-editor-reference.md`, `docs/gpt-editor-payload-reference.md`) into the `editorialInstructions` tool. ChatGPT Tasks cannot use Custom GPTs or Actions, so the connector replaces the GPT Action for scheduled runs; the GPT Action remains available for interactive sessions.
 
+The scheduled routine now prefers `listRecentPosts(detail=compact)` for coverage checks and discovery context, uses `resolvePost` for exact deduplication with the backend slug function, and keeps running in degraded mode when recent-list retrieval fails but per-candidate deduplication still works.
+
 ## Future autonomous publication via OpenAI API
 
 ```text
@@ -150,6 +152,7 @@ public/
   posts/{slug}.json
   indexes/latest.json
   indexes/topics/{topic}.json
+  images/*
 ```
 
 There is no database in the MVP. `indexes/latest.json` is capped at 100 summaries. `private/drafts` and `private/runs` are planned but not implemented.
@@ -158,11 +161,12 @@ There is no database in the MVP. `indexes/latest.json` is capped at 100 summarie
 
 All routes require `Authorization: Bearer <PUBLISH_TOKEN>`.
 
-- `GET /` (`listRecentPosts`): returns `{ posts: PostSummary[] }` from `indexes/latest.json`; optional query filters `since` (ISO 8601), `topic`, `signalType`, `limit` (default 30, max 100).
+- `GET /` (`listRecentPosts`): returns recent signals from `indexes/latest.json`; optional query filters `since` (ISO 8601), `topic`, `signalType`, `limit` (default 30, max 100) and `detail` (`full` or `compact`). Compact mode is the preferred editorial context list because it omits heavy source arrays.
+- `POST /posts/resolve` (`resolvePost`): resolves `{ title, primaryTopic, signalDate }` with the exact backend slug function and returns `{ exists, slug, post? }` for deduplication without reproducing slug logic in the editor.
 - `GET /posts/{slug}` (`getPost`): returns the full signal or 404.
 - `POST /` (`publishPost`): upserts a signal. The slug is derived as `{topics[0]}-{slugified title, max 40 chars}-{signalDate}`; publishing the same slug again updates the signal. Rejects drafts below the editorial gates (422). Returns 201 with `{ ok, slug, operation: created|updated, publishedAt, updatedAt }`.
-- `POST /validate-source` (`validateSource`): opens and validates a candidate URL; returns 200 with the check result or 422 with the reason when the URL is rejected.
-- `POST /audit-sources` (`auditSources`): revalidates all sources of all published signals, refreshes verification records and returns a count per state; use periodically to detect link rot.
+- `POST /validate-source` (`validateSource`): opens and validates a candidate URL; returns 200 with the check result, 422 for permanent rejection and 503/504 for retryable upstream failures.
+- `POST /audit-sources` (`auditSources`): revalidates all sources of all published signals in storage, refreshes verification records and returns a count per state; use periodically to detect link rot.
 - `POST /posts/{slug}/sources/{index}/replace` (`replaceSource`): replaces the source at `index` with a validated `newUrl`; the original URL stays in the replacement history, so link rot is distinguishable from a source that never existed.
 - `DELETE /posts/{slug}` (`deletePost`): removes the post object and cleans the latest and topic indexes; 404 when the slug does not exist.
 

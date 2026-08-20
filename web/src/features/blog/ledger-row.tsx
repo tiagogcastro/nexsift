@@ -41,29 +41,45 @@ export function LedgerRow({
         {String(index + 1).padStart(2, '0')}
       </span>
       <div className="min-w-0 py-4">
-        <span className="flex flex-wrap items-center gap-2 font-mono text-[10px] font-semibold tracking-[0.1em] text-(--topic-color)">
-          {TopicIcon ? <TopicIcon size={12} strokeWidth={2} /> : null}
-          {topicLabel ?? fallbackLabel}
-          {isNew ? (
-            <span className="rounded-(--radius-sm) bg-(--signal) px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-black">
-              {newLabel}
-            </span>
+        <div className="flex items-start gap-4">
+          {!compact && post.coverImage ? (
+            <div className="hidden h-20 w-32 shrink-0 overflow-hidden border border-(--border) bg-(--surface-soft) md:block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/s3/${post.coverImage.objectKey}`}
+                alt={post.coverImage.alt}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
           ) : null}
-        </span>
-        <h3
-          className={`signal-title mt-2 font-medium leading-snug tracking-[-0.025em] text-(--foreground) ${
-            compact
-              ? 'text-[clamp(0.9rem,1.15vw,1.05rem)]'
-              : 'text-[clamp(1rem,1.4vw,1.22rem)]'
-          }`}
-        >
-          {post.title}
-        </h3>
-        {!compact ? (
-          <p className="mt-1.5 hidden max-w-3xl text-sm leading-relaxed text-(--muted) md:block">
-            {post.description}
-          </p>
-        ) : null}
+
+          <div className="min-w-0">
+            <span className="flex flex-wrap items-center gap-2 font-mono text-[10px] font-semibold tracking-[0.1em] text-(--topic-color)">
+              {TopicIcon ? <TopicIcon size={12} strokeWidth={2} /> : null}
+              {topicLabel ?? fallbackLabel}
+              {isNew ? (
+                <span className="rounded-(--radius-sm) bg-(--signal) px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-black">
+                  {newLabel}
+                </span>
+              ) : null}
+            </span>
+            <h3
+              className={`signal-title mt-2 font-medium leading-snug tracking-[-0.025em] text-(--foreground) ${
+                compact
+                  ? 'text-[clamp(0.9rem,1.15vw,1.05rem)]'
+                  : 'text-[clamp(1rem,1.4vw,1.22rem)]'
+              }`}
+            >
+              {post.title}
+            </h3>
+            {!compact ? (
+              <p className="mt-1.5 hidden max-w-3xl text-sm leading-relaxed text-(--muted) md:block">
+                {post.description}
+              </p>
+            ) : null}
+          </div>
+        </div>
       </div>
       <div className="flex min-w-0 items-baseline justify-end gap-1.5 pl-2 text-right">
         <span className="font-mono text-sm font-semibold leading-none text-(--signal)">

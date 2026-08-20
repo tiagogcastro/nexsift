@@ -108,7 +108,7 @@
     "industry": {
       "label": "Tech Industry",
       "shortLabel": "IND",
-      "description": "What NexSift observes: the technology ecosystem, with acquisitions, layoffs, funding, open source governance, regulation and the software, cloud and AI economy."
+      "description": "What NexSift observes: the technology ecosystem, with acquisitions, layoffs, careers, education, certifications, open source governance, regulation and the software, cloud and AI economy."
     },
     "design": {
       "label": "Design",
@@ -146,6 +146,10 @@
     "updated": "Updated",
     "reading": "Reading",
     "relevance": "Relevance",
+    "sourcesIntroTitle": "Continue at the source",
+    "sourcesIntroBody": "NexSift synthesizes the change and its impact. Read the original source for documentation, technical details and full context.",
+    "openSource": "Open original source ↗",
+    "sourcePublished": "Published",
     "sourceStatus": {
       "healthy": "Healthy source",
       "redirected": "Redirected",
