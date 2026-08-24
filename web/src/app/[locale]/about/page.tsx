@@ -85,7 +85,7 @@ export default async function AboutPage({
                   body: t.rich('about.creatorBody', {
                     name: (chunks) => (
                       <a
-                        href={siteConfig.linkedinUrl}
+                        href={siteConfig.websiteUrl}
                         target="_blank"
                         rel="noreferrer"
                         className="font-semibold text-(--signal) underline decoration-(--signal)/40 underline-offset-4 transition-colors hover:decoration-(--signal)"

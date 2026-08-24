@@ -98,7 +98,7 @@ export async function PostArticle({
           <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 border-y border-(--border) py-3 font-mono text-[10px] uppercase tracking-[0.1em] text-(--muted)">
             <span>{t('article.byline')}</span>
             <a
-              href={siteConfig.linkedinUrl}
+              href={siteConfig.websiteUrl}
               target="_blank"
               rel="noreferrer"
               className="font-semibold text-(--foreground) transition-colors hover:text-(--signal)"
