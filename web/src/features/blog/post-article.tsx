@@ -80,7 +80,7 @@ export async function PostArticle({
             </div>
           ) : null}
 
-          <h1 className="mt-7 max-w-4xl text-[clamp(2.5rem,6vw,5.3rem)] font-medium leading-[0.96] tracking-[-0.04em]">
+          <h1 className="mt-7 max-w-4xl text-[clamp(2.2rem,4vw,3.75rem)] font-medium leading-[0.96] tracking-[-0.04em]">
             {post.title}
           </h1>
 
@@ -119,7 +119,7 @@ export async function PostArticle({
                 className="max-h-[75vh] w-full object-contain"
               />
               {post.coverImage.caption ? (
-                <figcaption className="px-4 py-3 font-mono text-[11px] tracking-[0.04em] text-(--muted)">
+                <figcaption className="max-w-[62ch] px-4 py-3 font-mono text-[11px] tracking-[0.04em] text-(--muted)">
                   {post.coverImage.caption}
                 </figcaption>
               ) : null}
