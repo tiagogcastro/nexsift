@@ -357,6 +357,11 @@ async function removeFromLatestIndex(slug: string) {
   )
 }
 
+// A signal is listed only under its primary topic ({topics[0]}). Secondary
+// topics are contextual and never get their own index entry, so a topic page
+// never shows a signal tagged with another topic. The sweep also purges any
+// stale entry whose primary topic does not match the index key, so a drifted
+// index heals itself on the next publish touching that topic.
 async function synchronizeTopicIndexes(post: Post, existing: Post | null) {
   const affectedTopics = new Set<Topic>([
     ...post.topics,
@@ -367,9 +372,13 @@ async function synchronizeTopicIndexes(post: Post, existing: Post | null) {
     [...affectedTopics].map(async (topic) => {
       const key = `public/indexes/topics/${topic}.json`
       const index = await getIndex(key)
-      const nextIndex = post.topics.includes(topic)
-        ? upsertSummary(index, post).sort(sortByPublishedAt)
-        : index.filter((item) => item.slug !== post.slug)
+      const withoutPostAndDrift = index.filter(
+        (item) => item.slug !== post.slug && item.topics[0] !== topic,
+      )
+      const nextIndex =
+        topic === post.topics[0]
+          ? upsertSummary(withoutPostAndDrift, post).sort(sortByPublishedAt)
+          : withoutPostAndDrift
 
       await putIndex(key, nextIndex)
     }),

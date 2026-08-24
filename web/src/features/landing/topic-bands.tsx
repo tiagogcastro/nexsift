@@ -12,7 +12,7 @@ export async function TopicBands({ posts }: { posts: PostSummary[] }) {
     <div className="border-y border-(--border)">
       {topicOrder.map((topic, index) => {
         const meta = getTopicMeta(t, topic)
-        const count = posts.filter((post) => post.topics.includes(topic)).length
+        const count = posts.filter((post) => post.topics[0] === topic).length
         const TopicIcon = topicIcons[topic]
 
         return (

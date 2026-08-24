@@ -67,7 +67,7 @@ export default async function HomePage({
         new Date(first.publishedAt).getTime(),
     )
     .slice(0, HOME_RADAR_LIMIT)
-  const topicCount = new Set(posts.flatMap((post) => post.topics)).size
+  const topicCount = new Set(posts.map((post) => post.topics[0])).size
   const homePath = locale === 'pt-BR' ? '/' : `/${locale}`
   const topicsPath = locale === 'pt-BR' ? '/topics' : `/${locale}/topics`
   const aboutPath = `/${locale}/about`
@@ -303,7 +303,7 @@ export default async function HomePage({
                 {topicOrder.map((topic) => {
                   const meta = getTopicMeta(t, topic)
                   const count = posts.filter((post) =>
-                    post.topics.includes(topic),
+                    post.topics[0] === topic,
                   ).length
                   const TopicIcon = topicIcons[topic]
 
