@@ -66,14 +66,13 @@ export default async function AboutPage({
       <main className="page-shell min-h-[75vh] py-16 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[0.45fr_1fr]">
           <div className="lg:sticky lg:top-24 lg:self-start">
-            <div className="eyebrow">{t('about.eyebrow')}</div>
-            <h1 className="mt-5 max-w-xl text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[0.95] tracking-[-0.06em]">
+            <h1 className="max-w-xl text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[0.95] tracking-[-0.04em]">
               <span className="block">{titleA}</span>
               {titleB ? <span className="block text-(--signal)">{titleB}</span> : null}
             </h1>
           </div>
           <div>
-            <p className="max-w-3xl text-xl leading-relaxed text-(--muted-strong)">
+            <p className="max-w-[56ch] text-xl leading-relaxed text-(--muted-strong)">
               {t('about.body')}
             </p>
 
@@ -101,7 +100,7 @@ export default async function AboutPage({
             <div className="mt-16 border-t border-(--border)">
               <div className="pt-6">
                 <div className="eyebrow">{t('about.criteriaTitle')}</div>
-                <p className="mt-4 max-w-3xl text-sm leading-relaxed text-(--muted)">
+                <p className="mt-4 max-w-[56ch] text-sm leading-relaxed text-(--muted)">
                   {t('about.criteriaIntro')}
                 </p>
                 <div className="mt-6 grid gap-px bg-(--border) md:grid-cols-3">
@@ -113,8 +112,8 @@ export default async function AboutPage({
                     const colonIndex = criterion.indexOf(':')
 
                     return (
-                      <div key={criterion} className="bg-(--background) p-6">
-                        <div className="font-mono text-[10px] text-(--muted)">
+                      <div key={criterion} className="bg-(--surface) p-6">
+                        <div className="font-mono text-[11px] text-(--muted)">
                           0{index + 1}
                         </div>
                         <p className="mt-10 text-base leading-relaxed tracking-[-0.015em]">
@@ -139,14 +138,14 @@ export default async function AboutPage({
             {sections.map((section) => (
               <div key={section.index} className="mt-16 border-t border-(--border)">
                 <div className="grid gap-6 pt-6 md:grid-cols-[3rem_1fr]">
-                  <span className="font-mono text-[10px] text-(--signal)">
+                  <span className="font-mono text-[11px] text-(--signal)">
                     {section.index}
                   </span>
                   <div>
                     <div className="eyebrow text-(--signal)">
                       {section.eyebrow}
                     </div>
-                    <p className="mt-4 max-w-3xl leading-relaxed text-(--muted-strong)">
+                    <p className="mt-4 max-w-[56ch] leading-relaxed text-(--muted-strong)">
                       {section.body}
                     </p>
                   </div>

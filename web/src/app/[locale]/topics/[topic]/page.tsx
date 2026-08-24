@@ -65,19 +65,17 @@ export default async function TopicPage({
               ]}
               topic={topic}
             />
-            <div className="eyebrow text-(--topic-color)">
-              {t('topicPage.frequency')}
-            </div>
-            <h1 className="mt-5 text-[clamp(2.8rem,5.5vw,5rem)] font-medium leading-[0.9] tracking-[-0.06em]">
+            <h1 className="text-[clamp(2.8rem,5.5vw,5rem)] font-medium leading-[0.9] tracking-[-0.04em]">
               {meta.label}
             </h1>
-            <p className="mt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-(--topic-color)">
+            <h2 className="sr-only">{meta.label}</h2>
+            <p className="mt-4 font-mono text-xs font-semibold text-(--topic-color)">
               {t('topicPage.radarTitle', { topic: meta.label })}
             </p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-(--muted)">
               {meta.description}
             </p>
-            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.12em] text-(--topic-color)">
+            <p className="mt-3 font-mono text-xs text-(--topic-color)">
               {t('topicPage.signalCount', { count: posts.length })}
             </p>
           </div>

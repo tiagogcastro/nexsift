@@ -55,11 +55,11 @@ export function LedgerRow({
           ) : null}
 
           <div className="min-w-0">
-            <span className="flex flex-wrap items-center gap-2 font-mono text-[10px] font-semibold tracking-[0.1em] text-(--topic-color)">
+            <span className="flex flex-wrap items-center gap-2 font-mono text-xs font-semibold tracking-[0.04em] text-(--topic-color)">
               {TopicIcon ? <TopicIcon size={12} strokeWidth={2} /> : null}
               {topicLabel ?? fallbackLabel}
               {isNew ? (
-                <span className="rounded-(--radius-sm) bg-(--signal) px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-black">
+                <span className="rounded-(--radius-sm) bg-(--signal) px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-widest text-black">
                   {newLabel}
                 </span>
               ) : null}
@@ -85,7 +85,7 @@ export function LedgerRow({
         <span className="font-mono text-sm font-semibold leading-none text-(--signal)">
           {post.relevanceScore.toFixed(1)}
         </span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.08em] text-(--muted)">
+        <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-(--muted)">
           <span className="hidden sm:inline">{relevanceLabel} · </span>
           {!compact ? `${post.sources.length} ${sourcesLabel} · ` : null}
           {formatCompactDate(post.publishedAt)}

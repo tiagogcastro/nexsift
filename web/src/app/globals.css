@@ -6,20 +6,20 @@
 }
 
 :root {
-  --background: #090b0d;
-  --surface: #101418;
-  --surface-raised: #151b20;
-  --surface-soft: #0d1114;
-  --foreground: #f4f7f2;
-  --muted: #98a29a;
-  --muted-strong: #bcc4bd;
-  --border: #263029;
-  --border-strong: #354239;
+  --background: #171c20;
+  --surface: #212830;
+  --surface-raised: #2b343d;
+  --surface-soft: #1d242a;
+  --foreground: #f2f5f2;
+  --muted: #b2bbb4;
+  --muted-strong: #d4dbd5;
+  --border: #3a463e;
+  --border-strong: #4d5a52;
   --signal: #c7f66b;
   --signal-soft: #c7f66b1a;
-  --cyan: #6de7e7;
-  --topic-ai: #c9a7ff;
-  --topic-cloud: #6de7e7;
+  --cyan: #74bfbf;
+  --topic-ai: #b5a4d9;
+  --topic-cloud: #74bfbf;
   --topic-development: #ff9c73;
   --topic-devops: #c7f66b;
   --topic-security: #ff8a7a;
@@ -27,9 +27,9 @@
   --topic-design: #f0a6d8;
   --danger: #ff7979;
   --on-signal: #0b0d0a;
-  --header-bg: rgba(9, 11, 13, 0.9);
-  --prose-body: #d8ded8;
-  --code-bg: #07090b;
+  --header-bg: rgba(23, 28, 32, 0.92);
+  --prose-body: #e5eae5;
+  --code-bg: #181d22;
   --signal-glow: #c7f66b80;
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -54,7 +54,7 @@ body {
   margin: 0;
   background:
     radial-gradient(circle at 80% 12%, #c7f66b0d 0, transparent 23rem),
-    radial-gradient(circle at 12% 48%, #6de7e708 0, transparent 28rem),
+    radial-gradient(circle at 12% 48%, #74bfbf08 0, transparent 28rem),
     var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -192,6 +192,7 @@ button:not(:disabled),
   color: var(--prose-body);
   font-size: clamp(1.05rem, 1.3vw, 1.18rem);
   line-height: 1.82;
+  max-width: 56ch;
 }
 
 .prose-nexsift h2 {
@@ -293,7 +294,7 @@ button:not(:disabled),
   background: color-mix(in srgb, var(--topic-color, var(--signal)) 10%, transparent);
   padding: 0.15rem 0.45rem;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -311,8 +312,8 @@ button:not(:disabled),
   height: 100%;
   border-radius: 999px;
   background: var(--signal);
-  box-shadow: 0 0 10px var(--signal-glow);
-  transition: width 600ms ease;
+  transform-origin: left;
+  transition: transform 600ms ease;
 }
 
 .hero-glow {

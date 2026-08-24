@@ -22,7 +22,7 @@ export async function TopicBands({ posts }: { posts: PostSummary[] }) {
             data-topic={topic}
             className="topic-color group grid grid-cols-[3rem_minmax(0,1fr)_auto_auto] items-center gap-3 border-b border-(--border) py-5 transition-colors hover:bg-(--topic-color)/[0.07] last:border-b-0 md:grid-cols-[5rem_2fr_minmax(0,1.6fr)_auto_auto] md:gap-4"
           >
-            <span className="font-mono text-[10px] text-(--muted)">
+            <span className="font-mono text-[11px] text-(--muted)">
               {String(index + 1).padStart(2, '0')}
             </span>
             <span className="flex min-w-0 items-center gap-3">
@@ -35,7 +35,7 @@ export async function TopicBands({ posts }: { posts: PostSummary[] }) {
                 {meta.label}
               </span>
             </span>
-            <span className="hidden max-w-2xl text-sm text-(--muted) md:block">
+            <span className="hidden max-w-[56ch] text-sm text-(--muted) md:block">
               {meta.description}
             </span>
             <span className="topic-chip">

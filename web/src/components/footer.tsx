@@ -41,7 +41,7 @@ export async function Footer({
                 <span className="text-sm font-medium text-(--foreground)">
                   {builtBy}
                 </span>
-                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-(--muted)">
+                <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--muted)">
                   LinkedIn <ArrowUpRight size={11} className="inline" />
                 </span>
               </span>
@@ -111,7 +111,7 @@ export async function Footer({
           </div>
         </div>
         <div className="mt-10 border-t border-(--border) pt-5">
-          <p className="max-w-3xl font-mono text-[10px] leading-relaxed text-(--muted)">
+          <p className="max-w-[64ch] font-mono text-xs leading-relaxed text-(--muted)">
             {t('notice.short')}
           </p>
         </div>

@@ -143,14 +143,14 @@ export function PathTrail({ steps }: { steps: string[] }) {
             >
               <div className="flex flex-col items-center">
                 {labelAbove && !isLast ? (
-                  <span className="mb-2 max-w-32 text-center font-mono text-[10px] leading-snug tracking-[0.06em] text-(--muted)">
+                  <span className="mb-2 max-w-32 text-center font-mono text-xs leading-snug tracking-[0.04em] text-(--muted)">
                     {step}
                   </span>
                 ) : null}
                 <span
                   className={`grid size-11 place-items-center rounded-full border font-mono text-xs font-semibold ${
                     isLast
-                      ? 'border-(--signal) bg-(--signal) text-(--on-signal) shadow-[0_0_24px_var(--signal-glow)]'
+                      ? 'border-(--signal) bg-(--signal) text-(--on-signal) shadow-[0_0_10px_var(--signal-glow)]'
                       : 'border-(--border-strong) bg-(--surface-raised) text-(--muted-strong)'
                   }`}
                 >
@@ -158,7 +158,7 @@ export function PathTrail({ steps }: { steps: string[] }) {
                 </span>
                 {!labelAbove ? (
                   <span
-                    className={`mt-2 max-w-32 text-center font-mono text-[10px] leading-snug tracking-[0.06em] ${
+                    className={`mt-2 max-w-32 text-center font-mono text-xs leading-snug tracking-[0.04em] ${
                       isLast ? 'text-(--signal)' : 'text-(--muted)'
                     }`}
                   >
@@ -181,7 +181,7 @@ export function PathTrail({ steps }: { steps: string[] }) {
                 <span
                   className={`grid size-10 place-items-center rounded-full border font-mono text-[11px] font-semibold ${
                     isLast
-                      ? 'border-(--signal) bg-(--signal) text-(--on-signal) shadow-[0_0_24px_var(--signal-glow)]'
+                      ? 'border-(--signal) bg-(--signal) text-(--on-signal) shadow-[0_0_10px_var(--signal-glow)]'
                       : 'border-(--border-strong) bg-(--surface-raised) text-(--muted-strong)'
                   }`}
                 >
