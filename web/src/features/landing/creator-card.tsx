@@ -11,7 +11,6 @@ export interface CreatorCardLabels {
 export function CreatorCard({ labels }: { labels: CreatorCardLabels }) {
   return (
     <div className="relative overflow-hidden border border-(--border) bg-(--surface-soft) p-6 md:p-8">
-      <div className="pointer-events-none absolute -right-16 -top-16 size-48 rounded-full bg-(--signal) opacity-[0.07] blur-3xl" />
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <div className="grid size-12 shrink-0 place-items-center rounded-(--radius-sm) border border-(--border-strong) bg-(--surface-raised) font-mono text-sm font-semibold text-(--signal)">
@@ -43,7 +42,7 @@ export function CreatorCard({ labels }: { labels: CreatorCardLabels }) {
           </a>
         </div>
       </div>
-      <p className="mt-6 max-w-3xl text-sm leading-relaxed text-(--muted-strong)">
+      <p className="mt-6 max-w-[56ch] text-sm leading-relaxed text-(--muted-strong)">
         {labels.body}
       </p>
     </div>

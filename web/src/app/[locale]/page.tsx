@@ -93,18 +93,14 @@ export default async function HomePage({
           <div className="page-shell relative grid items-center gap-6 py-8 lg:min-h-[calc(100vh-4rem)] lg:grid-cols-[1.12fr_0.88fr] lg:gap-12 lg:py-24">
             {/* Desktop: coluna original intacta + radar à direita */}
             <div className="hidden lg:block">
-              <div className="eyebrow flex items-center gap-3">
-                <span className="signal-dot" />
-                {t('hero.eyebrow')}
-              </div>
-              <h1 className="mt-8 text-[clamp(3.2rem,6.5vw,6.8rem)] font-medium leading-[0.84] tracking-[-0.08em]">
+              <h1 className="text-[clamp(3.2rem,6.5vw,6.8rem)] font-medium leading-[0.84] tracking-[-0.04em]">
                 <span className="block">{t('hero.titleA')}</span>
                 <span className="block text-(--signal)">{t('hero.titleB')}</span>
               </h1>
-              <p className="mt-9 max-w-2xl text-[clamp(1rem,1.7vw,1.28rem)] leading-relaxed text-(--muted-strong)">
+              <p className="mt-9 max-w-[56ch] text-[clamp(1rem,1.7vw,1.28rem)] leading-relaxed text-(--muted-strong)">
                 {t('hero.description')}
               </p>
-              <p className="mt-8 max-w-2xl font-mono text-sm leading-relaxed text-(--muted)">
+              <p className="mt-8 max-w-[56ch] font-mono text-sm leading-relaxed text-(--muted)">
                 {t.rich('hero.pain', {
                   b: (chunks) => (
                     <span className="font-semibold text-(--foreground)">
@@ -123,7 +119,7 @@ export default async function HomePage({
               <div className="mt-9 flex flex-wrap items-center gap-3">
                 <Link
                   href="/blog"
-                  className="flex items-center gap-2 rounded-sm bg-(--signal) px-4 py-2.5 text-sm font-semibold text-black shadow-[0_0_28px_var(--signal-glow)] transition-transform hover:-translate-y-0.5"
+                  className="flex items-center gap-2 rounded-sm bg-(--signal) px-4 py-2.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
                 >
                   {t('radar.viewAllCount', { count: posts.length })}
                   <ArrowUpRight size={15} />
@@ -140,18 +136,18 @@ export default async function HomePage({
 
             {/* Mobile: título antes do radar; CTAs e textos depois */}
             <div className="order-1 lg:hidden">
-              <div className="text-center text-[clamp(2.1rem,9vw,4.4rem)] font-medium leading-[0.84] tracking-[-0.08em]">
+              <div className="text-center text-[clamp(2.1rem,9vw,4.4rem)] font-medium leading-[0.84] tracking-[-0.04em]">
                 <span className="block">{t('hero.titleA')}</span>
                 <span className="block text-(--signal)">{t('hero.titleB')}</span>
               </div>
             </div>
 
-            <div className="radar-panel order-2 border border-(--border) bg-(--surface-soft) shadow-[0_0_60px_rgba(199,246,107,0.05)]">
+            <div className="radar-panel order-2 border border-(--border) bg-(--surface-soft)">
               <div className="flex items-center gap-2 border-b border-(--border) px-4 py-2.5 lg:px-5 lg:py-4">
                 <span className="signal-dot" />
-                <span className="eyebrow text-(--signal)">
+                <h2 className="eyebrow text-(--signal)">
                   {t('radar.eyebrow')}
-                </span>
+                </h2>
               </div>
               <div className="px-4 lg:px-5">
                 <SignalLedger posts={radarSignals} limit={4} compact />
@@ -159,7 +155,7 @@ export default async function HomePage({
               <div className="hidden border-t border-(--border) px-4 py-2.5 lg:block lg:px-5 lg:py-4">
                 <Link
                   href="/blog"
-                  className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-(--muted-strong) transition-colors hover:text-(--signal)"
+                  className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-(--muted-strong) transition-colors hover:text-(--signal)"
                 >
                   {t('radar.viewAllCount', { count: posts.length })}
                   <ArrowUpRight size={13} />
@@ -171,7 +167,7 @@ export default async function HomePage({
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href="/blog"
-                  className="flex items-center gap-2 rounded-sm bg-(--signal) px-3 py-2 text-[13px] font-semibold text-black shadow-[0_0_28px_var(--signal-glow)] transition-transform hover:-translate-y-0.5"
+                  className="flex items-center gap-2 rounded-sm bg-(--signal) px-3 py-2 text-[13px] font-semibold text-black transition-transform hover:-translate-y-0.5"
                 >
                   {t('radar.viewAllCount', { count: posts.length })}
                   <ArrowUpRight size={15} />
@@ -202,8 +198,7 @@ export default async function HomePage({
           <div className="page-shell py-20 lg:py-28">
             <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
               <div>
-                <div className="eyebrow">{t('topics.eyebrow')}</div>
-                <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
+                <h2 className="max-w-md text-4xl font-medium tracking-[-0.04em] md:text-5xl">
                   {t('topics.title')}
                 </h2>
                 <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
@@ -219,39 +214,36 @@ export default async function HomePage({
         </section>
 
         <section className="page-shell py-20 lg:py-28">
-          <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
-            <div className="eyebrow text-(--signal)">{t('why.eyebrow')}</div>
-            <div>
-              <h2 className="max-w-4xl text-[clamp(2.4rem,5vw,4.2rem)] font-medium leading-[0.95] tracking-[-0.06em]">
-                <span className="block">{t('why.titleA')}</span>
-                <span className="block text-(--signal)">{t('why.titleB')}</span>
-              </h2>
-              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-(--muted-strong)">
-                {t('why.description')}
-              </p>
-              <p className="mt-5 max-w-2xl leading-relaxed text-(--muted)">
-                {t('about.body')}
-              </p>
-              <div className="mt-10">
-                <CreatorCard
-                  labels={{
-                    eyebrow: t('about.creatorEyebrow'),
-                    title: t('about.creatorTitle'),
-                    body: t.rich('about.creatorBody', {
-                      name: (chunks) => (
-                        <a
-                          href={siteConfig.linkedinUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="font-semibold text-(--signal) underline decoration-(--signal)/40 underline-offset-4 transition-colors hover:decoration-(--signal)"
-                        >
-                          {chunks}
-                        </a>
-                      ),
-                    }),
-                  }}
-                />
-              </div>
+          <div>
+            <h2 className="max-w-4xl text-[clamp(2.4rem,5vw,4.2rem)] font-medium leading-[0.95] tracking-[-0.04em]">
+              <span className="block">{t('why.titleA')}</span>
+              <span className="block text-(--signal)">{t('why.titleB')}</span>
+            </h2>
+            <p className="mt-7 max-w-[56ch] text-lg leading-relaxed text-(--muted-strong)">
+              {t('why.description')}
+            </p>
+            <p className="mt-5 max-w-[56ch] leading-relaxed text-(--muted)">
+              {t('about.body')}
+            </p>
+            <div className="mt-10">
+              <CreatorCard
+                labels={{
+                  eyebrow: t('about.creatorEyebrow'),
+                  title: t('about.creatorTitle'),
+                  body: t.rich('about.creatorBody', {
+                    name: (chunks) => (
+                      <a
+                        href={siteConfig.websiteUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-(--signal) underline decoration-(--signal)/40 underline-offset-4 transition-colors hover:decoration-(--signal)"
+                      >
+                        {chunks}
+                      </a>
+                    ),
+                  }),
+                }}
+              />
             </div>
           </div>
         </section>
@@ -260,8 +252,7 @@ export default async function HomePage({
           <div className="page-shell py-20 lg:py-28">
             <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
               <div>
-                <div className="eyebrow">{t('process.eyebrow')}</div>
-                <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
+                <h2 className="max-w-md text-4xl font-medium tracking-[-0.04em] md:text-5xl">
                   {t('process.title')}
                 </h2>
                 <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
@@ -284,11 +275,10 @@ export default async function HomePage({
           </div>
         </section>
 
-        <section className="border-t border-(--border) bg-(--surface)">
+        <section className="border-t border-(--border)">
           <TrustBand
             posts={posts}
             labels={{
-              eyebrow: t('trust.eyebrow'),
               title: t('trust.title'),
               description: t('trust.description'),
               signalsLabel: t('trust.signalsLabel', { count: posts.length }),
@@ -304,8 +294,7 @@ export default async function HomePage({
         <section className="page-shell pb-20 pt-16 lg:pb-28 lg:pt-24">
           <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
             <div>
-              <div className="eyebrow">{t('explore.eyebrow')}</div>
-              <h2 className="mt-4 max-w-md text-4xl font-medium tracking-[-0.055em] md:text-5xl">
+              <h2 className="max-w-md text-4xl font-medium tracking-[-0.04em] md:text-5xl">
                 {t('explore.title')}
               </h2>
             </div>
@@ -323,7 +312,7 @@ export default async function HomePage({
                       key={topic}
                       href={`/topics/${topic}`}
                       data-topic={topic}
-                      className="topic-color flex items-center gap-1.5 rounded-(--radius-sm) border border-(--border) bg-(--surface-soft) px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] text-(--muted) transition-colors hover:border-(--topic-color) hover:bg-(--surface-raised) hover:text-(--topic-color)"
+                      className="topic-color flex items-center gap-1.5 rounded-(--radius-sm) border border-(--border) bg-(--surface-soft) px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-(--muted) transition-colors hover:border-(--topic-color) hover:bg-(--surface-raised) hover:text-(--topic-color)"
                     >
                       <TopicIcon size={11} strokeWidth={2} className="text-(--topic-color)" />
                       {meta.label}
@@ -382,7 +371,7 @@ function ExploreCard({
       href={href}
       className="group flex flex-col justify-between gap-8 bg-(--surface) p-6 transition-colors hover:bg-(--surface-raised)"
     >
-      <span className="font-mono text-[10px] tracking-[0.1em] text-(--muted)">
+      <span className="font-mono text-[11px] tracking-[0.1em] text-(--muted)">
         {index}
       </span>
       <div>

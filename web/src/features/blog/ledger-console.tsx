@@ -127,7 +127,7 @@ export function LedgerConsole({
           placeholder={labels.searchPlaceholder}
           className="w-full border border-(--border) bg-(--surface) px-4 py-2.5 font-mono text-sm text-(--foreground) outline-none transition-colors placeholder:text-(--muted) focus:border-(--signal) md:max-w-md lg:max-w-lg"
         />
-        <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-(--muted)">
+        <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-(--muted)">
           {filtered.length}{' '}
           {filtered.length === 1 ? labels.countLabelOne : labels.countLabelOther}
         </span>
@@ -141,7 +141,7 @@ export function LedgerConsole({
               setTopic(null)
               resetPage()
             }}
-            className={`flex items-center gap-1.5 rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
+            className={`flex items-center gap-1.5 rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors ${
               topic === null
                 ? 'bg-(--signal) text-black'
                 : 'text-(--muted) hover:text-(--foreground)'
@@ -161,7 +161,7 @@ export function LedgerConsole({
                   setTopic(topic === topicKey ? null : topicKey)
                   resetPage()
                 }}
-                className={`topic-color flex items-center gap-1.5 rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
+                className={`topic-color flex items-center gap-1.5 rounded-(--radius-sm) px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors ${
                   topic === topicKey
                     ? 'bg-(--topic-color) text-black'
                     : 'text-(--muted) hover:text-(--topic-color)'
@@ -211,7 +211,7 @@ export function LedgerConsole({
         <button
           type="button"
           onClick={() => setVisibleCount((current) => current + pageSize)}
-          className="mt-8 inline-flex items-center gap-2 border border-(--signal) px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.1em] text-(--signal) transition-colors hover:bg-(--signal) hover:text-black"
+          className="mt-8 inline-flex items-center gap-2 border border-(--signal) px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.1em] text-(--signal) transition-colors hover:bg-(--signal) hover:text-black"
         >
           {labels.loadMore}
         </button>

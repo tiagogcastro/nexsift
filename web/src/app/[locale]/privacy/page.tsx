@@ -36,10 +36,10 @@ export default async function PrivacyPage({
         <div className="grid gap-12 lg:grid-cols-[0.45fr_1fr]">
           <div className="eyebrow">{t('privacy.eyebrow')}</div>
           <div>
-            <h1 className="max-w-5xl text-[clamp(3rem,7vw,6.5rem)] font-medium leading-[0.9] tracking-[-0.075em]">
+            <h1 className="max-w-5xl text-[clamp(3rem,7vw,6.5rem)] font-medium leading-[0.9] tracking-[-0.04em]">
               {t('privacy.title')}
             </h1>
-            <p className="mt-10 max-w-3xl text-lg leading-relaxed text-(--muted-strong)">
+            <p className="mt-10 max-w-[56ch] text-lg leading-relaxed text-(--muted-strong)">
               {t('privacy.intro')}
             </p>
 
@@ -72,7 +72,7 @@ export default async function PrivacyPage({
                 eyebrow={t('privacy.contactTitle')}
                 body={t('privacy.contactBody')}
               />
-              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-(--muted)">
+              <p className="font-mono text-xs text-(--muted)">
                 {t('privacy.updated')}
               </p>
             </div>
@@ -92,7 +92,7 @@ function Section({ eyebrow, body }: { eyebrow: string; body: string }) {
   return (
     <section>
       <div className="eyebrow text-(--signal)">{eyebrow}</div>
-      <p className="mt-4 max-w-3xl leading-relaxed text-(--muted-strong)">
+      <p className="mt-4 max-w-[56ch] leading-relaxed text-(--muted-strong)">
         {body}
       </p>
     </section>

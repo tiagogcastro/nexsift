@@ -67,14 +67,14 @@ export default async function BlogPage({
       <main className="page-shell min-h-[75vh] py-16 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[0.55fr_1.45fr]">
           <div className="lg:sticky lg:top-10 lg:self-start">
-            <div className="eyebrow">{t('blog.eyebrow')}</div>
-            <h1 className="mt-5 max-w-md text-[clamp(3.5rem,7vw,7rem)] font-medium leading-[0.9] tracking-[-0.075em]">
+            <h1 className="max-w-md text-[clamp(3.5rem,7vw,7rem)] font-medium leading-[0.9] tracking-[-0.04em]">
               {t('blog.title')}
             </h1>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-(--muted)">
               {t('blog.description')}
             </p>
-            <div className="mt-10 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-(--muted)">
+            <h2 className="sr-only">{t('nav.blog')}</h2>
+            <div className="mt-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-(--muted)">
               <span className="signal-dot" />
               {t('blog.signalsPublished', { count: posts.length })}
             </div>

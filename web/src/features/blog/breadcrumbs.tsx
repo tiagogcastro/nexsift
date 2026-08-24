@@ -11,7 +11,7 @@ export function Breadcrumbs({
   return (
     <nav
       data-topic={topic}
-      className="topic-color mb-7 flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-(--muted)"
+      className="topic-color mb-7 flex flex-wrap items-center gap-2 font-mono text-[11px] tracking-[0.04em] text-(--muted)"
       aria-label="Breadcrumb"
     >
       {items.map((item, index) => {
@@ -24,9 +24,7 @@ export function Breadcrumbs({
           </Link>
         ) : (
           <span
-            className={`max-w-[16rem] truncate ${
-              topic ? 'text-(--topic-color)' : 'text-(--foreground)'
-            }`}
+            className={topic ? 'text-(--topic-color)' : 'text-(--foreground)'}
           >
             {item.label}
           </span>

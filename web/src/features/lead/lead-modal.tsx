@@ -158,7 +158,7 @@ export function LeadModal() {
             <div className="space-y-2">
               <label
                 htmlFor="lead-name"
-                className="block font-mono text-[10px] uppercase tracking-[0.1em] text-(--muted)"
+                className="block font-mono text-[11px] uppercase tracking-[0.1em] text-(--muted)"
               >
                 {t('nameLabel')}
               </label>
@@ -178,7 +178,7 @@ export function LeadModal() {
             <div className="space-y-2">
               <label
                 htmlFor="lead-email"
-                className="block font-mono text-[10px] uppercase tracking-[0.1em] text-(--muted)"
+                className="block font-mono text-[11px] uppercase tracking-[0.1em] text-(--muted)"
               >
                 {t('emailLabel')}
               </label>
@@ -197,7 +197,7 @@ export function LeadModal() {
             <div className="space-y-2">
               <label
                 htmlFor="lead-feedback"
-                className="block font-mono text-[10px] uppercase tracking-[0.1em] text-(--muted)"
+                className="block font-mono text-[11px] uppercase tracking-[0.1em] text-(--muted)"
               >
                 {t('feedbackLabel')}
               </label>
@@ -238,7 +238,7 @@ export function LeadModal() {
               {t('submit')}
             </button>
 
-            <p className="font-mono text-[10px] leading-relaxed text-(--muted)">
+            <p className="font-mono text-xs leading-relaxed text-(--muted)">
               {t('privacyNote')}
             </p>
           </form>

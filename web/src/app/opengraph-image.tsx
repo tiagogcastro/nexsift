@@ -4,9 +4,9 @@ export const alt = 'NexSift'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
-const background = '#090b0d'
-const surface = '#101418'
-const borderSoft = '#354239'
+const background = '#171c20'
+const surface = '#212830'
+const borderSoft = '#4d5a52'
 const signal = '#c7f66b'
 
 export default function OpenGraphImage() {
