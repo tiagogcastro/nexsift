@@ -52,7 +52,7 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
 - `whatToWatch`: 30 a 500 caracteres, obrigatorio.
 - `content`: markdown em pt-BR, minimo 100 caracteres. Imagens inline `![alt](url)` sao permitidas.
 - `coverImage`: opcional, fortemente recomendada quando houver imagem realmente util.
-- `topics`: 1 a 3, apenas `ai`, `development`, `cloud`, `devops`, `security`, `industry`, `design`. O primeiro define o slug.
+- `topics`: 1 a 3, apenas `ai`, `development`, `cloud`, `devops`, `security`, `industry`, `design`. O PRIMEIRO e o topico PRIMARIO: define o slug e a unica pagina de topico onde o sinal aparece. Tópicos adicionais sao contextuais e nunca geram pagina propria; so entram se forem genuinamente centrais ao conteudo.
 - `tags`: ate 10, em minusculas, estritamente ligadas ao sinal.
 - `sources`: 1 ou mais; cada item precisa de `title`, `publisher`, `url` e, para publicar, `editorialStatus: "verified"` e `editoriallyVerifiedAt`.
 - `relevanceScore`: 0 a 10. Gate minimo 6.5.

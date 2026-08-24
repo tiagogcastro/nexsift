@@ -93,7 +93,7 @@ export function LedgerConsole({
 
     return posts
       .filter((post) => {
-        if (topic && !post.topics.includes(topic)) {
+        if (topic && post.topics[0] !== topic) {
           return false
         }
 

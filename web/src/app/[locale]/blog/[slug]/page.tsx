@@ -74,10 +74,10 @@ export default async function PostPage({
     .filter((candidate) => candidate.slug !== post.slug)
     .sort((first, second) => {
       const firstMatches = primaryTopic
-        ? first.topics.includes(primaryTopic)
+        ? first.topics[0] === primaryTopic
         : false
       const secondMatches = primaryTopic
-        ? second.topics.includes(primaryTopic)
+        ? second.topics[0] === primaryTopic
         : false
 
       if (firstMatches !== secondMatches) {

@@ -31,7 +31,11 @@ export default async function TopicPage({
   }
 
   const topic = result.data as Topic
-  const posts = await listPostsByTopic(topic)
+  // Defense in depth: even if a topic index drifts, the page only ever shows
+  // signals whose primary topic is this one.
+  const posts = (await listPostsByTopic(topic)).filter(
+    (post) => post.topics[0] === topic,
+  )
   const t = await getTranslations()
   const meta = getTopicMeta(t, topic)
   const topicMeta = Object.fromEntries(

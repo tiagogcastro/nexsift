@@ -155,7 +155,7 @@ public/
   images/*
 ```
 
-There is no database in the MVP. `indexes/latest.json` is capped at 100 summaries. `private/drafts` and `private/runs` are planned but not implemented.
+There is no database in the MVP. `indexes/latest.json` is capped at 100 summaries. Each topic index (`indexes/topics/{topic}.json`) lists only signals whose primary topic (`topics[0]`) is that topic; secondary topics never place a signal on a topic page. `private/drafts` and `private/runs` are planned but not implemented.
 
 ## Publication endpoints
 

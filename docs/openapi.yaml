@@ -457,6 +457,7 @@ components:
           type: array
           minItems: 1
           maxItems: 3
+          description: "The first item is the primary topic: it defines the slug and is the only topic page where the signal appears. Additional topics are contextual and never place the signal on their own page."
           items:
             type: string
             enum: [ai, development, cloud, devops, security, industry, design]
@@ -576,6 +577,7 @@ components:
           type: string
         topics:
           type: array
+          description: "The first item is the primary topic: it defines the slug and is the only topic page where the signal appears."
           items:
             type: string
         signalDate:
