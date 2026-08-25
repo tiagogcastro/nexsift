@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site'
 import { SignalLedger } from '@/features/blog/signal-ledger'
 import { CreatorCard } from '@/features/landing/creator-card'
 import { PathTrail } from '@/features/landing/path-trail'
+import { SignalArt } from '@/features/landing/signal-art'
 import { TopicBands } from '@/features/landing/topic-bands'
 import { TrustBand } from '@/features/landing/trust-band'
 import { localizedAlternates } from '@/lib/alternates'
@@ -243,7 +244,13 @@ export default async function HomePage({
           </div>
         </section>
 
-        <section id="process" className="border-y border-(--border) bg-(--surface-soft)">
+        <section aria-hidden className="overflow-hidden border-y border-(--border)">
+          <div className="page-shell py-10 lg:py-14">
+            <SignalArt className="h-auto w-full" />
+          </div>
+        </section>
+
+        <section id="process" className="border-b border-(--border) bg-(--surface-soft)">
           <div className="page-shell py-20 lg:py-28">
             <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
               <div>
