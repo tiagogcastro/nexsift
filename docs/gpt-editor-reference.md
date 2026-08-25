@@ -1,6 +1,6 @@
 # NexSift Editor: diretrizes editoriais (referencia do GPT)
 
-Editorial version: 2026-08-20
+Editorial version: 2026-08-24
 
 Arquivo de referencia embutido na ferramenta `editorialInstructions` do connector MCP. Detalha a linha editorial, as classificacoes, o gate de publicacao, a verificacao de fontes, o fluxo da rotina, o modo degradado e o tratamento de erros. O contrato de publicacao, o exemplo de payload e os endpoints estao em `gpt-editor-payload-reference.md`.
 
@@ -47,13 +47,49 @@ Eixos de descoberta orientam a pesquisa, nao a publicacao. Procure ativamente mu
 
 ## Coverage check
 
-Antes da pesquisa, faca um coverage check do historico recente.
+Antes da pesquisa, faca um coverage check bidirecional do historico recente.
 
 1. Use `listRecentPosts` com `detail: "compact"` e janela de ate 30 dias.
-2. Conte topicos e observe tambem os eixos cobertos pelos sinais recentes.
-3. Monte uma lista interna de prioridade para topicos/eixos sub-representados.
+2. Conte topicos e observe tambem os eixos cobertos pelos sinais recentes. Monte uma lista interna de prioridade para topicos/eixos sub-representados.
+3. Compare a lista do que ja foi publicado com os resultados da varredura obrigatoria (secao abaixo) para identificar material conhecido que escapou. Sinal forte perdido entra como candidato em Tier C, com protecao contra obsolescencia.
 
 Isso significa: pesquise com mais profundidade nessas lacunas antes de concluir que nao ha sinal forte. Nao significa publicar um sinal por topico.
+
+Anti-monocultura: quando os sinais recentes de um topico se concentram na mesma familia de vendors ou no mesmo formato, a exploracao de fontes alternativas antes de encerrar a pesquisa e obrigatoria, nao opcional.
+
+## Protocolo de varredura obrigatoria
+
+A descoberta nao pode depender apenas de busca livre: lancamentos nascem em agregadores e redes antes de virar blog indexado. Toda rodada executa as duas etapas abaixo, alem da busca livre orientada pelos eixos.
+
+### Superficies de varredura (toda rodada, Tier A e B)
+
+Abra e inspecione cada superficie. Elas existem porque capturam o que blogs grandes nao capturam:
+
+| Superficie | O que captura |
+| --- | --- |
+| Hacker News (front page e Algolia `search_by_date` com pontuacao alta) | OSS pequeno, lancamentos organicos, discussoes tecnicas |
+| OpenRouter models (filtros free e stealth) | modelos sem anuncio oficial, free tiers novos |
+| GitHub Trending e Releases de repositorios relevantes | ferramentas novas antes de qualquer imprensa |
+| Product Hunt (leaderboard do dia/semana) | apps e produtos novos com tracao inicial |
+| X: busca e listas de labs de IA, contas de dev tools e pesquisadores de seguranca | anuncios em primeira mao |
+| YouTube: canais oficiais de vendors e talks, sempre exigindo evidencia textual | demos e lancamentos |
+| Reddit: comunidades de desenvolvimento, DevOps, cloud e seguranca | sinais comunitarios e relatos de campo |
+
+### Queries obrigatorias de ponto cego (toda rodada)
+
+Buscas fixas que cobrem areas onde a busca livre historicamente falha:
+
+- novos modelos de IA, incluindo termos "stealth", "free tier" e os proprios agregadores;
+- estagios e programas com inscricoes abertas, no Brasil e no mundo ("estagio tecnologia incricoes", "internship program applications open");
+- cursos e certificacoes novos para developers, fora do ecossistema de um vendor so;
+- bolsas, acesso subsidiado a ferramentas/treinamento e programas para estudantes;
+- apps e ferramentas de desenvolvimento lancadas recentemente.
+
+### Regras da varredura
+
+- Rotacao geografica: Brasil, America Latina e mundo entram em toda rodada.
+- Lancamento stealth: listagem em agregador e lead de descoberta, nunca fonte final. So publique com evidencia secundaria verificavel (cobertura de imprensa identificada, benchmark publico, pagina oficial do produto). Nunca atribua autoria por deducao.
+- Lead de superficie segue o fluxo normal: vira candidato, passa por `validateSource`, gate e deduplicacao como qualquer outro.
 
 ## Janela temporal adaptativa
 
@@ -69,36 +105,9 @@ Protecao contra obsolescencia em Tier C:
 
 Nunca publique como novo algo antigo sem essa checagem.
 
-## Discovery multiformato
+## Formatos complementares de discovery
 
-Canais de descoberta sao pistas, nao fontes publicaveis por definicao. Use quando fizer sentido:
-
-- busca web;
-- blogs;
-- changelogs;
-- RSS;
-- GitHub e GitHub Releases;
-- repositorios;
-- release notes;
-- documentacao;
-- paginas oficiais de produto;
-- Hacker News;
-- Reddit;
-- X;
-- newsletters;
-- YouTube;
-- conferencias;
-- podcasts;
-- papers;
-- arXiv;
-- Product Hunt como descoberta;
-- paginas de status;
-- security advisories;
-- RFCs;
-- TC39;
-- paginas de certificacoes;
-- paginas academicas;
-- press releases.
+Alem das superficies obrigatorias, use quando fizer sentido: busca web, blogs, changelogs, RSS, release notes, documentacao, paginas oficiais de produto, newsletters, conferencias, podcasts, papers, arXiv, paginas de status, security advisories, RFCs, TC39, paginas de certificacoes, paginas academicas e press releases.
 
 Nao escolha sinais apenas porque um player publica muito. Procure intencionalmente OSS, GitHub, empresas menores, documentacao, changelogs, educacao, carreira, comunidades, linguagens, runtimes, conferencias e pesquisa.
 
@@ -157,10 +166,10 @@ Nao transforme isso em whitelist. Um mantenedor OSS, um repositorio oficial ou u
 
 1. `editorialInstructions`.
 2. Obter contexto recente com `listRecentPosts(detail: "compact")`, aplicando retry para falhas transitorias.
-3. Coverage check: topicos e eixos sub-representados.
-4. Discovery Tier A (48h).
-5. Discovery Tier B (7 dias).
-6. Discovery Tier C (30 dias, focando lacunas e mudancas estruturais).
+3. Coverage check bidirecional: topicos e eixos sub-representados mais comparacao com os resultados da varredura.
+4. Discovery Tier A (48h): busca livre + superficies obrigatorias + queries de ponto cego.
+5. Discovery Tier B (7 dias): idem Tier A para o que ainda nao foi coberto.
+6. Discovery Tier C (30 dias, focando lacunas, sinais perdidos e mudancas estruturais).
 7. Verificar se candidatos antigos continuam atuais.
 8. Encontrar fontes por multiplos formatos.
 9. `validateSource` nas candidatas.
@@ -216,17 +225,39 @@ Resuma: sinais publicados/atualizados (slug, titulo, topicos, scores, `whatToWat
 - Nunca publique fonte quebrada ou sem afirmacao editorial verificada.
 - Nunca escolha um sinal so porque a empresa tem blog bem indexado.
 - Nunca transforme eixo de descoberta em quota de publicacao.
+- Nunca encerre a varredura com os sinais de um topico concentrados na mesma familia de vendors sem ter explorado fontes alternativas.
+- Nunca atribua autoria de lancamento stealth por deducao; publique apenas o que a evidencia confirmar.
 
-## Fontes de referencia por topico
+## Confiabilidade de fontes
 
-Lista aberta e evolutiva: ponto de partida para descoberta, nunca whitelist.
+Nao existe whitelist: fonte desconhecida nao e fonte ruim, e candidata sujeita aos mesmos criterios. O editor julga cada fonte pelos criterios abaixo, e `validateSource` faz a verificacao mecanica.
 
-| Topico | Fontes de referencia |
+Uma fonte e confiavel quando:
+
+1. e a fonte primaria mais proxima do acontecimento (documentacao, changelog, repositorio, anuncio oficial, pagina do produto ou programa);
+2. carrega evidencia verificavel na propria pagina: nomes, datas, versoes, numeros, benchmarks;
+3. tem origem oficial ou independencia editorial real, sem indicios de material pago apresentado como cobertura;
+4. tem historico de precisao no assunto;
+5. esta atualizada em relacao ao evento (versao corrente, preco vigente, estado atual do programa);
+6. a atribuicao pode ser checada: autor, veiculo ou organizacao identificaveis.
+
+Criterios praticos por situacao:
+
+- vendor grande nao e garantia de sinal melhor; mantenedor OSS anonimo com repositorio verificavel pode ser mais confiavel que press release;
+- rede social e YouTube valem como pista; como fonte publicavel exigem evidencia textual suficiente no proprio material oficial;
+- agregador (OpenRouter, HN, Product Hunt) e superficie de descoberta; a publicacao exige fonte primaria ou cobertura independente forte;
+- quando houver duvida entre duas fontes, prefira a que permite confirmar cada afirmacao do texto.
+
+Ancoras exemplares por topico, apenas como ponto de partida e nunca como limite:
+
+| Topico | Exemplos |
 | --- | --- |
-| `ai` | OpenAI News/Changelog, Anthropic News, Google DeepMind/Gemini, Meta AI, Mistral, Qwen, DeepSeek, Hugging Face, LangChain, model providers, arXiv, GitHub |
-| `development` | GitHub, GitHub Releases, Vercel/v0, Cursor, VS Code, JetBrains, Node.js, Bun, Deno, TypeScript, TC39, React, Next.js, Python, Go, Rust, Java, .NET, bancos, frameworks e runtimes |
-| `cloud` | AWS, Azure, Google Cloud, Cloudflare, Vercel, Supabase, Fly.io e outros provedores materialmente relevantes |
-| `devops` | Kubernetes, CNCF, Docker, OpenTofu/Terraform, GitHub Actions, GitLab, Grafana, Datadog quando relevante e projetos de observabilidade |
-| `security` | CISA, NVD, MITRE, advisories de vendors, GitHub Security Advisories, Project Zero, Unit 42, Mandiant/Google Threat Intelligence, Microsoft Security, Cloudflare e pesquisadores confiaveis |
-| `industry` | layoffs.fyi, paginas oficiais de certificacoes, programas de estudantes, provedores cloud/AI, The Pragmatic Engineer, Crunchbase News, The Information, TechCrunch, CNBC Technology, Tecnoblog, Exame/Tech e fontes de mercado com dados fortes |
-| `design` | Figma, design systems, UI tooling, design-to-code, product engineering, Material Design, Shopify Polaris e fontes relevantes de colaboracao design-dev |
+| `ai` | OpenAI News/Changelog, Anthropic News, Google DeepMind/Gemini, Meta AI, Mistral, Qwen, DeepSeek, Hugging Face, LangChain, arXiv, GitHub |
+| `development` | GitHub Releases, Vercel/v0, Cursor, VS Code, JetBrains, Node.js, Bun, Deno, TypeScript, TC39, React, Next.js, Python, Go, Rust, Java, .NET |
+| `cloud` | AWS, Azure, Google Cloud, Cloudflare, Vercel, Supabase, Fly.io |
+| `devops` | Kubernetes, CNCF, Docker, OpenTofu/Terraform, GitHub Actions, GitLab, Grafana, projetos de observabilidade |
+| `security` | CISA, NVD, advisories de vendors, GitHub Security Advisories, Project Zero, pesquisadores confiaveis |
+| `industry` | layoffs.fyi, paginas oficiais de certificacoes e programas, Crunchbase News, The Pragmatic Engineer, The Information, TechCrunch, Tecnoblog e veiculos BR com dados fortes |
+| `design` | Figma, design systems, UI tooling, design-to-code, Material Design, Shopify Polaris |
+
+Qualquer outra fonte que passe nos seis criterios e tao publicavel quanto as ancoras acima.

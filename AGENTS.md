@@ -44,7 +44,7 @@ yarn workspace @nexsift/web icons:generate # regenerate favicon/icon PNGs from s
 
 ## Publishing pipeline
 
-- All endpoints require `Authorization: Bearer <PUBLISH_TOKEN>`: `POST /` (upsert signal), `GET /` (recent signals with `since`, `topic`, `signalType`, `limit` filters), `GET /posts/{slug}`, `POST /validate-source`, `POST /audit-sources`, `POST /posts/{slug}/sources/{index}/replace`, `DELETE /posts/{slug}`.
+- All endpoints require `Authorization: Bearer <PUBLISH_TOKEN>`: `POST /` (upsert signal), `GET /` (recent signals with `since`, `topic`, `signalType`, `query`, `tag`, `limit` and `offset` filters, plus `total`), `GET /posts/{slug}`, `POST /validate-source`, `POST /audit-sources`, `POST /posts/{slug}/sources/{index}/replace`, `DELETE /posts/{slug}`.
 - Editorial gates: `relevanceScore >= 6.5` and `confidenceScore >= 7`; drafts below the gates are rejected with 422.
 - Slug is derived as `{topics[0]}-{slugified title, max 40 chars}-{signalDate}`; republishing the same slug updates the signal.
 - Sources are mechanically verified before publication (`validate-source.ts`, `audit-sources.ts`); verification fields, editorial status and source replacement are part of the post contract. Changing the Lambda contract also means updating `docs/openapi.yaml` and the `docs/gpt-editor-*.md` files.

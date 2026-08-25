@@ -91,7 +91,7 @@ API Gateway HTTP API (Function URL for local testing)
 S3
 ```
 
-The Lambda does not call OpenAI. The publication endpoint also exposes GET with optional filters (`since`, `topic`, `signalType`, `limit`), returning the most recently published signals so the editor can avoid repeating signals across days. Sources are mechanically verified before storage; a rejected source blocks publication (422). Production uses an API Gateway HTTP API because the ChatGPT Actions gateway does not reach `*.lambda-url.*.on.aws` domains; the Lambda Function URL is kept for local flows and rollback.
+The Lambda does not call OpenAI. The publication endpoint also exposes GET with optional filters (`since`, `topic`, `signalType`, `query`, `tag`, `limit`, `offset`), returning the most recently published signals so the editor can avoid repeating signals across days. Sources are mechanically verified before storage; a rejected source blocks publication (422). Production uses an API Gateway HTTP API because the ChatGPT Actions gateway does not reach `*.lambda-url.*.on.aws` domains; the Lambda Function URL is kept for local flows and rollback.
 
 ## Autonomous publication via ChatGPT Tasks
 
@@ -161,7 +161,7 @@ There is no database in the MVP. `indexes/latest.json` is capped at 100 summarie
 
 All routes require `Authorization: Bearer <PUBLISH_TOKEN>`.
 
-- `GET /` (`listRecentPosts`): returns recent signals from `indexes/latest.json`; optional query filters `since` (ISO 8601), `topic`, `signalType`, `limit` (default 30, max 100) and `detail` (`full` or `compact`). Compact mode is the preferred editorial context list because it omits heavy source arrays.
+- `GET /` (`listRecentPosts`): returns recent signals from `indexes/latest.json`; optional query filters `since` (ISO 8601), `topic`, `signalType`, `query` (case-insensitive match over title, description and tags), `tag` (exact, case-insensitive), `limit` (default 30, max 100), `offset` (pagination) and `detail` (`full` or `compact`). The response carries `total`, the number of matches before pagination. Compact mode is the preferred editorial context list because it omits heavy source arrays.
 - `POST /posts/resolve` (`resolvePost`): resolves `{ title, primaryTopic, signalDate }` with the exact backend slug function and returns `{ exists, slug, post? }` for deduplication without reproducing slug logic in the editor.
 - `GET /posts/{slug}` (`getPost`): returns the full signal or 404.
 - `POST /` (`publishPost`): upserts a signal. The slug is derived as `{topics[0]}-{slugified title, max 40 chars}-{signalDate}`; publishing the same slug again updates the signal. Rejects drafts below the editorial gates (422). Returns 201 with `{ ok, slug, operation: created|updated, publishedAt, updatedAt }`.
