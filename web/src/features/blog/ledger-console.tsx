@@ -132,7 +132,7 @@ export function LedgerConsole({
       </div>
 
       {!fixedTopic ? (
-        <div className="flex flex-wrap items-center gap-2 border-b border-(--border) py-4">
+        <div className="sticky top-16 z-20 -mx-1 flex flex-wrap items-center gap-2 border-b border-(--border) bg-(--surface) px-1 py-4">
           <button
             type="button"
             onClick={() => {

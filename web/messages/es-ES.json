@@ -10,16 +10,16 @@
     "eyebrow": "Inteligencia tecnológica para quienes construyen y operan",
     "titleA": "Menos ruido.",
     "titleB": "Más señal.",
-    "description": "NexSift filtra cambios relevantes en tecnología y muestra qué cambió, por qué importa y qué observar. Sin feed infinito: una selección corta, con contexto y fuentes verificadas.",
+    "description": "Cambios relevantes en tecnología: qué cambió, por qué importa y qué observar. Una selección corta con fuentes verificadas.",
     "primary": "Ver todas las señales",
     "secondary": "Cómo funciona",
-    "pain": "Seguir la tecnología se volvió un trabajo de filtrado: <b>cuanto más lees</b>, menos entiendes, y <b>nadie verifica</b> lo que circula."
+    "pain": "Cuanto más lees, menos entiendes - y <b>nadie verifica</b> lo que circula."
   },
   "radar": {
     "eyebrow": "EN EL RADAR AHORA",
     "title": "En el radar ahora",
     "description": "Cambios en tecnología que pasaron el filtro de NexSift y merecen tu atención.",
-    "definition": "Una <sinal>señal</sinal> es un cambio relevante, verificado y puesto en contexto.",
+    "definition": "Una <sinal>señal</sinal> es un cambio verificado, en contexto.",
     "viewAll": "Ver todas las señales",
     "newBadge": "Nuevo",
     "sourcesCount": "{count, plural, one {fuente} other {fuentes}}",
@@ -35,7 +35,7 @@
     "eyebrow": "POR QUÉ EXISTE",
     "titleA": "La tecnología produce mucho ruido.",
     "titleB": "Quedan las señales.",
-    "description": "Feeds, newsletters y alertas compiten por tu atención. NexSift no intenta que consumas más: intenta que necesites leer menos para entender mejor lo que cambió."
+    "description": "Feeds y alertas compiten por tu atención. NexSift hace lo contrario: menos lectura para entender lo que cambió."
   },
   "process": {
     "eyebrow": "CÓMO FUNCIONA",
@@ -145,6 +145,7 @@
     "published": "Publicado",
     "updated": "Actualizado",
     "reading": "Lectura",
+    "relatedTopics": "Temas relacionados con esta señal",
     "relevance": "Relevancia",
     "sourcesIntroTitle": "Sigue en la fuente",
     "sourcesIntroBody": "NexSift sintetiza el cambio y su impacto. Consulta la fuente original para documentación, detalles técnicos y contexto completo.",
@@ -237,7 +238,7 @@
   "about": {
     "eyebrow": "SOBRE",
     "title": "Un filtro técnico, no otro feed infinito",
-    "body": "NexSift nació para reducir el costo de seguir la tecnología. En lugar de reproducir todo lo publicado, prioriza señales con impacto real para quienes construyen, operan, diseñan o deciden sobre tecnología, con el desarrollo como principal sesgo editorial.",
+    "body": "NexSift reduce el costo de seguir la tecnología. En lugar de reproducir todo, prioriza señales con impacto real para quienes construyen y operan software.",
     "signalTitle": "Qué es una señal",
     "signalBody": "Una señal es un cambio relevante, verificado y puesto en contexto. No todo lo que pasa es una señal: el cambio debe ser real, tener evidencia y alterar una decisión, un riesgo, una oportunidad o el entendimiento de quienes construyen u operan tecnología.",
     "criteriaTitle": "Criterios editoriales",

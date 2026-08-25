@@ -66,7 +66,7 @@ export default async function BlogPage({
       />
       <main className="page-shell min-h-[75vh] py-16 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[0.55fr_1.45fr]">
-          <div className="lg:sticky lg:top-10 lg:self-start">
+          <div className="lg:sticky lg:top-24 lg:self-start">
             <h1 className="max-w-md text-[clamp(3.5rem,7vw,7rem)] font-medium leading-[0.9] tracking-[-0.04em]">
               {t('blog.title')}
             </h1>

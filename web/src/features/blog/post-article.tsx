@@ -67,22 +67,6 @@ export async function PostArticle({
               <TopicIcon size={11} strokeWidth={2} className="text-(--topic-color)" />
               {topicLabel}
             </span>
-            {post.relatedTopics.map((relatedTopic) => {
-              const RelatedIcon = topicIcons[relatedTopic]
-
-              return (
-                <Link
-                  key={relatedTopic}
-                  href={`/topics/${relatedTopic}`}
-                  className="flex items-center gap-1.5 rounded-(--radius-sm) border border-(--border) bg-(--surface) px-2 py-1 font-mono text-[11px] uppercase tracking-[0.08em] text-(--muted) transition-colors hover:text-(--foreground)"
-                >
-                  {RelatedIcon ? (
-                    <RelatedIcon size={11} strokeWidth={2} className="text-(--muted-strong)" />
-                  ) : null}
-                  {getTopicMeta(t, relatedTopic).label}
-                </Link>
-              )
-            })}
             {isNew ? (
               <span className="rounded-(--radius-sm) bg-(--signal) px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-widest text-black">
                 {t('radar.newBadge')}
@@ -165,6 +149,32 @@ export async function PostArticle({
               <p className="mt-4 max-w-[56ch] text-lg leading-relaxed text-(--foreground)">
                 {post.whatToWatch}
               </p>
+            </section>
+          ) : null}
+
+          {post.relatedTopics.length > 0 ? (
+            <section className="mt-14 border-t border-(--border) pt-10">
+              <div className="eyebrow text-(--signal)">
+                {t('article.relatedTopics')}
+              </div>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {post.relatedTopics.map((relatedTopic) => {
+                  const RelatedIcon = topicIcons[relatedTopic]
+
+                  return (
+                    <Link
+                      key={relatedTopic}
+                      href={`/topics/${relatedTopic}`}
+                      data-topic={relatedTopic}
+                      className="topic-color flex items-center gap-1.5 rounded-(--radius-sm) border border-(--border-strong) bg-(--surface) px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-(--muted-strong) transition-colors hover:border-(--topic-color) hover:text-(--topic-color)"
+                    >
+                      <RelatedIcon size={13} strokeWidth={2} className="text-(--topic-color)" />
+                      {getTopicMeta(t, relatedTopic).label}
+                      <ArrowUpRight size={12} className="text-(--muted)" />
+                    </Link>
+                  )
+                })}
+              </div>
             </section>
           ) : null}
 

@@ -38,7 +38,7 @@ export async function Footer({
               <img
                 src="/tiago-logo.svg"
                 alt="Logotipo de Tiago Castro"
-                className="size-9 shrink-0 rounded-sm border border-(--border-strong)"
+                className="size-9 shrink-0 rounded-sm"
               />
               <span className="flex flex-col">
                 <span className="text-sm font-medium text-(--foreground)">
