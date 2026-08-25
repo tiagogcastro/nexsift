@@ -153,7 +153,7 @@ server.registerTool(
   {
     title: 'Resolve a signal identity',
     description:
-      'Uses the exact backend slug function to resolve `{ title, primaryTopic, signalDate }` into a slug and tells whether the signal already exists.',
+      'Uses the exact backend slug function to resolve `{ title, topic, signalDate }` into a slug and tells whether the signal already exists.',
     inputSchema: postIdentitySchema,
   },
   async (identity) => {

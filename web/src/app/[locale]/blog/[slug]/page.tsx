@@ -69,16 +69,11 @@ export default async function PostPage({
   }
 
   const allPosts = await listPosts()
-  const primaryTopic = post.topics[0]
   const relatedPosts = allPosts
     .filter((candidate) => candidate.slug !== post.slug)
     .sort((first, second) => {
-      const firstMatches = primaryTopic
-        ? first.topics[0] === primaryTopic
-        : false
-      const secondMatches = primaryTopic
-        ? second.topics[0] === primaryTopic
-        : false
+      const firstMatches = first.topic === post.topic
+      const secondMatches = second.topic === post.topic
 
       if (firstMatches !== secondMatches) {
         return firstMatches ? -1 : 1

@@ -12,13 +12,7 @@ export function normalizePost(
   existing: Post | null,
   now = new Date(),
 ) {
-  const primaryTopic = draft.topics[0]
-
-  if (!primaryTopic) {
-    throw new Error('A post needs at least one topic')
-  }
-
-  const slug = buildSignalSlug(primaryTopic, draft.title, draft.signalDate)
+  const slug = buildSignalSlug(draft.topic, draft.title, draft.signalDate)
   const timestamp = now.toISOString()
   const post = {
     ...draft,

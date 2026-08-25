@@ -22,7 +22,7 @@ export function TrustBand({
   posts: PostSummary[]
   labels: TrustBandLabels
 }) {
-  const topicCount = new Set(posts.flatMap((post) => post.topics)).size
+  const topicCount = new Set(posts.map((post) => post.topic)).size
   const publicationPercent = Math.round(
     publicationVerifiedSourcesRatio(posts) * 100,
   )

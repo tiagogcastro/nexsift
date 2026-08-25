@@ -37,48 +37,58 @@ export async function PostArticle({
   relatedPosts: PostSummary[]
 }) {
   const t = await getTranslations()
-  const primaryTopic = post.topics[0]
-  const topicLabel = primaryTopic ? getTopicMeta(t, primaryTopic).label : null
-  const TopicIcon = primaryTopic ? topicIcons[primaryTopic] : null
+  const topic = post.topic
+  const topicLabel = getTopicMeta(t, topic).label
+  const TopicIcon = topicIcons[topic]
   const isNew = isSignalWithinDays(post.publishedAt, NEW_BADGE_DAYS)
   const breadcrumbs = [
     { label: t('breadcrumb.home'), href: '/' },
     { label: t('breadcrumb.blog'), href: '/blog' },
   ]
-  const topicCrumb = primaryTopic
-    ? { label: topicLabel ?? '', href: `/topics/${primaryTopic}` }
-    : null
+  const topicCrumb = { label: topicLabel, href: `/topics/${topic}` }
 
   return (
     <article className="page-shell py-12 lg:py-20">
       <Breadcrumbs
         items={[
           ...breadcrumbs,
-          ...(topicCrumb ? [topicCrumb] : []),
+          topicCrumb,
           { label: post.title },
         ]}
-        topic={primaryTopic}
+        topic={topic}
       />
       <div className="mt-8 grid gap-14 lg:grid-cols-[minmax(0,52rem)_minmax(15rem,1fr)] lg:gap-16">
         <div className="min-w-0">
-          {primaryTopic && topicLabel ? (
-            <div
-              data-topic={primaryTopic}
-              className="topic-color flex flex-wrap items-center gap-2"
-            >
-              <span className="topic-chip">
-                {TopicIcon ? (
-                  <TopicIcon size={11} strokeWidth={2} className="text-(--topic-color)" />
-                ) : null}
-                {topicLabel}
+          <div
+            data-topic={topic}
+            className="topic-color flex flex-wrap items-center gap-2"
+          >
+            <span className="topic-chip">
+              <TopicIcon size={11} strokeWidth={2} className="text-(--topic-color)" />
+              {topicLabel}
+            </span>
+            {post.relatedTopics.map((relatedTopic) => {
+              const RelatedIcon = topicIcons[relatedTopic]
+
+              return (
+                <Link
+                  key={relatedTopic}
+                  href={`/topics/${relatedTopic}`}
+                  className="flex items-center gap-1.5 rounded-(--radius-sm) border border-(--border) bg-(--surface) px-2 py-1 font-mono text-[11px] uppercase tracking-[0.08em] text-(--muted) transition-colors hover:text-(--foreground)"
+                >
+                  {RelatedIcon ? (
+                    <RelatedIcon size={11} strokeWidth={2} className="text-(--muted-strong)" />
+                  ) : null}
+                  {getTopicMeta(t, relatedTopic).label}
+                </Link>
+              )
+            })}
+            {isNew ? (
+              <span className="rounded-(--radius-sm) bg-(--signal) px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-widest text-black">
+                {t('radar.newBadge')}
               </span>
-              {isNew ? (
-                <span className="rounded-(--radius-sm) bg-(--signal) px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-widest text-black">
-                  {t('radar.newBadge')}
-                </span>
-              ) : null}
-            </div>
-          ) : null}
+            ) : null}
+          </div>
 
           <h1 className="mt-7 max-w-4xl text-[clamp(2.2rem,4vw,3.75rem)] font-medium leading-[0.96] tracking-[-0.04em]">
             {post.title}
@@ -165,19 +175,14 @@ export async function PostArticle({
               </div>
               <div className="mt-6">
                 {relatedPosts.map((related, index) => {
-                  const relatedTopic = related.topics[0]
-                  const relatedLabel = relatedTopic
-                    ? getTopicMeta(t, relatedTopic).label
-                    : null
-                  const RelatedIcon = relatedTopic
-                    ? topicIcons[relatedTopic]
-                    : null
+                  const relatedLabel = getTopicMeta(t, related.topic).label
+                  const RelatedIcon = topicIcons[related.topic]
 
                   return (
                     <Link
                       key={related.slug}
                       href={`/blog/${related.slug}`}
-                      data-topic={relatedTopic}
+                      data-topic={related.topic}
                       className="topic-color group flex items-center gap-4 border-b border-(--border) py-3.5 last:border-b-0"
                     >
                       <span className="font-mono text-[11px] text-(--muted)">
@@ -185,14 +190,12 @@ export async function PostArticle({
                       </span>
                       <span className="hidden shrink-0 sm:block">
                         <span className="topic-chip">
-                          {RelatedIcon ? (
-                            <RelatedIcon
-                              size={11}
-                              strokeWidth={2}
-                              className="text-(--topic-color)"
-                            />
-                          ) : null}
-                          {relatedLabel ?? t('console.signalFallback')}
+                          <RelatedIcon
+                            size={11}
+                            strokeWidth={2}
+                            className="text-(--topic-color)"
+                          />
+                          {relatedLabel}
                         </span>
                       </span>
                       <span className="min-w-0 flex-1 truncate text-sm text-(--muted-strong) transition-colors group-hover:text-(--foreground)">

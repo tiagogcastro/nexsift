@@ -35,7 +35,8 @@ const draftFields = {
   content: z.string().min(100),
   whyItMatters: z.string().min(30).max(800),
   whatToWatch: z.string().min(30).max(500),
-  topics: z.array(topicSchema).min(1).max(3),
+  topic: topicSchema,
+  relatedTopics: z.array(topicSchema).max(2).default([]),
   signalDate: z.iso.date(),
   signalType: signalTypeSchema,
   depth: depthSchema,
@@ -51,20 +52,28 @@ const draftBaseSchema = z.object(draftFields)
 
 export const postIdentitySchema = z.object({
   title: draftFields.title,
-  primaryTopic: topicSchema,
+  topic: topicSchema,
   signalDate: draftFields.signalDate,
 })
 
-export const postDraftSchema = draftBaseSchema.refine(
-  (draft) =>
-    draft.slug === undefined ||
-    (draft.slug.startsWith(`${draft.topics[0]}-`) &&
-      draft.slug.endsWith(`-${draft.signalDate}`)),
-  {
-    message: 'slug must start with {topics[0]}- and end with -{signalDate}',
-    path: ['slug'],
-  },
-)
+export const postDraftSchema = draftBaseSchema
+  .refine(
+    (draft) => !draft.relatedTopics.includes(draft.topic),
+    {
+      message: 'relatedTopics must not contain the primary topic',
+      path: ['relatedTopics'],
+    },
+  )
+  .refine(
+    (draft) =>
+      draft.slug === undefined ||
+      (draft.slug.startsWith(`${draft.topic}-`) &&
+        draft.slug.endsWith(`-${draft.signalDate}`)),
+    {
+      message: 'slug must start with {topic}- and end with -{signalDate}',
+      path: ['slug'],
+    },
+  )
 
 // whatToWatch is required on publish (draft gate) but optional on stored
 // posts so legacy records without the field can be read, migrated and
@@ -85,10 +94,10 @@ const postFieldsSchema = draftBaseSchema
 
 export const postSchema = postFieldsSchema.refine(
   (post) =>
-    post.slug.startsWith(`${post.topics[0]}-`) &&
+    post.slug.startsWith(`${post.topic}-`) &&
     post.slug.endsWith(`-${post.signalDate}`),
   {
-    message: 'slug must start with {topics[0]}- and end with -{signalDate}',
+    message: 'slug must start with {topic}- and end with -{signalDate}',
     path: ['slug'],
   },
 )
@@ -98,7 +107,8 @@ export const postSummarySchema = postFieldsSchema.pick({
   slug: true,
   title: true,
   description: true,
-  topics: true,
+  topic: true,
+  relatedTopics: true,
   tags: true,
   signalDate: true,
   publishedAt: true,
@@ -118,7 +128,8 @@ export const postListItemSchema = postFieldsSchema.pick({
   slug: true,
   title: true,
   description: true,
-  topics: true,
+  topic: true,
+  relatedTopics: true,
   signalDate: true,
   signalType: true,
   depth: true,

@@ -80,9 +80,7 @@ export function LedgerConsole({
     const result = {} as Record<Topic, number>
 
     for (const post of posts) {
-      for (const postTopic of post.topics) {
-        result[postTopic] = (result[postTopic] ?? 0) + 1
-      }
+      result[post.topic] = (result[post.topic] ?? 0) + 1
     }
 
     return result
@@ -93,7 +91,7 @@ export function LedgerConsole({
 
     return posts
       .filter((post) => {
-        if (topic && post.topics[0] !== topic) {
+        if (topic && post.topic !== topic) {
           return false
         }
 
@@ -182,10 +180,7 @@ export function LedgerConsole({
       {visiblePosts.length > 0 ? (
         <div>
           {visiblePosts.map((post, index) => {
-            const postTopic = post.topics[0]
-            const topicLabel = postTopic
-              ? topicMeta[postTopic].label
-              : undefined
+            const topicLabel = topicMeta[post.topic]?.label
 
             return (
               <LedgerRow

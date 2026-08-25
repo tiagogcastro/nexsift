@@ -23,6 +23,7 @@ paths:
         - name: topic
           in: query
           required: false
+          description: Only signals whose single topic equals this value.
           schema:
             type: string
             enum: [ai, development, cloud, devops, security, industry, design]
@@ -422,13 +423,13 @@ components:
             additionalProperties: true
     PostIdentity:
       type: object
-      required: [title, primaryTopic, signalDate]
+      required: [title, topic, signalDate]
       properties:
         title:
           type: string
           minLength: 8
           maxLength: 140
-        primaryTopic:
+        topic:
           type: string
           enum: [ai, development, cloud, devops, security, industry, design]
         signalDate:
@@ -442,7 +443,7 @@ components:
         - content
         - whyItMatters
         - whatToWatch
-        - topics
+        - topic
         - signalDate
         - signalType
         - depth
@@ -452,7 +453,7 @@ components:
       properties:
         slug:
           type: string
-          description: Optional; when present it must start with {topics[0]}- and end with -{signalDate}. The backend derives the slug itself as {topics[0]}-{slugified title, max 40 chars}-{signalDate}. Use resolvePost for exact deduplication instead of reproducing the slug logic manually.
+          description: Optional; when present it must start with {topic}- and end with -{signalDate}. The backend derives the slug itself as {topic}-{slugified title, max 40 chars}-{signalDate}. Use resolvePost for exact deduplication instead of reproducing the slug logic manually.
           pattern: ^(ai|development|cloud|devops|security|industry|design)-[a-z0-9]+(-[a-z0-9]+)*-\d{4}-\d{2}-\d{2}$
         title:
           type: string
@@ -475,11 +476,14 @@ components:
           minLength: 30
           maxLength: 500
           description: "What to watch next: the concrete follow-up (rollout, adoption, patch, migration, ecosystem response, breaking change)."
-        topics:
+        topic:
+          type: string
+          enum: [ai, development, cloud, devops, security, industry, design]
+          description: "The signal's single topic: it defines the slug and is the only topic page where the signal appears."
+        relatedTopics:
           type: array
-          minItems: 1
-          maxItems: 3
-          description: "The first item is the primary topic: it defines the slug and is the only topic page where the signal appears. Additional topics are contextual and never place the signal on their own page."
+          maxItems: 2
+          description: "Contextual topics related to the signal. They never define the slug and never place the signal on their own topic page; they are displayed as context on the signal page."
           items:
             type: string
             enum: [ai, development, cloud, devops, security, industry, design]
@@ -572,7 +576,8 @@ components:
         - content
         - whyItMatters
         - whatToWatch
-        - topics
+        - topic
+        - relatedTopics
         - signalDate
         - signalType
         - depth
@@ -597,9 +602,12 @@ components:
           type: string
         whatToWatch:
           type: string
-        topics:
+        topic:
+          type: string
+          description: "The signal's single topic: it defines the slug and is the only topic page where the signal appears."
+        relatedTopics:
           type: array
-          description: "The first item is the primary topic: it defines the slug and is the only topic page where the signal appears."
+          description: "Contextual topics related to the signal; never place it on their own topic page."
           items:
             type: string
         signalDate:
@@ -764,7 +772,8 @@ components:
         - slug
         - title
         - description
-        - topics
+        - topic
+        - relatedTopics
         - tags
         - signalDate
         - publishedAt
@@ -784,7 +793,10 @@ components:
           type: string
         description:
           type: string
-        topics:
+        topic:
+          type: string
+          description: "The signal's single topic; the only topic page where the signal appears."
+        relatedTopics:
           type: array
           items:
             type: string
@@ -827,7 +839,8 @@ components:
         - slug
         - title
         - description
-        - topics
+        - topic
+        - relatedTopics
         - signalDate
         - signalType
         - depth
@@ -841,7 +854,10 @@ components:
           type: string
         description:
           type: string
-        topics:
+        topic:
+          type: string
+          description: "The signal's single topic; the only topic page where the signal appears."
+        relatedTopics:
           type: array
           items:
             type: string

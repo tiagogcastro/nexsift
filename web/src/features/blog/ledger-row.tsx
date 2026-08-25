@@ -26,9 +26,9 @@ export function LedgerRow({
   fallbackLabel: string
   compact?: boolean
 }) {
-  const topic = post.topics[0]
+  const topic = post.topic
   const isNew = isSignalWithinDays(post.publishedAt, NEW_BADGE_DAYS)
-  const TopicIcon = topic ? topicIcons[topic] : null
+  const TopicIcon = topicIcons[topic]
 
   return (
     <Link
