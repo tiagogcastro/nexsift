@@ -1,6 +1,6 @@
 # NexSift: contrato de publicacao (referencia do GPT Editor)
 
-Editorial version: 2026-08-20
+Editorial version: 2026-08-24
 
 Arquivo de referencia embutido na ferramenta `editorialInstructions` do connector MCP. Detalha o contrato das operacoes, o exemplo de payload e os codigos de erro relevantes para a rotina editorial.
 
@@ -77,7 +77,10 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
 
 ## Operacoes principais
 
-- `listRecentPosts`: lista sinais recentes. Filtros opcionais: `since`, `topic`, `signalType`, `limit` e `detail`.
+- `listRecentPosts`: lista sinais recentes. Filtros opcionais: `since`, `topic`, `signalType`, `query`, `tag`, `limit`, `offset` e `detail`. A resposta inclui `total`, o numero de matches antes da paginacao.
+  - `query`: texto livre, case-insensitive, sobre titulo, descricao e tags. Use para checar o que ja existe sobre um assunto ("o que ja publiquei sobre Cursor").
+  - `tag`: match exato de tag, case-insensitive.
+  - `offset`: paginacao junto com `limit`; combine com `total` para percorrer o historico completo.
   - `detail: "full"` retorna resumos com `sources`.
   - `detail: "compact"` retorna itens leves para coverage check, discovery e modo degradado.
 - `resolvePost`: recebe `{ title, primaryTopic, signalDate }` e devolve `{ exists, slug, post? }`, usando exatamente a mesma funcao de slug da publicacao.
@@ -87,6 +90,16 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
 - `replaceSource`: substitui uma fonte validando a nova URL antes de gravar.
 - `auditSources`: revalida as fontes publicadas.
 - `deletePost`: exclui um sinal.
+
+## Gestao do acervo (autogestao)
+
+Alem de publicar, a rotina e responsavel pela saude do acervo:
+
+- Antes de publicar, use `listRecentPosts` com `query` ou `resolvePost` para confirmar que o sinal e novo.
+- Periodicamente (pelo menos semanal), rode `auditSources` e trate as fontes quebradas: troque via `replaceSource` quando houver equivalente valida.
+- Erro factual ou informacao corrigida: republique o mesmo slug com o conteudo corrigido via `publishPost`.
+- Sinal invalido, duplicado ou sem correcao possivel: remova com `deletePost`.
+- Toda edicao preserva `title`, topico primario e `signalDate`. `updatedAt` so muda com novidade material.
 
 ## Validacao no servidor
 

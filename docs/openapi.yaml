@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: NexSift Publisher
-  version: 2.1.0
+  version: 2.2.0
   description: Publishes validated pt-BR NexSift signals and lists recently published signals.
 servers:
   - url: https://oh4qzz4ivd.execute-api.us-east-1.amazonaws.com/
@@ -32,6 +32,18 @@ paths:
           schema:
             type: string
             enum: [release, risk, shift, research, industry, opportunity]
+        - name: query
+          in: query
+          required: false
+          description: Case-insensitive substring match over title, description and tags.
+          schema:
+            type: string
+        - name: tag
+          in: query
+          required: false
+          description: Exact tag match, case-insensitive.
+          schema:
+            type: string
         - name: limit
           in: query
           required: false
@@ -39,6 +51,14 @@ paths:
             type: integer
             default: 30
             maximum: 100
+        - name: offset
+          in: query
+          required: false
+          description: Pagination offset applied after all filters.
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
         - name: detail
           in: query
           required: false
@@ -49,12 +69,14 @@ paths:
             default: full
       responses:
         '200':
-          description: Recent signals
+          description: Recent signals with `total` counting all matches before pagination
           content:
             application/json:
               schema:
                 type: object
                 properties:
+                  total:
+                    type: integer
                   posts:
                     type: array
                     items:

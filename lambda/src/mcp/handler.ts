@@ -15,7 +15,7 @@ import editorialInstructions from '../../../docs/gpt-editor-instructions.md'
 import editorialReference from '../../../docs/gpt-editor-reference.md'
 import payloadReference from '../../../docs/gpt-editor-payload-reference.md'
 
-const editorialBundleVersion = '2026-08-20'
+const editorialBundleVersion = '2026-08-24'
 
 async function callApi(
   operation: string,
@@ -99,7 +99,7 @@ server.registerTool(
   {
     title: 'List recent signals',
     description:
-      'Lists recent NexSift signals, optionally filtered by `since`, `topic`, `signalType` and `limit` (max 100). Use `detail: "compact"` for coverage, discovery and degraded mode because it avoids returning full sources.',
+      'Lists recent NexSift signals, optionally filtered by `since`, `topic`, `signalType`, free-text `query` (matches title, description and tags), exact `tag`, with `limit` (max 100) and `offset` pagination. Returns `total` matches before pagination. Use `detail: "compact"` for coverage, discovery and degraded mode because it avoids returning full sources.',
     inputSchema: {
       since: z
         .string()
@@ -107,22 +107,36 @@ server.registerTool(
         .optional(),
       topic: topicSchema.optional(),
       signalType: signalTypeSchema.optional(),
+      query: z
+        .string()
+        .min(1)
+        .describe('Case-insensitive text match over title, description and tags.')
+        .optional(),
+      tag: z
+        .string()
+        .min(1)
+        .describe('Exact tag match, case-insensitive.')
+        .optional(),
       limit: z.number().int().min(1).max(100).optional(),
+      offset: z.number().int().min(0).optional(),
       detail: z.enum(['full', 'compact']).optional(),
     },
   },
-  async ({ since, topic, signalType, limit, detail }) => {
+  async ({ since, topic, signalType, query, tag, limit, offset, detail }) => {
     const params = new URLSearchParams()
     const requestedDetail = detail ?? 'compact'
 
     if (since) params.set('since', since)
     if (topic) params.set('topic', topic)
     if (signalType) params.set('signalType', signalType)
+    if (query) params.set('query', query)
+    if (tag) params.set('tag', tag)
     if (limit) params.set('limit', String(limit))
+    if (offset) params.set('offset', String(offset))
     params.set('detail', requestedDetail)
 
-    const query = params.toString()
-    let result = await callApi('listRecentPosts', `/?${query}`)
+    const queryString = params.toString()
+    let result = await callApi('listRecentPosts', `/?${queryString}`)
 
     if (result.status >= 500 && (limit ?? 0) > 60) {
       params.set('limit', '60')
