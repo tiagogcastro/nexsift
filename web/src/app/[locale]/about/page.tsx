@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { CreatorCard } from '@/features/landing/creator-card'
+import { SignalArt } from '@/features/landing/signal-art'
 import { siteConfig } from '@/config/site'
 import { routing, type AppLocale } from '@/i18n/routing'
 
@@ -63,7 +64,9 @@ export default async function AboutPage({
           today: t('nav.today'),
         }}
       />
-      <main className="page-shell min-h-[75vh] py-16 lg:py-24">
+      <main className="relative min-h-[75vh] overflow-hidden py-16 lg:py-24">
+        <SignalArt className="pointer-events-none absolute -right-32 top-10 hidden w-[860px] opacity-[0.06] lg:block" />
+        <div className="page-shell relative">
         <div className="grid gap-12 lg:grid-cols-[0.45fr_1fr]">
           <div className="lg:sticky lg:top-24 lg:self-start">
             <h1 className="max-w-xl text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[0.95] tracking-[-0.04em]">
@@ -135,6 +138,10 @@ export default async function AboutPage({
               </div>
             </div>
 
+            <div aria-hidden className="mt-16 overflow-hidden border-y border-(--border)">
+              <SignalArt className="h-auto w-full" />
+            </div>
+
             {sections.map((section) => (
               <div key={section.index} className="mt-16 border-t border-(--border)">
                 <div className="grid gap-6 pt-6 md:grid-cols-[3rem_1fr]">
@@ -153,6 +160,7 @@ export default async function AboutPage({
               </div>
             ))}
           </div>
+        </div>
         </div>
       </main>
       <Footer

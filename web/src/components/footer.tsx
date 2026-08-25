@@ -29,20 +29,24 @@ export async function Footer({
             <Brand locale={locale} />
             <p className="max-w-sm text-sm text-(--muted)">{tagline}</p>
             <a
-              href={siteConfig.linkedinUrl}
+              href={siteConfig.websiteUrl}
               target="_blank"
               rel="noreferrer"
               className="inline-flex max-w-md items-center gap-3 rounded-(--radius-sm) border border-(--border) bg-(--surface-soft) px-4 py-3 transition-colors hover:border-(--signal)"
             >
-              <span className="grid size-9 shrink-0 place-items-center rounded-sm border border-(--border-strong) bg-(--surface-raised) font-mono text-xs font-semibold text-(--signal)">
-                TC
-              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/tiago-logo.svg"
+                alt="Logotipo de Tiago Castro"
+                className="size-9 shrink-0 rounded-sm border border-(--border-strong)"
+              />
               <span className="flex flex-col">
                 <span className="text-sm font-medium text-(--foreground)">
                   {builtBy}
                 </span>
                 <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-(--muted)">
-                  LinkedIn <ArrowUpRight size={11} className="inline" />
+                  {new URL(siteConfig.websiteUrl).hostname}{' '}
+                  <ArrowUpRight size={11} className="inline" />
                 </span>
               </span>
             </a>
