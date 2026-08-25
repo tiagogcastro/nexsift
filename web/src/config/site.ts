@@ -17,6 +17,7 @@ export const siteConfig = {
   author: 'NexSift Editorial',
   creator: 'Tiago Castro',
   websiteUrl: 'https://tiagogcastro.com.br',
+  repoUrl: 'https://github.com/tiagogcastro/nexsift',
   githubUrl: 'https://github.com/tiagogcastro',
   linkedinUrl: 'https://www.linkedin.com/in/tiagogcastro',
 } as const

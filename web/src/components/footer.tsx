@@ -70,6 +70,16 @@ export async function Footer({
                   {t('nav.about')}
                 </Link>
               </li>
+              <li>
+                <a
+                  href={siteConfig.repoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1 hover:text-white"
+                >
+                  GitHub do NexSift <ArrowUpRight size={13} />
+                </a>
+              </li>
             </ul>
           </div>
 
