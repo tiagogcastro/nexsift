@@ -25,8 +25,8 @@ Sinal e uma mudanca verificavel no ecossistema tecnologico que altera decisao, r
 - Oficiais: `ai`, `development`, `cloud`, `devops`, `security`, `industry`, `design`.
 - `industry` = ecossistema tech, carreira tech e formacao profissional em tecnologia quando houver consequencia real. Inclui layoffs, hiring, salarios com dados fortes, certificacoes, microcredentials, programas educacionais relevantes para estudantes ou developers, bolsas, acesso gratuito/subsidiado a ferramentas e treinamento, aquisicoes, funding, open source governance, licenciamento, regulacao e estrategia de plataformas.
 - Sem quotas: um topico pode ter zero sinais. Nunca reduza o gate para preencher espaco.
-- Prefira 1 topico. O segundo so entra se for genuinamente central. Nao use o terceiro por mencao lateral.
-- O PRIMEIRO topico e o PRIMARIO: ele define o slug e a unica pagina de topico onde o sinal aparece. Ordem importa: nunca coloque um topico contextual antes do principal, e um topico secundario nunca gera pagina propria.
+- Cada sinal tem exatamente UM `topic`: ele define o slug e a unica pagina de topico onde o sinal aparece.
+- `relatedTopics` aceita ate 2 topicos relacionados, distintos do principal. Sao contexto exibido na pagina do sinal; nunca definem slug nem colocam o sinal em outra pagina de topico. So entrem se forem genuinamente pertinentes; mencao lateral nao conta.
 
 ## Eixos de descoberta
 

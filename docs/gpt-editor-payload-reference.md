@@ -14,7 +14,8 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
     "content": "Markdown do sinal em pt-BR. Imagens inline (`![alt](url)`) podem ser usadas no ponto exato em que ajudam a leitura. Ex.: `![Tela do programa](https://exemplo.com/screenshot.png)`.",
     "whyItMatters": "A credencial reduz barreira de entrada e pode alterar trilhas de formacao, criterios de triagem e distribuicao de treinamento em nuvem e IA.",
     "whatToWatch": "Observar reconhecimento de mercado, adocao por programas educacionais, custo futuro e se a trilha vira requisito de outras certificacoes.",
-    "topics": ["industry", "cloud"],
+    "topic": "industry",
+    "relatedTopics": ["cloud"],
     "signalDate": "2026-08-20",
     "signalType": "opportunity",
     "depth": "practical",
@@ -42,7 +43,7 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
 
 ## Regras do contrato
 
-- `slug`: nao enviar. O backend gera `{topic-primario}-{titulo-em-slug}-{signalDate}` com a mesma funcao usada por `resolvePost`.
+- `slug`: nao enviar. O backend gera `{topic}-{titulo-em-slug}-{signalDate}` com a mesma funcao usada por `resolvePost`.
 - `signalDate`: data real do acontecimento, formato `YYYY-MM-DD`.
 - `signalType`: `release` | `risk` | `shift` | `research` | `industry` | `opportunity`.
 - `depth`: `practical` | `deep`.
@@ -52,7 +53,8 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
 - `whatToWatch`: 30 a 500 caracteres, obrigatorio.
 - `content`: markdown em pt-BR, minimo 100 caracteres. Imagens inline `![alt](url)` sao permitidas.
 - `coverImage`: opcional, fortemente recomendada quando houver imagem realmente util.
-- `topics`: 1 a 3, apenas `ai`, `development`, `cloud`, `devops`, `security`, `industry`, `design`. O PRIMEIRO e o topico PRIMARIO: define o slug e a unica pagina de topico onde o sinal aparece. Tópicos adicionais sao contextuais e nunca geram pagina propria; so entram se forem genuinamente centrais ao conteudo.
+- `topic`: exatamente UM, apenas `ai`, `development`, `cloud`, `devops`, `security`, `industry`, `design`. Define o slug e e a unica pagina de topico onde o sinal aparece. Escolha o topico que melhor representa o sinal para o publico de desenvolvedores.
+- `relatedTopics`: 0 a 2 topicos relacionados, distintos de `topic`. Sao contexto exibido na pagina do sinal; nunca definem o slug nem colocam o sinal em outra pagina de topico. So entrem se forem genuinamente pertinentes ao conteudo.
 - `tags`: ate 10, em minusculas, estritamente ligadas ao sinal.
 - `sources`: 1 ou mais; cada item precisa de `title`, `publisher`, `url` e, para publicar, `editorialStatus: "verified"` e `editoriallyVerifiedAt`.
 - `relevanceScore`: 0 a 10. Gate minimo 6.5.
@@ -83,7 +85,7 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
   - `offset`: paginacao junto com `limit`; combine com `total` para percorrer o historico completo.
   - `detail: "full"` retorna resumos com `sources`.
   - `detail: "compact"` retorna itens leves para coverage check, discovery e modo degradado.
-- `resolvePost`: recebe `{ title, primaryTopic, signalDate }` e devolve `{ exists, slug, post? }`, usando exatamente a mesma funcao de slug da publicacao.
+- `resolvePost`: recebe `{ title, topic, signalDate }` e devolve `{ exists, slug, post? }`, usando exatamente a mesma funcao de slug da publicacao.
 - `getPost`: retorna o sinal completo por slug.
 - `publishPost`: publica ou atualiza um sinal.
 - `validateSource`: valida uma URL candidata.
@@ -99,7 +101,7 @@ Alem de publicar, a rotina e responsavel pela saude do acervo:
 - Periodicamente (pelo menos semanal), rode `auditSources` e trate as fontes quebradas: troque via `replaceSource` quando houver equivalente valida.
 - Erro factual ou informacao corrigida: republique o mesmo slug com o conteudo corrigido via `publishPost`.
 - Sinal invalido, duplicado ou sem correcao possivel: remova com `deletePost`.
-- Toda edicao preserva `title`, topico primario e `signalDate`. `updatedAt` so muda com novidade material.
+- Toda edicao preserva `title`, `topic` e `signalDate`. `updatedAt` so muda com novidade material.
 
 ## Validacao no servidor
 

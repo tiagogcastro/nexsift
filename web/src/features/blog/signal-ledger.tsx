@@ -18,8 +18,7 @@ export async function SignalLedger({
   return (
     <div>
       {visiblePosts.map((post, index) => {
-        const topic = post.topics[0]
-        const label = topic ? getTopicMeta(t, topic).label : undefined
+        const label = getTopicMeta(t, post.topic).label
 
         return (
           <LedgerRow

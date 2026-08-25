@@ -56,7 +56,7 @@ export default async function TopicsPage({
               {topicOrder.map((topic, index) => {
                 const meta = getTopicMeta(t, topic)
                 const count = posts.filter((post) =>
-                  post.topics[0] === topic,
+                  post.topic === topic,
                 ).length
                 const TopicIcon = topicIcons[topic]
 

@@ -1,12 +1,18 @@
 import type { Post } from '@nexsift/schemas/post'
+import { postSummarySchema } from '@nexsift/schemas/post'
 import type { SourceStatus, VerifiedPostSource } from '@nexsift/schemas/source'
-import { getIndex, getPost, listPostSlugs, putIndex, putPost } from '../storage/s3'
+import { topicSchema } from '@nexsift/schemas/topic'
+import {
+  getPost,
+  listPostSlugs,
+  putIndex,
+  putPost,
+} from '../storage/s3'
 import {
   applySourceReplacement,
   latestIndexKey,
   latestLimit,
   sortByPublishedAt,
-  upsertSummary,
 } from './publish-post'
 import type { SourceCheck } from './validate-source'
 import {
@@ -47,9 +53,9 @@ const archiveDiscoveryTimeoutMs = 10_000
 // Periodic routine, separate from the editorial flow. Revalidates every
 // source of every published signal and records the outcome on each stored
 // post without changing editorial content. A broken source does not delete
-// or rewrite a signal; it only flags the source for review. Because the
-// frontend and listRecentPosts read the index files, every audit refreshes
-// them, otherwise stored posts and index entries drift apart.
+// or rewrite a signal; it only flags the source for review. Indexes are
+// derived once from the audited posts at the end, so every run also heals
+// drift in latest.json and all topic indexes.
 export async function auditAllSources(
   requestContext?: RequestContext,
 ): Promise<SourceAuditResult> {
@@ -70,34 +76,49 @@ export async function auditAllSources(
     replacementCandidates: 0,
   }
   const entries: SourceAuditEntry[] = []
+  const audited: Post[] = []
 
   for (const post of posts.sort((first, second) => sortByPublishedAt(first, second))) {
-    const updated = await auditPostSources(
+    const { post: updated, changed } = await auditPostSources(
       post,
       checkedAt,
       counts,
       entries,
       requestContext,
     )
-    await putPost(updated)
-    await refreshIndexes(updated)
+
+    // lastCheckedAt moves on every check, so only status-level changes are
+    // worth an S3 write; unchanged posts keep their previous timestamps.
+    if (changed) {
+      await putPost(updated)
+    }
+
+    audited.push(updated)
   }
+
+  await rebuildIndexes(audited)
 
   return { checkedAt, ...counts, entries }
 }
 
-async function refreshIndexes(post: Post) {
-  const latest = await getIndex(latestIndexKey)
+// Derives every index file from the full set of stored posts instead of
+// merging per-post updates: one write per index regardless of post count,
+// and stale entries disappear instead of accumulating.
+async function rebuildIndexes(posts: Post[]) {
+  const summaries = posts.map((post) => postSummarySchema.parse(post))
+
   await putIndex(
     latestIndexKey,
-    upsertSummary(latest, post).sort(sortByPublishedAt).slice(0, latestLimit),
+    [...summaries].sort(sortByPublishedAt).slice(0, latestLimit),
   )
 
   await Promise.all(
-    post.topics.map(async (topic) => {
-      const key = `public/indexes/topics/${topic}.json`
-      const index = await getIndex(key)
-      await putIndex(key, upsertSummary(index, post).sort(sortByPublishedAt))
+    topicSchema.options.map(async (topic) => {
+      const topicPosts = summaries
+        .filter((summary) => summary.topic === topic)
+        .sort(sortByPublishedAt)
+
+      await putIndex(`public/indexes/topics/${topic}.json`, topicPosts)
     }),
   )
 }
@@ -108,7 +129,7 @@ async function auditPostSources(
   counts: AuditCounts,
   entries: SourceAuditEntry[],
   requestContext?: RequestContext,
-): Promise<Post> {
+): Promise<{ post: Post; changed: boolean }> {
   const results = await Promise.allSettled(
     post.sources.map((source) => validateSourceUrl(source.url, { requestContext })),
   )
@@ -189,7 +210,38 @@ async function auditPostSources(
     })
   }
 
-  return { ...post, sources }
+  return {
+    post: { ...post, sources },
+    changed: sourcesChanged(post.sources, sources),
+  }
+}
+
+// A write is only worth it when a source moved between states or its
+// effective URL changed. Timestamp-only updates (lastCheckedAt) do not
+// count, otherwise every audit run would rewrite every post.
+function sourcesChanged(
+  before: VerifiedPostSource[],
+  after: VerifiedPostSource[],
+): boolean {
+  if (before.length !== after.length) {
+    return true
+  }
+
+  return before.some((source, index) => {
+    const next = after[index]
+
+    if (!next) {
+      return true
+    }
+
+    return (
+      source.url !== next.url ||
+      source.sourceStatus !== next.sourceStatus ||
+      source.httpStatus !== next.httpStatus ||
+      source.finalUrl !== next.finalUrl ||
+      (source.replacements?.length ?? 0) !== (next.replacements?.length ?? 0)
+    )
+  })
 }
 
 function storeStatus(

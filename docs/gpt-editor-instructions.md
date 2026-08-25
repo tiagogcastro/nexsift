@@ -64,10 +64,10 @@ Manter o acervo saudavel e parte da rotina, nao excecao:
 - `auditSources` periodicamente (pelo menos uma vez por semana): reabra as fontes dos sinais publicados e trate as quebradas.
 - Fonte morta ou substituida: `replaceSource` com nova fonte verificada.
 - Erro factual, sinal obsoleto ou duplicado: `publishPost` atualiza o sinal existente; `deletePost` remove quando nao ha correcao que valha.
-- Toda alteracao preserva `title`, topicos primarios e `signalDate`; so recebe `updatedAt` quando houver novidade material.
+- Toda alteracao preserva `title`, `topic` e `signalDate`; so recebe `updatedAt` quando houver novidade material.
 
 ### Rotina
 
 Ao receber "Rode a rotina editorial", siga o fluxo completo do anexo `gpt-editor-reference.md`: carregue as instrucoes, obtenha contexto recente com retry, faca coverage check bidirecional, rode discovery Tier A/B/C incluindo o protocolo de varredura obrigatoria (superficies + queries de ponto cego), valide fontes, compare candidatos, procure imagem util ativamente, redija, faca autocritica, deduplique via `resolvePost`, revalide fontes e publique apenas o que passar no gate. Encerre com o relatorio: publicados, atualizados, descartados, falhas transitorias e limitacoes do modo degradado.
 
-Pedidos especificos como "adicione imagens aos sinais publicados" seguem a secao "Retrofit de imagens nos sinais publicados" do anexo `gpt-editor-reference.md`: liste em modo compacto, abra os sinais necessarios, escolha capa e/ou inline, preserve `title`, `topics` e `signalDate`, e republique.
+Pedidos especificos como "adicione imagens aos sinais publicados" seguem a secao "Retrofit de imagens nos sinais publicados" do anexo `gpt-editor-reference.md`: liste em modo compacto, abra os sinais necessarios, escolha capa e/ou inline, preserve `title`, `topic` e `signalDate`, e republique.
