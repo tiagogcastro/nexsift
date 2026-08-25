@@ -64,7 +64,7 @@ export function CreatorCard({ labels }: { labels: CreatorCardLabels }) {
           ))}
         </div>
       </div>
-      <p className="mt-6 max-w-[56ch] text-sm leading-relaxed text-(--muted-strong)">
+      <p className="mt-6 max-w-[80ch] text-sm leading-relaxed text-(--muted-strong)">
         {labels.body}
       </p>
     </div>

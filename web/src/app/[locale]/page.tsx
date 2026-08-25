@@ -96,7 +96,7 @@ export default async function HomePage({
               <p className="mt-9 max-w-[56ch] text-[clamp(1rem,1.7vw,1.28rem)] leading-relaxed text-(--muted-strong)">
                 {t('hero.description')}
               </p>
-              <p className="mt-8 max-w-[56ch] font-mono text-sm leading-relaxed text-(--muted)">
+              <p className="mt-6 max-w-[56ch] font-mono text-sm leading-relaxed text-(--muted)">
                 {t.rich('hero.pain', {
                   b: (chunks) => (
                     <span className="font-semibold text-(--foreground)">
@@ -105,7 +105,7 @@ export default async function HomePage({
                   ),
                 })}
               </p>
-              <p className="mt-6 max-w-sm font-mono text-sm leading-relaxed text-(--muted)">
+              <p className="mt-4 max-w-md border-l-2 border-(--border-strong) pl-4 font-mono text-sm leading-relaxed text-(--muted-strong)">
                 {t.rich('radar.definition', {
                   sinal: (chunks) => (
                     <span className="font-semibold text-(--signal)">{chunks}</span>
