@@ -39,7 +39,7 @@ export function CreatorCard({ labels }: { labels: CreatorCardLabels }) {
           <img
             src="/tiago-logo.svg"
             alt="Logotipo de Tiago Castro"
-            className="size-12 shrink-0 rounded-(--radius-sm) border border-(--border-strong)"
+            className="size-12 shrink-0 rounded-(--radius-sm)"
           />
           <div>
             <div className="eyebrow text-(--signal)">{labels.eyebrow}</div>

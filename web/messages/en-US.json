@@ -10,16 +10,16 @@
     "eyebrow": "Technology intelligence for builders and operators",
     "titleA": "Less noise.",
     "titleB": "More signal.",
-    "description": "NexSift filters relevant changes in technology and shows what changed, why it matters and what to watch. No infinite feed: a short selection, with context and verified sources.",
+    "description": "Relevant changes in technology: what changed, why it matters and what to watch. A short selection with verified sources.",
     "primary": "View all signals",
     "secondary": "How it works",
-    "pain": "Keeping up with technology became a filtering job: the <b>more you read</b>, the less you understand, and <b>nobody verifies</b> what circulates."
+    "pain": "The more you read, the less you understand - and <b>nobody verifies</b> what circulates."
   },
   "radar": {
     "eyebrow": "ON THE RADAR NOW",
     "title": "On the radar now",
     "description": "Changes in technology that passed NexSift's filter and deserve your attention.",
-    "definition": "A <sinal>signal</sinal> is a relevant change, verified and placed in context.",
+    "definition": "A <sinal>signal</sinal> is a verified change, in context.",
     "viewAll": "View all signals",
     "newBadge": "New",
     "sourcesCount": "{count, plural, one {source} other {sources}}",
@@ -35,7 +35,7 @@
     "eyebrow": "WHY IT EXISTS",
     "titleA": "Technology produces a lot of noise.",
     "titleB": "Only the signals remain.",
-    "description": "Feeds, newsletters and alerts compete for your attention. NexSift does not try to make you consume more: it tries to make you need to read less to understand better what changed."
+    "description": "Feeds and alerts compete for your attention. NexSift does the opposite: less reading to understand what changed."
   },
   "process": {
     "eyebrow": "HOW IT WORKS",
@@ -145,6 +145,7 @@
     "published": "Published",
     "updated": "Updated",
     "reading": "Reading",
+    "relatedTopics": "Related topics for this signal",
     "relevance": "Relevance",
     "sourcesIntroTitle": "Continue at the source",
     "sourcesIntroBody": "NexSift synthesizes the change and its impact. Read the original source for documentation, technical details and full context.",
@@ -237,7 +238,7 @@
   "about": {
     "eyebrow": "ABOUT",
     "title": "A technical filter, not another infinite feed",
-    "body": "NexSift was born to reduce the cost of keeping up with technology. Instead of reproducing everything that was published, it prioritizes signals with real impact for people who build, operate, design or decide about technology, with development as the main editorial bias.",
+    "body": "NexSift reduces the cost of keeping up with technology. Instead of reproducing everything, it prioritizes signals with real impact for people who build and operate software.",
     "signalTitle": "What a signal is",
     "signalBody": "A signal is a relevant change, verified and placed in context. Not everything that happens is a signal: the change must be real, have evidence and alter a decision, risk, opportunity or understanding for people who build or operate technology.",
     "criteriaTitle": "Editorial criteria",

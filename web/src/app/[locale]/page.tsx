@@ -145,17 +145,8 @@ export default async function HomePage({
                   {t('radar.eyebrow')}
                 </h2>
               </div>
-              <div className="px-4 lg:px-5">
+              <div className="px-4 pb-4 lg:px-5">
                 <SignalLedger posts={radarSignals} limit={4} compact />
-              </div>
-              <div className="hidden border-t border-(--border) px-4 py-2.5 lg:block lg:px-5 lg:py-4">
-                <Link
-                  href="/blog"
-                  className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-(--muted-strong) transition-colors hover:text-(--signal)"
-                >
-                  {t('radar.viewAllCount', { count: posts.length })}
-                  <ArrowUpRight size={13} />
-                </Link>
               </div>
             </div>
 
@@ -215,10 +206,10 @@ export default async function HomePage({
               <span className="block">{t('why.titleA')}</span>
               <span className="block text-(--signal)">{t('why.titleB')}</span>
             </h2>
-            <p className="mt-7 max-w-[56ch] text-lg leading-relaxed text-(--muted-strong)">
+            <p className="mt-7 max-w-[72ch] text-lg leading-relaxed text-(--muted-strong)">
               {t('why.description')}
             </p>
-            <p className="mt-5 max-w-[56ch] leading-relaxed text-(--muted)">
+            <p className="mt-5 max-w-[72ch] leading-relaxed text-(--muted)">
               {t('about.body')}
             </p>
             <div className="mt-10">
@@ -245,9 +236,7 @@ export default async function HomePage({
         </section>
 
         <section aria-hidden className="overflow-hidden border-y border-(--border)">
-          <div className="page-shell py-10 lg:py-14">
-            <SignalArt className="h-auto w-full" />
-          </div>
+          <SignalArt className="block h-auto w-full" />
         </section>
 
         <section id="process" className="border-b border-(--border) bg-(--surface-soft)">
