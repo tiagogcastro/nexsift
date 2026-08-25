@@ -8,6 +8,7 @@ import { TopicBands } from '@/features/landing/topic-bands'
 import { TrustBand } from '@/features/landing/trust-band'
 import { localizedAlternates } from '@/lib/alternates'
 import { topicIcons } from '@/lib/topic-icons'
+import { selectRadarSignals } from '@/lib/radar-signals'
 import { getTopicMeta, topicOrder } from '@/lib/topics'
 import { routing, type AppLocale } from '@/i18n/routing'
 import { listPosts } from '@/lib/content'
@@ -60,14 +61,8 @@ export default async function HomePage({
   setRequestLocale(locale)
   const t = await getTranslations()
   const posts = await listPosts()
-  const radarSignals = [...posts]
-    .sort(
-      (first, second) =>
-        new Date(second.publishedAt).getTime() -
-        new Date(first.publishedAt).getTime(),
-    )
-    .slice(0, HOME_RADAR_LIMIT)
-  const topicCount = new Set(posts.map((post) => post.topics[0])).size
+  const topicCount = new Set(posts.map((post) => post.topic)).size
+  const radarSignals = selectRadarSignals(posts, HOME_RADAR_LIMIT)
   const homePath = locale === 'pt-BR' ? '/' : `/${locale}`
   const topicsPath = locale === 'pt-BR' ? '/topics' : `/${locale}/topics`
   const aboutPath = `/${locale}/about`
@@ -302,8 +297,8 @@ export default async function HomePage({
               <div className="flex flex-wrap gap-2">
                 {topicOrder.map((topic) => {
                   const meta = getTopicMeta(t, topic)
-                  const count = posts.filter((post) =>
-                    post.topics[0] === topic,
+                  const count = posts.filter(
+                    (post) => post.topic === topic,
                   ).length
                   const TopicIcon = topicIcons[topic]
 

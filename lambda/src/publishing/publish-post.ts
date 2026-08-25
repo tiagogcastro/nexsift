@@ -7,7 +7,6 @@ import {
   type PostSummary,
 } from '@nexsift/schemas/post'
 import type { VerifiedPostSource } from '@nexsift/schemas/source'
-import type { Topic } from '@nexsift/schemas/topic'
 import {
   deleteObject,
   getIndex,
@@ -121,13 +120,7 @@ export async function publishPost(
   draft: PostDraft,
   requestContext?: RequestContext,
 ): Promise<PublishResult> {
-  const primaryTopic = draft.topics[0]
-
-  if (!primaryTopic) {
-    throw new Error('A post needs at least one topic')
-  }
-
-  const slug = buildSignalSlug(primaryTopic, draft.title, draft.signalDate)
+  const slug = buildSignalSlug(draft.topic, draft.title, draft.signalDate)
   const verifiedSources = await verifyPostSources(draft.sources, requestContext)
   const existing = await getPost(slug)
   const coverImage = await resolveCoverImage(draft, slug, existing, requestContext)
@@ -357,44 +350,32 @@ async function removeFromLatestIndex(slug: string) {
   )
 }
 
-// A signal is listed only under its primary topic ({topics[0]}). Secondary
-// topics are contextual and never get their own index entry, so a topic page
-// never shows a signal tagged with another topic. The sweep also purges any
-// stale entry whose primary topic does not match the index key, so a drifted
-// index heals itself on the next publish touching that topic.
+// A publish only ever touches its own entry: an upsert into its topic index
+// plus, when the topic changed, a removal from the previous one. Drift is
+// healed by the periodic audit, which derives every index from the stored
+// posts; filtering foreign entries here would amplify any stale index read
+// into silent data loss.
 async function synchronizeTopicIndexes(post: Post, existing: Post | null) {
-  const affectedTopics = new Set<Topic>([
-    ...post.topics,
-    ...(existing?.topics ?? []),
-  ])
+  const key = `public/indexes/topics/${post.topic}.json`
+  const index = await getIndex(key)
+  await putIndex(key, upsertSummary(index, post).sort(sortByPublishedAt))
 
-  await Promise.all(
-    [...affectedTopics].map(async (topic) => {
-      const key = `public/indexes/topics/${topic}.json`
-      const index = await getIndex(key)
-      const withoutPostAndDrift = index.filter(
-        (item) => item.slug !== post.slug && item.topics[0] !== topic,
-      )
-      const nextIndex =
-        topic === post.topics[0]
-          ? upsertSummary(withoutPostAndDrift, post).sort(sortByPublishedAt)
-          : withoutPostAndDrift
-
-      await putIndex(key, nextIndex)
-    }),
-  )
+  if (existing && existing.topic !== post.topic) {
+    const previousKey = `public/indexes/topics/${existing.topic}.json`
+    const previousIndex = await getIndex(previousKey)
+    await putIndex(
+      previousKey,
+      previousIndex.filter((item) => item.slug !== post.slug),
+    )
+  }
 }
 
 async function removeFromTopicIndexes(post: Post) {
-  await Promise.all(
-    post.topics.map(async (topic) => {
-      const key = `public/indexes/topics/${topic}.json`
-      const index = await getIndex(key)
-      await putIndex(
-        key,
-        index.filter((item) => item.slug !== post.slug),
-      )
-    }),
+  const key = `public/indexes/topics/${post.topic}.json`
+  const index = await getIndex(key)
+  await putIndex(
+    key,
+    index.filter((item) => item.slug !== post.slug),
   )
 }
 

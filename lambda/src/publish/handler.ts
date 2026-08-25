@@ -247,7 +247,7 @@ export async function handler(
       const body = parseBody(event)
       const identity = postIdentitySchema.parse(body)
       const slug = buildSignalSlug(
-        identity.primaryTopic,
+        identity.topic,
         identity.title,
         identity.signalDate,
       )
@@ -433,7 +433,7 @@ async function listRecentPosts(query: ListQuery) {
       return false
     }
 
-    if (topic && !post.topics.includes(topic)) {
+    if (topic && post.topic !== topic) {
       return false
     }
 

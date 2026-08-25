@@ -140,6 +140,20 @@ yarn tsx --env-file=.env packages/dev-publish/reset.ts
 
 The reset script lists recent signals and deletes each one. For production endpoints it requires `--allow-prod`; never use it to delete test content from prod.
 
+### Migrating stored posts to the single-topic contract
+
+Signals published before the single-topic contract carry a legacy `topics` array. The one-time migration script rewrites each stored post (`topics[0]` becomes `topic`, the remainder becomes `relatedTopics`) and derives every index file from the migrated posts. Run it once per environment after deploying the new Lambda and site, then delete the script:
+
+```bash
+# MiniStack local (S3 credentials come from web/.env.local)
+yarn tsx --env-file=web/.env.local packages/dev-publish/migrate-single-topic.ts
+
+# Production (with prod credentials in the shell environment)
+AWS_REGION=us-east-1 CONTENT_BUCKET=<prod-bucket> yarn tsx packages/dev-publish/migrate-single-topic.ts
+```
+
+Until the migration runs against a bucket, the site renders empty lists there instead of mixed-topic entries; publishing through the new pipeline works normally.
+
 Check the objects in the local bucket:
 
 ```bash
