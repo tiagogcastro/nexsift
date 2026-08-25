@@ -80,6 +80,12 @@ Discovery should look for relevant changes in the technology ecosystem, not just
 
 These axes are discovery lenses, not public topics and not publication quotas.
 
+Every run executes a mandatory sweep protocol on top of free search: aggregator and social surfaces that catch what indexed blogs miss (Hacker News, OpenRouter models including stealth/free listings, GitHub Trending and Releases, Product Hunt, X, YouTube with textual evidence, Reddit), plus fixed blind-spot queries for new AI models, internships and open programs worldwide, new courses and certifications, scholarships and subsidized access, and newly launched apps and developer tools.
+
+There is no source whitelist. Sources are judged by reliability criteria (primary proximity, verifiable evidence on page, editorial independence or official origin, accuracy track record, recency, checkable attribution); unknown sources are candidates subject to the same criteria plus mechanical validation. Aggregator listings are discovery leads, never final sources; stealth launches publish only with secondary verifiable evidence.
+
+The coverage check is bidirectional: recent published signals are compared against sweep results so known-but-missed material re-enters as Tier C candidates, and topic concentration around a single vendor family forces alternative exploration before the sweep concludes.
+
 ## Editorial cadence
 
 Main routine: publish strong signals as soon as they pass the gate; the scheduled task is an operational trigger, not a publication limit.

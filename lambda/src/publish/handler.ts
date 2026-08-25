@@ -7,6 +7,7 @@ import {
   postDraftSchema,
   postIdentitySchema,
   postListItemSchema,
+  type PostSummary,
 } from '@nexsift/schemas/post'
 import { signalTypeSchema } from '@nexsift/schemas/signal-type'
 import { topicSchema, type Topic } from '@nexsift/schemas/topic'
@@ -44,7 +45,10 @@ interface ListQuery {
   since?: string | undefined
   topic?: string | undefined
   signalType?: string | undefined
+  query?: string | undefined
+  tag?: string | undefined
   limit?: string | undefined
+  offset?: string | undefined
   detail?: string | undefined
 }
 
@@ -127,24 +131,30 @@ export async function handler(
     if (method === 'GET' && path === '/') {
       operation = 'listRecentPosts'
       const query = event.queryStringParameters ?? {}
-      const posts = await listRecentPosts({
+      const { posts, total } = await listRecentPosts({
         since: query.since,
         topic: query.topic,
         signalType: query.signalType,
+        query: query.query,
+        tag: query.tag,
         limit: query.limit,
+        offset: query.offset,
         detail: query.detail,
       })
-      const body = { posts }
+      const body = { posts, total }
 
       logSuccess(requestContext, operation, startedAt, {
         status: 200,
         resultCount: posts.length,
+        total,
         limit: parseLimit(query.limit),
         detail: parseDetail(query.detail),
         filters: {
           since: query.since,
           topic: query.topic,
           signalType: query.signalType,
+          query: query.query,
+          tag: query.tag,
         },
         responseSizeBytes: approximateJsonSize(body),
       })
@@ -412,32 +422,79 @@ async function listRecentPosts(query: ListQuery) {
   const since = parseSince(query.since)
   const topic = parseTopic(query.topic)
   const signalType = parseSignalType(query.signalType)
+  const text = parseListQuery(query.query)
+  const tag = parseTag(query.tag)
   const limit = parseLimit(query.limit)
+  const offset = parseOffset(query.offset)
   const detail = parseDetail(query.detail)
 
-  const filtered = index
-    .filter((post) => {
-      if (since !== null && new Date(post.publishedAt).getTime() < since) {
-        return false
-      }
+  const matches = index.filter((post) => {
+    if (since !== null && new Date(post.publishedAt).getTime() < since) {
+      return false
+    }
 
-      if (topic && !post.topics.includes(topic)) {
-        return false
-      }
+    if (topic && !post.topics.includes(topic)) {
+      return false
+    }
 
-      if (signalType && post.signalType !== signalType) {
-        return false
-      }
+    if (signalType && post.signalType !== signalType) {
+      return false
+    }
 
-      return true
-    })
-    .slice(0, limit)
+    if (tag && !post.tags.some((value) => value.toLowerCase() === tag)) {
+      return false
+    }
+
+    if (
+      text &&
+      !matchesListQuery(post, text)
+    ) {
+      return false
+    }
+
+    return true
+  })
+
+  const posts = matches.slice(offset, offset + limit)
 
   if (detail === 'compact') {
-    return filtered.map((post) => postListItemSchema.parse(post))
+    return { posts: posts.map((post) => postListItemSchema.parse(post)), total: matches.length }
   }
 
-  return filtered
+  return { posts, total: matches.length }
+}
+
+function matchesListQuery(
+  post: PostSummary,
+  text: string,
+): boolean {
+  const haystack = [post.title, post.description, ...post.tags]
+    .join(' ')
+    .toLowerCase()
+
+  return haystack.includes(text)
+}
+
+function parseListQuery(value?: string) {
+  const normalized = value?.trim().toLowerCase()
+
+  return normalized ? normalized : null
+}
+
+function parseTag(value?: string) {
+  const normalized = value?.trim().toLowerCase()
+
+  return normalized ? normalized : null
+}
+
+function parseOffset(value?: string) {
+  const parsed = Number.parseInt(value ?? '', 10)
+
+  if (Number.isNaN(parsed) || parsed < 0) {
+    return 0
+  }
+
+  return parsed
 }
 
 function parseLimit(value?: string) {
