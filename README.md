@@ -6,6 +6,19 @@ NexSift is a technology intelligence product for developers. It filters, verifie
 
 The product is designed to feel closer to a technical signal console than a traditional blog. Editorial posts are published in pt-BR. Institutional interface copy supports pt-BR, en-US and es-ES.
 
+## Screens
+
+| | |
+| --- | --- |
+| ![Home: hero and live radar](docs/screenshots/home.png) | ![Signal archive](docs/screenshots/blog.png) |
+| Home: hero and live radar | Signal archive with topic filters |
+| ![Topic page](docs/screenshots/topico-design.png) | ![Signal page](docs/screenshots/sinal.png) |
+| Topic page as a specialized radar | Signal page with verified sources |
+| ![About page](docs/screenshots/sobre.png) | |
+| About the filter | |
+
+Live product: <https://nexsift.vercel.app> - editorial feed at [/blog](https://nexsift.vercel.app/blog), topic pages under [/topics](https://nexsift.vercel.app/topics).
+
 ## Current scope
 
 The repository already contains the foundation for:
