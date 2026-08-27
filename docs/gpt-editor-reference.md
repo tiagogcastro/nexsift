@@ -1,6 +1,6 @@
 # NexSift Editor: diretrizes editoriais (referencia do GPT)
 
-Editorial version: 2026-08-24
+Editorial version: 2026-08-27
 
 Arquivo de referencia embutido na ferramenta `editorialInstructions` do connector MCP. Detalha a linha editorial, as classificacoes, o gate de publicacao, a verificacao de fontes, o fluxo da rotina, o modo degradado e o tratamento de erros. O contrato de publicacao, o exemplo de payload e os endpoints estao em `gpt-editor-payload-reference.md`.
 
@@ -85,6 +85,18 @@ Buscas fixas que cobrem areas onde a busca livre historicamente falha:
 - bolsas, acesso subsidiado a ferramentas/treinamento e programas para estudantes;
 - apps e ferramentas de desenvolvimento lancadas recentemente.
 
+Use as queries abaixo como sementes obrigatorias, nunca como limite. Va alem com busca livre, sinonimos, novos players e formatos encontrados durante a pesquisa:
+
+- Brasil/pt: `programa tecnologia inscrições abertas Brasil`; `curso gratuito inteligência artificial inscrições`; `certificação cloud voucher gratuito`; `pós-graduação inteligência artificial EaD edital`; `programa mulheres tecnologia aberto a todos`.
+- Brasil/en: `Google Cloud training Brazil registration`; `student AI plan free Brazil`.
+- America Latina/es: `programa tecnología inscripciones abiertas América Latina`; `curso gratuito inteligencia artificial convocatoria`; `beca tecnología estudiantes Latinoamérica`; `certificación cloud voucher examen gratis`.
+- America Latina/en: `technology scholarship Latin America`.
+- Mundo/en: `developer program applications open`; `AI certification beta registration`; `women in tech program open to everyone`; `certification exam voucher program`; `public university AI postgraduate applications`; `technology apprenticeship applications open`; `developer hackathon registration official`; `free AI tool plan for students official`.
+
+Superficies oficiais obrigatorias para essas buscas incluem paginas RSVP e eventos oficiais, Google Cloud Learning e Certification, AWS Training and Certification, Microsoft Learn, universidades e institutos federais, editais e PDFs oficiais, paginas estudantis de produtos e programas oficiais de empresas e comunidades. Agregadores sao leads, nao fontes finais quando houver fonte oficial.
+
+Antes de publicar, confirme prazo, custo, publico, elegibilidade, modalidade e beneficio. Diferencie publico prioritario de restricao obrigatoria. Nao descreva uma iniciativa como exclusiva para mulheres quando ela apenas prioriza ou tem foco em mulheres; se aceitar qualquer genero, use titulo inclusivo e explique o foco no conteudo.
+
 ### Regras da varredura
 
 - Rotacao geografica: Brasil, America Latina e mundo entram em toda rodada.
@@ -161,6 +173,8 @@ Nao transforme isso em whitelist. Um mantenedor OSS, um repositorio oficial ou u
 - Use `coverImage` quando a imagem abre bem a leitura; use imagem inline no ponto exato do `content` quando ela explica um trecho especifico.
 - A mesma imagem nao deve aparecer como capa e inline no mesmo sinal.
 - Se a imagem falhar mecanicamente, tente outra. Se nao houver outra boa, publique sem imagem. Nao descarte um sinal forte por causa disso.
+- A IA inspeciona `og:image`, `twitter:image` e imagens relevantes nas fontes oficiais, tenta candidatas em sequencia e envia a aprovada para persistencia no bucket. Nunca dependa permanentemente de hotlink.
+- O relatorio final deve registrar, para cada sinal: imagem persistida; imagem rejeitada e o motivo; ou ausencia de imagem util.
 
 ## Fluxo da rotina
 
@@ -213,7 +227,7 @@ Use para publicacao acidental, slug errado, duplicidade, fonte invalida ou erro 
 
 ## Relatorio ao final da rotina
 
-Resuma: sinais publicados/atualizados (slug, titulo, topicos, scores, `whatToWatch`), descartados com motivo, falhas transitorias, limitacoes do modo degradado e fontes nao verificaveis.
+Resuma: sinais publicados/atualizados (slug, titulo, topicos, scores, `whatToWatch`), imagem persistida ou rejeitada com motivo ou ausencia de imagem util, descartados com motivo, falhas transitorias, limitacoes do modo degradado e fontes nao verificaveis.
 
 ## Regras duras
 
