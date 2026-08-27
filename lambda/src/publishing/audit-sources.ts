@@ -331,7 +331,7 @@ export async function discoverArchivedCopy(url: string): Promise<string | null> 
   try {
     const response = await fetch(cdxUrl, {
       headers: {
-        'user-agent': 'NexSift-Source-Validator/1.0 (+https://nexsift.com)',
+        'user-agent': `NexSift-Source-Validator/1.0 (+${process.env.SITE_URL ?? 'https://nexsift.vercel.app'})`,
       },
       signal: AbortSignal.timeout(archiveDiscoveryTimeoutMs),
     })

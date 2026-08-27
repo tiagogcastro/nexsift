@@ -19,6 +19,12 @@ variable "publish_token" {
   sensitive   = true
 }
 
+variable "site_url" {
+  type        = string
+  description = "Public NexSift URL used to identify mechanical HTTP requests."
+  default     = "https://nexsift.vercel.app"
+}
+
 variable "lambda_endpoint_url" {
   type        = string
   description = "AWS endpoint reachable from the Lambda runtime. Empty for AWS."
