@@ -87,3 +87,12 @@ export function sourceStatusLabelKey(source: VerifiedPostSource | undefined) {
       return 'unknown'
   }
 }
+
+export function sourceDisplayTitle(title: string, publisher: string) {
+  const cleaned = title
+    .replace(/\bsvg\d*\b/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+
+  return cleaned || publisher
+}

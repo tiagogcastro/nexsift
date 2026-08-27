@@ -7,6 +7,7 @@ import { siteConfig } from '@/config/site'
 import { PostArticle } from '@/features/blog/post-article'
 import { postAlternates } from '@/lib/alternates'
 import { getPostBySlug, listPosts } from '@/lib/content'
+import { selectRelatedSignals } from '@/lib/related-signals'
 
 export const dynamic = 'force-dynamic'
 
@@ -69,22 +70,7 @@ export default async function PostPage({
   }
 
   const allPosts = await listPosts()
-  const relatedPosts = allPosts
-    .filter((candidate) => candidate.slug !== post.slug)
-    .sort((first, second) => {
-      const firstMatches = first.topic === post.topic
-      const secondMatches = second.topic === post.topic
-
-      if (firstMatches !== secondMatches) {
-        return firstMatches ? -1 : 1
-      }
-
-      return (
-        new Date(second.publishedAt).getTime() -
-        new Date(first.publishedAt).getTime()
-      )
-    })
-    .slice(0, 4)
+  const relatedPosts = selectRelatedSignals(post, allPosts)
 
   const t = await getTranslations()
   const jsonLd = {
