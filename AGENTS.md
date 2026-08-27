@@ -35,7 +35,6 @@ yarn dev                                   # web only
 yarn lint                                  # web only; lambda has no lint script
 yarn typecheck                             # lambda + web
 yarn build                                 # lambda first, then web
-yarn workspace @nexsift/web icons:generate # regenerate favicon/icon PNGs from src/app/icon.svg
 ```
 
 - This project has no tests and none should ever be added: no test files, no test dependencies, no test scripts.
