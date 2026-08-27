@@ -1,7 +1,9 @@
 import {
+  completePostDraftSchema,
   postSchema,
   postSummarySchema,
   type CoverImage,
+  type CompletePostDraft,
   type Post,
   type PostDraft,
   type PostSummary,
@@ -11,6 +13,7 @@ import {
   deleteObject,
   getIndex,
   getPost,
+  getPostDeletionTarget,
   listObjects,
   putIndex,
   putObject,
@@ -41,6 +44,13 @@ export class NotFoundError extends Error {
   constructor(slug: string) {
     super(`Signal not found: ${slug}`)
     this.name = 'NotFoundError'
+  }
+}
+
+export class ConflictError extends Error {
+  constructor(slug: string) {
+    super(`Signal already exists: ${slug}`)
+    this.name = 'ConflictError'
   }
 }
 
@@ -117,13 +127,23 @@ export async function replacePostSource(
 }
 
 export async function publishPost(
-  draft: PostDraft,
+  input: PostDraft,
   requestContext?: RequestContext,
 ): Promise<PublishResult> {
-  const slug = buildSignalSlug(draft.topic, draft.title, draft.signalDate)
-  const verifiedSources = await verifyPostSources(draft.sources, requestContext)
-  const existing = await getPost(slug)
-  const coverImage = await resolveCoverImage(draft, slug, existing, requestContext)
+  const { draft, existing } = await resolvePublicationDraft(input)
+  const slug = existing?.slug ?? buildSignalSlug(draft.topic, draft.title, draft.signalDate)
+  const verifiedSources = await verifyPostSources(
+    draft.sources,
+    requestContext,
+    existing?.sources,
+  )
+  const coverImage = await resolveCoverImage(
+    draft,
+    slug,
+    existing,
+    requestContext,
+    input.coverImage === undefined,
+  )
   const inline = await resolveInlineImages(draft.content, slug, requestContext)
   const post = normalizePost(
     {
@@ -150,6 +170,50 @@ export async function publishPost(
   }
 }
 
+export async function resolvePublicationDraft(input: PostDraft): Promise<{
+  draft: CompletePostDraft
+  existing: Post | null
+}> {
+  if (!input.slug) {
+    const draft = completePostDraftSchema.parse(input)
+    const slug = buildSignalSlug(draft.topic, draft.title, draft.signalDate)
+
+    if (await getPost(slug)) {
+      throw new ConflictError(slug)
+    }
+
+    return { draft, existing: null }
+  }
+
+  const existing = await getPost(input.slug)
+
+  if (!existing) {
+    throw new NotFoundError(input.slug)
+  }
+
+  const draft = completePostDraftSchema.parse({
+    title: existing.title,
+    description: existing.description,
+    content: existing.content,
+    whyItMatters: existing.whyItMatters,
+    whatToWatch: existing.whatToWatch,
+    topic: existing.topic,
+    relatedTopics: existing.relatedTopics,
+    signalDate: existing.signalDate,
+    signalType: existing.signalType,
+    depth: existing.depth,
+    tags: existing.tags,
+    sources: existing.sources,
+    relevanceScore: existing.relevanceScore,
+    confidenceScore: existing.confidenceScore,
+    featured: existing.featured,
+    ...input,
+    slug: existing.slug,
+  })
+
+  return { draft, existing }
+}
+
 // Deletes stored images of a slug that the published post no longer
 // references. The prefix split on '-' and '.' avoids matching a different
 // signal whose slug starts with this one.
@@ -172,20 +236,15 @@ async function removeOrphanImages(slug: string, usedKeys: string[]) {
 // removes the stored copy of a previous publish; a changed image deletes the
 // stale object after the new one is written.
 async function resolveCoverImage(
-  draft: PostDraft,
+  draft: CompletePostDraft,
   slug: string,
   existing: Post | null,
   requestContext?: RequestContext,
+  preserveExisting = false,
 ): Promise<CoverImage | undefined> {
   const previous = existing?.coverImage
 
-  if (!draft.coverImage) {
-    if (previous) {
-      await deleteObject(previous.objectKey)
-    }
-
-    return undefined
-  }
+  if (!draft.coverImage) return preserveExisting ? previous : undefined
 
   const downloaded = await downloadImage(draft.coverImage.url, { requestContext })
   const objectKey = `public/images/${slug}${downloaded.extension}`
@@ -210,8 +269,9 @@ async function resolveCoverImage(
 // editor's claim that a source was checked is never trusted on its own: the
 // backend reopens the exact URL and records the result on the stored source.
 export async function verifyPostSources(
-  sources: PostDraft['sources'],
+  sources: CompletePostDraft['sources'],
   requestContext?: RequestContext,
+  previousSources: VerifiedPostSource[] = [],
 ): Promise<VerifiedPostSource[]> {
   const checkedAt = new Date().toISOString()
   const editorialFailures = collectEditorialFailures(sources)
@@ -264,6 +324,9 @@ export async function verifyPostSources(
     }
 
     const check = result.value
+    const previous = previousSources.find(
+      (candidate) => candidate.url === source.url || candidate.finalUrl === check.finalUrl,
+    )
 
     verified.push({
       title: source.title,
@@ -272,13 +335,14 @@ export async function verifyPostSources(
       publishedAt: source.publishedAt,
       editorialStatus: source.editorialStatus,
       editoriallyVerifiedAt: source.editoriallyVerifiedAt,
-      firstVerifiedAt: checkedAt,
+      firstVerifiedAt: previous?.firstVerifiedAt ?? checkedAt,
       verifiedAtPublication: true,
       lastCheckedAt: checkedAt,
       lastSuccessfulAt: check.ok ? check.checkedAt : undefined,
       httpStatus: check.status ?? 0,
       finalUrl: check.finalUrl,
       sourceStatus: check.sourceStatus,
+      replacements: previous?.replacements,
     })
   })
 
@@ -298,7 +362,7 @@ export async function verifyPostSources(
 // its content sustains the signal (acontecimento, data, versões, números).
 // Without that assertion the publish gate stays closed.
 function collectEditorialFailures(
-  sources: PostDraft['sources'],
+  sources: CompletePostDraft['sources'],
 ): SourceFailure[] {
   const failures: SourceFailure[] = []
 
@@ -319,16 +383,16 @@ function collectEditorialFailures(
 }
 
 export async function deletePost(slug: string) {
-  const existing = await getPost(slug)
+  const topic = await getPostDeletionTarget(slug)
 
-  if (!existing) {
+  if (!topic) {
     throw new NotFoundError(slug)
   }
 
   await deleteObject(`public/posts/${slug}.json`)
   await removeOrphanImages(slug, [])
   await removeFromLatestIndex(slug)
-  await removeFromTopicIndexes(existing)
+  await removeFromTopicIndexes({ slug, topic })
 
   return { slug, deletedAt: new Date().toISOString() }
 }
@@ -370,7 +434,7 @@ async function synchronizeTopicIndexes(post: Post, existing: Post | null) {
   }
 }
 
-async function removeFromTopicIndexes(post: Post) {
+async function removeFromTopicIndexes(post: Pick<Post, 'slug' | 'topic'>) {
   const key = `public/indexes/topics/${post.topic}.json`
   const index = await getIndex(key)
   await putIndex(

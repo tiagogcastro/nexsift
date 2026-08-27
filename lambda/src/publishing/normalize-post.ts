@@ -1,25 +1,27 @@
 import {
   postSchema,
   type CoverImage,
+  type CompletePostDraft,
   type Post,
-  type PostDraft,
 } from '@nexsift/schemas/post'
 import { calculateReadingTime } from './reading-time'
 import { buildSignalSlug } from './signal-slug'
 
 export function normalizePost(
-  draft: Omit<PostDraft, 'coverImage'> & { coverImage: CoverImage | undefined },
+  draft: Omit<CompletePostDraft, 'coverImage'> & { coverImage: CoverImage | undefined },
   existing: Post | null,
   now = new Date(),
 ) {
-  const slug = buildSignalSlug(draft.topic, draft.title, draft.signalDate)
+  const slug = existing?.slug ?? buildSignalSlug(draft.topic, draft.title, draft.signalDate)
   const timestamp = now.toISOString()
   const post = {
     ...draft,
     id: existing?.id ?? `post_${slug}`,
     slug,
     tags: normalizeTags(draft.tags),
-    publishedAt: existing?.publishedAt ?? timestamp,
+    publishedAt: draft.publishedAt
+      ? new Date(draft.publishedAt).toISOString()
+      : existing?.publishedAt ?? timestamp,
     updatedAt: existing ? timestamp : undefined,
     readingTime: calculateReadingTime(draft.content),
     locale: 'pt-BR' as const,

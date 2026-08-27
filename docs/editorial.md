@@ -56,7 +56,7 @@ There are no topic quotas. The goal is to find the best signals of the period. A
 
 - `signalType`: `release` | `risk` | `shift` | `research` | `industry` | `opportunity`.
 - `depth`: `practical` (useful to a broad tech audience without being overly basic) or `deep` (architecture, protocols, infrastructure, internals, security, runtimes, research, or subjects requiring more technical context). There is no beginner level.
-- `signalDate`: the actual date of the event. `publishedAt` is when NexSift published it. `updatedAt` is when the published content received a material update. A signal only receives an update when there is material news (beta became GA, incident got a root cause, CVE got a patch, rollout paused, price changed, official information corrected, availability changed). Never update just because the editor reread the content.
+- `signalDate`: the actual date of the event. `publishedAt` is the editable editorial publication instant, persisted in UTC and displayed in `America/Sao_Paulo`; it is never synchronized automatically with `signalDate`. Creation defaults it to the current instant, while updates preserve it unless explicitly supplied. `updatedAt` is always the real instant when published content receives a material update. A signal only receives an update when there is material news (beta became GA, incident got a root cause, CVE got a patch, rollout paused, price changed, official information corrected, availability changed). Never update just because the editor reread the content.
 
 ## Relevance and confidence
 

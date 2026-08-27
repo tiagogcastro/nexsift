@@ -11,6 +11,7 @@ import {
   type Post,
   type PostSummary,
 } from '@nexsift/schemas/post'
+import { topicSchema } from '@nexsift/schemas/topic'
 
 let client: S3Client | null = null
 
@@ -48,6 +49,18 @@ export async function getPost(slug: string) {
   try {
     const value = await readJson(`public/posts/${slug}.json`)
     return postSchema.parse(value)
+  } catch (error) {
+    if (isMissingObject(error)) {
+      return null
+    }
+    throw error
+  }
+}
+
+export async function getPostDeletionTarget(slug: string) {
+  try {
+    const value = await readJson(`public/posts/${slug}.json`)
+    return topicSchema.parse((value as { topic?: unknown }).topic)
   } catch (error) {
     if (isMissingObject(error)) {
       return null

@@ -38,6 +38,10 @@ const draftFields = {
   topic: topicSchema,
   relatedTopics: z.array(topicSchema).max(2).default([]),
   signalDate: z.iso.date(),
+  publishedAt: z.iso.datetime({ offset: true }).refine(
+    (value) => new Date(value).getTime() <= Date.now(),
+    'publishedAt must not be in the future',
+  ).optional(),
   signalType: signalTypeSchema,
   depth: depthSchema,
   tags: z.array(z.string().min(1)).max(10).default([]),
@@ -49,6 +53,9 @@ const draftFields = {
 }
 
 const draftBaseSchema = z.object(draftFields)
+const updateBaseSchema = draftBaseSchema.partial().extend({
+  slug: z.string().regex(signalSlugRegex),
+})
 
 export const postIdentitySchema = z.object({
   title: draftFields.title,
@@ -56,7 +63,7 @@ export const postIdentitySchema = z.object({
   signalDate: draftFields.signalDate,
 })
 
-export const postDraftSchema = draftBaseSchema
+export const completePostDraftSchema = draftBaseSchema
   .refine(
     (draft) => !draft.relatedTopics.includes(draft.topic),
     {
@@ -75,11 +82,27 @@ export const postDraftSchema = draftBaseSchema
     },
   )
 
+export const postUpdateSchema = updateBaseSchema.refine(
+  (draft) =>
+    !draft.topic ||
+    !draft.relatedTopics ||
+    !draft.relatedTopics.includes(draft.topic),
+  {
+    message: 'relatedTopics must not contain the primary topic',
+    path: ['relatedTopics'],
+  },
+)
+
+export const postDraftSchema = z.union([
+  completePostDraftSchema,
+  postUpdateSchema,
+])
+
 // whatToWatch is required on publish (draft gate) but optional on stored
 // posts so legacy records without the field can be read, migrated and
 // re-published before the field is filled.
 const postFieldsSchema = draftBaseSchema
-  .omit({ whatToWatch: true })
+  .omit({ whatToWatch: true, publishedAt: true })
   .extend({
     id: z.string().min(1),
     slug: z.string().regex(signalSlugRegex),
@@ -142,6 +165,8 @@ export const postListItemSchema = postFieldsSchema.pick({
 export const postIndexSchema = z.array(postSummarySchema)
 
 export type PostDraft = z.infer<typeof postDraftSchema>
+export type CompletePostDraft = z.infer<typeof completePostDraftSchema>
+export type PostUpdate = z.infer<typeof postUpdateSchema>
 export type Post = z.infer<typeof postSchema>
 export type PostSummary = z.infer<typeof postSummarySchema>
 export type PostIdentity = z.infer<typeof postIdentitySchema>

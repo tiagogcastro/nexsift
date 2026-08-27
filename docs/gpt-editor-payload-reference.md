@@ -1,6 +1,6 @@
 # NexSift: contrato de publicacao (referencia do GPT Editor)
 
-Editorial version: 2026-08-24
+Editorial version: 2026-08-27
 
 Arquivo de referencia embutido na ferramenta `editorialInstructions` do connector MCP. Detalha o contrato das operacoes, o exemplo de payload e os codigos de erro relevantes para a rotina editorial.
 
@@ -17,6 +17,7 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
     "topic": "industry",
     "relatedTopics": ["cloud"],
     "signalDate": "2026-08-20",
+    "publishedAt": "2026-08-20T15:00:00.000Z",
     "signalType": "opportunity",
     "depth": "practical",
     "tags": ["aws", "microcredential", "education", "genai"],
@@ -43,8 +44,10 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
 
 ## Regras do contrato
 
-- `slug`: nao enviar. O backend gera `{topic}-{titulo-em-slug}-{signalDate}` com a mesma funcao usada por `resolvePost`.
+- `slug`: omita na criacao; o backend gera `{topic}-{titulo-em-slug}-{signalDate}` com a mesma funcao usada por `resolvePost`. Para atualizar, envie o slug existente como identidade. Slug inexistente retorna 404 e nunca cria outro sinal; alterar `title` nao altera a URL.
+- Criacao sem `slug` que resolva para um sinal existente retorna `409 CONFLICT`; use `resolvePost` antes e envie o slug somente quando houver uma atualizacao editorial real.
 - `signalDate`: data real do acontecimento, formato `YYYY-MM-DD`.
+- `publishedAt`: data editorial opcional em ISO 8601, persistida em UTC. Na criacao, omissao usa o instante atual; na atualizacao, omissao preserva o valor existente. Data futura e rejeitada com `422 VALIDATION_ERROR`. Nunca sincronize automaticamente com `signalDate`.
 - `signalType`: `release` | `risk` | `shift` | `research` | `industry` | `opportunity`.
 - `depth`: `practical` | `deep`.
 - `title`: 8 a 140 caracteres.
@@ -71,10 +74,10 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
 ## Semantica de imagens
 
 - `coverImage` deve apontar para uma imagem aberta com sucesso em uma das paginas de fonte do sinal.
-- O backend baixa a imagem, valida o formato e guarda uma copia local no bucket.
+- A IA escolhe a candidata nas fontes oficiais. O backend valida mecanicamente a URL, o formato e o tamanho e guarda uma copia local no bucket.
 - Formatos aceitos: jpeg, png, webp, avif e gif. Maximo 5MB. SVG nao e aceito.
 - Imagem forte e recomendada, mas nao e gate absoluto.
-- Se uma imagem falhar por motivo permanente (`IMAGE_REJECTED`), troque a URL ou publique sem imagem.
+- Se uma candidata falhar, a IA tenta a proxima. O sinal so fica sem capa quando nenhuma candidata util passa na validacao.
 - Se falhar por motivo transitorio (`RATE_LIMITED`, `UPSTREAM_TIMEOUT`, `SOURCE_UNAVAILABLE`), aplique retry e, se necessario, tente outra imagem valida.
 
 ## Operacoes principais
@@ -87,7 +90,7 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
   - `detail: "compact"` retorna itens leves para coverage check, discovery e modo degradado.
 - `resolvePost`: recebe `{ title, topic, signalDate }` e devolve `{ exists, slug, post? }`, usando exatamente a mesma funcao de slug da publicacao.
 - `getPost`: retorna o sinal completo por slug.
-- `publishPost`: publica ou atualiza um sinal.
+- `publishPost`: cria sem `slug` ou atualiza parcialmente pelo `slug` existente. Campos omitidos em atualizacoes sao preservados.
 - `validateSource`: valida uma URL candidata.
 - `replaceSource`: substitui uma fonte validando a nova URL antes de gravar.
 - `auditSources`: revalida as fontes publicadas.

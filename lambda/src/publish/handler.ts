@@ -13,6 +13,7 @@ import { signalTypeSchema } from '@nexsift/schemas/signal-type'
 import { topicSchema, type Topic } from '@nexsift/schemas/topic'
 import { validateEditorialGates } from '../publishing/gates'
 import {
+  ConflictError,
   deletePost,
   latestIndexKey,
   NotFoundError,
@@ -346,6 +347,17 @@ export async function handler(
       )
     }
 
+    if (error instanceof ConflictError) {
+      return errorResponse(
+        409,
+        requestContext,
+        operation,
+        startedAt,
+        'CONFLICT',
+        error.message,
+      )
+    }
+
     if (error instanceof SourceIndexError) {
       return errorResponse(
         422,
@@ -428,7 +440,11 @@ async function listRecentPosts(query: ListQuery) {
   const offset = parseOffset(query.offset)
   const detail = parseDetail(query.detail)
 
-  const matches = index.filter((post) => {
+  const matches = [...index]
+    .sort((first, second) =>
+      new Date(second.publishedAt).getTime() - new Date(first.publishedAt).getTime(),
+    )
+    .filter((post) => {
     if (since !== null && new Date(post.publishedAt).getTime() < since) {
       return false
     }
@@ -453,7 +469,7 @@ async function listRecentPosts(query: ListQuery) {
     }
 
     return true
-  })
+    })
 
   const posts = matches.slice(offset, offset + limit)
 
