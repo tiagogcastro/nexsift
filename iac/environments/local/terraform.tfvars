@@ -2,6 +2,7 @@ name_prefix          = "nexsift-local"
 aws_region           = "us-east-1"
 content_bucket_name  = "nexsift-content-local"
 publish_token        = "local-dev-token-change-me"
+site_url             = "https://nexsift.vercel.app"
 lambda_endpoint_url  = "http://ministack:4566"
 bucket_force_destroy = true
 create_vercel_reader = false

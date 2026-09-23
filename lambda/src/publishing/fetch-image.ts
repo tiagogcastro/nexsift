@@ -76,7 +76,7 @@ export async function downloadImage(
         {
           method: 'GET',
           headers: {
-            'user-agent': 'NexSift-Source-Validator/1.0 (+https://nexsift.com)',
+            'user-agent': `NexSift-Source-Validator/1.0 (+${process.env.SITE_URL ?? 'https://nexsift.vercel.app'})`,
             accept: 'image/avif,image/webp,image/jpeg,image/png,image/gif',
           },
           redirect: 'manual',
@@ -148,6 +148,10 @@ export async function downloadImage(
 
       if (!extension) {
         throw rejectImage('unsupported image type', 'IMAGE_REJECTED', false, response.status, attempts)
+      }
+
+      if (!matchesImageSignature(bytes, contentType)) {
+        throw rejectImage('image bytes do not match content type', 'IMAGE_REJECTED', false, response.status, attempts)
       }
 
       logInfo('image_download', {
@@ -239,4 +243,25 @@ function normalizeContentType(value: string | null) {
   }
 
   return mime
+}
+
+function matchesImageSignature(bytes: Buffer, contentType: string) {
+  if (contentType === 'image/jpeg') {
+    return bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff
+  }
+  if (contentType === 'image/png') {
+    return bytes.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
+  }
+  if (contentType === 'image/gif') {
+    return bytes.subarray(0, 4).toString('ascii') === 'GIF8'
+  }
+  if (contentType === 'image/webp') {
+    return bytes.subarray(0, 4).toString('ascii') === 'RIFF' &&
+      bytes.subarray(8, 12).toString('ascii') === 'WEBP'
+  }
+  if (contentType === 'image/avif') {
+    const brand = bytes.subarray(4, 32).toString('ascii')
+    return brand.includes('ftypavif') || brand.includes('ftypavis')
+  }
+  return false
 }

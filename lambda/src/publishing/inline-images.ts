@@ -32,6 +32,13 @@ export async function resolveInlineImages(
   const objectKeys: string[] = []
 
   for (const url of uniqueUrls) {
+    if (url.startsWith('/s3/public/images/')) {
+      const objectKey = url.slice('/s3/'.length)
+      keysByUrl.set(url, objectKey)
+      objectKeys.push(objectKey)
+      continue
+    }
+
     let downloaded
 
     try {

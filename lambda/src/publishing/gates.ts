@@ -11,14 +11,20 @@ export interface GateIssue {
 export function validateEditorialGates(draft: PostDraft): GateIssue[] {
   const issues: GateIssue[] = []
 
-  if (draft.relevanceScore < MIN_RELEVANCE_SCORE) {
+  if (
+    draft.relevanceScore !== undefined &&
+    draft.relevanceScore < MIN_RELEVANCE_SCORE
+  ) {
     issues.push({
       path: 'relevanceScore',
       message: `relevanceScore must be at least ${MIN_RELEVANCE_SCORE}`,
     })
   }
 
-  if (draft.confidenceScore < MIN_CONFIDENCE_SCORE) {
+  if (
+    draft.confidenceScore !== undefined &&
+    draft.confidenceScore < MIN_CONFIDENCE_SCORE
+  ) {
     issues.push({
       path: 'confidenceScore',
       message: `confidenceScore must be at least ${MIN_CONFIDENCE_SCORE}`,

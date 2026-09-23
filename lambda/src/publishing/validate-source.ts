@@ -201,7 +201,7 @@ export async function validateSourceUrl(
           method: 'GET',
           headers: {
             'user-agent':
-              'NexSift-Source-Validator/1.0 (+https://nexsift.com)',
+              `NexSift-Source-Validator/1.0 (+${process.env.SITE_URL ?? 'https://nexsift.vercel.app'})`,
             accept: 'text/html,text/plain,application/json',
           },
           redirect: 'manual',

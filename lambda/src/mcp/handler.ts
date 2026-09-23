@@ -170,7 +170,7 @@ server.registerTool(
   {
     title: 'Publish a signal',
     description:
-      'Upserts a signal via the publication API. The backend derives the slug, resolves duplicates, runs source verification and applies the editorial gates; 422 responses carry fixable reasons and 503 responses indicate retryable upstream failures.',
+      'Creates a signal when slug is omitted or partially updates an existing signal by slug. Updates preserve omitted fields and never recalculate the URL after title changes. Optional publishedAt is an ISO 8601 editorial instant: it defaults to now on creation, is preserved when omitted on update and cannot be in the future. The backend mechanically validates supplied sources and images before saving.',
     inputSchema: { post: postDraftSchema },
   },
   async ({ post }) => {

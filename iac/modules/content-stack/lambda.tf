@@ -19,6 +19,7 @@ resource "aws_lambda_function" "publish" {
       {
         CONTENT_BUCKET = aws_s3_bucket.content.bucket
         PUBLISH_TOKEN  = var.publish_token
+        SITE_URL       = var.site_url
       },
       var.lambda_endpoint_url != "" ? { AWS_ENDPOINT_URL = var.lambda_endpoint_url } : {}
     )

@@ -1,12 +1,12 @@
 import { TrackedLink } from '@/analytics/tracked-link'
 import { formatCompactDate, formatShortDate } from '@/lib/date'
 import { isSignalWithinDays } from '@/lib/recency'
-import { sourceStatusLabelKey } from '@/lib/source-verification'
+import { sourceDisplayTitle, sourceStatusLabelKey } from '@/lib/source-verification'
 import { getTopicMeta } from '@/lib/topics'
 import { topicIcons } from '@/lib/topic-icons'
 import { siteConfig } from '@/config/site'
 import type { Post, PostSummary } from '@nexsift/schemas/post'
-import { ArrowUpRight, Clock, Link2 } from 'lucide-react'
+import { ArrowUpRight, CheckCircle2, CircleAlert, Clock, Link2 } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
@@ -219,7 +219,7 @@ export async function PostArticle({
         </div>
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="border border-(--border) bg-(--surface-soft) p-4 md:p-5">
+          <div className="border border-(--border) bg-(--surface-soft) p-4 sm:p-5">
             <div className="flex items-center justify-between gap-3">
               <div className="eyebrow text-(--signal)">{t('blog.sources')}</div>
               <span className="flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-(--signal)">
@@ -227,49 +227,56 @@ export async function PostArticle({
                 {post.sources.length}
               </span>
             </div>
-            <p className="mt-2 text-xs leading-relaxed text-(--muted)">{t('article.sourcesIntroBody')}</p>
-            <div className="mt-4 space-y-2">
-              {post.sources.map((source, index) => {
+            <div className="mt-4 divide-y divide-(--border) border-y border-(--border)">
+              {post.sources.map((source) => {
                 const statusKey = sourceStatusLabelKey(source)
+                const StatusIcon = ['healthy', 'redirected', 'replaced'].includes(statusKey)
+                  ? CheckCircle2
+                  : CircleAlert
 
                 return (
-                    <TrackedLink
+                    <div
                       key={source.url}
-                      href={source.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      event="source_clicked"
-                      properties={{ post: post.slug, publisher: source.publisher }}
-                       className="group block border border-(--border) bg-(--surface) p-3 transition-colors hover:border-(--signal) hover:bg-(--surface-raised) focus-visible:outline-2 focus-visible:outline-(--signal)"
-                     >
-                       <div className="flex min-w-0 items-center gap-2 font-mono text-[10px] text-(--muted)">
-                         <span className="shrink-0">{String(index + 1).padStart(2, '0')}</span>
-                         <span className="min-w-0 flex-1 truncate text-(--muted-strong)" title={source.publisher}>{source.publisher}</span>
-                       {statusKey !== 'unknown' ? (
-                         <span
-                           data-status={statusKey}
-                           className="source-status inline-flex shrink-0 items-center whitespace-nowrap rounded-(--radius-sm) border px-1.5 py-1 font-mono text-[10px] leading-none tracking-[0.01em]"
-                         >
-                           {t(`article.sourceStatus.${statusKey}`)}
-                         </span>
-                       ) : null}
-                     </div>
-                       <div className="mt-2 flex items-start gap-2 text-[13px] leading-snug text-(--muted-strong) transition-colors group-hover:text-(--foreground)">
-                        <span>{source.title}</span>
-                        <ArrowUpRight size={13} className="mt-0.5 shrink-0" />
+                      className="group flex flex-col gap-2 py-3 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-x-4"
+                    >
+                      <div className="min-w-0">
+                        <div className="line-clamp-2 text-sm font-semibold leading-snug text-(--foreground)">
+                          {sourceDisplayTitle(source.title, source.publisher)}
+                        </div>
+                        <div className="mt-1 flex flex-wrap items-center gap-1.5 font-mono text-[11px] tracking-[0.04em] text-(--muted)">
+                          <span>{source.publisher}</span>
+                          {statusKey !== 'unknown' ? (
+                            <>
+                              <span aria-hidden>·</span>
+                              <span
+                                data-status={statusKey}
+                                aria-label={t('article.sourceStatusAria', {
+                                  status: t(`article.sourceStatus.${statusKey}`),
+                                })}
+                                className="source-status inline-flex items-center gap-1 rounded-(--radius-sm) px-1 py-0.5"
+                              >
+                                <StatusIcon size={11} aria-hidden />
+                                {t(`article.sourceStatus.${statusKey}`)}
+                              </span>
+                            </>
+                          ) : null}
+                        </div>
                       </div>
-
-                       <div className="mt-2.5 flex items-center gap-2 border-t border-(--border) pt-2.5 font-mono text-[10px]">
-                         {source.publishedAt ? (
-                           <time dateTime={source.publishedAt} className="whitespace-nowrap text-(--muted)">
-                             {formatShortDate(source.publishedAt)}
-                           </time>
-                         ) : null}
-                         <span className="ml-auto shrink-0 whitespace-nowrap text-(--signal) underline underline-offset-4 group-hover:text-(--foreground)">
-                           {t('article.openSource')}
-                         </span>
-                      </div>
-                    </TrackedLink>
+                      <TrackedLink
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={t('article.openSourceAria', {
+                          title: sourceDisplayTitle(source.title, source.publisher),
+                        })}
+                        event="source_clicked"
+                        properties={{ post: post.slug, publisher: source.publisher }}
+                        className="inline-flex items-center gap-1 self-start font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-(--signal) hover:underline sm:self-center"
+                      >
+                          {t('article.openSource')}
+                        <ArrowUpRight size={12} aria-hidden />
+                      </TrackedLink>
+                    </div>
                   )
                 })}
             </div>

@@ -7,6 +7,7 @@
     "whatToWatch": "Observar o próximo ciclo da rotina local para confirmar que a capa passa pelos gates e persiste no sinal.",
     "topic": "devops",
     "signalDate": "2026-08-13",
+    "publishedAt": "2026-08-13T15:00:00.000Z",
     "signalType": "release",
     "depth": "practical",
     "tags": ["nexsift", "local"],

@@ -34,6 +34,11 @@ variable "publish_token" {
   sensitive = true
 }
 
+variable "site_url" {
+  type    = string
+  default = "https://nexsift.vercel.app"
+}
+
 variable "lambda_endpoint_url" {
   type    = string
   default = ""
@@ -58,6 +63,7 @@ module "content_stack" {
   aws_region           = var.aws_region
   content_bucket_name  = var.content_bucket_name
   publish_token        = var.publish_token
+  site_url             = var.site_url
   lambda_endpoint_url  = var.lambda_endpoint_url
   bucket_force_destroy = var.bucket_force_destroy
   create_vercel_reader = var.create_vercel_reader

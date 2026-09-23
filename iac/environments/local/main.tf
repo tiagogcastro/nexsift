@@ -24,12 +24,12 @@ provider "aws" {
   skip_requesting_account_id  = true
 
   endpoints {
-    s3            = "http://localhost:4566"
-    lambda        = "http://localhost:4566"
-    iam           = "http://localhost:4566"
-    ssm           = "http://localhost:4566"
-    sts           = "http://localhost:4566"
-    apigatewayv2  = "http://localhost:4566"
+    s3           = "http://localhost:4566"
+    lambda       = "http://localhost:4566"
+    iam          = "http://localhost:4566"
+    ssm          = "http://localhost:4566"
+    sts          = "http://localhost:4566"
+    apigatewayv2 = "http://localhost:4566"
   }
 }
 
@@ -48,6 +48,11 @@ variable "content_bucket_name" {
 variable "publish_token" {
   type      = string
   sensitive = true
+}
+
+variable "site_url" {
+  type    = string
+  default = "https://nexsift.vercel.app"
 }
 
 variable "lambda_endpoint_url" {
@@ -73,6 +78,7 @@ module "content_stack" {
   aws_region           = var.aws_region
   content_bucket_name  = var.content_bucket_name
   publish_token        = var.publish_token
+  site_url             = var.site_url
   lambda_endpoint_url  = var.lambda_endpoint_url
   bucket_force_destroy = var.bucket_force_destroy
   create_vercel_reader = var.create_vercel_reader
