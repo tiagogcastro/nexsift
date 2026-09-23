@@ -137,6 +137,16 @@ terraform -chdir=iac/environments/local apply
 
 `iac/environments/local/terraform.tfvars` is auto-loaded and committed. Terraform creates the local S3 bucket, IAM role and publication Lambda inside MiniStack.
 
+### 3b. Apply the production Terraform stack (when needed)
+
+Always use the `nexsift` AWS profile (IAM user `nexsift-terraform`, no SSO login required):
+
+```bash
+yarn workspace @nexsift/lambda build
+AWS_PROFILE=nexsift terraform -chdir=iac/environments/prod init
+AWS_PROFILE=nexsift terraform -chdir=iac/environments/prod apply
+```
+
 ### 4. Publish a test post
 
 ```bash
