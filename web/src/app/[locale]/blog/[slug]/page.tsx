@@ -7,8 +7,18 @@ import { siteConfig } from '@/config/site'
 import { PostArticle } from '@/features/blog/post-article'
 import { postAlternates } from '@/lib/alternates'
 import { getPostBySlug, listPosts } from '@/lib/content'
+import type { Post, PostSummary } from '@nexsift/schemas/post'
 
 export const dynamic = 'force-dynamic'
+
+function relatedScore(post: Post, candidate: PostSummary) {
+  const tags = new Set(post.tags.map((tag) => tag.toLocaleLowerCase('pt-BR')))
+  const words = new Set(post.title.toLocaleLowerCase('pt-BR').match(/[\p{L}\p{N}]{5,}/gu) ?? [])
+  const sharedTags = candidate.tags.filter((tag) => tags.has(tag.toLocaleLowerCase('pt-BR'))).length
+  const sharedWords = (candidate.title.toLocaleLowerCase('pt-BR').match(/[\p{L}\p{N}]{5,}/gu) ?? [])
+    .filter((word) => words.has(word)).length
+  return sharedTags * 4 + sharedWords * 2 + (candidate.topic === post.topic ? 1 : 0)
+}
 
 export async function generateMetadata({
   params,
@@ -71,20 +81,12 @@ export default async function PostPage({
   const allPosts = await listPosts()
   const relatedPosts = allPosts
     .filter((candidate) => candidate.slug !== post.slug)
-    .sort((first, second) => {
-      const firstMatches = first.topic === post.topic
-      const secondMatches = second.topic === post.topic
-
-      if (firstMatches !== secondMatches) {
-        return firstMatches ? -1 : 1
-      }
-
-      return (
-        new Date(second.publishedAt).getTime() -
-        new Date(first.publishedAt).getTime()
-      )
-    })
-    .slice(0, 4)
+    .filter((candidate) => relatedScore(post, candidate) > 0)
+    .sort((first, second) =>
+      relatedScore(post, second) - relatedScore(post, first) ||
+      Date.parse(second.publishedAt) - Date.parse(first.publishedAt),
+    )
+    .slice(0, 5)
 
   const t = await getTranslations()
   const jsonLd = {

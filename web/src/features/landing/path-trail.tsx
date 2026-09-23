@@ -150,7 +150,7 @@ export function PathTrail({ steps }: { steps: string[] }) {
                 <span
                   className={`grid size-11 place-items-center rounded-full border font-mono text-xs font-semibold ${
                     isLast
-                      ? 'border-(--signal) bg-(--signal) text-(--on-signal) shadow-[0_0_10px_var(--signal-glow)]'
+                       ? 'border-(--signal) bg-(--signal) text-(--on-signal)'
                       : 'border-(--border-strong) bg-(--surface-raised) text-(--muted-strong)'
                   }`}
                 >
@@ -181,7 +181,7 @@ export function PathTrail({ steps }: { steps: string[] }) {
                 <span
                   className={`grid size-10 place-items-center rounded-full border font-mono text-[11px] font-semibold ${
                     isLast
-                      ? 'border-(--signal) bg-(--signal) text-(--on-signal) shadow-[0_0_10px_var(--signal-glow)]'
+                       ? 'border-(--signal) bg-(--signal) text-(--on-signal)'
                       : 'border-(--border-strong) bg-(--surface-raised) text-(--muted-strong)'
                   }`}
                 >

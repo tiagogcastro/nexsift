@@ -155,13 +155,14 @@ public/
   images/*
 ```
 
-There is no database in the MVP. `indexes/latest.json` is capped at 100 summaries. Each topic index (`indexes/topics/{topic}.json`) lists only signals whose `topic` is that topic; `relatedTopics` are contextual metadata and never place a signal on a topic page. The audit routine derives all index files from the stored posts on every run, so drift self-heals. `private/drafts` and `private/runs` are planned but not implemented.
+There is no database in the MVP. `indexes/latest.json` and each topic index contain the complete set of summaries. The web archive reads all seven topic indexes, so it can recover signals omitted by a legacy 100-item latest index before the next audit. `relatedTopics` are contextual metadata and never place a signal on a topic page. The audit routine derives all index files from the stored posts on every run, so drift self-heals. `private/drafts` and `private/runs` are planned but not implemented.
 
 ## Publication endpoints
 
 All routes require `Authorization: Bearer <PUBLISH_TOKEN>`.
 
-- `GET /` (`listRecentPosts`): returns recent signals from `indexes/latest.json`; optional query filters `since` (ISO 8601), `topic`, `signalType`, `query` (case-insensitive match over title, description and tags), `tag` (exact, case-insensitive), `limit` (default 30, max 100), `offset` (pagination) and `detail` (`full` or `compact`). The response carries `total`, the number of matches before pagination. Compact mode is the preferred editorial context list because it omits heavy source arrays.
+- `GET /` (`listRecentPosts`): searches the complete archive; optional query filters `since` (ISO 8601), `topic`, `signalType`, `query` (case-insensitive match over title, description and tags), `tag` (exact, case-insensitive), `limit` (default 30, max 100), `offset` (pagination) and `detail` (`full` or `compact`). The response carries `total`, the number of matches before pagination. Compact mode is the preferred editorial context list because it omits heavy source arrays.
+- `PATCH /posts/{slug}/copy` (`revisePostCopy`): updates only the four prose fields of an existing signal and recomputes reading time; publication and material-update timestamps, sources, identity and images stay unchanged.
 - `POST /posts/resolve` (`resolvePost`): resolves `{ title, topic, signalDate }` with the exact backend slug function and returns `{ exists, slug, post? }` for deduplication without reproducing slug logic in the editor.
 - `GET /posts/{slug}` (`getPost`): returns the full signal or 404.
 - `POST /` (`publishPost`): upserts a signal. The slug is derived as `{topic}-{slugified title, max 40 chars}-{signalDate}`; publishing the same slug again updates the signal. Rejects drafts below the editorial gates (422). Returns 201 with `{ ok, slug, operation: created|updated, publishedAt, updatedAt }`.

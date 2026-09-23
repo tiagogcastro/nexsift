@@ -23,6 +23,7 @@ interface ConsoleLabels {
   relevanceLabel: string
   newLabel: string
   sourcesLabel: string
+  matchedTag: string
 }
 
 interface LedgerConsoleProps {
@@ -178,7 +179,7 @@ export function LedgerConsole({
       ) : null}
 
       {visiblePosts.length > 0 ? (
-        <div>
+        <div className="ledger-console-list">
           {visiblePosts.map((post, index) => {
             const topicLabel = topicMeta[post.topic]?.label
 
@@ -192,6 +193,8 @@ export function LedgerConsole({
                 newLabel={labels.newLabel}
                 sourcesLabel={labels.sourcesLabel}
                 fallbackLabel={labels.signalFallback}
+                query={query.trim()}
+                matchedTagLabel={labels.matchedTag}
               />
             )
           })}

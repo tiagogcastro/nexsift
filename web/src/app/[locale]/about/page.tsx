@@ -69,13 +69,13 @@ export default async function AboutPage({
         <div className="page-shell relative">
         <div className="grid gap-12 lg:grid-cols-[0.45fr_1fr]">
           <div className="lg:sticky lg:top-24 lg:self-start">
-            <h1 className="max-w-xl text-[clamp(2.2rem,4.2vw,3.8rem)] font-medium leading-[0.95] tracking-[-0.04em]">
+            <h1 className="page-heading max-w-xl">
               <span className="block">{titleA}</span>
               {titleB ? <span className="block text-(--signal)">{titleB}</span> : null}
             </h1>
           </div>
           <div>
-            <p className="max-w-[56ch] text-xl leading-relaxed text-(--muted-strong)">
+            <p className="intro-copy max-w-[64ch] text-(--muted-strong)">
               {t('about.body')}
             </p>
 
@@ -100,7 +100,7 @@ export default async function AboutPage({
               />
             </div>
 
-            <div className="mt-16 border-t border-(--border)">
+            <div className="mt-12 border-t border-(--border)">
               <div className="pt-6">
                 <div className="eyebrow">{t('about.criteriaTitle')}</div>
                 <p className="mt-4 max-w-[56ch] text-sm leading-relaxed text-(--muted)">
@@ -115,11 +115,11 @@ export default async function AboutPage({
                     const colonIndex = criterion.indexOf(':')
 
                     return (
-                      <div key={criterion} className="bg-(--surface) p-6">
+                      <div key={criterion} className="bg-(--surface) p-5">
                         <div className="font-mono text-[11px] text-(--muted)">
                           0{index + 1}
                         </div>
-                        <p className="mt-10 text-base leading-relaxed tracking-[-0.015em]">
+                        <p className="mt-7 text-sm leading-relaxed tracking-[-0.015em]">
                           {colonIndex === -1 ? (
                             criterion
                           ) : (
@@ -143,7 +143,7 @@ export default async function AboutPage({
             </div>
 
             {sections.map((section) => (
-              <div key={section.index} className="mt-16 border-t border-(--border)">
+              <div key={section.index} className="mt-12 border-t border-(--border)">
                 <div className="grid gap-6 pt-6 md:grid-cols-[3rem_1fr]">
                   <span className="font-mono text-[11px] text-(--signal)">
                     {section.index}
@@ -152,7 +152,7 @@ export default async function AboutPage({
                     <div className="eyebrow text-(--signal)">
                       {section.eyebrow}
                     </div>
-                    <p className="mt-4 max-w-[56ch] leading-relaxed text-(--muted-strong)">
+                    <p className="intro-copy mt-3 max-w-[64ch] text-(--muted-strong)">
                       {section.body}
                     </p>
                   </div>

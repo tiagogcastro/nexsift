@@ -11,7 +11,6 @@ import {
 import {
   applySourceReplacement,
   latestIndexKey,
-  latestLimit,
   sortByPublishedAt,
 } from './publish-post'
 import type { SourceCheck } from './validate-source'
@@ -109,7 +108,7 @@ async function rebuildIndexes(posts: Post[]) {
 
   await putIndex(
     latestIndexKey,
-    [...summaries].sort(sortByPublishedAt).slice(0, latestLimit),
+    [...summaries].sort(sortByPublishedAt),
   )
 
   await Promise.all(

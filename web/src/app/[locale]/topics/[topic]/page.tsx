@@ -69,14 +69,14 @@ export default async function TopicPage({
               ]}
               topic={topic}
             />
-            <h1 className="text-[clamp(2.8rem,5.5vw,5rem)] font-medium leading-[0.9] tracking-[-0.04em]">
+            <h1 className="page-heading max-w-xl">
               {meta.label}
             </h1>
             <h2 className="sr-only">{meta.label}</h2>
             <p className="mt-4 font-mono text-xs font-semibold text-(--topic-color)">
               {t('topicPage.radarTitle', { topic: meta.label })}
             </p>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-(--muted)">
+            <p className="intro-copy mt-5 max-w-sm text-(--muted)">
               {meta.description}
             </p>
             <p className="mt-3 font-mono text-xs text-(--topic-color)">
@@ -97,6 +97,7 @@ export default async function TopicPage({
               relevanceLabel: t('article.relevance'),
               newLabel: t('radar.newBadge'),
               sourcesLabel: t('radar.sourcesCount', { count: 1 }),
+              matchedTag: t('console.matchedTag'),
             }}
             topicMeta={topicMeta}
             initialTopic={topic}

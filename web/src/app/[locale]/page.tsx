@@ -1,9 +1,9 @@
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
-import { siteConfig } from '@/config/site'
 import { SignalLedger } from '@/features/blog/signal-ledger'
-import { CreatorCard } from '@/features/landing/creator-card'
 import { PathTrail } from '@/features/landing/path-trail'
+import { SignalExample } from '@/features/landing/signal-example'
+import { SectionArt } from '@/features/landing/section-art'
 import { SignalArt } from '@/features/landing/signal-art'
 import { TopicBands } from '@/features/landing/topic-bands'
 import { TrustBand } from '@/features/landing/trust-band'
@@ -12,9 +12,8 @@ import { topicIcons } from '@/lib/topic-icons'
 import { selectRadarSignals } from '@/lib/radar-signals'
 import { getTopicMeta, topicOrder } from '@/lib/topics'
 import { routing, type AppLocale } from '@/i18n/routing'
-import { listPosts } from '@/lib/content'
+import { getPostBySlug, listPosts } from '@/lib/content'
 import {
-  ArrowDownRight,
   ArrowUpRight,
 } from 'lucide-react'
 import { hasLocale } from 'next-intl'
@@ -64,6 +63,8 @@ export default async function HomePage({
   const posts = await listPosts()
   const topicCount = new Set(posts.map((post) => post.topic)).size
   const radarSignals = selectRadarSignals(posts, HOME_RADAR_LIMIT)
+  const exampleSummary = posts.find((post) => post.sources.length > 0)
+  const examplePost = exampleSummary ? await getPostBySlug(exampleSummary.slug) : null
   const homePath = locale === 'pt-BR' ? '/' : `/${locale}`
   const topicsPath = locale === 'pt-BR' ? '/topics' : `/${locale}/topics`
   const aboutPath = `/${locale}/about`
@@ -83,109 +84,86 @@ export default async function HomePage({
 
       <main>
         <section className="relative overflow-hidden border-b border-(--border)">
-          <div className="pointer-events-none absolute inset-0 grid-line opacity-[0.16]" />
-          <div className="hero-glow -right-32 -top-32 size-96 bg-(--signal) opacity-[0.1]" />
-          <div className="hero-glow -bottom-40 left-1/4 size-96 bg-(--cyan) opacity-[0.07]" />
-          <div className="page-shell relative grid items-center gap-6 py-8 lg:min-h-[calc(100vh-4rem)] lg:grid-cols-[1.12fr_0.88fr] lg:gap-12 lg:py-24">
-            {/* Desktop: coluna original intacta + radar à direita */}
-            <div className="hidden lg:block">
-              <h1 className="text-[clamp(3.2rem,6.5vw,6.8rem)] font-medium leading-[0.84] tracking-[-0.04em]">
-                <span className="block">{t('hero.titleA')}</span>
-                <span className="block text-(--signal)">{t('hero.titleB')}</span>
+          <div className="pointer-events-none absolute inset-0 grid-line opacity-[0.09]" />
+          <SignalArt className="pointer-events-none absolute inset-x-0 bottom-0 h-auto w-full opacity-[0.16]" />
+          <div className="page-shell relative grid items-center gap-5 py-7 md:gap-10 md:py-24 lg:min-h-[min(780px,calc(100vh-4rem))] lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+            <div>
+              <h1 className="max-w-[21ch] text-[clamp(1.85rem,7.5vw,2.2rem)] font-medium leading-[1.04] tracking-[-0.04em] md:max-w-[19ch] md:text-[clamp(2rem,4.7vw,4.75rem)] md:leading-[1.02]">
+                {t('hero.titleA')} <span className="text-(--signal)">{t('hero.titleB')}</span>
               </h1>
-              <p className="mt-9 max-w-[56ch] text-[clamp(1rem,1.7vw,1.28rem)] leading-relaxed text-(--muted-strong)">
-                {t('hero.description')}
+              <p className="mt-3 max-w-[52ch] text-[13px] leading-snug text-(--muted-strong) md:mt-7 md:text-lg md:leading-relaxed">
+                <span className="md:hidden">{t('hero.mobileDescription')}</span>
+                <span className="hidden md:inline">{t('hero.description')}</span>
               </p>
-              <p className="mt-6 max-w-[56ch] font-mono text-sm leading-relaxed text-(--muted)">
-                {t.rich('hero.pain', {
-                  b: (chunks) => (
-                    <span className="font-semibold text-(--foreground)">
-                      {chunks}
-                    </span>
-                  ),
-                })}
+              <p className="mt-2 max-w-[54ch] text-xs leading-snug text-(--muted) md:mt-4 md:text-sm md:leading-relaxed">
+                <span className="md:hidden">{t('hero.mobileDefinition')}</span>
+                <span className="hidden md:inline">{t('hero.definition')}</span>
               </p>
-              <p className="mt-4 max-w-md border-l-2 border-(--border-strong) pl-4 font-mono text-sm leading-relaxed text-(--muted-strong)">
-                {t.rich('radar.definition', {
-                  sinal: (chunks) => (
-                    <span className="font-semibold text-(--signal)">{chunks}</span>
-                  ),
-                })}
-              </p>
-              <div className="mt-9 flex flex-wrap items-center gap-3">
-                <Link
-                  href="/blog"
-                  className="flex items-center gap-2 rounded-sm bg-(--signal) px-4 py-2.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5"
-                >
-                  {t('radar.viewAllCount', { count: posts.length })}
-                  <ArrowUpRight size={15} />
+              <div className="mt-4 flex flex-wrap items-center gap-3 md:mt-8 md:gap-4">
+                <Link href="/blog" className="inline-flex items-center gap-2 rounded-sm bg-(--signal) px-3 py-2 text-xs font-semibold text-(--on-signal) transition-colors hover:bg-(--foreground) md:px-4 md:py-2.5 md:text-sm">
+                  {t('hero.primary')} <ArrowUpRight size={16} />
                 </Link>
-                <Link
-                  href={`${homePath}#process`}
-                  className="flex items-center gap-2 px-3 py-2.5 text-sm text-(--muted-strong) hover:text-white"
-                >
+                <Link href={`${homePath}#process`} className="text-xs text-(--muted-strong) underline decoration-(--border-strong) underline-offset-4 hover:text-(--foreground) md:text-sm">
                   {t('hero.secondary')}
-                  <ArrowDownRight size={15} />
                 </Link>
               </div>
+              <p className="mt-3 font-mono text-[11px] text-(--muted) md:mt-5 md:text-xs">
+                <span className="font-semibold text-(--signal)">{posts.length}</span>{' '}
+                {t('hero.totalSignals', { count: posts.length })}
+              </p>
             </div>
 
-            {/* Mobile: título antes do radar; CTAs e textos depois */}
-            <div className="order-1 lg:hidden">
-              <div className="text-center text-[clamp(2.1rem,9vw,4.4rem)] font-medium leading-[0.84] tracking-[-0.04em]">
-                <span className="block">{t('hero.titleA')}</span>
-                <span className="block text-(--signal)">{t('hero.titleB')}</span>
-              </div>
-            </div>
-
-            <div className="radar-panel order-2 border border-(--border) bg-(--surface-soft)">
-              <div className="flex items-center gap-2 border-b border-(--border) px-4 py-2.5 lg:px-5 lg:py-4">
+            <div className="radar-panel border border-(--border) bg-(--surface-soft)">
+              <div className="flex items-center gap-2 border-b border-(--border) px-3 py-2 lg:px-5 lg:py-4">
                 <span className="signal-dot" />
                 <h2 className="eyebrow text-(--signal)">
                   {t('radar.eyebrow')}
                 </h2>
               </div>
-              <div className="px-4 pb-4 lg:px-5">
+              <div className="px-3 pb-1 lg:px-5">
                 <SignalLedger posts={radarSignals} limit={4} compact />
               </div>
             </div>
 
-            <div className="order-3 flex flex-col lg:hidden">
-              <div className="flex flex-wrap items-center gap-3">
-                <Link
-                  href="/blog"
-                  className="flex items-center gap-2 rounded-sm bg-(--signal) px-3 py-2 text-[13px] font-semibold text-black transition-transform hover:-translate-y-0.5"
-                >
-                  {t('radar.viewAllCount', { count: posts.length })}
-                  <ArrowUpRight size={15} />
-                </Link>
-                <Link
-                  href={`${homePath}#process`}
-                  className="flex items-center gap-2 px-3 py-2 text-[13px] text-(--muted-strong) hover:text-white"
-                >
-                  {t('hero.secondary')}
-                  <ArrowDownRight size={15} />
-                </Link>
+          </div>
+        </section>
+
+        <section id="process" className="border-b border-(--border) bg-(--surface-soft)">
+          <div className="page-shell py-16 lg:py-24">
+            <div className="grid gap-8 lg:grid-cols-[0.65fr_1.35fr]">
+              <div>
+                <p className="eyebrow mb-4">{t('process.eyebrow')}</p>
+                <h2 className="section-heading max-w-md">{t('process.title')}</h2>
+                <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">{t('process.description')}</p>
               </div>
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-(--muted-strong)">
-                {t('hero.description')}
-              </p>
-              <p className="mt-3 max-w-sm font-mono text-[13px] leading-relaxed text-(--muted)">
-                {t.rich('radar.definition', {
-                  sinal: (chunks) => (
-                    <span className="font-semibold text-(--signal)">{chunks}</span>
-                  ),
-                })}
-              </p>
+              <PathTrail steps={[t('process.steps.0'), t('process.steps.1'), t('process.steps.2'), t('process.steps.3'), t('process.steps.4')]} />
             </div>
           </div>
         </section>
+
+        {examplePost?.sources.length ? (
+          <SignalExample
+            post={examplePost}
+            labels={{
+              eyebrow: t('example.eyebrow'),
+              title: t('example.title'),
+              description: t('example.description'),
+              source: t('example.source'),
+              summary: t('example.summary'),
+              why: t('blog.why'),
+              read: t('example.read'),
+              openSource: t('example.openSource'),
+            }}
+          />
+        ) : null}
+
+        <SectionArt variant="filter" />
 
         <section id="topics" className="border-y border-(--border) bg-(--surface-soft)">
           <div className="page-shell py-20 lg:py-28">
             <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
               <div>
-                <h2 className="max-w-md text-4xl font-medium tracking-[-0.04em] md:text-5xl">
+                <h2 className="section-heading max-w-md">
                   {t('topics.title')}
                 </h2>
                 <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
@@ -200,71 +178,7 @@ export default async function HomePage({
           </div>
         </section>
 
-        <section className="page-shell py-20 lg:py-28">
-          <div>
-            <h2 className="max-w-4xl text-[clamp(2.4rem,5vw,4.2rem)] font-medium leading-[0.95] tracking-[-0.04em]">
-              <span className="block">{t('why.titleA')}</span>
-              <span className="block text-(--signal)">{t('why.titleB')}</span>
-            </h2>
-            <p className="mt-7 max-w-[72ch] text-lg leading-relaxed text-(--muted-strong)">
-              {t('why.description')}
-            </p>
-            <p className="mt-5 max-w-[72ch] leading-relaxed text-(--muted)">
-              {t('about.body')}
-            </p>
-            <div className="mt-10">
-              <CreatorCard
-                labels={{
-                  eyebrow: t('about.creatorEyebrow'),
-                  title: t('about.creatorTitle'),
-                  body: t.rich('about.creatorBody', {
-                    name: (chunks) => (
-                      <a
-                        href={siteConfig.websiteUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-(--signal) underline decoration-(--signal)/40 underline-offset-4 transition-colors hover:decoration-(--signal)"
-                      >
-                        {chunks}
-                      </a>
-                    ),
-                  }),
-                }}
-              />
-            </div>
-          </div>
-        </section>
-
-        <section aria-hidden className="overflow-hidden border-y border-(--border)">
-          <SignalArt className="block h-auto w-full" />
-        </section>
-
-        <section id="process" className="border-b border-(--border) bg-(--surface-soft)">
-          <div className="page-shell py-20 lg:py-28">
-            <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
-              <div>
-                <h2 className="max-w-md text-4xl font-medium tracking-[-0.04em] md:text-5xl">
-                  {t('process.title')}
-                </h2>
-                <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
-                  {t('process.description')}
-                </p>
-                <p className="mt-5 max-w-sm font-mono text-xs leading-relaxed text-(--signal)">
-                  {t('process.scarcity')}
-                </p>
-              </div>
-              <PathTrail
-                steps={[
-                  t('process.steps.0'),
-                  t('process.steps.1'),
-                  t('process.steps.2'),
-                  t('process.steps.3'),
-                  t('process.steps.4'),
-                ]}
-              />
-            </div>
-          </div>
-        </section>
+        <SectionArt variant="trace" />
 
         <section className="border-t border-(--border)">
           <TrustBand
@@ -285,7 +199,7 @@ export default async function HomePage({
         <section className="page-shell pb-20 pt-16 lg:pb-28 lg:pt-24">
           <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
             <div>
-              <h2 className="max-w-md text-4xl font-medium tracking-[-0.04em] md:text-5xl">
+              <h2 className="section-heading max-w-md">
                 {t('explore.title')}
               </h2>
             </div>
@@ -366,7 +280,7 @@ function ExploreCard({
         {index}
       </span>
       <div>
-        <div className="flex items-center justify-between gap-3 text-lg font-medium tracking-[-0.03em]">
+        <div className="flex items-center justify-between gap-3 text-base font-medium tracking-[-0.03em]">
           {title}
           <ArrowUpRight
             size={16}

@@ -5,6 +5,7 @@ import {
   postSchema,
 } from '@nexsift/schemas/post'
 import type { Topic } from '@nexsift/schemas/topic'
+import { topicSchema } from '@nexsift/schemas/topic'
 
 function createS3Client() {
   const endpoint = process.env.AWS_ENDPOINT_URL || undefined
@@ -53,20 +54,18 @@ function cachedReadJsonObject(key: string) {
 }
 
 export async function listPosts() {
-  try {
-    const value = await cachedReadJsonObject('public/indexes/latest.json')()
-    return postIndexSchema.parse(value)
-  } catch (error) {
-    if (error instanceof Error && error.name === 'NoSuchKey') {
-      return []
-    }
-
-    if (isZodError(error)) {
-      return []
-    }
-
-    throw error
-  }
+  // Topic indexes contain the entire archive, including signals omitted from
+  // an older 100-item latest index before its next audit rebuild.
+  const indexes = await Promise.all(topicSchema.options.map((topic) => listPostsByTopic(topic)))
+  const posts = new Map(
+    indexes.flatMap((index, position) =>
+      index.filter((post) => post.topic === topicSchema.options[position])
+        .map((post) => [post.slug, post] as const),
+    ),
+  )
+  return [...posts.values()].sort(
+    (first, second) => Date.parse(second.publishedAt) - Date.parse(first.publishedAt),
+  )
 }
 
 export async function getPostBySlug(slug: string) {

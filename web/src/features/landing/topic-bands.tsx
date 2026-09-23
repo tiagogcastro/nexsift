@@ -31,7 +31,7 @@ export async function TopicBands({ posts }: { posts: PostSummary[] }) {
                 strokeWidth={2}
                 className="shrink-0 text-(--topic-color)"
               />
-              <span className="truncate text-lg font-medium tracking-[-0.03em] text-(--topic-color)">
+              <span className="truncate text-base font-medium tracking-[-0.03em] text-(--topic-color)">
                 {meta.label}
               </span>
             </span>

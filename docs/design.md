@@ -87,4 +87,4 @@ Topics are represented by a monochrome lucide icon (brain for AI, cpu for develo
 
 ## Article layout
 
-Signals use a two-zone layout: a single editorial column (topic chip with icon; title; byline row; "O que mudou"; "Por que importa"; development; "O que observar agora"; "Continue no radar") and a sticky source rail that keeps traceability visible while reading. Metadata is a discreet mono line under the title, not a rail. Each source is a small bordered card with its verification status as a colored badge. The "Continue no radar" rows carry the related topic chip and source count.
+Signals use a two-zone layout: a single editorial column (breadcrumb with a linked topic chip; title; one horizontally scrollable publication/reading/relevance/byline row on narrow screens; "O que mudou"; "Por que importa"; development; "O que observar agora"; "Continue no radar") and a sticky source rail that keeps traceability visible while reading. Each source is a small bordered card with its verification status as a colored badge. The "Continue no radar" rows carry the related topic chip and source count.

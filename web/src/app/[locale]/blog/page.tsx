@@ -67,14 +67,14 @@ export default async function BlogPage({
       <main className="page-shell min-h-[75vh] py-16 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[0.55fr_1.45fr]">
           <div className="lg:sticky lg:top-24 lg:self-start">
-            <h1 className="max-w-md text-[clamp(3.5rem,7vw,7rem)] font-medium leading-[0.9] tracking-[-0.04em]">
+            <h1 className="page-heading max-w-md">
               {t('blog.title')}
             </h1>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-(--muted)">
+            <p className="intro-copy mt-4 max-w-sm text-(--muted)">
               {t('blog.description')}
             </p>
             <h2 className="sr-only">{t('nav.blog')}</h2>
-            <div className="mt-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-(--muted)">
+            <div className="mt-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-(--muted)">
               <span className="signal-dot" />
               {t('blog.signalsPublished', { count: posts.length })}
             </div>
@@ -93,6 +93,7 @@ export default async function BlogPage({
               relevanceLabel: t('article.relevance'),
               newLabel: t('radar.newBadge'),
               sourcesLabel: t('radar.sourcesCount', { count: 1 }),
+              matchedTag: t('console.matchedTag'),
             }}
             topicMeta={topicMeta}
             initialTopic={topicResult?.success ? (topicResult.data as Topic) : undefined}

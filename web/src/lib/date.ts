@@ -16,3 +16,12 @@ export function formatCompactDate(value: string, locale = 'pt-BR') {
     timeZone: EDITORIAL_TIME_ZONE,
   }).format(new Date(value))
 }
+
+export function formatShortDate(value: string, locale = 'pt-BR') {
+  return new Intl.DateTimeFormat(locale, {
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+    timeZone: EDITORIAL_TIME_ZONE,
+  }).format(new Date(value))
+}

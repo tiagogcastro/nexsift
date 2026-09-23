@@ -4,8 +4,29 @@ import type { PostSummary } from '@nexsift/schemas/post'
 import { formatCompactDate } from '@/lib/date'
 import { isSignalWithinDays } from '@/lib/recency'
 import { topicIcons } from '@/lib/topic-icons'
+import type { ReactNode } from 'react'
 
 const NEW_BADGE_DAYS = 5
+
+function highlight(text: string, query: string): ReactNode {
+  if (!query) return text
+
+  const parts: ReactNode[] = []
+  const normalized = text.toLocaleLowerCase('pt-BR')
+  const needle = query.toLocaleLowerCase('pt-BR')
+  let start = 0
+  let index = normalized.indexOf(needle)
+
+  while (index !== -1) {
+    parts.push(text.slice(start, index))
+    parts.push(<mark key={index} className="bg-(--signal-soft) text-(--signal)">{text.slice(index, index + query.length)}</mark>)
+    start = index + query.length
+    index = normalized.indexOf(needle, start)
+  }
+
+  parts.push(text.slice(start))
+  return parts
+}
 
 export function LedgerRow({
   post,
@@ -16,6 +37,8 @@ export function LedgerRow({
   sourcesLabel,
   fallbackLabel,
   compact = false,
+  query = '',
+  matchedTagLabel,
 }: {
   post: PostSummary
   index: number
@@ -25,10 +48,15 @@ export function LedgerRow({
   sourcesLabel: string
   fallbackLabel: string
   compact?: boolean
+  query?: string
+  matchedTagLabel?: string
 }) {
   const topic = post.topic
   const isNew = isSignalWithinDays(post.publishedAt, NEW_BADGE_DAYS)
   const TopicIcon = topicIcons[topic]
+  const matchedTag = query && !`${post.title} ${post.description}`.toLocaleLowerCase('pt-BR').includes(query.toLocaleLowerCase('pt-BR'))
+    ? post.tags.find((tag) => tag.toLocaleLowerCase('pt-BR').includes(query.toLocaleLowerCase('pt-BR')))
+    : undefined
 
   return (
     <Link
@@ -71,25 +99,25 @@ export function LedgerRow({
                   : 'text-[clamp(1rem,1.4vw,1.22rem)]'
               }`}
             >
-              {post.title}
+              {highlight(post.title, query)}
             </h3>
             {!compact ? (
               <p className="mt-1.5 hidden max-w-3xl text-sm leading-relaxed text-(--muted) md:block">
-                {post.description}
+                {highlight(post.description, query)}
               </p>
+            ) : null}
+            {matchedTag && matchedTagLabel ? (
+              <span className="mt-2 block font-mono text-[11px] text-(--signal)">{matchedTagLabel} {highlight(matchedTag, query)}</span>
             ) : null}
           </div>
         </div>
       </div>
-      <div className="flex min-w-0 items-baseline justify-end gap-1.5 pl-2 text-right">
-        <span className="font-mono text-sm font-semibold leading-none text-(--signal)">
-          {post.relevanceScore.toFixed(1)}
+      <div className="ledger-row-meta flex min-w-0 flex-col gap-1 pl-2 text-right font-mono text-[11px] text-(--muted)">
+        <span className="text-(--signal)" aria-label={`${relevanceLabel} ${post.relevanceScore.toFixed(1)}`}>
+          {compact ? post.relevanceScore.toFixed(1) : `${relevanceLabel} ${post.relevanceScore.toFixed(1)}`}
         </span>
-        <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-(--muted)">
-          <span className="hidden sm:inline">{relevanceLabel} · </span>
-          {!compact ? `${post.sources.length} ${sourcesLabel} · ` : null}
-          {formatCompactDate(post.publishedAt)}
-        </span>
+        {!compact ? <span>{post.sources.length} {sourcesLabel}</span> : null}
+        <span>{formatCompactDate(post.publishedAt)}</span>
       </div>
       <ArrowUpRight
         size={15}

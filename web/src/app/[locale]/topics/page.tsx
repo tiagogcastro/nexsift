@@ -45,14 +45,14 @@ export default async function TopicsPage({
         <div className="grid gap-12 lg:grid-cols-[0.45fr_1fr]">
           <div className="eyebrow">{t('topics.eyebrow')}</div>
           <div>
-            <h1 className="max-w-5xl text-[clamp(3.4rem,8vw,8rem)] font-medium leading-[0.9] tracking-[-0.04em]">
+            <h1 className="page-heading max-w-5xl">
               {t('topics.title')}
             </h1>
-            <p className="mt-10 max-w-[56ch] text-xl leading-relaxed text-(--muted-strong)">
+            <p className="intro-copy mt-6 max-w-[64ch] text-(--muted-strong)">
               {t('topics.description')}
             </p>
 
-            <div className="mt-16 border-t border-(--border)">
+            <div className="mt-10 border-t border-(--border)">
               {topicOrder.map((topic, index) => {
                 const meta = getTopicMeta(t, topic)
                 const count = posts.filter((post) =>
@@ -77,7 +77,7 @@ export default async function TopicsPage({
                           strokeWidth={2}
                           className="shrink-0 text-(--topic-color)"
                         />
-                        <span className="text-lg font-medium tracking-[-0.03em] text-(--topic-color)">
+                        <span className="text-base font-medium tracking-[-0.03em] text-(--topic-color)">
                           {meta.label}
                         </span>
                       </div>

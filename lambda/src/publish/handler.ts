@@ -7,6 +7,7 @@ import {
   postDraftSchema,
   postIdentitySchema,
   postListItemSchema,
+  postCopyRevisionSchema,
   type PostSummary,
 } from '@nexsift/schemas/post'
 import { signalTypeSchema } from '@nexsift/schemas/signal-type'
@@ -14,10 +15,12 @@ import { topicSchema, type Topic } from '@nexsift/schemas/topic'
 import { validateEditorialGates } from '../publishing/gates'
 import {
   deletePost,
+  CopyRevisionError,
   latestIndexKey,
   NotFoundError,
   publishPost,
   replacePostSource,
+  revisePostCopy,
   SourceIndexError,
 } from '../publishing/publish-post'
 import { getIndex, getPost } from '../storage/s3'
@@ -95,6 +98,22 @@ export async function handler(
       '/'
 
     const slug = extractSlug(path)
+
+    const copyMatch = path.match(/^\/posts\/([^/]+)\/copy$/)
+
+    if (method === 'PATCH' && copyMatch) {
+      operation = 'revisePostCopy'
+      const revision = postCopyRevisionSchema.parse(parseBody(event))
+      const post = await revisePostCopy(decodeURIComponent(copyMatch[1] ?? ''), revision)
+      logSuccess(requestContext, operation, startedAt, { status: 200, slug: post.slug })
+      return response(200, {
+        ok: true,
+        slug: post.slug,
+        publishedAt: post.publishedAt,
+        updatedAt: post.updatedAt,
+        readingTime: post.readingTime,
+      }, requestContext)
+    }
 
     if (method === 'GET' && slug) {
       operation = 'getPost'
@@ -346,7 +365,7 @@ export async function handler(
       )
     }
 
-    if (error instanceof SourceIndexError) {
+    if (error instanceof SourceIndexError || error instanceof CopyRevisionError) {
       return errorResponse(
         422,
         requestContext,
@@ -418,7 +437,15 @@ function extractSlug(path: string) {
 }
 
 async function listRecentPosts(query: ListQuery) {
-  const index = await getIndex(latestIndexKey)
+  const [latest, ...topics] = await Promise.all([
+    getIndex(latestIndexKey),
+    ...topicSchema.options.map((topic) => getIndex(`public/indexes/topics/${topic}.json`)),
+  ])
+  const topicPosts = topics.flatMap((posts, position) =>
+    posts.filter((post) => post.topic === topicSchema.options[position]),
+  )
+  const index = [...new Map([...latest, ...topicPosts].map((post) => [post.slug, post])).values()]
+    .sort((first, second) => Date.parse(second.publishedAt) - Date.parse(first.publishedAt))
   const since = parseSince(query.since)
   const topic = parseTopic(query.topic)
   const signalType = parseSignalType(query.signalType)

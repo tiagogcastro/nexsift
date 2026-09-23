@@ -38,6 +38,12 @@ A signal should answer:
 4. Quem deve prestar atenção: who is actually affected.
 5. O que observar agora: the next action, decision or relevant variable (test, update, migrate, benchmark, track, review cost, review security, wait for GA, no immediate action).
 
+Target one to two minutes of reading for most signals. `whyItMatters` and `whatToWatch` should each be one or two concrete sentences. Preserve the facts, dates, numbers, caveats and source links necessary to support the interpretation; brevity must not erase evidence. Copy-only revisions of older signals use `revisePostCopy` and do not change `publishedAt` or `updatedAt`; material factual developments use normal publication and receive `updatedAt`.
+
+The reading flow is "O que mudou" (`description`), "Por que importa" (`whyItMatters`), continuous `content` paragraphs and "O que observar agora" (`whatToWatch`). Do not divide every paragraph of `content` with headings that repeat these labels or announce generic steps. Use a heading, list or table only when technical structure materially improves understanding. The GPT applies this style to older signals through copy-only revision, preserving claims, source links, inline images, caveats and dates; the site does not automatically strip headings from older content.
+
+Aim for a single brief sentence in each of `description`, `whyItMatters` and `whatToWatch`, roughly two lines on a typical phone when the facts allow it. Keep the development as short connected prose, without headings such as "O que mudou de novo" or "Quem e afetado". Never truncate a published statement visually to hit a line count; if a fact needs more space, preserve it and edit for clarity instead.
+
 ## Topics
 
 - `ai`
@@ -81,6 +87,8 @@ Discovery should look for relevant changes in the technology ecosystem, not just
 These axes are discovery lenses, not public topics and not publication quotas.
 
 Every run executes a mandatory sweep protocol on top of free search: aggregator and social surfaces that catch what indexed blogs miss (Hacker News, OpenRouter models including stealth/free listings, GitHub Trending and Releases, Product Hunt, X, YouTube with textual evidence, Reddit), plus fixed blind-spot queries for new AI models, internships and open programs worldwide, new courses and certifications, scholarships and subsidized access, and newly launched apps and developer tools.
+
+The editor's report records which surfaces and official program/model sources were actually inspected, relevant candidates and why each was accepted or discarded, and discovery gaps to revisit. A source or query that was not opened must be reported as a gap, not silently treated as having no relevant results.
 
 There is no source whitelist. Sources are judged by reliability criteria (primary proximity, verifiable evidence on page, editorial independence or official origin, accuracy track record, recency, checkable attribution); unknown sources are candidates subject to the same criteria plus mechanical validation. Aggregator listings are discovery leads, never final sources; stealth launches publish only with secondary verifiable evidence.
 
