@@ -7,10 +7,13 @@
     "today": "Ver sinais"
   },
   "hero": {
-    "eyebrow": "Inteligência tecnológica para quem constrói e opera",
-    "titleA": "Menos ruído.",
-    "titleB": "Mais sinal.",
-    "description": "Mudanças relevantes em tecnologia: o que mudou, por que importa e o que observar. Seleção curta, com fontes verificadas.",
+    "titleA": "O que importa em tecnologia,",
+    "titleB": "resumido em minutos.",
+    "mobileDescription": "Mudanças importantes em tecnologia, resumidas para você se atualizar rápido.",
+    "mobileDefinition": "Cada sinal explica o que mudou e aponta para a fonte original.",
+    "description": "Selecionamos mudanças importantes e explicamos o que aconteceu e por que importa. Você se atualiza rápido e pode conferir as fontes.",
+    "definition": "Chamamos cada resumo de sinal: uma mudança relevante, com contexto e links para o conteúdo original.",
+    "totalSignals": "{count, plural, one {sinal publicado} other {sinais publicados}}",
     "pain": "Quanto mais você lê, menos entende - e <b>ninguém verifica</b> o que circula.",
     "primary": "Ver todos os sinais",
     "secondary": "Como funciona"
@@ -27,8 +30,8 @@
   },
   "topics": {
     "eyebrow": "TÓPICOS",
-    "title": "Sete áreas, um único radar",
-    "description": "Cada tópico é uma lente sobre o que está mudando. Escolha uma área para ver o que merece atenção nela.",
+    "title": "Explore por assunto",
+    "description": "Tópicos organizam os resumos por área. Acompanhamos estas sete hoje e podemos incluir outras quando fizer sentido editorialmente.",
     "count": "{count, plural, one {# sinal} other {# sinais}}"
   },
   "why": {
@@ -39,8 +42,8 @@
   },
   "process": {
     "eyebrow": "COMO FUNCIONA",
-    "title": "Nem tudo que acontece merece sua atenção.",
-    "description": "O NexSift é uma peneira editorial: muito acontece, quase nada passa. Só entra no radar o que altera decisão, risco, oportunidade ou entendimento.",
+    "title": "Da fonte ao resumo, com critério.",
+    "description": "Buscamos novidades, conferimos as fontes e publicamos um resumo quando a mudança tem consequência concreta para quem trabalha com tecnologia.",
     "steps": [
       "Muito acontece",
       "Isso realmente mudou algo?",
@@ -49,6 +52,15 @@
       "SINAL"
     ],
     "scarcity": "Escassez é a proposta: é melhor publicar menos do que baixar o padrão."
+  },
+  "example": {
+    "eyebrow": "NA PRÁTICA",
+    "title": "Uma mudança real, com fonte e contexto.",
+    "description": "Este sinal foi publicado no NexSift. Veja a fonte original, o que mudou e por que essa mudança importa. Os links levam ao sinal completo e ao material consultado.",
+    "source": "FONTE ORIGINAL",
+    "summary": "RESUMO NEXSIFT",
+    "openSource": "Conferir fonte",
+    "read": "Ler o sinal completo"
   },
   "trust": {
     "eyebrow": "CONFIANÇA E FONTES",
@@ -119,7 +131,7 @@
   "notice": {
     "short": "Conteúdo gerado com apoio de IA a partir de fontes verificadas. Pode conter erros.",
     "article": "Este texto foi produzido com apoio de IA e é extraído das fontes verificadas citadas abaixo. Antes de tomar decisões, revise as fontes; erros podem ocorrer.",
-    "sources": "Uma fonte pode deixar de existir na web a qualquer momento. A equipe editorial pode revisar e atualizar a fonte ou o sinal quando necessário."
+    "sources": "Links externos podem mudar. Confira a fonte antes de tomar decisões."
   },
   "breadcrumb": {
     "home": "Home",
@@ -127,7 +139,8 @@
     "topics": "Tópicos"
   },
   "console": {
-    "searchPlaceholder": "Buscar por título, tag ou descrição",
+    "searchPlaceholder": "Buscar por título, descrição ou assunto",
+    "matchedTag": "Encontrado no assunto:",
     "allTopics": "Todos",
     "allTypes": "Todos os tipos",
     "loadMore": "Carregar mais sinais",
@@ -142,6 +155,7 @@
     "signalCount": "{count, plural, one {# sinal publicado neste tópico} other {# sinais publicados neste tópico}}"
   },
   "article": {
+    "metadata": "Data, leitura, relevância e autoria do sinal",
     "published": "Publicado",
     "updated": "Atualizado",
     "reading": "Leitura",
@@ -150,7 +164,7 @@
     "byline": "Por",
     "bylineRole": "Criador do NexSift",
     "sourcesIntroTitle": "Continue na fonte",
-    "sourcesIntroBody": "O NexSift sintetiza a mudança e seu impacto. Consulte a fonte original para documentação, detalhes técnicos e contexto completo.",
+    "sourcesIntroBody": "Consulte as fontes para conferir detalhes e contexto técnico.",
     "openSource": "Abrir",
     "openSourceAria": "Abrir fonte externa: {title}",
     "sourceStatusAria": "Status de verificação: {status}",
@@ -175,6 +189,7 @@
     "why": "Por que importa",
     "whatToWatch": "O que observar agora",
     "continueOnRadar": "Continue no radar",
+    "continueOnRadarDescription": "Outros sinais sobre assuntos próximos ao que você acabou de ler.",
     "sources": "Fontes verificadas",
     "minutes": "min de leitura",
     "signalsPublished": "{count, plural, one {# sinal publicado} other {# sinais publicados}}",

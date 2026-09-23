@@ -1,5 +1,5 @@
 import { TrackedLink } from '@/analytics/tracked-link'
-import { formatCompactDate, formatDate } from '@/lib/date'
+import { formatCompactDate, formatShortDate } from '@/lib/date'
 import { isSignalWithinDays } from '@/lib/recency'
 import { sourceDisplayTitle, sourceStatusLabelKey } from '@/lib/source-verification'
 import { getTopicMeta } from '@/lib/topics'
@@ -39,10 +39,8 @@ export async function PostArticle({
   const t = await getTranslations()
   const topic = post.topic
   const topicLabel = getTopicMeta(t, topic).label
-  const TopicIcon = topicIcons[topic]
   const isNew = isSignalWithinDays(post.publishedAt, NEW_BADGE_DAYS)
   const breadcrumbs = [
-    { label: t('breadcrumb.home'), href: '/' },
     { label: t('breadcrumb.blog'), href: '/blog' },
   ]
   const topicCrumb = { label: topicLabel, href: `/topics/${topic}` }
@@ -53,59 +51,47 @@ export async function PostArticle({
         items={[
           ...breadcrumbs,
           topicCrumb,
-          { label: post.title },
         ]}
         topic={topic}
+        topicChip
+        badge={isNew ? t('radar.newBadge') : undefined}
       />
-      <div className="mt-8 grid gap-14 lg:grid-cols-[minmax(0,52rem)_minmax(15rem,1fr)] lg:gap-16">
+      <div className="mt-3 grid gap-10 lg:grid-cols-[minmax(0,52rem)_minmax(15rem,1fr)] lg:gap-14">
         <div className="min-w-0">
-          <div
-            data-topic={topic}
-            className="topic-color flex flex-wrap items-center gap-2"
-          >
-            <span className="topic-chip">
-              <TopicIcon size={11} strokeWidth={2} className="text-(--topic-color)" />
-              {topicLabel}
-            </span>
-            {isNew ? (
-              <span className="rounded-(--radius-sm) bg-(--signal) px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-widest text-black">
-                {t('radar.newBadge')}
-              </span>
-            ) : null}
-          </div>
-
-          <h1 className="mt-7 max-w-4xl text-[clamp(2.2rem,4vw,3.75rem)] font-medium leading-[0.96] tracking-[-0.04em]">
+          <h1 className="max-w-4xl text-[clamp(1.55rem,3vw,2.85rem)] font-medium leading-[1.12] tracking-[-0.03em]">
             {post.title}
           </h1>
 
-          <p className="mt-5 max-w-[62ch] font-mono text-xs tracking-[0.04em] text-(--muted)">
-            {t('article.published')} {formatDate(post.publishedAt)}
-            {post.updatedAt
-              ? ` · ${t('article.updated')} ${formatDate(post.updatedAt)}`
-              : ''}
-            {' · '}
-            {t('article.reading')} {post.readingTime} {t('blog.minutes')}
-            {' · '}
-            {t('article.relevance')} {post.relevanceScore.toFixed(1)}
-          </p>
-
-          <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 border-y border-(--border) py-3 font-mono text-xs tracking-[0.04em] text-(--muted)">
-            <span>{t('article.byline')}</span>
-            <a
-              href={siteConfig.websiteUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="font-semibold text-(--foreground) transition-colors hover:text-(--signal)"
-            >
-              {siteConfig.creator}
-            </a>
-            <span>{t('article.bylineRole')}</span>
-            <span>·</span>
-            <span>{siteConfig.name} Editorial</span>
+          <div
+            role="region"
+            aria-label={t('article.metadata')}
+            tabIndex={0}
+            className="mt-3 overflow-x-auto border-y border-(--border) sm:mt-4"
+          >
+            <div className="flex w-max min-w-full items-center gap-x-1.5 whitespace-nowrap py-2 font-mono text-[10px] text-(--muted) sm:gap-x-2 sm:text-[11px]">
+              <time dateTime={post.publishedAt} aria-label={`${t('article.published')} ${formatShortDate(post.publishedAt)}`}>
+                {formatShortDate(post.publishedAt)}
+              </time>
+              {post.updatedAt ? (
+                <span>· {t('article.updated')} {formatShortDate(post.updatedAt)}</span>
+              ) : null}
+              <span>· {post.readingTime} min</span>
+              <span>· {t('article.relevance')} {post.relevanceScore.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</span>
+              <span>· {t('article.byline')}</span>
+              <a
+                href={siteConfig.websiteUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-(--foreground) transition-colors hover:text-(--signal)"
+              >
+                {siteConfig.creator}
+              </a>
+              <span>· {siteConfig.name}</span>
+            </div>
           </div>
 
           {post.coverImage ? (
-            <figure className="mt-10 border border-(--border) bg-(--surface)">
+            <figure className="mt-8 border border-(--border) bg-(--surface)">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`/s3/${post.coverImage.objectKey}`}
@@ -120,21 +106,21 @@ export async function PostArticle({
             </figure>
           ) : null}
 
-          <section className="mt-10">
+          <section className="mt-8">
             <div className="eyebrow text-(--signal)">{t('blog.whatChanged')}</div>
-            <p className="mt-4 max-w-[56ch] text-lg leading-relaxed text-(--muted-strong) md:text-xl">
+            <p className="mt-2 max-w-[68ch] text-sm leading-[1.55] text-(--muted-strong) md:text-base">
               {post.description}
             </p>
           </section>
 
-          <section className="mt-12 border border-(--border) bg-(--signal-soft) p-6 md:p-8">
+          <section className="mt-8 border border-(--border) bg-(--signal-soft) p-4 md:p-5">
             <div className="eyebrow text-(--signal)">{t('blog.why')}</div>
-            <p className="mt-4 max-w-[56ch] text-lg leading-relaxed text-(--foreground)">
+            <p className="mt-2 max-w-[68ch] text-sm leading-[1.55] text-(--foreground) md:text-base">
               {post.whyItMatters}
             </p>
           </section>
 
-          <div className="prose-nexsift mt-12">
+          <div className="prose-nexsift mt-8">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{ a: EditorialLink, img: InlineArticleImage }}
@@ -144,9 +130,9 @@ export async function PostArticle({
           </div>
 
           {post.whatToWatch ? (
-            <section className="mt-14 border border-(--border) bg-(--surface) p-6 md:p-8">
+            <section className="mt-10 border border-(--border) bg-(--surface-raised) p-4 md:p-5">
               <div className="eyebrow text-(--signal)">{t('blog.whatToWatch')}</div>
-              <p className="mt-4 max-w-[56ch] text-lg leading-relaxed text-(--foreground)">
+              <p className="mt-2 max-w-[68ch] text-sm leading-[1.55] text-(--foreground) md:text-base">
                 {post.whatToWatch}
               </p>
             </section>
@@ -183,6 +169,7 @@ export async function PostArticle({
               <div className="eyebrow text-(--signal)">
                 {t('blog.continueOnRadar')}
               </div>
+              <p className="mt-2 text-sm text-(--muted)">{t('blog.continueOnRadarDescription')}</p>
               <div className="mt-6">
                 {relatedPosts.map((related, index) => {
                   const relatedLabel = getTopicMeta(t, related.topic).label
@@ -193,12 +180,12 @@ export async function PostArticle({
                       key={related.slug}
                       href={`/blog/${related.slug}`}
                       data-topic={related.topic}
-                      className="topic-color group flex items-center gap-4 border-b border-(--border) py-3.5 last:border-b-0"
+                      className="topic-color group flex flex-wrap items-center gap-2 border-b border-(--border) py-3.5 last:border-b-0 sm:gap-4"
                     >
                       <span className="font-mono text-[11px] text-(--muted)">
                         {String(index + 1).padStart(2, '0')}
                       </span>
-                      <span className="hidden shrink-0 sm:block">
+                      <span className="shrink-0">
                         <span className="topic-chip">
                           <RelatedIcon
                             size={11}
@@ -208,14 +195,14 @@ export async function PostArticle({
                           {relatedLabel}
                         </span>
                       </span>
-                      <span className="min-w-0 flex-1 truncate text-sm text-(--muted-strong) transition-colors group-hover:text-(--foreground)">
+                      <span className="w-full min-w-0 text-sm text-(--muted-strong) transition-colors group-hover:text-(--foreground) sm:w-auto sm:flex-1 sm:truncate">
                         {related.title}
                       </span>
                       <span className="flex shrink-0 items-center gap-1 font-mono text-[11px] uppercase tracking-[0.08em] text-(--muted-strong)">
                         <Link2 size={10} className="text-(--signal)" />
                         {related.sources.length}
                       </span>
-                      <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.08em] text-(--muted)">
+                      <span className="ml-auto shrink-0 font-mono text-[11px] uppercase tracking-[0.08em] text-(--muted) sm:ml-0">
                         {formatCompactDate(related.publishedAt)}
                       </span>
                       <ArrowUpRight
@@ -293,7 +280,7 @@ export async function PostArticle({
                   )
                 })}
             </div>
-            <p className="mt-4 flex items-start gap-1.5 font-mono text-xs leading-relaxed text-(--muted)">
+            <p className="mt-3 flex items-start gap-1.5 font-mono text-[10px] leading-relaxed text-(--muted)">
               <Clock size={11} className="mt-0.5 shrink-0" />
               {t('notice.sources')}
             </p>

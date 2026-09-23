@@ -43,7 +43,7 @@ export function CreatorCard({ labels }: { labels: CreatorCardLabels }) {
           />
           <div>
             <div className="eyebrow text-(--signal)">{labels.eyebrow}</div>
-            <div className="mt-1 text-lg font-medium tracking-[-0.03em]">
+            <div className="mt-1 text-base font-medium tracking-[-0.03em]">
               {labels.title}
             </div>
           </div>

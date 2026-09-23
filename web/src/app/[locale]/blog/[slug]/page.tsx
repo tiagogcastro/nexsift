@@ -70,7 +70,7 @@ export default async function PostPage({
   }
 
   const allPosts = await listPosts()
-  const relatedPosts = selectRelatedSignals(post, allPosts)
+  const relatedPosts = selectRelatedSignals(post, allPosts, new Date(), 5)
 
   const t = await getTranslations()
   const jsonLd = {

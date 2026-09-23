@@ -7,10 +7,13 @@
     "today": "View signals"
   },
   "hero": {
-    "eyebrow": "Technology intelligence for builders and operators",
-    "titleA": "Less noise.",
-    "titleB": "More signal.",
-    "description": "Relevant changes in technology: what changed, why it matters and what to watch. A short selection with verified sources.",
+    "titleA": "What matters in technology,",
+    "titleB": "summarized in minutes.",
+    "mobileDescription": "Important technology changes, summarized so you can catch up quickly.",
+    "mobileDefinition": "Each signal explains what changed and links to the original source.",
+    "description": "We select important changes and explain what happened and why it matters. Catch up quickly and check the original sources.",
+    "definition": "Each short summary is a signal: a relevant change with context and links to the original material.",
+    "totalSignals": "{count, plural, one {signal published} other {signals published}}",
     "primary": "View all signals",
     "secondary": "How it works",
     "pain": "The more you read, the less you understand - and <b>nobody verifies</b> what circulates."
@@ -27,8 +30,8 @@
   },
   "topics": {
     "eyebrow": "TOPICS",
-    "title": "Seven areas, one radar",
-    "description": "Each topic is a lens on what is changing. Pick an area to see what deserves attention there.",
+    "title": "Explore by subject",
+    "description": "Topics organize summaries by area. We follow these seven today and may add more when it makes editorial sense.",
     "count": "{count, plural, one {# signal} other {# signals}}"
   },
   "why": {
@@ -39,8 +42,8 @@
   },
   "process": {
     "eyebrow": "HOW IT WORKS",
-    "title": "Not everything that happens deserves your attention.",
-    "description": "NexSift is an editorial sieve: a lot happens, almost nothing gets through. Only what changes a decision, risk, opportunity or understanding makes it to the radar.",
+    "title": "From the source to a useful summary.",
+    "description": "We find changes, check the sources and publish a short summary when there is a real consequence for people working in technology.",
     "steps": [
       "A lot happens",
       "Did it really change something?",
@@ -49,6 +52,15 @@
       "SIGNAL"
     ],
     "scarcity": "Scarcity is the point: publishing less is better than lowering the standard."
+  },
+  "example": {
+    "eyebrow": "IN PRACTICE",
+    "title": "A real change, with sources and context.",
+    "description": "This signal was published on NexSift. See the original source, what changed and why it matters. The links lead to the full signal and the source material.",
+    "source": "ORIGINAL SOURCE",
+    "summary": "NEXSIFT SUMMARY",
+    "openSource": "Check source",
+    "read": "Read the full signal"
   },
   "trust": {
     "eyebrow": "TRUST AND SOURCES",

@@ -70,7 +70,7 @@ paths:
             default: full
       responses:
         '200':
-          description: Recent signals with `total` counting all matches before pagination
+          description: Signals from the complete archive with `total` counting all matches before pagination
           content:
             application/json:
               schema:
@@ -331,6 +331,52 @@ paths:
           description: Invalid publication token
         '404':
           description: Signal not found
+  /posts/{slug}/copy:
+    patch:
+      operationId: revisePostCopy
+      summary: Revise the wording of an existing signal
+      description: Only wording fields may change. Identity, sources, images, scores, publishedAt and updatedAt are preserved. Use publishPost for material changes.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [description, content, whyItMatters, whatToWatch]
+              properties:
+                description:
+                  type: string
+                  minLength: 30
+                  maxLength: 260
+                content:
+                  type: string
+                  minLength: 100
+                whyItMatters:
+                  type: string
+                  minLength: 30
+                  maxLength: 800
+                whatToWatch:
+                  type: string
+                  minLength: 30
+                  maxLength: 500
+      responses:
+        '200':
+          description: Copy revised without changing publication or material-update timestamps
+        '401':
+          description: Invalid publication token
+        '404':
+          description: Signal not found
+        '422':
+          description: Invalid wording payload
   /posts/{slug}/sources/{index}/replace:
     post:
       operationId: replaceSource

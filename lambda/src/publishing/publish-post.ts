@@ -2,10 +2,12 @@ import {
   completePostDraftSchema,
   postSchema,
   postSummarySchema,
+  postCopyRevisionSchema,
   type CoverImage,
   type CompletePostDraft,
   type Post,
   type PostDraft,
+  type PostCopyRevision,
   type PostSummary,
 } from '@nexsift/schemas/post'
 import type { VerifiedPostSource } from '@nexsift/schemas/source'
@@ -22,6 +24,7 @@ import {
 import { downloadImage } from './fetch-image'
 import { resolveInlineImages } from './inline-images'
 import { normalizePost } from './normalize-post'
+import { calculateReadingTime } from './reading-time'
 import { buildSignalSlug } from './signal-slug'
 import {
   SourceRejectedError,
@@ -32,7 +35,6 @@ import {
 import type { RequestContext } from '../runtime/observability'
 
 export const latestIndexKey = 'public/indexes/latest.json'
-export const latestLimit = 100
 
 export type PublishResult = {
   post: Post
@@ -58,6 +60,13 @@ export class SourceIndexError extends Error {
   constructor(index: number) {
     super(`Source index out of range: ${index}`)
     this.name = 'SourceIndexError'
+  }
+}
+
+export class CopyRevisionError extends Error {
+  constructor() {
+    super('Copy revisions must preserve inline image URLs')
+    this.name = 'CopyRevisionError'
   }
 }
 
@@ -168,6 +177,36 @@ export async function publishPost(
     operation: existing ? 'updated' : 'created',
     imageCount: inline.objectKeys.length + (coverImage ? 1 : 0),
   }
+}
+
+export async function revisePostCopy(slug: string, copy: PostCopyRevision): Promise<Post> {
+  const existing = await getPost(slug)
+
+  if (!existing) {
+    throw new NotFoundError(slug)
+  }
+
+  const revision = postCopyRevisionSchema.parse(copy)
+  const originalImages = new Set([...existing.content.matchAll(/!\[[^\]]*\]\(([^)]+)\)/g)].map((match) => match[1]))
+  const revisedImages = [...revision.content.matchAll(/!\[[^\]]*\]\(([^)]+)\)/g)].map((match) => match[1])
+
+  if (
+    revisedImages.some((url) => !originalImages.has(url)) ||
+    [...originalImages].some((url) => !revisedImages.includes(url))
+  ) {
+    throw new CopyRevisionError()
+  }
+
+  const post = postSchema.parse({
+    ...existing,
+    ...revision,
+    readingTime: calculateReadingTime(revision.content),
+  })
+
+  await putPost(post)
+  await updateLatestIndex(post)
+  await synchronizeTopicIndexes(post, existing)
+  return post
 }
 
 export async function resolvePublicationDraft(input: PostDraft): Promise<{
@@ -401,7 +440,6 @@ async function updateLatestIndex(post: Post) {
   const index = await getIndex(latestIndexKey)
   const nextIndex = upsertSummary(index, post)
     .sort(sortByPublishedAt)
-    .slice(0, latestLimit)
 
   await putIndex(latestIndexKey, nextIndex)
 }

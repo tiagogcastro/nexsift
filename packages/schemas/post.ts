@@ -164,12 +164,21 @@ export const postListItemSchema = postFieldsSchema.pick({
 
 export const postIndexSchema = z.array(postSummarySchema)
 
+// A copy revision cannot modify a signal's identity, evidence or publication dates.
+export const postCopyRevisionSchema = z.strictObject({
+  description: draftFields.description,
+  content: draftFields.content,
+  whyItMatters: draftFields.whyItMatters,
+  whatToWatch: draftFields.whatToWatch,
+})
+
 export type PostDraft = z.infer<typeof postDraftSchema>
 export type CompletePostDraft = z.infer<typeof completePostDraftSchema>
 export type PostUpdate = z.infer<typeof postUpdateSchema>
 export type Post = z.infer<typeof postSchema>
 export type PostSummary = z.infer<typeof postSummarySchema>
 export type PostIdentity = z.infer<typeof postIdentitySchema>
+export type PostCopyRevision = z.infer<typeof postCopyRevisionSchema>
 export type PostListItem = z.infer<typeof postListItemSchema>
 export type CoverImageDraft = z.infer<typeof coverImageDraftSchema>
 export type CoverImage = z.infer<typeof coverImageSchema>

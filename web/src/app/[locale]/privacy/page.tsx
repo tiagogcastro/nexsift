@@ -36,14 +36,14 @@ export default async function PrivacyPage({
         <div className="grid gap-12 lg:grid-cols-[0.45fr_1fr]">
           <div className="eyebrow">{t('privacy.eyebrow')}</div>
           <div>
-            <h1 className="max-w-5xl text-[clamp(3rem,7vw,6.5rem)] font-medium leading-[0.9] tracking-[-0.04em]">
+            <h1 className="page-heading max-w-5xl">
               {t('privacy.title')}
             </h1>
-            <p className="mt-10 max-w-[56ch] text-lg leading-relaxed text-(--muted-strong)">
+            <p className="intro-copy mt-6 max-w-[64ch] text-(--muted-strong)">
               {t('privacy.intro')}
             </p>
 
-            <div className="mt-14 space-y-12 border-t border-(--border) pt-8">
+             <div className="mt-10 space-y-10 border-t border-(--border) pt-8">
               <Section
                 eyebrow={t('privacy.productTitle')}
                 body={t('privacy.productBody')}
@@ -92,7 +92,7 @@ function Section({ eyebrow, body }: { eyebrow: string; body: string }) {
   return (
     <section>
       <div className="eyebrow text-(--signal)">{eyebrow}</div>
-      <p className="mt-4 max-w-[56ch] leading-relaxed text-(--muted-strong)">
+      <p className="intro-copy mt-3 max-w-[64ch] text-(--muted-strong)">
         {body}
       </p>
     </section>

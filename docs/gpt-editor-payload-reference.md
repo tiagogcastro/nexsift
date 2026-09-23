@@ -55,6 +55,10 @@ Arquivo de referencia embutido na ferramenta `editorialInstructions` do connecto
 - `whyItMatters`: 30 a 800 caracteres.
 - `whatToWatch`: 30 a 500 caracteres, obrigatorio.
 - `content`: markdown em pt-BR, minimo 100 caracteres. Imagens inline `![alt](url)` sao permitidas.
+- Mire um sinal de 1 a 2 minutos na maioria dos casos. `whyItMatters` e `whatToWatch` devem ter uma ou duas frases concretas cada; preserve evidencias e precisao acima da meta de tamanho.
+- `content`: prefira paragrafos corridos, sem subtitulos genericos nem repeticao de "O que mudou", "Por que importa" e "O que observar agora". Use Markdown estrutural quando necessario para explicar detalhes tecnicos reais.
+- Para `description`, `whyItMatters` e `whatToWatch`, prefira uma frase que caiba em cerca de duas linhas no celular, sem omitir fatos essenciais. No `content`, incorpore quem e afetado e as consequencias ao texto corrido em vez de abrir novos subtitulos.
+- Para revisar somente a redacao de um sinal existente, use `getPost` e `revisePostCopy` com `slug` e os quatro campos `description`, `content`, `whyItMatters`, `whatToWatch`. Nao use `publishPost` para esta revisao: ele registra uma atualizacao material. A revisao nao permite novas imagens inline nem altera fontes, identidade ou datas.
 - `coverImage`: opcional, fortemente recomendada quando houver imagem realmente util.
 - `topic`: exatamente UM, apenas `ai`, `development`, `cloud`, `devops`, `security`, `industry`, `design`. Define o slug e e a unica pagina de topico onde o sinal aparece. Escolha o topico que melhor representa o sinal para o publico de desenvolvedores.
 - `relatedTopics`: 0 a 2 topicos relacionados, distintos de `topic`. Sao contexto exibido na pagina do sinal; nunca definem o slug nem colocam o sinal em outra pagina de topico. So entrem se forem genuinamente pertinentes ao conteudo.

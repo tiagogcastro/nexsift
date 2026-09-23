@@ -6,7 +6,7 @@ import type {
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js'
 import { z } from 'zod'
-import { postDraftSchema, postIdentitySchema } from '@nexsift/schemas/post'
+import { postCopyRevisionSchema, postDraftSchema, postIdentitySchema } from '@nexsift/schemas/post'
 import { topicSchema } from '@nexsift/schemas/topic'
 import { signalTypeSchema } from '@nexsift/schemas/signal-type'
 import { fetchWithRetry, UpstreamRequestError } from '../http/fetch-with-retry'
@@ -15,7 +15,7 @@ import editorialInstructions from '../../../docs/gpt-editor-instructions.md'
 import editorialReference from '../../../docs/gpt-editor-reference.md'
 import payloadReference from '../../../docs/gpt-editor-payload-reference.md'
 
-const editorialBundleVersion = '2026-08-27'
+const editorialBundleVersion = '2026-09-23'
 
 async function callApi(
   operation: string,
@@ -99,7 +99,7 @@ server.registerTool(
   {
     title: 'List recent signals',
     description:
-      'Lists recent NexSift signals, optionally filtered by `since`, `topic`, `signalType`, free-text `query` (matches title, description and tags), exact `tag`, with `limit` (max 100) and `offset` pagination. Returns `total` matches before pagination. Use `detail: "compact"` for coverage, discovery and degraded mode because it avoids returning full sources.',
+      'Lists the complete NexSift archive, newest first, optionally filtered by `since`, `topic`, `signalType`, free-text `query` (matches title, description and tags), exact `tag`, with `limit` (page size max 100) and `offset` pagination. Returns `total` matches before pagination. Use `detail: "compact"` for coverage, discovery and degraded mode because it avoids returning full sources.',
     inputSchema: {
       since: z
         .string()
@@ -177,6 +177,23 @@ server.registerTool(
     const { status, text } = await callApi('publishPost', '/', {
       method: 'POST',
       body: JSON.stringify({ post }),
+    })
+    return toolResult(status, text)
+  },
+)
+
+server.registerTool(
+  'revisePostCopy',
+  {
+    title: 'Revise the wording of an existing signal',
+    description:
+      'Revises only description, content, whyItMatters and whatToWatch of an existing slug. Preserves its identity, evidence, publishedAt and updatedAt. Use only for a wording-only revision with no new facts; use publishPost for material changes.',
+    inputSchema: { slug: z.string().min(1), copy: postCopyRevisionSchema },
+  },
+  async ({ slug, copy }) => {
+    const { status, text } = await callApi('revisePostCopy', `/posts/${encodeURIComponent(slug)}/copy`, {
+      method: 'PATCH',
+      body: JSON.stringify(copy),
     })
     return toolResult(status, text)
   },

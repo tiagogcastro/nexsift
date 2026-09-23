@@ -15,6 +15,10 @@ Sinal e uma mudanca verificavel no ecossistema tecnologico que altera decisao, r
 
 ## Idioma e voz
 
+O corpo (`content`) deve ler como texto continuo: paragrafos conectados entre "Por que importa" e "O que observar agora", sem subtitulos genericos repetindo as secoes da pagina. Titulos, listas e tabelas ficam reservados para casos em que organizam detalhes tecnicos de verdade. Na revisao de sinais antigos, o GPT reorganiza o texto com `revisePostCopy` sem esconder ou perder fatos, fontes, imagens inline, datas e ressalvas.
+
+Mire uma frase direta e aproximadamente duas linhas no celular em `description`, `whyItMatters` e `whatToWatch` quando couber sem perder precisao. Evite repeticoes no corpo e nao crie secoes "O que mudou de novo" ou "Quem e afetado"; integre essas informacoes aos paragrafos. Nunca trunque informacao verificada para atingir um numero de linhas.
+
 - Conteudo em pt-BR, direto, tecnico, ancorado em fontes, cetico a hype.
 - Sem clickbait, superlativos vazios, definicoes basicas desnecessarias ou texto inflado.
 - Sem o caractere em dash.
@@ -102,6 +106,7 @@ Antes de publicar, confirme prazo, custo, publico, elegibilidade, modalidade e b
 - Rotacao geografica: Brasil, America Latina e mundo entram em toda rodada.
 - Lancamento stealth: listagem em agregador e lead de descoberta, nunca fonte final. So publique com evidencia secundaria verificavel (cobertura de imprensa identificada, benchmark publico, pagina oficial do produto). Nunca atribua autoria por deducao.
 - Lead de superficie segue o fluxo normal: vira candidato, passa por `validateSource`, gate e deduplicacao como qualquer outro.
+- Registre no relatorio final as superficies efetivamente abertas, consultas por programas para estudantes e novos ou alterados modelos de IA, candidatos encontrados, descartes com motivo e lacunas para a proxima rodada. Se uma superficie falhar, relate a falha explicitamente; nunca transforme ausencia de busca em ausencia de sinal.
 
 ## Janela temporal adaptativa
 

@@ -7,10 +7,13 @@
     "today": "Ver señales"
   },
   "hero": {
-    "eyebrow": "Inteligencia tecnológica para quienes construyen y operan",
-    "titleA": "Menos ruido.",
-    "titleB": "Más señal.",
-    "description": "Cambios relevantes en tecnología: qué cambió, por qué importa y qué observar. Una selección corta con fuentes verificadas.",
+    "titleA": "Lo importante en tecnología,",
+    "titleB": "resumido en minutos.",
+    "mobileDescription": "Cambios importantes en tecnología, resumidos para ponerte al día rápido.",
+    "mobileDefinition": "Cada señal explica qué cambió y enlaza a la fuente original.",
+    "description": "Seleccionamos cambios importantes y explicamos qué pasó y por qué importa. Ponte al día rápido y consulta las fuentes originales.",
+    "definition": "Cada resumen breve es una señal: un cambio relevante con contexto y enlaces al material original.",
+    "totalSignals": "{count, plural, one {señal publicada} other {señales publicadas}}",
     "primary": "Ver todas las señales",
     "secondary": "Cómo funciona",
     "pain": "Cuanto más lees, menos entiendes - y <b>nadie verifica</b> lo que circula."
@@ -27,8 +30,8 @@
   },
   "topics": {
     "eyebrow": "TEMAS",
-    "title": "Siete áreas, un solo radar",
-    "description": "Cada tema es una lente sobre lo que está cambiando. Elige un área para ver lo que merece atención en ella.",
+    "title": "Explora por tema",
+    "description": "Los temas organizan los resúmenes por área. Seguimos estas siete hoy y podremos añadir otras cuando tenga sentido editorial.",
     "count": "{count, plural, one {# señal} other {# señales}}"
   },
   "why": {
@@ -39,8 +42,8 @@
   },
   "process": {
     "eyebrow": "CÓMO FUNCIONA",
-    "title": "No todo lo que pasa merece tu atención.",
-    "description": "NexSift es un tamiz editorial: mucho pasa, casi nada entra. Solo entra al radar lo que cambia una decisión, un riesgo, una oportunidad o el entendimiento.",
+    "title": "De la fuente a un resumen útil.",
+    "description": "Encontramos cambios, verificamos las fuentes y publicamos un resumen breve cuando hay una consecuencia real para quienes trabajan en tecnología.",
     "steps": [
       "Mucho pasa",
       "¿Esto realmente cambió algo?",
@@ -49,6 +52,15 @@
       "SEÑAL"
     ],
     "scarcity": "La escasez es la propuesta: publicar menos es mejor que bajar el estándar."
+  },
+  "example": {
+    "eyebrow": "EN LA PRÁCTICA",
+    "title": "Un cambio real, con fuentes y contexto.",
+    "description": "Esta señal fue publicada en NexSift. Mira la fuente original, qué cambió y por qué importa. Los enlaces llevan a la señal completa y al material consultado.",
+    "source": "FUENTE ORIGINAL",
+    "summary": "RESUMEN NEXSIFT",
+    "openSource": "Consultar fuente",
+    "read": "Leer la señal completa"
   },
   "trust": {
     "eyebrow": "CONFIANZA Y FUENTES",

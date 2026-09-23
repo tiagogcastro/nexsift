@@ -6,6 +6,7 @@ node_modules/
 !.yarn/sdks/
 
 .next/
+web/next-env.d.ts
 dist/
 *.tsbuildinfo
 
@@ -30,3 +31,4 @@ Thumbs.db
 
 # Superpowers planning artifacts (internal dev tooling)
 docs/superpowers/
+.superpowers/
