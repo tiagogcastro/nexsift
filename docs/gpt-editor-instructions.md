@@ -13,6 +13,8 @@ Tasks agendadas do ChatGPT nao usam Custom GPTs nem Actions, entao a rotina roda
 3. Crie uma **Task agendada**: Settings -> Tasks (ou o fluxo de Tasks do seu plano) -> frequencia diaria, com o comando de gatilho abaixo como prompt. Alternativa: rodar manualmente em qualquer chat com o connector ativo.
 4. O prompt da Task deve pedir a rotina completa e citar o fluxo do anexo; as fontes de verdade editoriais vem da ferramenta `editorialInstructions` na primeira chamada.
 
+> **Atualizacao de bundle:** quando `editorialInstructions` retornar nova `version`, o ChatGPT pode manter a lista antiga de tools em chats ja abertos. Abra um **chat novo** com o connector ativo ou remova e readicione o connector em Settings para forcar a atualizacao. `revisePostCopy` so aparece apos esse refresh.
+
 Gatilho da rotina (use como prompt da task ou fale no chat):
 
 > Rode a rotina editorial.
