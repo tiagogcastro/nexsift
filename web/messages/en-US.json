@@ -1,43 +1,48 @@
 {
   "nav": {
-    "blog": "Signals",
+    "blog": "Posts",
     "topics": "Topics",
     "process": "How it works",
     "about": "About",
-    "today": "View signals"
+    "today": "View posts"
   },
   "hero": {
-    "titleA": "What matters in technology,",
-    "titleB": "summarized in minutes.",
-    "mobileDescription": "Important technology changes, summarized so you can catch up quickly.",
-    "mobileDefinition": "Each signal explains what changed and links to the original source.",
-    "description": "We select important changes and explain what happened and why it matters. Catch up quickly and check the original sources.",
-    "definition": "Each short summary is a signal: a relevant change with context and links to the original material.",
-    "totalSignals": "{count, plural, one {signal published} other {signals published}}",
-    "primary": "View all signals",
+    "titleA": "Short posts on",
+    "titleB": "technology that matters.",
+    "mobileDescription": "AI filters the noise and publishes only what matters in tech, with verified sources and a minutes-long read.",
+    "mobileDefinition": "Short, verified posts with sources, no noise.",
+    "description": "AI monitors trusted sources, filters the noise and publishes only what matters in technology. Short, verified posts with context for a minutes-long read.",
+    "definition": "Short, verified posts with sources, no noise.",
+    "totalSignals": "{count, plural, one {post published} other {posts published}}",
+    "primary": "View all posts",
     "secondary": "How it works",
-    "pain": "The more you read, the less you understand - and <b>nobody verifies</b> what circulates."
+    "pain": "The more you read, the less you understand - and <b>nobody verifies</b> what circulates.",
+    "badges": {
+      "verified": "Verified sources",
+      "updated": "Daily updates",
+      "reading": "2-min read"
+    }
   },
   "radar": {
     "eyebrow": "ON THE RADAR NOW",
     "title": "On the radar now",
     "description": "Changes in technology that passed NexSift's filter and deserve your attention.",
-    "definition": "A <sinal>signal</sinal> is a verified change, in context.",
-    "viewAll": "View all signals",
+    "definition": "A <sinal>post</sinal> is a verified change, in context.",
+    "viewAll": "View all posts",
     "newBadge": "New",
     "sourcesCount": "{count, plural, one {source} other {sources}}",
-    "viewAllCount": "View all {count, plural, one {# signal} other {# signals}}"
+    "viewAllCount": "View all {count, plural, one {# post} other {# posts}}"
   },
   "topics": {
     "eyebrow": "TOPICS",
     "title": "Explore by subject",
     "description": "Topics organize summaries by area. We follow these seven today and may add more when it makes editorial sense.",
-    "count": "{count, plural, one {# signal} other {# signals}}"
+    "count": "{count, plural, one {# post} other {# posts}}"
   },
   "why": {
     "eyebrow": "WHY IT EXISTS",
     "titleA": "Technology produces a lot of noise.",
-    "titleB": "Only the signals remain.",
+    "titleB": "Only the posts remain.",
     "description": "Feeds and alerts compete for your attention. NexSift does the opposite: less reading to understand what changed."
   },
   "process": {
@@ -49,35 +54,35 @@
       "Did it really change something?",
       "Is there evidence?",
       "Does it have consequences?",
-      "SIGNAL"
+      "POST"
     ],
     "scarcity": "Scarcity is the point: publishing less is better than lowering the standard."
   },
   "example": {
     "eyebrow": "IN PRACTICE",
     "title": "A real change, with sources and context.",
-    "description": "This signal was published on NexSift. See the original source, what changed and why it matters. The links lead to the full signal and the source material.",
+    "description": "This post was published on NexSift. See the original source, what changed and why it matters. The links lead to the full post and the source material.",
     "source": "ORIGINAL SOURCE",
     "summary": "NEXSIFT SUMMARY",
     "openSource": "Check source",
-    "read": "Read the full signal"
+    "read": "Read the full post"
   },
   "trust": {
     "eyebrow": "TRUST AND SOURCES",
     "title": "Verified sources, not just cited ones.",
-    "description": "Every signal is traceable to the source that supports it. Before publishing, NexSift reopens and mechanically verifies every URL: the source is evidence, not decoration.",
+    "description": "Every post is traceable to the source that supports it. Before publishing, NexSift reopens and mechanically verifies every URL: the source is evidence, not decoration.",
     "publicationLabel": "verified at publication",
-    "publicationTooltip": "Share of sources that were verified at publication time. Every new signal is only published when 100% of its sources pass verification. Signals published before this rule took effect may sit below 100%.",
+    "publicationTooltip": "Share of sources that were verified at publication time. Every new post is only published when 100% of its sources pass verification. Posts published before this rule took effect may sit below 100%.",
     "verifiableLabel": "sources verifiable now",
     "verifiableTooltip": "Share of original sources that remain accessible and verifiable right now. A source may have been validated at publication and later removed, moved or temporarily unavailable.",
     "topicsLabel": "{count, plural, one {topic on the radar} other {topics on the radar}}",
-    "signalsLabel": "{count, plural, one {signal on the radar} other {signals on the radar}}"
+    "signalsLabel": "{count, plural, one {post on the radar} other {posts on the radar}}"
   },
   "explore": {
     "eyebrow": "KEEP GOING",
     "title": "Follow what changes",
-    "fullRadar": "All signals",
-    "fullRadarBody": "The full list of signals that passed NexSift's filter.",
+    "fullRadar": "All posts",
+    "fullRadarBody": "The full list of posts that passed NexSift's filter.",
     "topicsLink": "Topics",
     "topicsLinkBody": "Each area as its own lens.",
     "aboutLink": "About",
@@ -131,33 +136,33 @@
   "notice": {
     "short": "Content produced with AI support from verified sources. Errors may occur.",
     "article": "This text was produced with AI support and is extracted from the verified sources cited below. Review the sources before making decisions; errors may occur.",
-    "sources": "A source may disappear from the web at any time. The editorial team may review and update the source or the signal when needed."
+    "sources": "A source may disappear from the web at any time. The editorial team may review and update the source or the post when needed."
   },
   "breadcrumb": {
     "home": "Home",
-    "blog": "Signals",
+    "blog": "Posts",
     "topics": "Topics"
   },
   "console": {
     "searchPlaceholder": "Search by title, tag or description",
     "allTopics": "All",
     "allTypes": "All types",
-    "loadMore": "Load more signals",
-    "empty": "No signals match the current filters.",
-    "signalFallback": "SIGNAL",
-    "countLabelOne": "signal on the radar",
-    "countLabelOther": "signals on the radar"
+    "loadMore": "Load more posts",
+    "empty": "No posts match the current filters.",
+    "signalFallback": "POST",
+    "countLabelOne": "post on the radar",
+    "countLabelOther": "posts on the radar"
   },
   "topicPage": {
     "frequency": "TOPIC",
     "radarTitle": "Changes in {topic} that deserve attention",
-    "signalCount": "{count, plural, one {# signal published in this topic} other {# signals published in this topic}}"
+    "signalCount": "{count, plural, one {# post published in this topic} other {# posts published in this topic}}"
   },
   "article": {
     "published": "Published",
     "updated": "Updated",
     "reading": "Reading",
-    "relatedTopics": "Related topics for this signal",
+    "relatedTopics": "Related topics for this post",
     "relevance": "Relevance",
     "sourcesIntroTitle": "Continue at the source",
     "sourcesIntroBody": "NexSift synthesizes the change and its impact. Read the original source for documentation, technical details and full context.",
@@ -180,39 +185,39 @@
   },
   "blog": {
     "eyebrow": "ARCHIVE",
-    "title": "Signals",
-    "description": "Every signal that passed NexSift's filter.",
-    "read": "Read signal",
+    "title": "Posts",
+    "description": "Every post that passed NexSift's filter.",
+    "read": "Read post",
     "whatChanged": "What changed",
     "why": "Why it matters",
     "whatToWatch": "What to watch now",
     "continueOnRadar": "Keep going on the radar",
     "sources": "Verified sources",
     "minutes": "min read",
-    "signalsPublished": "{count, plural, one {# signal published} other {# signals published}}",
-    "metaTitle": "Signals - NexSift",
-    "metaDescription": "All NexSift signals: relevant changes in technology, verified and contextualized."
+    "signalsPublished": "{count, plural, one {# post published} other {# posts published}}",
+    "metaTitle": "Posts - NexSift",
+    "metaDescription": "All NexSift posts: relevant changes in technology, verified and contextualized."
   },
   "notFound": {
-    "eyebrow": "404 / NO SIGNAL",
+    "eyebrow": "404 / NO POST",
     "title": "Topic not found.",
-    "body": "This address does not point to a signal published by NexSift.",
-    "back": "Back to signals"
+    "body": "This address does not point to a post published by NexSift.",
+    "back": "Back to posts"
   },
   "footer": {
-    "tagline": "Less noise. More signal.",
+    "tagline": "Less noise. More post.",
     "builtBy": "Built by Tiago Castro",
     "rights": "NexSift",
     "privacy": "Privacy",
     "product": "Product",
     "contact": "Contact",
     "updates": "Updates",
-    "updatesBody": "Get the most relevant signals by email. No spam, no feed: only what passes the filter."
+    "updatesBody": "Get the most relevant posts by email. No spam, no feed: only what passes the filter."
   },
   "leadModal": {
-    "eyebrow": "GET THE SIGNALS",
-    "title": "Verified signals, straight to your inbox",
-    "description": "Sign up to receive by email the most relevant signals on AI, cloud, development and tech careers.",
+    "eyebrow": "GET THE POSTS",
+    "title": "Verified posts, straight to your inbox",
+    "description": "Sign up to receive by email the most relevant posts on AI, cloud, development and tech careers.",
     "nameLabel": "Name",
     "namePlaceholder": "Your name",
     "emailLabel": "Email",
@@ -221,7 +226,7 @@
     "feedbackPlaceholder": "What do you expect from NexSift?",
     "submit": "Sign up",
     "successTitle": "Sign-up confirmed",
-    "successBody": "You will receive the next signals by email. In the meantime, keep exploring the radar.",
+    "successBody": "You will receive the next posts by email. In the meantime, keep exploring the radar.",
     "successAction": "Continue",
     "error": "Fill in a name and a valid email.",
     "privacyNote": "By signing up you agree to the privacy policy. Your data is used only for contact and updates.",
@@ -240,7 +245,7 @@
     "notCollectTitle": "What we do not collect",
     "notCollectBody": "We do not collect name, email, ID number, precise location or browsing data outside NexSift, except when you voluntarily sign up through the updates form. We do not use advertising cookies or share data with third parties.",
     "contentTitle": "Editorial content and sources",
-    "contentBody": "Signals are produced with AI assistance from verified public sources and point to those sources. Verification is automated by the system itself and collects no data from readers. When you access external links, you leave NexSift and become subject to the respective sites' privacy policies.",
+    "contentBody": "Posts are produced with AI assistance from verified public sources and point to those sources. Verification is automated by the system itself and collects no data from readers. When you access external links, you leave NexSift and become subject to the respective sites' privacy policies.",
     "retentionTitle": "Retention and purpose",
     "retentionBody": "Anonymous events are used only to understand product usage and improve the site. Sign-up data is used exclusively for contact and sending updates. There is no profiling, targeted advertising or data selling.",
     "rightsTitle": "Your rights (LGPD)",
@@ -252,22 +257,22 @@
   "about": {
     "eyebrow": "ABOUT",
     "title": "A technical filter, not another infinite feed",
-    "body": "NexSift reduces the cost of keeping up with technology. Instead of reproducing everything, it prioritizes signals with real impact for people who build and operate software.",
-    "signalTitle": "What a signal is",
-    "signalBody": "A signal is a relevant change, verified and placed in context. Not everything that happens is a signal: the change must be real, have evidence and alter a decision, risk, opportunity or understanding for people who build or operate technology.",
+    "body": "NexSift reduces the cost of keeping up with technology. Instead of reproducing everything, it prioritizes posts with real impact for people who build and operate software.",
+    "signalTitle": "What a post is",
+    "signalBody": "A post is a relevant change, verified and placed in context. Not everything that happens is a post: the change must be real, have evidence and alter a decision, risk, opportunity or understanding for people who build or operate technology.",
     "criteriaTitle": "Editorial criteria",
-    "criteriaIntro": "A signal is only published when it passes all of these criteria:",
+    "criteriaIntro": "A post is only published when it passes all of these criteria:",
     "criteriaA": "Source before opinion: evidence supports every fact, and the source is cited.",
     "criteriaB": "Context before volume: publishing less is better than lowering the standard.",
     "criteriaC": "Technical impact before hype: concrete consequence beats flashy novelty.",
     "aiTitle": "Use of AI",
     "aiBody": "AI researches, organizes and drafts with support; NexSift verifies. No claim is published without a verified source, and the text points to the material that supports it. Before making decisions, review the original sources; errors may occur.",
     "relevanceTitle": "Relevance and confidence",
-    "relevanceBody": "Every signal gets a relevance (how much it matters to people who build and operate technology) and a confidence (the solidity of the evidence and interpretation). Only signals with relevance 6.5 or above and confidence 7 or above make it to the radar.",
+    "relevanceBody": "Every post gets a relevance (how much it matters to people who build and operate technology) and a confidence (the solidity of the evidence and interpretation). Only posts with relevance 6.5 or above and confidence 7 or above make it to the radar.",
     "methodTitle": "How the curation works",
-    "methodBody": "The flow is a sieve: a lot happens, almost nothing gets through. NexSift asks whether the change is real, whether there is evidence and whether it has consequences. What is left becomes a signal, and every signal ends by indicating what to watch next.",
+    "methodBody": "The flow is a sieve: a lot happens, almost nothing gets through. NexSift asks whether the change is real, whether there is evidence and whether it has consequences. What is left becomes a post, and every post ends by indicating what to watch next.",
     "creatorEyebrow": "BEHIND IT ALL",
     "creatorTitle": "Built by someone who lives the problem",
-    "creatorBody": "NexSift was created by <name>Tiago Castro</name>, a full stack cloud developer with a degree in Systems Analysis and Development and more than 5 years in the market building and operating software. The motivation came from the cost of keeping up with technology: infinite feeds, hype and little context. NexSift is the filter he wanted for himself: few signals, verifiable sources and direct context about what changes for people who build software."
+    "creatorBody": "NexSift was created by <name>Tiago Castro</name>, a full stack cloud developer with a degree in Systems Analysis and Development and more than 5 years in the market building and operating software. The motivation came from the cost of keeping up with technology: infinite feeds, hype and little context. NexSift is the filter he wanted for himself: few posts, verifiable sources and direct context about what changes for people who build software."
   }
 }

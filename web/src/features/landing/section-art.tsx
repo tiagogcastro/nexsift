@@ -1,9 +1,9 @@
 export function SectionArt({ variant }: { variant: 'filter' | 'trace' }) {
   return (
-    <div aria-hidden="true" className="overflow-hidden border-b border-(--border) bg-(--background)">
+    <div aria-hidden="true" className="overflow-hidden border-y border-(--border) bg-(--background) py-6 md:py-8">
       <svg
         viewBox="0 0 1200 112"
-        preserveAspectRatio="xMidYMid slice"
+        preserveAspectRatio="xMidYMid meet"
         fill="none"
         className="block h-20 w-full md:h-28"
       >

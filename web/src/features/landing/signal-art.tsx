@@ -7,6 +7,7 @@ export function SignalArt({ className }: { className?: string }) {
       viewBox="0 0 1200 320"
       fill="none"
       aria-hidden="true"
+      preserveAspectRatio="xMidYMid meet"
       className={className}
     >
       <defs>
