@@ -1,6 +1,6 @@
 # NexSift Editor: diretrizes editoriais (referencia do GPT)
 
-Editorial version: 2026-08-27
+Editorial version: 2026-09-24
 
 Arquivo de referencia embutido na ferramenta `editorialInstructions` do connector MCP. Detalha a linha editorial, as classificacoes, o gate de publicacao, a verificacao de fontes, o fluxo da rotina, o modo degradado e o tratamento de erros. O contrato de publicacao, o exemplo de payload e os endpoints estao em `gpt-editor-payload-reference.md`.
 

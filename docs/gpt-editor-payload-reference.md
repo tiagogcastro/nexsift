@@ -1,6 +1,6 @@
 # NexSift: contrato de publicacao (referencia do GPT Editor)
 
-Editorial version: 2026-08-27
+Editorial version: 2026-09-24
 
 Arquivo de referencia embutido na ferramenta `editorialInstructions` do connector MCP. Detalha o contrato das operacoes, o exemplo de payload e os codigos de erro relevantes para a rotina editorial.
 
