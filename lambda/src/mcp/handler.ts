@@ -15,7 +15,7 @@ import editorialInstructions from '../../../docs/gpt-editor-instructions.md'
 import editorialReference from '../../../docs/gpt-editor-reference.md'
 import payloadReference from '../../../docs/gpt-editor-payload-reference.md'
 
-const editorialBundleVersion = '2026-09-23'
+const editorialBundleVersion = '2026-09-24'
 
 async function callApi(
   operation: string,

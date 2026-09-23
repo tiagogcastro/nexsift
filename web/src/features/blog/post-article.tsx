@@ -235,12 +235,20 @@ export async function PostArticle({
                   : CircleAlert
 
                 return (
-                    <div
+                    <TrackedLink
                       key={source.url}
-                      className="group flex flex-col gap-2 py-3 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-x-4"
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={t('article.openSourceAria', {
+                        title: sourceDisplayTitle(source.title, source.publisher),
+                      })}
+                      event="source_clicked"
+                      properties={{ post: post.slug, publisher: source.publisher }}
+                      className="group flex flex-col gap-2 py-3 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-x-4 rounded-sm transition-colors hover:bg-(--surface) focus-visible:outline focus-visible:outline-2 focus-visible:outline-(--signal)"
                     >
                       <div className="min-w-0">
-                        <div className="line-clamp-2 text-sm font-semibold leading-snug text-(--foreground)">
+                        <div className="line-clamp-2 text-sm font-semibold leading-snug text-(--foreground) group-hover:text-(--signal)">
                           {sourceDisplayTitle(source.title, source.publisher)}
                         </div>
                         <div className="mt-1 flex flex-wrap items-center gap-1.5 font-mono text-[11px] tracking-[0.04em] text-(--muted)">
@@ -262,21 +270,11 @@ export async function PostArticle({
                           ) : null}
                         </div>
                       </div>
-                      <TrackedLink
-                        href={source.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={t('article.openSourceAria', {
-                          title: sourceDisplayTitle(source.title, source.publisher),
-                        })}
-                        event="source_clicked"
-                        properties={{ post: post.slug, publisher: source.publisher }}
-                        className="inline-flex items-center gap-1 self-start font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-(--signal) hover:underline sm:self-center"
-                      >
+                      <span className="inline-flex items-center gap-1 self-start font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-(--signal) group-hover:underline sm:self-center">
                           {t('article.openSource')}
                         <ArrowUpRight size={12} aria-hidden />
-                      </TrackedLink>
-                    </div>
+                      </span>
+                    </TrackedLink>
                   )
                 })}
             </div>

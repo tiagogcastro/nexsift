@@ -65,7 +65,6 @@ export default async function HomePage({
   const radarSignals = selectRadarSignals(posts, HOME_RADAR_LIMIT)
   const exampleSummary = posts.find((post) => post.sources.length > 0)
   const examplePost = exampleSummary ? await getPostBySlug(exampleSummary.slug) : null
-  const homePath = locale === 'pt-BR' ? '/' : `/${locale}`
   const topicsPath = locale === 'pt-BR' ? '/topics' : `/${locale}/topics`
   const aboutPath = `/${locale}/about`
 
@@ -84,33 +83,26 @@ export default async function HomePage({
 
       <main>
         <section className="relative overflow-hidden border-b border-(--border)">
-          <div className="pointer-events-none absolute inset-0 grid-line opacity-[0.09]" />
-          <SignalArt className="pointer-events-none absolute inset-x-0 bottom-0 h-auto w-full opacity-[0.16]" />
-          <div className="page-shell relative grid items-center gap-5 py-7 md:gap-10 md:py-24 lg:min-h-[min(780px,calc(100vh-4rem))] lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+          <div className="pointer-events-none absolute inset-0 grid-line opacity-[0.06]" />
+          <SignalArt className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.14]" />
+          <div className="page-shell relative grid items-center gap-5 py-10 md:gap-10 md:py-24 lg:min-h-[min(720px,calc(100vh-4rem))] lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
             <div>
-              <h1 className="max-w-[21ch] text-[clamp(1.85rem,7.5vw,2.2rem)] font-medium leading-[1.04] tracking-[-0.04em] md:max-w-[19ch] md:text-[clamp(2rem,4.7vw,4.75rem)] md:leading-[1.02]">
+              <h1 className="max-w-[22ch] text-[clamp(2rem,8vw,2.6rem)] font-medium leading-[1.02] tracking-[-0.04em] md:max-w-[20ch] md:text-[clamp(2.6rem,5vw,5.4rem)] md:leading-[0.98]">
                 {t('hero.titleA')} <span className="text-(--signal)">{t('hero.titleB')}</span>
               </h1>
-              <p className="mt-3 max-w-[52ch] text-[13px] leading-snug text-(--muted-strong) md:mt-7 md:text-lg md:leading-relaxed">
-                <span className="md:hidden">{t('hero.mobileDescription')}</span>
-                <span className="hidden md:inline">{t('hero.description')}</span>
+              <p className="mt-5 max-w-[54ch] text-[15px] leading-relaxed text-(--muted-strong) md:mt-7 md:text-[19px] md:leading-relaxed">
+                {t('hero.description')}
               </p>
-              <p className="mt-2 max-w-[54ch] text-xs leading-snug text-(--muted) md:mt-4 md:text-sm md:leading-relaxed">
-                <span className="md:hidden">{t('hero.mobileDefinition')}</span>
-                <span className="hidden md:inline">{t('hero.definition')}</span>
-              </p>
-              <div className="mt-4 flex flex-wrap items-center gap-3 md:mt-8 md:gap-4">
-                <Link href="/blog" className="inline-flex items-center gap-2 rounded-sm bg-(--signal) px-3 py-2 text-xs font-semibold text-(--on-signal) transition-colors hover:bg-(--foreground) md:px-4 md:py-2.5 md:text-sm">
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <Link href="/blog" className="inline-flex items-center gap-2 rounded-sm bg-(--signal) px-4 py-2.5 text-sm font-semibold text-(--on-signal) transition-colors hover:bg-(--foreground)">
                   {t('hero.primary')} <ArrowUpRight size={16} />
                 </Link>
-                <Link href={`${homePath}#process`} className="text-xs text-(--muted-strong) underline decoration-(--border-strong) underline-offset-4 hover:text-(--foreground) md:text-sm">
-                  {t('hero.secondary')}
-                </Link>
               </div>
-              <p className="mt-3 font-mono text-[11px] text-(--muted) md:mt-5 md:text-xs">
-                <span className="font-semibold text-(--signal)">{posts.length}</span>{' '}
-                {t('hero.totalSignals', { count: posts.length })}
-              </p>
+              <div className="mt-4 flex flex-wrap gap-2 font-mono text-[11px] md:mt-5">
+                <span className="rounded-full border border-(--border) bg-(--surface) px-2.5 py-1 text-(--muted-strong)">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</span>
+                <span className="rounded-full border border-(--border) bg-(--surface) px-2.5 py-1 text-(--muted-strong)">{t('hero.badges.verified')}</span>
+                <span className="rounded-full border border-(--border) bg-(--surface) px-2.5 py-1 text-(--muted-strong)">{t('hero.badges.reading')}</span>
+              </div>
             </div>
 
             <div className="radar-panel border border-(--border) bg-(--surface-soft)">

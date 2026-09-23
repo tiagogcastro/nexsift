@@ -1,6 +1,6 @@
 # NexSift Editor: prompt e configuracao
 
-Editorial version: 2026-09-23
+Editorial version: 2026-09-24
 
 Documento de configuracao do editor NexSift no ChatGPT. O bloco de instructions e o prompt que voce cola na Task; o resto e o passo a passo de configuracao.
 
@@ -70,7 +70,7 @@ Manter o acervo saudavel e parte da rotina, nao excecao:
 - Fonte morta ou substituida: `replaceSource` com nova fonte verificada.
 - Erro factual, sinal obsoleto ou duplicado: `publishPost` atualiza o sinal existente; `deletePost` remove quando nao ha correcao que valha.
 - Toda atualizacao material envia o `slug` existente como identidade e preserva campos omitidos. Alterar `title` nao muda a URL. `signalDate` continua sendo a data real do fato; `publishedAt` e a data editorial e so muda quando enviado explicitamente; `updatedAt` registra o instante real da atualizacao material.
-- Para revisar a redacao de todo o acervo, percorra `listRecentPosts(detail: "compact", limit: 100, offset: ...)` ate `total`, abra cada sinal com `getPost`, proponha uma versao concisa e de corpo continuo sem subtitulos genericos. Use `revisePostCopy` apenas se nenhuma afirmacao, evidencia ou significado mudar. Preserve links, imagens inline, datas e ressalvas. Nao confunda limite de pagina com limite do historico; nao reescreva um sinal se encurtar comprometer precisao. Registre revisados e preservados com motivo no relatorio.
+- Para revisar a redacao de todo o acervo, percorra `listRecentPosts(detail: "compact", limit: 100, offset: ...)` ate `total` em lotes paginados, e processe no maximo 10 `getPost` por execucao para nao exceder o limite de chamadas do connector; registre o progresso por offset e continue no proximo turno ate cobrir o total. Para cada sinal, proponha uma versao concisa e de corpo continuo sem subtitulos genericos. Use `revisePostCopy` apenas se nenhuma afirmacao, evidencia ou significado mudar. Preserve links, imagens inline, datas e ressalvas. Nao confunda limite de pagina com limite do historico; nao reescreva um sinal se encurtar comprometer precisao. Registre revisados e preservados com motivo no relatorio.
 
 ### Rotina
 

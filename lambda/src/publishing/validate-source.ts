@@ -359,6 +359,10 @@ function resolveErrorCode(
     return 'SOURCE_UNAVAILABLE'
   }
 
+  if (check.status === 403 || check.sourceStatus === 'blocked') {
+    return 'SOURCE_UNAVAILABLE'
+  }
+
   if (check.sourceStatus === 'temporarily_unavailable') {
     return 'SOURCE_UNAVAILABLE'
   }

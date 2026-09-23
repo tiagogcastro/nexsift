@@ -1,38 +1,43 @@
 {
   "nav": {
-    "blog": "Sinais",
+    "blog": "Posts",
     "topics": "Tópicos",
     "process": "Como funciona",
     "about": "Sobre",
-    "today": "Ver sinais"
+    "today": "Ver posts"
   },
   "hero": {
-    "titleA": "O que importa em tecnologia,",
-    "titleB": "resumido em minutos.",
-    "mobileDescription": "Mudanças importantes em tecnologia, resumidas para você se atualizar rápido.",
-    "mobileDefinition": "Cada sinal explica o que mudou e aponta para a fonte original.",
-    "description": "Selecionamos mudanças importantes e explicamos o que aconteceu e por que importa. Você se atualiza rápido e pode conferir as fontes.",
-    "definition": "Chamamos cada resumo de sinal: uma mudança relevante, com contexto e links para o conteúdo original.",
-    "totalSignals": "{count, plural, one {sinal publicado} other {sinais publicados}}",
+    "titleA": "Posts curtos sobre",
+    "titleB": "tecnologia que importa.",
+    "mobileDescription": "IA filtra o ruído e publica só o que importa em tecnologia, com fontes verificadas e leitura em minutos.",
+    "mobileDefinition": "Posts curtos, verificados e com fontes, sem ruído.",
+    "description": "IA monitora fontes confiáveis, filtra o ruído e publica só o que importa em tecnologia. Posts curtos, verificados e com contexto para leitura em minutos.",
+    "definition": "Posts curtos, verificados e com fontes, sem ruído.",
+    "totalSignals": "{count, plural, one {post publicado} other {posts publicados}}",
     "pain": "Quanto mais você lê, menos entende - e <b>ninguém verifica</b> o que circula.",
-    "primary": "Ver todos os sinais",
-    "secondary": "Como funciona"
+    "primary": "Ver todos os posts",
+    "secondary": "Como funciona",
+    "badges": {
+      "verified": "Fontes verificadas",
+      "updated": "Atualizado diariamente",
+      "reading": "Leitura em minutos"
+    }
   },
   "radar": {
     "eyebrow": "NO RADAR AGORA",
     "title": "No radar agora",
-    "description": "Mudanças em tecnologia que passaram pelo filtro do NexSift e merecem sua atenção.",
-    "definition": "Um <sinal>sinal</sinal> é uma mudança verificada, em contexto.",
-    "viewAll": "Ver todos os sinais",
-    "viewAllCount": "Ver todos os {count, plural, one {# sinal} other {# sinais}}",
+    "description": "Posts recentes que passaram pelo filtro do NexSift.",
+    "definition": "Um <sinal>post</sinal> é uma mudança verificada, em contexto.",
+    "viewAll": "Ver todos os posts",
+    "viewAllCount": "Ver todos os {count, plural, one {# post} other {# posts}}",
     "newBadge": "Novo",
     "sourcesCount": "{count, plural, one {fonte} other {fontes}}"
   },
   "topics": {
     "eyebrow": "TÓPICOS",
     "title": "Explore por assunto",
-    "description": "Tópicos organizam os resumos por área. Acompanhamos estas sete hoje e podemos incluir outras quando fizer sentido editorialmente.",
-    "count": "{count, plural, one {# sinal} other {# sinais}}"
+    "description": "Tópicos organizam os posts por área. Acompanhamos estas sete hoje e podemos incluir outras quando fizer sentido editorialmente.",
+    "count": "{count, plural, one {# post} other {# posts}}"
   },
   "why": {
     "eyebrow": "POR QUE EXISTE",
@@ -49,35 +54,35 @@
       "Isso realmente mudou algo?",
       "Há evidência?",
       "Tem consequência?",
-      "SINAL"
+      "POST"
     ],
     "scarcity": "Escassez é a proposta: é melhor publicar menos do que baixar o padrão."
   },
   "example": {
     "eyebrow": "NA PRÁTICA",
     "title": "Uma mudança real, com fonte e contexto.",
-    "description": "Este sinal foi publicado no NexSift. Veja a fonte original, o que mudou e por que essa mudança importa. Os links levam ao sinal completo e ao material consultado.",
+    "description": "Este post foi publicado no NexSift. Veja a fonte original, o que mudou e por que importa. Os links levam ao post completo e ao material consultado.",
     "source": "FONTE ORIGINAL",
     "summary": "RESUMO NEXSIFT",
     "openSource": "Conferir fonte",
-    "read": "Ler o sinal completo"
+    "read": "Ler o post completo"
   },
   "trust": {
     "eyebrow": "CONFIANÇA E FONTES",
     "title": "Fontes verificadas, não apenas citadas.",
-    "description": "Cada sinal é rastreado até a fonte que o sustenta. Antes de publicar, o NexSift reabre e verifica mecanicamente cada URL: a fonte é evidência, não decoração.",
+    "description": "Cada post é rastreado até a fonte que o sustenta. Antes de publicar, o NexSift reabre e verifica mecanicamente cada URL: a fonte é evidência, não decoração.",
     "publicationLabel": "verificadas na publicação",
-    "publicationTooltip": "Percentual de fontes que foram verificadas no momento da publicação. Todo novo sinal só é publicado quando 100% das suas fontes passam na verificação. Sinais publicados antes dessa regra entrar em vigor podem ficar abaixo de 100%.",
+    "publicationTooltip": "Percentual de fontes que foram verificadas no momento da publicação. Todo novo post só é publicado quando 100% das suas fontes passam na verificação. Posts publicados antes dessa regra entrar em vigor podem ficar abaixo de 100%.",
     "verifiableLabel": "fontes verificáveis agora",
     "verifiableTooltip": "Percentual de fontes originais que continuam acessíveis e verificáveis neste momento. Uma fonte pode ter sido validada na publicação e depois ser removida, movida ou ficar temporariamente indisponível.",
     "topicsLabel": "{count, plural, one {tópico no radar} other {tópicos no radar}}",
-    "signalsLabel": "{count, plural, one {sinal no radar} other {sinais no radar}}"
+    "signalsLabel": "{count, plural, one {post no radar} other {posts no radar}}"
   },
   "explore": {
     "eyebrow": "CONTINUE",
     "title": "Acompanhe o que muda",
-    "fullRadar": "Todos os sinais",
-    "fullRadarBody": "A lista completa de sinais que passaram pelo filtro do NexSift.",
+    "fullRadar": "Todos os posts",
+    "fullRadarBody": "A lista completa de posts que passaram pelo filtro do NexSift.",
     "topicsLink": "Tópicos",
     "topicsLinkBody": "Cada área como uma lente própria.",
     "aboutLink": "Sobre",
@@ -135,7 +140,7 @@
   },
   "breadcrumb": {
     "home": "Home",
-    "blog": "Sinais",
+    "blog": "Posts",
     "topics": "Tópicos"
   },
   "console": {
@@ -143,23 +148,23 @@
     "matchedTag": "Encontrado no assunto:",
     "allTopics": "Todos",
     "allTypes": "Todos os tipos",
-    "loadMore": "Carregar mais sinais",
-    "empty": "Nenhum sinal corresponde aos filtros atuais.",
-    "signalFallback": "SINAL",
-    "countLabelOne": "sinal no radar",
-    "countLabelOther": "sinais no radar"
+    "loadMore": "Carregar mais posts",
+    "empty": "Nenhum post corresponde aos filtros atuais.",
+    "signalFallback": "POST",
+    "countLabelOne": "post no radar",
+    "countLabelOther": "posts no radar"
   },
   "topicPage": {
     "frequency": "TÓPICO",
     "radarTitle": "Mudanças em {topic} que merecem atenção",
-    "signalCount": "{count, plural, one {# sinal publicado neste tópico} other {# sinais publicados neste tópico}}"
+    "signalCount": "{count, plural, one {# post publicado neste tópico} other {# posts publicados neste tópico}}"
   },
   "article": {
-    "metadata": "Data, leitura, relevância e autoria do sinal",
+    "metadata": "Data, leitura, relevância e autoria do post",
     "published": "Publicado",
     "updated": "Atualizado",
     "reading": "Leitura",
-    "relatedTopics": "Tópicos relacionados com este sinal",
+    "relatedTopics": "Tópicos relacionados com este post",
     "relevance": "Relevância",
     "byline": "Por",
     "bylineRole": "Criador do NexSift",
@@ -182,25 +187,25 @@
   },
   "blog": {
     "eyebrow": "ARQUIVO",
-    "title": "Sinais",
-    "description": "Todos os sinais que passaram pelo filtro do NexSift.",
-    "read": "Ler sinal",
+    "title": "Posts",
+    "description": "Todos os posts que passaram pelo filtro do NexSift.",
+    "read": "Ler post",
     "whatChanged": "O que mudou",
     "why": "Por que importa",
     "whatToWatch": "O que observar agora",
     "continueOnRadar": "Continue no radar",
-    "continueOnRadarDescription": "Outros sinais sobre assuntos próximos ao que você acabou de ler.",
+    "continueOnRadarDescription": "Outros posts sobre assuntos próximos ao que você acabou de ler.",
     "sources": "Fontes verificadas",
     "minutes": "min de leitura",
-    "signalsPublished": "{count, plural, one {# sinal publicado} other {# sinais publicados}}",
-    "metaTitle": "Sinais - NexSift",
-    "metaDescription": "Todos os sinais do NexSift: mudanças relevantes em tecnologia, verificadas e contextualizadas."
+    "signalsPublished": "{count, plural, one {# post publicado} other {# posts publicados}}",
+    "metaTitle": "Posts - NexSift",
+    "metaDescription": "Todos os posts do NexSift: mudanças relevantes em tecnologia, verificadas e contextualizadas."
   },
   "notFound": {
-    "eyebrow": "404 / SEM SINAL",
+    "eyebrow": "404 / SEM POST",
     "title": "Tópico não encontrado.",
-    "body": "Este endereço não aponta para um sinal publicado pelo NexSift.",
-    "back": "Voltar aos sinais"
+    "body": "Este endereço não aponta para um post publicado pelo NexSift.",
+    "back": "Voltar aos posts"
   },
   "footer": {
     "tagline": "Menos ruído. Mais sinal.",
@@ -213,9 +218,9 @@
     "updatesBody": "Receba os sinais mais relevantes por e-mail. Sem spam, sem feed: só o que passa no filtro."
   },
   "leadModal": {
-    "eyebrow": "RECEBA OS SINAIS",
-    "title": "Sinais verificados, direto no seu e-mail",
-    "description": "Cadastre-se para receber por e-mail os sinais mais relevantes de IA, cloud, desenvolvimento e carreira em tecnologia.",
+    "eyebrow": "RECEBA OS POSTS",
+    "title": "Posts verificados, direto no seu e-mail",
+    "description": "Cadastre-se para receber por e-mail os posts mais relevantes de IA, cloud, desenvolvimento e carreira em tecnologia.",
     "nameLabel": "Nome",
     "namePlaceholder": "Seu nome",
     "emailLabel": "E-mail",
@@ -224,7 +229,7 @@
     "feedbackPlaceholder": "O que você espera do NexSift?",
     "submit": "Cadastrar",
     "successTitle": "Cadastro confirmado",
-    "successBody": "Você vai receber os próximos sinais por e-mail. Enquanto isso, continue explorando o radar.",
+    "successBody": "Você vai receber os próximos posts por e-mail. Enquanto isso, continue explorando o radar.",
     "successAction": "Continuar",
     "error": "Preencha nome e um e-mail válido.",
     "privacyNote": "Ao cadastrar, você concorda com a política de privacidade. Seus dados são usados apenas para contato e novidades.",
