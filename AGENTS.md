@@ -39,6 +39,7 @@ yarn build                                 # lambda first, then web
 
 - This project has no tests and none should ever be added: no test files, no test dependencies, no test scripts.
 - Lambda must be built (`yarn workspace @nexsift/lambda build`) before `terraform apply` or any local publish; Terraform zips `lambda/dist/publish/index.js` and `lambda/dist/mcp/index.js`.
+- Production deploys always use `AWS_PROFILE=nexsift` (`nexsift-terraform` IAM user). Do not use `aws sso login`; the `nexsift` profile in `~/.aws/credentials` is the source of truth for prod.
 - `yarn build` in CI sets `NEXT_PUBLIC_SITE_URL` for the web build.
 
 ## Publishing pipeline
