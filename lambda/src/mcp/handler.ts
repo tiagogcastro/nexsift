@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto'
+import { randomUUID, timingSafeEqual } from 'node:crypto'
 import type {
   APIGatewayProxyEventV2,
   APIGatewayProxyStructuredResultV2,
@@ -15,7 +15,7 @@ import editorialInstructions from '../../../docs/gpt-editor-instructions.md'
 import editorialReference from '../../../docs/gpt-editor-reference.md'
 import payloadReference from '../../../docs/gpt-editor-payload-reference.md'
 
-const editorialBundleVersion = '2026-09-24'
+const editorialBundleVersion = '2026-09-27'
 
 async function callApi(
   operation: string,
@@ -346,6 +346,21 @@ function toWebRequest(event: APIGatewayProxyEventV2): Request {
   return new Request(url, init)
 }
 
+function isAuthorized(event: APIGatewayProxyEventV2): boolean {
+  const expected = process.env.MCP_TOKEN
+
+  // Temporary open mode until OAuth lands: no token configured means no gate.
+  if (!expected) return true
+
+  const authorization = event.headers?.authorization ?? event.headers?.Authorization
+
+  if (!authorization?.startsWith('Bearer ')) return false
+
+  const provided = Buffer.from(authorization.slice(7))
+  const secret = Buffer.from(expected)
+  return provided.length === secret.length && timingSafeEqual(provided, secret)
+}
+
 async function toLambdaResult(
   response: Response,
 ): Promise<APIGatewayProxyStructuredResultV2> {
@@ -374,6 +389,15 @@ export async function handler(
   // "server does not offer SSE", falling back to POST-only JSON requests.
   if (method === 'GET') {
     return { statusCode: 405, headers: { allow: 'POST' }, body: '' }
+  }
+
+  if (!isAuthorized(event)) {
+    logInfo('mcp_unauthorized', { requestId })
+    return {
+      statusCode: 401,
+      headers: { 'content-type': 'application/json', 'www-authenticate': 'Bearer realm="nexsift-mcp"' },
+      body: JSON.stringify({ error: 'Unauthorized' }),
+    }
   }
 
   // Stateless mode (no sessionIdGenerator): a fresh transport per request,

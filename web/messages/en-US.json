@@ -1,10 +1,16 @@
 {
   "nav": {
+    "home": "Home",
+    "mobileNavigation": "Main navigation",
     "blog": "Posts",
     "topics": "Topics",
     "process": "How it works",
     "about": "About",
     "today": "View posts"
+  },
+  "homeMeta": {
+    "title": "What changed in tech, with sources and context",
+    "description": "Short posts on AI, development, cloud and tech careers, backed by verified sources and clear context."
   },
   "hero": {
     "titleA": "Short posts on",
@@ -12,6 +18,8 @@
     "mobileDescription": "AI filters the noise and publishes only what matters in tech, with verified sources and a minutes-long read.",
     "mobileDefinition": "Short, verified posts with sources, no noise.",
     "description": "AI monitors trusted sources, filters the noise and publishes only what matters in technology. Short, verified posts with context for a minutes-long read.",
+    "trustNote": "Every post points to sources checked before publication. Verify the facts beyond the summary.",
+    "postsCard": "published posts",
     "definition": "Short, verified posts with sources, no noise.",
     "totalSignals": "{count, plural, one {post published} other {posts published}}",
     "primary": "View all posts",
@@ -19,8 +27,9 @@
     "pain": "The more you read, the less you understand - and <b>nobody verifies</b> what circulates.",
     "badges": {
       "verified": "Verified sources",
+      "verifiedShort": "Sources checked",
       "updated": "Daily updates",
-      "reading": "2-min read"
+      "reading": "Quick read"
     }
   },
   "radar": {
@@ -36,7 +45,9 @@
   "topics": {
     "eyebrow": "TOPICS",
     "title": "Explore by subject",
-    "description": "Topics organize summaries by area. We follow these seven today and may add more when it makes editorial sense.",
+    "description": "Seven areas to find what changed, quickly.",
+    "metaTitle": "Technology topics",
+    "metaDescription": "Browse NexSift posts by area: AI, development, cloud, DevOps, security, tech industry and design.",
     "count": "{count, plural, one {# post} other {# posts}}"
   },
   "why": {
@@ -47,14 +58,21 @@
   },
   "process": {
     "eyebrow": "HOW IT WORKS",
-    "title": "From the source to a useful summary.",
-    "description": "We find changes, check the sources and publish a short summary when there is a real consequence for people working in technology.",
+    "title": "From discovery to post, in five steps.",
+    "description": "A change needs evidence and real consequences before it becomes a short, verifiable summary.",
     "steps": [
-      "A lot happens",
-      "Did it really change something?",
-      "Is there evidence?",
-      "Does it have consequences?",
-      "POST"
+      "Find new developments",
+      "Identify the change",
+      "Check the sources",
+      "Evaluate the impact",
+      "Publish the post"
+    ],
+    "details": [
+      "Look across projects, docs and communities.",
+      "Separate a new fact from a repeated announcement.",
+      "Open sources and verify what they support.",
+      "Ask what changes for people working in tech.",
+      "Summarize the essentials and what to watch."
     ],
     "scarcity": "Scarcity is the point: publishing less is better than lowering the standard."
   },
@@ -70,13 +88,13 @@
   "trust": {
     "eyebrow": "TRUST AND SOURCES",
     "title": "Verified sources, not just cited ones.",
-    "description": "Every post is traceable to the source that supports it. Before publishing, NexSift reopens and mechanically verifies every URL: the source is evidence, not decoration.",
+    "description": "Before publication, we reopen sources and verify each URL. You can see where the facts came from.",
     "publicationLabel": "verified at publication",
     "publicationTooltip": "Share of sources that were verified at publication time. Every new post is only published when 100% of its sources pass verification. Posts published before this rule took effect may sit below 100%.",
     "verifiableLabel": "sources verifiable now",
     "verifiableTooltip": "Share of original sources that remain accessible and verifiable right now. A source may have been validated at publication and later removed, moved or temporarily unavailable.",
     "topicsLabel": "{count, plural, one {topic on the radar} other {topics on the radar}}",
-    "signalsLabel": "{count, plural, one {post on the radar} other {posts on the radar}}"
+    "signalsLabel": "{count, plural, one {post} other {posts}}"
   },
   "explore": {
     "eyebrow": "KEEP GOING",
@@ -100,37 +118,37 @@
     "ai": {
       "label": "Artificial Intelligence",
       "shortLabel": "AI",
-      "description": "What NexSift observes: models, agents, tools and price and cost changes that alter how AI is built."
+      "description": "Models, agents and tools changing how AI is used."
     },
     "development": {
       "label": "Development",
       "shortLabel": "DEV",
-      "description": "What NexSift observes: frameworks, runtimes and languages, with releases, breaking changes and practices that change engineering."
+      "description": "Languages, runtimes and frameworks that affect development."
     },
     "cloud": {
       "label": "Cloud",
       "shortLabel": "CLOUD",
-      "description": "What NexSift observes: managed services, architecture and costs, and what changes in how the cloud is operated."
+      "description": "Services, architecture and costs of running in the cloud."
     },
     "devops": {
       "label": "DevOps",
       "shortLabel": "OPS",
-      "description": "What NexSift observes: CI/CD, IaC, observability and automation that affect how systems are delivered and operated."
+      "description": "Automation, infrastructure and observability in practice."
     },
     "security": {
       "label": "Security",
       "shortLabel": "SEC",
-      "description": "What NexSift observes: CVEs, incidents and supply chain that require action, a patch or immediate attention."
+      "description": "Vulnerabilities and incidents that require attention."
     },
     "industry": {
       "label": "Tech Industry",
       "shortLabel": "IND",
-      "description": "What NexSift observes: the technology ecosystem, with acquisitions, layoffs, careers, education, certifications, open source governance, regulation and the software, cloud and AI economy."
+      "description": "Careers, learning and shifts across the tech industry."
     },
     "design": {
       "label": "Design",
       "shortLabel": "DES",
-      "description": "What NexSift observes: interfaces, design systems and product experience, and what changes in how things are designed."
+      "description": "Interfaces and tools changing product work."
     }
   },
   "notice": {
@@ -146,19 +164,37 @@
   "console": {
     "searchPlaceholder": "Search by title, tag or description",
     "allTopics": "All",
+    "topicFilter": "Topic",
+    "selectedTopics": "topics",
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page",
     "allTypes": "All types",
     "loadMore": "Load more posts",
     "empty": "No posts match the current filters.",
     "signalFallback": "POST",
-    "countLabelOne": "post on the radar",
-    "countLabelOther": "posts on the radar"
+    "countLabelOne": "post found",
+    "countLabelOther": "posts found"
   },
   "topicPage": {
     "frequency": "TOPIC",
     "radarTitle": "Changes in {topic} that deserve attention",
-    "signalCount": "{count, plural, one {# post published in this topic} other {# posts published in this topic}}"
+    "signalCount": "{count, plural, one {# post published in this topic} other {# posts published in this topic}}",
+    "metaTitle": "Posts about {topic}",
+    "metaDescription": "Changes in {topic} with verified sources and clear context on NexSift."
   },
   "article": {
+    "share": "Share",
+    "copyLink": "Copy link",
+    "copied": "Copied",
+    "copyFailed": "Could not copy",
+    "email": "Email",
+    "shareIntro": "Check out this post on NexSift:",
+    "linkedinCopy": "Text copied. Paste it on LinkedIn.",
+    "linkedinText": "Worth reading on NexSift:",
+    "whatsappText": "Take a look at this post on NexSift:",
+    "emailSubject": "Worth reading on NexSift: {title}",
+    "emailBody": "I found this post on NexSift and thought you might like it:",
     "published": "Published",
     "updated": "Updated",
     "reading": "Reading",
@@ -195,7 +231,7 @@
     "sources": "Verified sources",
     "minutes": "min read",
     "signalsPublished": "{count, plural, one {# post published} other {# posts published}}",
-    "metaTitle": "Posts - NexSift",
+    "metaTitle": "Posts",
     "metaDescription": "All NexSift posts: relevant changes in technology, verified and contextualized."
   },
   "notFound": {
@@ -205,7 +241,7 @@
     "back": "Back to posts"
   },
   "footer": {
-    "tagline": "Less noise. More post.",
+    "tagline": "What changed in tech, with sources and context.",
     "builtBy": "Built by Tiago Castro",
     "rights": "NexSift",
     "privacy": "Privacy",
@@ -256,8 +292,10 @@
   },
   "about": {
     "eyebrow": "ABOUT",
-    "title": "A technical filter, not another infinite feed",
-    "body": "NexSift reduces the cost of keeping up with technology. Instead of reproducing everything, it prioritizes posts with real impact for people who build and operate software.",
+    "title": "About NexSift",
+    "body": "Built by a software developer, NexSift selects technical changes, explains their impact and links to sources you can check.",
+    "metaTitle": "About NexSift and Tiago Castro",
+    "metaDescription": "Meet Tiago Castro, creator of NexSift, and learn how every technology post is verified and contextualized.",
     "signalTitle": "What a post is",
     "signalBody": "A post is a relevant change, verified and placed in context. Not everything that happens is a post: the change must be real, have evidence and alter a decision, risk, opportunity or understanding for people who build or operate technology.",
     "criteriaTitle": "Editorial criteria",
@@ -273,6 +311,10 @@
     "methodBody": "The flow is a sieve: a lot happens, almost nothing gets through. NexSift asks whether the change is real, whether there is evidence and whether it has consequences. What is left becomes a post, and every post ends by indicating what to watch next.",
     "creatorEyebrow": "BEHIND IT ALL",
     "creatorTitle": "Built by someone who lives the problem",
-    "creatorBody": "NexSift was created by <name>Tiago Castro</name>, a full stack cloud developer with a degree in Systems Analysis and Development and more than 5 years in the market building and operating software. The motivation came from the cost of keeping up with technology: infinite feeds, hype and little context. NexSift is the filter he wanted for himself: few posts, verifiable sources and direct context about what changes for people who build software."
+    "creatorBody": "<name>Tiago Castro</name> is a Fullstack Cloud developer with 6+ years of hands-on experience. He works on live systems, marketplaces, data, AWS infrastructure and applied AI. He has a degree in Systems Analysis and Development and is an AWS Certified AI Practitioner. He built NexSift to follow technical changes with verifiable sources and direct context for people who build software."
+  },
+  "homeCreator": {
+    "body": "Tiago Castro is a Fullstack Cloud developer with 6+ years of experience. He works on AWS data and infrastructure at LakeIT and a marketplace with over 65,000 orders to date. That experience led him to build NexSift.",
+    "readMore": "Read the story"
   }
 }

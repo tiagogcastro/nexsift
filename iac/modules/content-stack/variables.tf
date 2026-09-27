@@ -19,6 +19,13 @@ variable "publish_token" {
   sensitive   = true
 }
 
+variable "mcp_token" {
+  type        = string
+  description = "Temporary bearer token for the MCP Function URL. Empty keeps the connector open until OAuth lands."
+  sensitive   = true
+  default     = ""
+}
+
 variable "site_url" {
   type        = string
   description = "Public NexSift URL used to identify mechanical HTTP requests."

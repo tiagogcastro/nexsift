@@ -1,10 +1,16 @@
 {
   "nav": {
+    "home": "Inicio",
+    "mobileNavigation": "Navegación principal",
     "blog": "Posts",
     "topics": "Temas",
     "process": "Cómo funciona",
     "about": "Sobre",
     "today": "Ver posts"
+  },
+  "homeMeta": {
+    "title": "Lo que cambió en tecnología, con fuentes y contexto",
+    "description": "Posts breves sobre IA, desarrollo, cloud y carrera tech, con fuentes verificadas y contexto directo."
   },
   "hero": {
     "titleA": "Posts cortos sobre",
@@ -12,23 +18,26 @@
     "mobileDescription": "La IA filtra el ruido y publica solo lo que importa en tecnología, con fuentes verificadas y lectura en minutos.",
     "mobileDefinition": "Posts cortos, verificados y con fuentes, sin ruido.",
     "description": "La IA monitorea fuentes confiables, filtra el ruido y publica solo lo que importa en tecnología. Posts cortos, verificados y con contexto para lectura en minutos.",
+    "trustNote": "Cada post enlaza fuentes verificadas antes de publicarse. Puedes consultar los hechos más allá del resumen.",
+    "postsCard": "posts publicados",
     "definition": "Posts cortos, verificados y con fuentes, sin ruido.",
     "totalSignals": "{count, plural, one {post publicada} other {posts publicadas}}",
-    "primary": "Ver todas las posts",
+    "primary": "Ver todos los posts",
     "secondary": "Cómo funciona",
     "pain": "Cuanto más lees, menos entiendes - y <b>nadie verifica</b> lo que circula.",
     "badges": {
       "verified": "Fuentes verificadas",
+      "verifiedShort": "Fuentes revisadas",
       "updated": "Actualizado a diario",
-      "reading": "Lectura en minutos"
+      "reading": "Lectura rápida"
     }
   },
   "radar": {
     "eyebrow": "EN EL RADAR AHORA",
     "title": "En el radar ahora",
     "description": "Cambios en tecnología que pasaron el filtro de NexSift y merecen tu atención.",
-    "definition": "Una <sinal>post</sinal> es un cambio verificado, en contexto.",
-    "viewAll": "Ver todas las posts",
+    "definition": "Un <sinal>post</sinal> es un cambio verificado, en contexto.",
+    "viewAll": "Ver todos los posts",
     "newBadge": "Nuevo",
     "sourcesCount": "{count, plural, one {fuente} other {fuentes}}",
     "viewAllCount": "Ver todos los {count, plural, one {# post} other {# posts}}"
@@ -36,52 +45,61 @@
   "topics": {
     "eyebrow": "TEMAS",
     "title": "Explora por tema",
-    "description": "Los temas organizan los resúmenes por área. Seguimos estas siete hoy y podremos añadir otras cuando tenga sentido editorial.",
+    "description": "Siete áreas para encontrar rápidamente lo que cambió.",
+    "metaTitle": "Temas de tecnología",
+    "metaDescription": "Explora los posts de NexSift por área: IA, desarrollo, cloud, DevOps, seguridad, industria tech y diseño.",
     "count": "{count, plural, one {# post} other {# posts}}"
   },
   "why": {
     "eyebrow": "POR QUÉ EXISTE",
     "titleA": "La tecnología produce mucho ruido.",
-    "titleB": "Quedan las posts.",
+    "titleB": "Queda lo que importa.",
     "description": "Feeds y alertas compiten por tu atención. NexSift hace lo contrario: menos lectura para entender lo que cambió."
   },
   "process": {
     "eyebrow": "CÓMO FUNCIONA",
-    "title": "De la fuente a un resumen útil.",
-    "description": "Encontramos cambios, verificamos las fuentes y publicamos un resumen breve cuando hay una consecuencia real para quienes trabajan en tecnología.",
+    "title": "Del hallazgo al post, en cinco pasos.",
+    "description": "Un cambio necesita evidencia y consecuencias reales antes de convertirse en un resumen breve y verificable.",
     "steps": [
-      "Mucho pasa",
-      "¿Esto realmente cambió algo?",
-      "¿Hay evidencia?",
-      "¿Tiene consecuencias?",
-      "SEÑAL"
+      "Encontramos novedades",
+      "Identificamos el cambio",
+      "Verificamos las fuentes",
+      "Evaluamos el impacto",
+      "Publicamos el post"
+    ],
+    "details": [
+      "Buscamos en proyectos, documentación y comunidades.",
+      "Separamos el hecho nuevo del anuncio repetido.",
+      "Abrimos las fuentes y verificamos lo que sustentan.",
+      "Preguntamos qué cambia para quienes trabajan en tecnología.",
+      "Resumimos lo esencial y qué observar después."
     ],
     "scarcity": "La escasez es la propuesta: publicar menos es mejor que bajar el estándar."
   },
   "example": {
     "eyebrow": "EN LA PRÁCTICA",
     "title": "Un cambio real, con fuentes y contexto.",
-    "description": "Esta post fue publicada en NexSift. Mira la fuente original, qué cambió y por qué importa. Los enlaces llevan a la post completa y al material consultado.",
+    "description": "Este post fue publicado en NexSift. Mira la fuente original, qué cambió y por qué importa. Los enlaces llevan al post completo y al material consultado.",
     "source": "FUENTE ORIGINAL",
     "summary": "RESUMEN NEXSIFT",
     "openSource": "Consultar fuente",
-    "read": "Leer la post completa"
+    "read": "Leer el post completo"
   },
   "trust": {
     "eyebrow": "CONFIANZA Y FUENTES",
     "title": "Fuentes verificadas, no solo citadas.",
-    "description": "Cada post es rastreable hasta la fuente que la sustenta. Antes de publicar, NexSift reabre y verifica mecánicamente cada URL: la fuente es evidencia, no decoración.",
+    "description": "Antes de publicar, reabrimos las fuentes y verificamos cada URL. Puedes consultar de dónde vienen los hechos.",
     "publicationLabel": "verificadas al publicar",
-    "publicationTooltip": "Porcentaje de fuentes verificadas al momento de la publicación. Toda post nueva solo se publica cuando el 100% de sus fuentes pasan la verificación. Las posts publicadas antes de esta regla pueden estar por debajo del 100%.",
+    "publicationTooltip": "Porcentaje de fuentes verificadas al publicar. Cada post nuevo requiere fuentes verificadas. Los posts anteriores a esta regla pueden quedar por debajo del 100%.",
     "verifiableLabel": "fuentes verificables ahora",
     "verifiableTooltip": "Porcentaje de fuentes originales que siguen accesibles y verificables en este momento. Una fuente pudo haberse validado al publicar y luego ser eliminada, movida o quedar temporalmente no disponible.",
     "topicsLabel": "{count, plural, one {tema en el radar} other {temas en el radar}}",
-    "signalsLabel": "{count, plural, one {post en el radar} other {posts en el radar}}"
+    "signalsLabel": "{count, plural, one {post} other {posts}}"
   },
   "explore": {
     "eyebrow": "CONTINÚA",
     "title": "Sigue lo que cambia",
-    "fullRadar": "Todas las posts",
+    "fullRadar": "Todos los posts",
     "fullRadarBody": "La lista completa de posts que pasaron el filtro de NexSift.",
     "topicsLink": "Temas",
     "topicsLinkBody": "Cada área como una lente propia.",
@@ -100,37 +118,37 @@
     "ai": {
       "label": "Inteligencia Artificial",
       "shortLabel": "IA",
-      "description": "Lo que NexSift observa: modelos, agentes, herramientas y cambios de precio y costo que alteran cómo se construye IA."
+      "description": "Modelos, agentes y herramientas que cambian el uso de la IA."
     },
     "development": {
       "label": "Desarrollo",
       "shortLabel": "DEV",
-      "description": "Lo que NexSift observa: frameworks, runtimes y lenguajes, con releases, breaking changes y prácticas que cambian la ingeniería."
+      "description": "Lenguajes, runtimes y frameworks que afectan el desarrollo."
     },
     "cloud": {
       "label": "Cloud",
       "shortLabel": "CLOUD",
-      "description": "Lo que NexSift observa: servicios gestionados, arquitectura y costos, y lo que cambia en la forma de operar en la nube."
+      "description": "Servicios, arquitectura y costos de operar en la nube."
     },
     "devops": {
       "label": "DevOps",
       "shortLabel": "OPS",
-      "description": "Lo que NexSift observa: CI/CD, IaC, observabilidad y automatización que afectan cómo se entregan y operan los sistemas."
+      "description": "Automatización, infraestructura y observabilidad en la práctica."
     },
     "security": {
       "label": "Seguridad",
       "shortLabel": "SEC",
-      "description": "Lo que NexSift observa: CVEs, incidentes y supply chain que exigen acción, parche o atención inmediata."
+      "description": "Vulnerabilidades e incidentes que requieren atención."
     },
     "industry": {
       "label": "Industria Tech",
       "shortLabel": "IND",
-      "description": "Lo que NexSift observa: el ecosistema de tecnología, con adquisiciones, layoffs, carrera, formación, certificaciones, open source governance, regulación y economía de software, cloud e IA."
+      "description": "Carrera, formación y cambios en la industria tecnológica."
     },
     "design": {
       "label": "Diseño",
       "shortLabel": "DES",
-      "description": "Lo que NexSift observa: interfaces, sistemas de diseño y experiencia en producto, y lo que cambia en la forma de diseñar."
+      "description": "Interfaces y herramientas que cambian el trabajo de producto."
     }
   },
   "notice": {
@@ -146,23 +164,41 @@
   "console": {
     "searchPlaceholder": "Buscar por título, tag o descripción",
     "allTopics": "Todos",
+    "topicFilter": "Tema",
+    "selectedTopics": "temas",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "pageOf": "Página",
     "allTypes": "Todos los tipos",
     "loadMore": "Cargar más posts",
     "empty": "Ninguna post coincide con los filtros actuales.",
-    "signalFallback": "SEÑAL",
-    "countLabelOne": "post en el radar",
-    "countLabelOther": "posts en el radar"
+    "signalFallback": "POST",
+    "countLabelOne": "post encontrado",
+    "countLabelOther": "posts encontrados"
   },
   "topicPage": {
     "frequency": "TEMA",
     "radarTitle": "Cambios en {topic} que merecen atención",
-    "signalCount": "{count, plural, one {# post publicada en este tema} other {# posts publicadas en este tema}}"
+    "signalCount": "{count, plural, one {# post publicado en este tema} other {# posts publicados en este tema}}",
+    "metaTitle": "Posts sobre {topic}",
+    "metaDescription": "Cambios en {topic} con fuentes verificadas y contexto claro en NexSift."
   },
   "article": {
+    "share": "Compartir",
+    "copyLink": "Copiar enlace",
+    "copied": "Copiado",
+    "copyFailed": "No se pudo copiar",
+    "email": "Correo",
+    "shareIntro": "Mira este post en NexSift:",
+    "linkedinCopy": "Texto copiado. Pégalo en LinkedIn.",
+    "linkedinText": "Vale la pena leer este post en NexSift:",
+    "whatsappText": "Mira este post en NexSift:",
+    "emailSubject": "Vale la pena leer en NexSift: {title}",
+    "emailBody": "Encontré este post en NexSift y quise compartirlo:",
     "published": "Publicado",
     "updated": "Actualizado",
     "reading": "Lectura",
-    "relatedTopics": "Temas relacionados con esta post",
+    "relatedTopics": "Temas relacionados con este post",
     "relevance": "Relevancia",
     "sourcesIntroTitle": "Sigue en la fuente",
     "sourcesIntroBody": "NexSift sintetiza el cambio y su impacto. Consulta la fuente original para documentación, detalles técnicos y contexto completo.",
@@ -186,7 +222,7 @@
   "blog": {
     "eyebrow": "ARCHIVO",
     "title": "Posts",
-    "description": "Todas las posts que pasaron el filtro de NexSift.",
+    "description": "Busca por tema o palabra clave.",
     "read": "Leer post",
     "whatChanged": "Qué cambió",
     "why": "Por qué importa",
@@ -194,30 +230,30 @@
     "continueOnRadar": "Continúa en el radar",
     "sources": "Fuentes verificadas",
     "minutes": "min de lectura",
-    "signalsPublished": "{count, plural, one {# post publicada} other {# posts publicadas}}",
-    "metaTitle": "Posts - NexSift",
-    "metaDescription": "Todas las posts de NexSift: cambios relevantes en tecnología, verificados y contextualizados."
+    "signalsPublished": "{count, plural, one {# post publicado} other {# posts publicados}}",
+    "metaTitle": "Posts",
+    "metaDescription": "Todos los posts de NexSift: cambios relevantes en tecnología, verificados y contextualizados."
   },
   "notFound": {
-    "eyebrow": "404 / SIN SEÑAL",
+    "eyebrow": "404 / SIN POST",
     "title": "Tema no encontrado.",
-    "body": "Esta dirección no apunta a una post publicada por NexSift.",
-    "back": "Volver a las posts"
+    "body": "Esta dirección no apunta a un post publicado por NexSift.",
+    "back": "Volver a los posts"
   },
   "footer": {
-    "tagline": "Menos ruido. Más post.",
+    "tagline": "Lo que cambió en tecnología, con fuentes y contexto.",
     "builtBy": "Creado por Tiago Castro",
     "rights": "NexSift",
     "privacy": "Privacidad",
     "product": "Producto",
     "contact": "Contacto",
     "updates": "Novedades",
-    "updatesBody": "Recibe por correo las posts más relevantes. Sin spam, sin feed: solo lo que pasa el filtro."
+    "updatesBody": "Recibe por correo los posts más relevantes. Sin spam, sin feed: solo lo que pasa el filtro."
   },
   "leadModal": {
-    "eyebrow": "RECIBE LAS SEÑALES",
-    "title": "Posts verificadas, directo a tu correo",
-    "description": "Regístrate para recibir por correo las posts más relevantes de IA, cloud, desarrollo y carrera en tecnología.",
+    "eyebrow": "RECIBE LOS POSTS",
+    "title": "Posts verificados, directo a tu correo",
+    "description": "Regístrate para recibir por correo los posts más relevantes de IA, cloud, desarrollo y carrera en tecnología.",
     "nameLabel": "Nombre",
     "namePlaceholder": "Tu nombre",
     "emailLabel": "Correo",
@@ -226,7 +262,7 @@
     "feedbackPlaceholder": "¿Qué esperas de NexSift?",
     "submit": "Registrarse",
     "successTitle": "Registro confirmado",
-    "successBody": "Recibirás las próximas posts por correo. Mientras tanto, sigue explorando el radar.",
+    "successBody": "Recibirás los próximos posts por correo. Mientras tanto, sigue explorando el radar.",
     "successAction": "Continuar",
     "error": "Completa tu nombre y un correo válido.",
     "privacyNote": "Al registrarte aceptas la política de privacidad. Tus datos se usan solo para contacto y novedades.",
@@ -245,7 +281,7 @@
     "notCollectTitle": "Lo que no recopilamos",
     "notCollectBody": "No recopilamos nombre, correo, número de documento, ubicación precisa ni datos de navegación fuera de NexSift, excepto cuando te registras voluntariamente en el formulario de novedades. No usamos cookies publicitarias ni compartimos datos con terceros.",
     "contentTitle": "Contenido editorial y fuentes",
-    "contentBody": "Las posts se producen con apoyo de IA a partir de fuentes públicas verificadas y apuntan a esas fuentes. La verificación es automatizada por el propio sistema y no recopila datos de quienes leen el sitio. Al acceder a enlaces externos, sales de NexSift y quedas sujeto a las políticas de privacidad de los sitios respectivos.",
+    "contentBody": "Los posts se producen con apoyo de IA a partir de fuentes públicas verificadas y apuntan a esas fuentes. La verificación es automatizada por el propio sistema y no recopila datos de quienes leen el sitio. Al acceder a enlaces externos, sales de NexSift y quedas sujeto a las políticas de privacidad de los sitios respectivos.",
     "retentionTitle": "Retención y finalidad",
     "retentionBody": "Los eventos anónimos se usan solo para entender el uso del producto y mejorar el sitio. Los datos de registro se usan exclusivamente para contactarte y enviarte novedades. No hay perfilado, publicidad dirigida ni venta de datos.",
     "rightsTitle": "Tus derechos (LGPD)",
@@ -256,23 +292,29 @@
   },
   "about": {
     "eyebrow": "SOBRE",
-    "title": "Un filtro técnico, no otro feed infinito",
-    "body": "NexSift reduce el costo de seguir la tecnología. En lugar de reproducir todo, prioriza posts con impacto real para quienes construyen y operan software.",
-    "signalTitle": "Qué es una post",
-    "signalBody": "Una post es un cambio relevante, verificado y puesto en contexto. No todo lo que pasa es una post: el cambio debe ser real, tener evidencia y alterar una decisión, un riesgo, una oportunidad o el entendimiento de quienes construyen u operan tecnología.",
+    "title": "Sobre NexSift",
+    "body": "Creado por un desarrollador de software, NexSift selecciona cambios técnicos, explica su impacto y enlaza las fuentes para que puedas consultarlas.",
+    "metaTitle": "Sobre NexSift y Tiago Castro",
+    "metaDescription": "Conoce a Tiago Castro, creador de NexSift, y los criterios para verificar y contextualizar cada post de tecnología.",
+    "signalTitle": "Qué publicamos",
+    "signalBody": "Publicamos cambios con evidencia y consecuencias reales para quienes trabajan en tecnología.",
     "criteriaTitle": "Criterios editoriales",
-    "criteriaIntro": "Una post solo se publica cuando pasa todos estos criterios:",
+    "criteriaIntro": "Qué debe demostrar cada post antes de publicarse:",
     "criteriaA": "Fuente antes que opinión: la evidencia sustenta cada hecho y la fuente se cita.",
     "criteriaB": "Contexto antes que volumen: publicar menos es mejor que bajar el estándar.",
     "criteriaC": "Impacto técnico antes que hype: la consecuencia concreta vale más que la novedad llamativa.",
     "aiTitle": "Uso de IA",
     "aiBody": "La IA investiga, organiza y redacta con apoyo; NexSift verifica. Ninguna afirmación se publica sin fuente verificada, y el texto apunta al material que la sustenta. Antes de tomar decisiones, revisa las fuentes originales; pueden ocurrir errores.",
     "relevanceTitle": "Relevancia y confianza",
-    "relevanceBody": "Cada post recibe una relevancia (cuánto importa para quienes construyen y operan tecnología) y una confianza (la solidez de la evidencia y la interpretación). Solo entran al radar posts con relevancia 6,5 o más y confianza 7 o más.",
+    "relevanceBody": "Evaluamos el impacto del cambio y la solidez de las pruebas. Solo publicamos posts con relevancia de 6,5 o más y confianza de 7 o más.",
     "methodTitle": "Cómo funciona la curaduría",
     "methodBody": "El flujo es un tamiz: mucho pasa, casi nada entra. NexSift pregunta si el cambio es real, si hay evidencia y si tiene consecuencias. Lo que queda se convierte en post, y cada post termina indicando qué observar a continuación.",
     "creatorEyebrow": "QUIÉN ESTÁ DETRÁS",
     "creatorTitle": "Creado por quien vive el problema",
-    "creatorBody": "NexSift fue creado por <name>Tiago Castro</name>, desarrollador full stack cloud graduado en Análisis y Desarrollo de Sistemas, con más de 5 años de mercado construyendo y operando software. La motivación vino del costo de seguir la tecnología: feeds infinitos, hype y poco contexto. NexSift es el filtro que él mismo quería tener: pocas posts, fuentes verificables y contexto directo sobre lo que cambia para quienes construyen software."
+    "creatorBody": "<name>Tiago Castro</name> es desarrollador Fullstack Cloud con más de 6 años de experiencia práctica. Trabaja con sistemas en producción, marketplaces, datos, infraestructura AWS e IA aplicada. Es graduado en Análisis y Desarrollo de Sistemas y cuenta con la certificación AWS Certified AI Practitioner. Creó NexSift para seguir cambios técnicos con fuentes verificables y contexto directo para quienes construyen software."
+  },
+  "homeCreator": {
+    "body": "Tiago Castro es desarrollador Fullstack Cloud con más de 6 años de experiencia. Trabaja con datos e infraestructura AWS en LakeIT y un marketplace con más de 65.000 pedidos acumulados. Esa experiencia dio origen a NexSift.",
+    "readMore": "Conoce la historia"
   }
 }

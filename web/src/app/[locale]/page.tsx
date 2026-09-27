@@ -3,14 +3,12 @@ import { Header } from '@/components/header'
 import { SignalLedger } from '@/features/blog/signal-ledger'
 import { PathTrail } from '@/features/landing/path-trail'
 import { SignalExample } from '@/features/landing/signal-example'
-import { SectionArt } from '@/features/landing/section-art'
 import { SignalArt } from '@/features/landing/signal-art'
 import { TopicBands } from '@/features/landing/topic-bands'
 import { TrustBand } from '@/features/landing/trust-band'
+import { CreatorCard } from '@/features/landing/creator-card'
 import { localizedAlternates } from '@/lib/alternates'
-import { topicIcons } from '@/lib/topic-icons'
 import { selectRadarSignals } from '@/lib/radar-signals'
-import { getTopicMeta, topicOrder } from '@/lib/topics'
 import { routing, type AppLocale } from '@/i18n/routing'
 import { getPostBySlug, listPosts } from '@/lib/content'
 import {
@@ -23,6 +21,7 @@ import {
 } from 'next-intl/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
 
@@ -32,7 +31,7 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>
-}) {
+}): Promise<Metadata> {
   const { locale: rawLocale } = await params
 
   if (!hasLocale(routing.locales, rawLocale)) {
@@ -40,9 +39,14 @@ export async function generateMetadata({
   }
 
   const locale = rawLocale as AppLocale
+  const t = await getTranslations({ locale })
 
   return {
+    title: t('homeMeta.title'),
+    description: t('homeMeta.description'),
     alternates: localizedAlternates(locale, '/'),
+    openGraph: { title: t('homeMeta.title'), description: t('homeMeta.description'), url: locale === 'pt-BR' ? '/' : `/${locale}`, images: ['/opengraph-image'] },
+    twitter: { card: 'summary_large_image', title: t('homeMeta.title'), description: t('homeMeta.description'), images: ['/opengraph-image'] },
   }
 }
 
@@ -85,7 +89,7 @@ export default async function HomePage({
         <section className="relative overflow-hidden border-b border-(--border)">
           <div className="pointer-events-none absolute inset-0 grid-line opacity-[0.06]" />
           <SignalArt className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.14]" />
-          <div className="page-shell relative grid items-center gap-5 py-10 md:gap-10 md:py-24 lg:min-h-[min(720px,calc(100vh-4rem))] lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+          <div className="page-shell relative grid items-center gap-5 py-9 md:gap-10 md:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
             <div>
               <h1 className="max-w-[22ch] text-[clamp(2rem,8vw,2.6rem)] font-medium leading-[1.02] tracking-[-0.04em] md:max-w-[20ch] md:text-[clamp(2.6rem,5vw,5.4rem)] md:leading-[0.98]">
                 {t('hero.titleA')} <span className="text-(--signal)">{t('hero.titleB')}</span>
@@ -94,14 +98,14 @@ export default async function HomePage({
                 {t('hero.description')}
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
-                <Link href="/blog" className="inline-flex items-center gap-2 rounded-sm bg-(--signal) px-4 py-2.5 text-sm font-semibold text-(--on-signal) transition-colors hover:bg-(--foreground)">
+                <Link href="/blog" className="inline-flex items-center gap-2 rounded-sm bg-(--signal) px-4 py-2.5 text-sm font-semibold text-(--on-signal) transition-opacity hover:opacity-85">
                   {t('hero.primary')} <ArrowUpRight size={16} />
                 </Link>
               </div>
-              <div className="mt-4 flex flex-wrap gap-2 font-mono text-[11px] md:mt-5">
-                <span className="rounded-full border border-(--border) bg-(--surface) px-2.5 py-1 text-(--muted-strong)">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</span>
-                <span className="rounded-full border border-(--border) bg-(--surface) px-2.5 py-1 text-(--muted-strong)">{t('hero.badges.verified')}</span>
-                <span className="rounded-full border border-(--border) bg-(--surface) px-2.5 py-1 text-(--muted-strong)">{t('hero.badges.reading')}</span>
+              <div className="mt-4 grid grid-cols-3 gap-1.5 text-center text-[10px] sm:flex sm:flex-wrap sm:gap-2 sm:font-mono sm:text-[11px] md:mt-5">
+                <Link href="/blog" className="min-w-0 whitespace-nowrap rounded-full border border-(--border) bg-(--surface) px-1 py-1 text-(--muted-strong) hover:border-(--signal) sm:px-2.5">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</Link>
+                <Link href="#trust" className="min-w-0 whitespace-nowrap rounded-full border border-(--border) bg-(--surface) px-1 py-1 text-(--muted-strong) hover:border-(--signal) sm:px-2.5"><span className="sm:hidden">{t('hero.badges.verifiedShort')}</span><span className="hidden sm:inline">{t('hero.badges.verified')}</span></Link>
+                <span className="min-w-0 whitespace-nowrap rounded-full border border-(--border) bg-(--surface) px-1 py-1 text-(--muted-strong) sm:px-2.5">{t('hero.badges.reading')}</span>
               </div>
             </div>
 
@@ -120,15 +124,50 @@ export default async function HomePage({
           </div>
         </section>
 
+        <section id="trust" className="scroll-mt-16 border-b border-(--border)">
+          <TrustBand
+            posts={posts}
+            labels={{
+              title: t('trust.title'), description: t('trust.description'),
+              signalsLabel: t('trust.signalsLabel', { count: posts.length }),
+              publicationLabel: t('trust.publicationLabel'), publicationTooltip: t('trust.publicationTooltip'),
+              verifiableLabel: t('trust.verifiableLabel'), verifiableTooltip: t('trust.verifiableTooltip'),
+              topicsLabel: t('trust.topicsLabel', { count: topicCount }),
+            }}
+          />
+        </section>
+
         <section id="process" className="border-b border-(--border) bg-(--surface-soft)">
-          <div className="page-shell py-16 lg:py-24">
-            <div className="grid gap-8 lg:grid-cols-[0.65fr_1.35fr]">
+          <div className="page-shell py-12 lg:py-16">
+            <div className="space-y-7">
               <div>
                 <p className="eyebrow mb-4">{t('process.eyebrow')}</p>
                 <h2 className="section-heading max-w-md">{t('process.title')}</h2>
-                <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">{t('process.description')}</p>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-(--muted)">{t('process.description')}</p>
               </div>
-              <PathTrail steps={[t('process.steps.0'), t('process.steps.1'), t('process.steps.2'), t('process.steps.3'), t('process.steps.4')]} />
+              <PathTrail steps={[0, 1, 2, 3, 4].map((index) => ({
+                title: t(`process.steps.${index}`),
+                description: t(`process.details.${index}`),
+              }))} />
+            </div>
+          </div>
+        </section>
+
+        <section id="topics" className="border-y border-(--border) bg-(--surface-soft)">
+          <div className="page-shell py-12 lg:py-16">
+            <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
+              <div>
+                <h2 className="section-heading max-w-md">
+                  {t('topics.title')}
+                </h2>
+                <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
+                  {t('topics.description')}
+                </p>
+                <p className="mt-5 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-(--signal)">
+                  {t('topics.count', { count: posts.length })}
+                </p>
+              </div>
+              <TopicBands posts={posts} />
             </div>
           </div>
         </section>
@@ -149,46 +188,15 @@ export default async function HomePage({
           />
         ) : null}
 
-        <SectionArt variant="filter" />
-
-        <section id="topics" className="border-y border-(--border) bg-(--surface-soft)">
-          <div className="page-shell py-20 lg:py-28">
-            <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
-              <div>
-                <h2 className="section-heading max-w-md">
-                  {t('topics.title')}
-                </h2>
-                <p className="mt-5 max-w-sm text-sm leading-relaxed text-(--muted)">
-                  {t('topics.description')}
-                </p>
-                <p className="mt-5 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-(--signal)">
-                  {t('topics.count', { count: posts.length })}
-                </p>
-              </div>
-              <TopicBands posts={posts} />
-            </div>
-          </div>
+        <section className="page-shell py-12 lg:py-16">
+          <CreatorCard labels={{
+            eyebrow: t('about.creatorEyebrow'),
+            title: t('about.creatorTitle'),
+            body: <>{t('homeCreator.body')} <Link href={aboutPath} className="font-semibold text-(--signal) hover:underline">{t('homeCreator.readMore')}</Link></>,
+          }} />
         </section>
 
-        <SectionArt variant="trace" />
-
-        <section className="border-t border-(--border)">
-          <TrustBand
-            posts={posts}
-            labels={{
-              title: t('trust.title'),
-              description: t('trust.description'),
-              signalsLabel: t('trust.signalsLabel', { count: posts.length }),
-              publicationLabel: t('trust.publicationLabel'),
-              publicationTooltip: t('trust.publicationTooltip'),
-              verifiableLabel: t('trust.verifiableLabel'),
-              verifiableTooltip: t('trust.verifiableTooltip'),
-              topicsLabel: t('trust.topicsLabel', { count: topicCount }),
-            }}
-          />
-        </section>
-
-        <section className="page-shell pb-20 pt-16 lg:pb-28 lg:pt-24">
+        <section className="page-shell pb-12 pt-6 lg:pb-16 lg:pt-10">
           <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr]">
             <div>
               <h2 className="section-heading max-w-md">
@@ -196,29 +204,7 @@ export default async function HomePage({
               </h2>
             </div>
             <div>
-              <div className="flex flex-wrap gap-2">
-                {topicOrder.map((topic) => {
-                  const meta = getTopicMeta(t, topic)
-                  const count = posts.filter(
-                    (post) => post.topic === topic,
-                  ).length
-                  const TopicIcon = topicIcons[topic]
-
-                  return (
-                    <Link
-                      key={topic}
-                      href={`/topics/${topic}`}
-                      data-topic={topic}
-                      className="topic-color flex items-center gap-1.5 rounded-(--radius-sm) border border-(--border) bg-(--surface-soft) px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-(--muted) transition-colors hover:border-(--topic-color) hover:bg-(--surface-raised) hover:text-(--topic-color)"
-                    >
-                      <TopicIcon size={11} strokeWidth={2} className="text-(--topic-color)" />
-                      {meta.label}
-                      <span className="text-(--topic-color)">{count}</span>
-                    </Link>
-                  )
-                })}
-              </div>
-              <div className="mt-8 grid gap-px border-y border-(--border) bg-(--border) sm:grid-cols-3">
+              <div className="grid gap-px border-y border-(--border) bg-(--border) sm:grid-cols-3">
                 <ExploreCard
                   href="/blog"
                   index="01"

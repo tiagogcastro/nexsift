@@ -2,6 +2,7 @@ name_prefix          = "nexsift-prod"
 aws_region           = "us-east-1"
 content_bucket_name  = "nexsift-content-prod"
 publish_token        = "change-me"
+mcp_token            = "use-a-different-random-secret"
 lambda_endpoint_url  = ""
 bucket_force_destroy = false
 create_vercel_reader = true
