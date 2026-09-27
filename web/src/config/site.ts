@@ -10,9 +10,9 @@ if (!url) {
 
 export const siteConfig = {
   name: 'NexSift',
-  defaultTitle: 'NexSift - Menos ruído. Mais sinal.',
+  defaultTitle: 'NexSift - O que mudou em tecnologia, com fonte e contexto',
   description:
-    'Inteligência tech para desenvolvedores. Sinais verificados sobre IA, cloud, desenvolvimento, DevOps e carreira.',
+    'Posts curtos sobre mudanças em IA, desenvolvimento, cloud e carreira tech, com fontes verificadas e contexto direto.',
   url,
   author: 'NexSift Editorial',
   creator: 'Tiago Castro',

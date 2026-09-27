@@ -1,6 +1,6 @@
 # NexSift Editor: diretrizes editoriais (referencia do GPT)
 
-Editorial version: 2026-09-24
+Editorial version: 2026-09-27
 
 Arquivo de referencia embutido na ferramenta `editorialInstructions` do connector MCP. Detalha a linha editorial, as classificacoes, o gate de publicacao, a verificacao de fontes, o fluxo da rotina, o modo degradado e o tratamento de erros. O contrato de publicacao, o exemplo de payload e os endpoints estao em `gpt-editor-payload-reference.md`.
 
@@ -58,6 +58,8 @@ Antes da pesquisa, faca um coverage check bidirecional do historico recente.
 3. Compare a lista do que ja foi publicado com os resultados da varredura obrigatoria (secao abaixo) para identificar material conhecido que escapou. Sinal forte perdido entra como candidato em Tier C, com protecao contra obsolescencia.
 
 Isso significa: pesquise com mais profundidade nessas lacunas antes de concluir que nao ha sinal forte. Nao significa publicar um sinal por topico.
+
+Pesquise cada eixo principal independentemente em toda rodada, mesmo quando ele ja esta bem representado. Nao rebaixe candidatos por saturacao; descoberta ampla nao e quota de publicacao. Amplie as buscas a partir dos nomes, termos, repositorios, lancamentos e discussoes encontrados na propria rodada. Um projeto novo nao precisa constar de uma lista previa para ser candidato.
 
 Anti-monocultura: quando os sinais recentes de um topico se concentram na mesma familia de vendors ou no mesmo formato, a exploracao de fontes alternativas antes de encerrar a pesquisa e obrigatoria, nao opcional.
 
@@ -230,9 +232,18 @@ Se `listRecentPosts` falhar apos retry:
 
 Use para publicacao acidental, slug errado, duplicidade, fonte invalida ou erro factual grave. Depois, republica corrigido.
 
-## Relatorio ao final da rotina
+## Relatorio obrigatorio em toda execucao
 
-Resuma: sinais publicados/atualizados (slug, titulo, topicos, scores, `whatToWatch`), imagem persistida ou rejeitada com motivo ou ausencia de imagem util, descartados com motivo, falhas transitorias, limitacoes do modo degradado e fontes nao verificaveis.
+Retorne um relatorio completo mesmo quando nenhum candidato passar, a listagem falhar ou a publicacao for bloqueada. Registre:
+
+1. Horario da execucao, versao retornada por `editorialInstructions`, janelas Tier A/B/C cobertas e estado final.
+2. Por eixo: consultas e superficies pesquisadas, paginas efetivamente abertas, leads encontrados, lacunas e superficies que falharam. Busca tentada nao equivale a pagina inspecionada.
+3. Funil com numeros de descobertos, avaliados, fontes validadas, duplicados, aprovados, descartados, publicados, atualizados e falhos.
+4. Por candidato: titulo, topico, scores, URL e resultado de cada fonte, resultado de `resolvePost`, motivo de aprovacao ou descarte, imagem persistida/rejeitada (com motivo) ou ausencia de imagem util.
+5. Por tentativa de escrita: ferramenta, horario, numero da tentativa, resposta literal disponivel, codigo de erro, slug, operacao e confirmacao posterior por leitura quando possivel. Se a ferramenta nao retornou, diga `retorno nao capturado` e indique a ultima etapa comprovadamente concluida. Nao infira a causa do bloqueio.
+6. Erros transitorios, limitacoes do modo degradado, IDs de correlacao quando recebidos e pendencias para a proxima rodada. Nunca inclua tokens ou credenciais no relatorio.
+
+Nao conte como publicado um candidato sem confirmacao da operacao ou consulta posterior do slug. Se a plataforma encerrar a execucao antes da resposta final, os logs do MCP so cobrem requisicoes que chegaram ao servidor; nao invente etapas nao observadas.
 
 ## Regras duras
 

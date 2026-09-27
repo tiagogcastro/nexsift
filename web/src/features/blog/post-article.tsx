@@ -14,6 +14,7 @@ import remarkGfm from 'remark-gfm'
 import type { ImgHTMLAttributes } from 'react'
 import { Breadcrumbs } from './breadcrumbs'
 import { EditorialLink } from './editorial-link'
+import { SharePost } from './share-post'
 
 const NEW_BADGE_DAYS = 5
 
@@ -58,9 +59,28 @@ export async function PostArticle({
       />
       <div className="mt-3 grid gap-10 lg:grid-cols-[minmax(0,52rem)_minmax(15rem,1fr)] lg:gap-14">
         <div className="min-w-0">
-          <h1 className="max-w-4xl text-[clamp(1.55rem,3vw,2.85rem)] font-medium leading-[1.12] tracking-[-0.03em]">
-            {post.title}
-          </h1>
+          <div className="flex items-start justify-between gap-3">
+            <h1 className="min-w-0 max-w-4xl flex-1 text-[clamp(1.55rem,3vw,2.85rem)] font-medium leading-[1.12] tracking-[-0.03em]">
+              {post.title}
+            </h1>
+            <SharePost
+              url={`${siteConfig.url}/blog/${post.slug}`}
+              title={post.title}
+              labels={{
+                share: t('article.share'),
+                copy: t('article.copyLink'),
+                copied: t('article.copied'),
+                copyFailed: t('article.copyFailed'),
+                email: t('article.email'),
+                intro: t('article.shareIntro'),
+                linkedinCopy: t('article.linkedinCopy'),
+                linkedinText: t('article.linkedinText'),
+                whatsappText: t('article.whatsappText'),
+                emailSubject: t('article.emailSubject', { title: post.title }),
+                emailBody: t('article.emailBody'),
+              }}
+            />
+          </div>
 
           <div
             role="region"
@@ -86,7 +106,6 @@ export async function PostArticle({
               >
                 {siteConfig.creator}
               </a>
-              <span>· {siteConfig.name}</span>
             </div>
           </div>
 

@@ -16,7 +16,7 @@ export async function Footer({
   builtBy: string
 }) {
   const t = await getTranslations()
-  const sinaisPath = locale === 'pt-BR' ? '/blog' : `/${locale}/blog`
+  const postsPath = '/blog'
   const topicsPath = locale === 'pt-BR' ? '/topics' : `/${locale}/topics`
   const aboutPath = `/${locale}/about`
   const privacyPath = `/${locale}/privacy`
@@ -56,7 +56,7 @@ export async function Footer({
             <div className="eyebrow">{t('footer.product')}</div>
             <ul className="mt-4 space-y-2.5 text-sm text-(--muted-strong)">
               <li>
-                <Link href={sinaisPath} className="hover:text-white">
+                <Link href={postsPath} className="hover:text-white">
                   {t('nav.blog')}
                 </Link>
               </li>

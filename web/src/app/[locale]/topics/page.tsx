@@ -1,4 +1,5 @@
 import { hasLocale } from 'next-intl'
+import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
@@ -9,6 +10,19 @@ import { routing, type AppLocale } from '@/i18n/routing'
 import { listPosts } from '@/lib/content'
 import { topicIcons } from '@/lib/topic-icons'
 import { getTopicMeta, topicOrder } from '@/lib/topics'
+import { localizedAlternates } from '@/lib/alternates'
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  if (!hasLocale(routing.locales, locale)) return {}
+  const t = await getTranslations({ locale })
+  return {
+    title: t('topics.metaTitle'), description: t('topics.metaDescription'),
+    alternates: localizedAlternates(locale as AppLocale, '/topics'),
+    openGraph: { title: t('topics.metaTitle'), description: t('topics.metaDescription'), url: locale === 'pt-BR' ? '/topics' : `/${locale}/topics`, images: ['/opengraph-image'] },
+    twitter: { card: 'summary_large_image', title: t('topics.metaTitle'), description: t('topics.metaDescription'), images: ['/opengraph-image'] },
+  }
+}
 
 export const dynamic = 'force-dynamic'
 
@@ -41,18 +55,18 @@ export default async function TopicsPage({
           today: t('nav.today'),
         }}
       />
-      <main className="page-shell min-h-[75vh] py-16 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-[0.45fr_1fr]">
-          <div className="eyebrow">{t('topics.eyebrow')}</div>
-          <div>
+      <main className="page-shell min-h-[70vh] py-9 lg:py-20">
+        <div className="grid gap-7 lg:grid-cols-[minmax(22rem,0.85fr)_minmax(0,1.15fr)] lg:gap-10">
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <div className="eyebrow mb-4">{t('topics.eyebrow')}</div>
             <h1 className="page-heading max-w-5xl">
               {t('topics.title')}
             </h1>
-            <p className="intro-copy mt-6 max-w-[64ch] text-(--muted-strong)">
+            <p className="intro-copy mt-3 max-w-sm text-(--muted-strong)">
               {t('topics.description')}
             </p>
-
-            <div className="mt-10 border-t border-(--border)">
+          </div>
+          <div className="border-t border-(--border)">
               {topicOrder.map((topic, index) => {
                 const meta = getTopicMeta(t, topic)
                 const count = posts.filter((post) =>
@@ -65,36 +79,35 @@ export default async function TopicsPage({
                     key={topic}
                     href={`${localePath}/topics/${topic}`}
                     data-topic={topic}
-                    className="topic-color group grid grid-cols-[3rem_minmax(0,1fr)_auto_auto] items-center gap-4 border-b border-(--border) py-6 transition-colors hover:bg-(--topic-color)/[0.07] last:border-b-0 md:grid-cols-[5rem_minmax(0,1fr)_auto_auto]"
+                    className="topic-color group flex min-w-0 items-center gap-3 border-b border-(--border) py-3.5 transition-colors hover:bg-(--topic-color)/[0.07] last:border-b-0 sm:gap-4 lg:py-4"
                   >
-                    <span className="font-mono text-[11px] text-(--muted)">
+                    <span className="hidden w-7 shrink-0 font-mono text-[11px] text-(--muted) sm:block">
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-3">
                         <TopicIcon
                           size={16}
                           strokeWidth={2}
                           className="shrink-0 text-(--topic-color)"
                         />
-                        <span className="text-base font-medium tracking-[-0.03em] text-(--topic-color)">
-                          {meta.label}
+                        <span className="min-w-0 truncate text-base font-medium tracking-[-0.03em] text-(--topic-color) sm:text-lg">
+                          <span className="sm:hidden">{topic === 'ai' ? meta.shortLabel : meta.label}</span><span className="hidden sm:inline">{meta.label}</span>
                         </span>
                       </div>
-                      <div className="mt-1 max-w-[56ch] text-sm text-(--muted)">
+                      <div className="mt-1 hidden text-sm leading-snug text-(--muted) lg:block">
                         {meta.description}
                       </div>
                     </div>
-                    <span className="topic-chip">
+                    <span className="shrink-0 font-mono text-xs text-(--muted)">
                       {t('topics.count', { count })}
                     </span>
-                    <span className="grid size-8 place-items-center text-(--muted) transition-colors group-hover:text-(--topic-color)">
+                    <span className="grid size-6 shrink-0 place-items-center text-(--muted) transition-colors group-hover:text-(--topic-color)">
                       <ArrowUpRight size={16} />
                     </span>
                   </Link>
                 )
               })}
-            </div>
           </div>
         </div>
       </main>

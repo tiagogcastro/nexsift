@@ -47,9 +47,13 @@ async function main() {
   })
 
   const text = await response.text()
-  console.log(`status=${response.status} body=${text}`)
+  const lambdaResult = isProdUrl
+    ? null
+    : JSON.parse(text) as { statusCode: number; body?: string }
+  const status = lambdaResult?.statusCode ?? response.status
+  console.log(`status=${status} body=${lambdaResult?.body ?? text}`)
 
-  if (!response.ok) {
+  if (!response.ok || status >= 400) {
     process.exitCode = 1
   }
 }

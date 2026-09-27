@@ -42,8 +42,9 @@ resource "aws_lambda_function" "mcp" {
   environment {
     variables = merge(
       {
-        PUBLISH_API_URL = aws_apigatewayv2_api.publish.api_endpoint
+        PUBLISH_API_URL = var.lambda_endpoint_url != "" ? "${var.lambda_endpoint_url}/_aws/execute-api/${aws_apigatewayv2_api.publish.id}" : aws_apigatewayv2_api.publish.api_endpoint
         PUBLISH_TOKEN   = var.publish_token
+        MCP_TOKEN       = var.mcp_token
       },
       var.lambda_endpoint_url != "" ? { AWS_ENDPOINT_URL = var.lambda_endpoint_url } : {}
     )

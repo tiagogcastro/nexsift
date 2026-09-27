@@ -15,7 +15,7 @@ export function localizedAlternates(locale: AppLocale, path: string) {
 
   return {
     languages,
-    canonical: path,
+    canonical: locale === routing.defaultLocale ? path : `/${locale}${path}`,
   }
 }
 

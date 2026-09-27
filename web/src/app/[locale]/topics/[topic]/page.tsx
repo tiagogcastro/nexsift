@@ -1,4 +1,5 @@
 import { topicSchema, type Topic } from '@nexsift/schemas/topic'
+import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { notFound, redirect } from 'next/navigation'
 import { Footer } from '@/components/footer'
@@ -7,6 +8,21 @@ import { Breadcrumbs } from '@/features/blog/breadcrumbs'
 import { LedgerConsole } from '@/features/blog/ledger-console'
 import { listPostsByTopic } from '@/lib/content'
 import { getTopicMeta, topicOrder } from '@/lib/topics'
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; topic: string }> }): Promise<Metadata> {
+  const { locale, topic } = await params
+  const parsed = topicSchema.safeParse(topic)
+  if (locale !== 'pt-BR' || !parsed.success) return {}
+  const t = await getTranslations({ locale })
+  const label = getTopicMeta(t, parsed.data).label
+  return {
+    title: t('topicPage.metaTitle', { topic: label }),
+    description: t('topicPage.metaDescription', { topic: label }),
+    alternates: { canonical: `/topics/${topic}` },
+    openGraph: { title: t('topicPage.metaTitle', { topic: label }), description: t('topicPage.metaDescription', { topic: label }), url: `/topics/${topic}`, images: ['/opengraph-image'] },
+    twitter: { card: 'summary_large_image', title: t('topicPage.metaTitle', { topic: label }), description: t('topicPage.metaDescription', { topic: label }), images: ['/opengraph-image'] },
+  }
+}
 
 export const dynamic = 'force-dynamic'
 
@@ -42,9 +58,9 @@ export default async function TopicPage({
     topicOrder.map((topicKey) => {
       const topicKeyMeta = getTopicMeta(t, topicKey)
 
-      return [topicKey, { label: topicKeyMeta.label }]
+      return [topicKey, { label: topicKeyMeta.label, shortLabel: topicKeyMeta.shortLabel }]
     }),
-  ) as Record<Topic, { label: string }>
+  ) as Record<Topic, { label: string; shortLabel: string }>
 
   return (
     <>
@@ -58,12 +74,12 @@ export default async function TopicPage({
           today: t('nav.today'),
         }}
       />
-      <main className="page-shell min-h-[75vh] py-16 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-[0.55fr_1.45fr]">
+      <main className="page-shell min-h-[75vh] py-9 lg:py-20">
+        <div className="grid gap-5 lg:grid-cols-[0.55fr_1.45fr] lg:gap-12">
           <div data-topic={topic} className="topic-color lg:sticky lg:top-24 lg:self-start">
             <Breadcrumbs
               items={[
-                { label: t('breadcrumb.home'), href: '/' },
+                { label: t('breadcrumb.blog'), href: '/blog' },
                 { label: t('breadcrumb.topics'), href: '/topics' },
                 { label: meta.label },
               ]}
@@ -72,15 +88,8 @@ export default async function TopicPage({
             <h1 className="page-heading max-w-xl">
               {meta.label}
             </h1>
-            <h2 className="sr-only">{meta.label}</h2>
-            <p className="mt-4 font-mono text-xs font-semibold text-(--topic-color)">
-              {t('topicPage.radarTitle', { topic: meta.label })}
-            </p>
-            <p className="intro-copy mt-5 max-w-sm text-(--muted)">
+            <p className="intro-copy mt-3 max-w-sm text-(--muted)">
               {meta.description}
-            </p>
-            <p className="mt-3 font-mono text-xs text-(--topic-color)">
-              {t('topicPage.signalCount', { count: posts.length })}
             </p>
           </div>
           <LedgerConsole
@@ -89,9 +98,13 @@ export default async function TopicPage({
             labels={{
               searchPlaceholder: t('console.searchPlaceholder'),
               allTopics: t('console.allTopics'),
+              topicFilter: t('console.topicFilter'),
+              selectedTopics: t('console.selectedTopics'),
               countLabelOne: t('console.countLabelOne'),
               countLabelOther: t('console.countLabelOther'),
-              loadMore: t('console.loadMore'),
+              previous: t('console.previous'),
+              next: t('console.next'),
+              pageOf: t('console.pageOf'),
               empty: t('console.empty'),
               signalFallback: t('console.signalFallback'),
               relevanceLabel: t('article.relevance'),
@@ -100,7 +113,7 @@ export default async function TopicPage({
               matchedTag: t('console.matchedTag'),
             }}
             topicMeta={topicMeta}
-            initialTopic={topic}
+            initialTopics={[topic]}
             initialQuery={q}
           />
         </div>
