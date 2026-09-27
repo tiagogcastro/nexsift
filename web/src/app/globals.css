@@ -59,6 +59,12 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+  }
+}
+
 a {
   text-decoration: none;
 }
@@ -87,9 +93,9 @@ button:not(:disabled),
 }
 
 .page-heading {
-  font-size: clamp(2rem, 4.2vw, 3.75rem);
+  font-size: clamp(2rem, 3.6vw, 3.2rem);
   font-weight: 500;
-  line-height: 1.04;
+  line-height: 1.1;
   letter-spacing: -0.04em;
 }
 

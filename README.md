@@ -97,6 +97,8 @@ cp web/.env.example web/.env.local
 cp .env.example .env
 ```
 
+Store `TF_VAR_mcp_token` in the ignored `.env.mcp.local` with a long, random value distinct from `PUBLISH_TOKEN` (for example, generate one with `openssl rand -hex 32`). This value is stored as an encrypted-at-rest Lambda environment variable after Terraform apply; Terraform state also contains it, so keep state private. No Secrets Manager is required.
+
 Running `yarn install` creates `yarn.lock`. Commit that lockfile with the project after the first install.
 
 ## Full local AWS simulation
@@ -132,10 +134,11 @@ terraform -chdir=iac/environments/local init
 Then:
 
 ```bash
+set -a; source .env; source .env.mcp.local; set +a
 terraform -chdir=iac/environments/local apply
 ```
 
-`iac/environments/local/terraform.tfvars` is auto-loaded and committed. Terraform creates the local S3 bucket, IAM role and publication Lambda inside MiniStack.
+`iac/environments/local/terraform.tfvars` is auto-loaded and committed; the MCP token comes only from the ignored `.env.mcp.local` via `TF_VAR_mcp_token`. Terraform creates the local S3 bucket, IAM role and Lambdas inside MiniStack. After changing the token, re-apply Terraform.
 
 ### 3b. Apply the production Terraform stack (when needed)
 
@@ -146,6 +149,8 @@ yarn workspace @nexsift/lambda build
 AWS_PROFILE=nexsift terraform -chdir=iac/environments/prod init
 AWS_PROFILE=nexsift terraform -chdir=iac/environments/prod apply
 ```
+
+`mcp_token` stays empty in production until OAuth lands; an empty value keeps the connector open so the scheduled Task keeps working. Do not apply production changes until the local flow is confirmed.
 
 ### 4. Publish a test post
 
@@ -200,6 +205,12 @@ ChatGPT Task (daily schedule)
 Interactive sessions can still use the NexSift Editor GPT Action; the contract is defined in the OpenAPI spec at `docs/openapi.yaml`. The ChatGPT step handles research, writing and review; the Lambda only validates, verifies and publishes.
 
 ChatGPT Tasks cannot use Custom GPTs or Actions, so the scheduled routine runs through a private MCP connector: the `mcp` Lambda exposes the publication contract as MCP tools and bundles the editorial docs into `editorialInstructions` (see `docs/gpt-editor-instructions.md`). Production is fronted by an API Gateway HTTP API because ChatGPT cannot reach `*.lambda-url.*.on.aws` domains; the Function URLs remain for local flows and rollback.
+
+When `MCP_TOKEN` is configured, the MCP Function URL requires `Authorization: Bearer <MCP_TOKEN>` before any tool request; when empty, the connector stays temporarily open so the current ChatGPT Task keeps working until OAuth lands. This is separate from the token used between the MCP and the publish API. Local clients that can send custom headers can verify the MCP via MiniStack. ChatGPT's current MCP connection flow does not send custom API keys; connecting this bearer-protected URL to ChatGPT requires a compatible OAuth setup. A local `localhost` URL is also unreachable from ChatGPT without a reachable HTTPS endpoint. Do not paste a token into a URL or an editorial prompt. This local bearer implementation does not claim to restore the scheduled ChatGPT write flow; investigate connector version and write permissions separately before production.
+
+After the local apply, run `yarn tsx --env-file=.env.mcp.local packages/dev-publish/check-mcp.ts`. It invokes the local MCP Lambda through MiniStack, verifies anonymous rejection (401), authorized tool listing, the editorial bundle version and the read-only MCP-to-publish-API proxy. It does not publish. MiniStack's Terraform `mcp_function_url` is a simulated AWS URL; for local terminal calls use its Invoke API as this command does. Do not send example posts to production.
+
+In MiniStack, the MCP proxy uses the internal `http://ministack:4566/_aws/execute-api/<api-id>` path to reach the publish HTTP API from its Docker container. This avoids resolving the host-only `*.execute-api.localhost` address inside the Lambda container; production continues to use the AWS API endpoint directly.
 
 Locally, the direct publish command replaces the ChatGPT step: it reads a JSON payload from `packages/dev-publish/payloads/` and invokes the Lambda through MiniStack.
 

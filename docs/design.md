@@ -18,7 +18,7 @@ NexSift does not copy their layouts. The shared lessons are strong typography, u
 
 ## Core visual idea
 
-The primary editorial primitive is the signal radar. The hero pairs the value proposition with a live "No radar agora" panel on the right; the archive ("Sinais") lists every published signal; topic pages are specialized radars. Each signal row communicates topic, type, what changed, relevance, date and source count in a dense, terminal-like scan pattern.
+The primary editorial primitive is the signal radar. The hero pairs the value proposition with a live "No radar agora" panel on the right; the archive ("Posts") lists every published post; topic pages are specialized radars. Each row communicates topic, type, what changed, relevance, date and source count in a dense, terminal-like scan pattern.
 
 Each row communicates:
 
@@ -79,11 +79,11 @@ Avoid background particles, parallax and cinematic page transitions.
 
 ## Curation path
 
-The curation process is rendered as a winding trail, not a linear pipeline: "Muito acontece" starts the path and each gate question curves toward the next (Isso realmente mudou algo? Há evidência? Tem consequência?) until only "SINAL" remains, drawn in the signal color with a glow. The trail is a smooth SVG curve with numbered nodes; the last segment glows in the signal color. Nodes are non-interactive: no heavy borders, no shadows, no hover affordances. On mobile the trail collapses into a vertical path with a curving rail on the left.
+Five numbered, compact stages explain discovery, identifying the change, source verification, impact assessment and publication. Each stage has one short explanation. The sequence stays readable on small screens without a tall decorative trail.
 
 ## Topics
 
-Topics are represented by a monochrome lucide icon (brain for AI, cpu for development, cloud, terminal for DevOps, shield for security, factory for industry, pen tool for design) plus their full label. Abbreviated short labels are not used in the UI.
+Topics are represented by a monochrome lucide icon (brain for AI, cpu for development, cloud, terminal for DevOps, shield for security, factory for industry, pen tool for design) plus their full label. The compact mobile filter and topic list may use "IA" when the full label would crowd the layout.
 
 ## Article layout
 

@@ -34,6 +34,12 @@ variable "publish_token" {
   sensitive = true
 }
 
+variable "mcp_token" {
+  type      = string
+  sensitive = true
+  default   = ""
+}
+
 variable "site_url" {
   type    = string
   default = "https://nexsift.vercel.app"
@@ -63,6 +69,7 @@ module "content_stack" {
   aws_region           = var.aws_region
   content_bucket_name  = var.content_bucket_name
   publish_token        = var.publish_token
+  mcp_token            = var.mcp_token
   site_url             = var.site_url
   lambda_endpoint_url  = var.lambda_endpoint_url
   bucket_force_destroy = var.bucket_force_destroy
