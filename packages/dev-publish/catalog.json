@@ -1,0 +1,4711 @@
+{
+  "generatedAt": "2026-10-01T23:00:59.451Z",
+  "source": "nexsift-content-prod",
+  "count": 204,
+  "signals": [
+    {
+      "slug": "ai-pixverse-r2-transforma-geracao-de-video-2026-09-22",
+      "title": "PixVerse R2 transforma geração de vídeo em mundos persistentes e interativos",
+      "topic": "ai",
+      "relatedTopics": [
+        "design",
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-22",
+      "publishedAt": "2026-09-27T16:27:22.107Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.3,
+      "sources": [
+        {
+          "title": "PixVerse introduces R2 real-time world model",
+          "publisher": "PixVerse",
+          "url": "https://pixverse.ai/en/blog/pixverse-introduces-r2-real-time-world-model"
+        }
+      ]
+    },
+    {
+      "slug": "ai-xiaomi-abre-mimo-v2-6-com-rl-em-larga-es-2026-09-22",
+      "title": "Xiaomi abre MiMo-V2.6 com RL em larga escala e dois modelos multimodais",
+      "topic": "ai",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-22",
+      "publishedAt": "2026-09-27T16:26:02.267Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "MiMo-V2.6",
+          "publisher": "Xiaomi MiMo",
+          "url": "https://mimo.mi.com/docs/en-US/news/latest/v2-6"
+        }
+      ]
+    },
+    {
+      "slug": "ai-gemini-3-8-tts-cria-vozes-por-prompt-e-r-2026-09-23",
+      "title": "Gemini 3.8 TTS cria vozes por prompt e replica voz com amostra de 30 segundos",
+      "topic": "ai",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-23",
+      "publishedAt": "2026-09-23T19:47:50.391Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Gemini 3.8 Text-to-Speech",
+          "publisher": "Google",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/"
+        }
+      ]
+    },
+    {
+      "slug": "ai-claude-opus-5-5-reduz-custo-e-amplia-tes-2026-09-22",
+      "title": "Claude Opus 5.5 reduz custo e amplia testes externos de segurança",
+      "topic": "ai",
+      "relatedTopics": [
+        "development",
+        "security"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-22",
+      "publishedAt": "2026-09-23T11:09:48.145Z",
+      "relevanceScore": 9.4,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Claude Opus 5.5",
+          "publisher": "Anthropic",
+          "url": "https://www.anthropic.com/claude-opus-5-5"
+        }
+      ]
+    },
+    {
+      "slug": "ai-qwen-image-2-1-unifica-geracao-e-edicao-2026-09-20",
+      "title": "Qwen-Image-2.1 unifica geração e edição com pesos abertos e transparência nativa",
+      "topic": "ai",
+      "relatedTopics": [
+        "development",
+        "design"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-20",
+      "publishedAt": "2026-09-21T11:44:57.865Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Qwen-Image-2.1",
+          "publisher": "Qwen",
+          "url": "https://huggingface.co/Qwen/Qwen-Image-2.1"
+        }
+      ]
+    },
+    {
+      "slug": "ai-anthropic-mede-quanto-da-propria-p-d-ja-2026-09-17",
+      "title": "Anthropic mede quanto da própria P&D já é liderada por Claude",
+      "topic": "ai",
+      "relatedTopics": [
+        "industry"
+      ],
+      "signalType": "research",
+      "signalDate": "2026-09-17",
+      "publishedAt": "2026-09-20T11:41:07.265Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Measurements for understanding the pace of AI development inside frontier labs",
+          "publisher": "Anthropic",
+          "url": "https://www.anthropic.com/institute/measuring-pace-of-ai-development"
+        }
+      ]
+    },
+    {
+      "slug": "ai-anthropic-cria-acesso-verificado-a-model-2026-09-17",
+      "title": "Anthropic cria acesso verificado a modelos com salvaguardas mais permissivas para biologia",
+      "topic": "ai",
+      "relatedTopics": [
+        "security",
+        "industry"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-17",
+      "publishedAt": "2026-09-18T11:45:27.457Z",
+      "relevanceScore": 8.5,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Introducing the Life Sciences Verification Program",
+          "publisher": "Anthropic",
+          "url": "https://www.anthropic.com/news/life-sciences-verification-program"
+        }
+      ]
+    },
+    {
+      "slug": "ai-df26-expoe-falha-de-humanos-e-detectores-2026-09-07",
+      "title": "DF26 expõe falha de humanos e detectores diante de vídeos sintéticos",
+      "topic": "ai",
+      "relatedTopics": [
+        "security"
+      ],
+      "signalType": "research",
+      "signalDate": "2026-09-07",
+      "publishedAt": "2026-09-11T16:18:36.252Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 8.8,
+      "sources": [
+        {
+          "title": "DF26: We Cannot Tell Fake From Real Anymore",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/abs/2609.07369"
+        }
+      ]
+    },
+    {
+      "slug": "ai-gpt-live-1-leva-voz-full-duplex-a-api-po-2026-09-10",
+      "title": "GPT-Live-1 leva voz full-duplex à API por US$ 0,05 por minuto",
+      "topic": "ai",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-11T11:19:07.400Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Getting started with GPT-Live",
+          "publisher": "OpenAI",
+          "url": "https://developers.openai.com/api/docs/guides/live"
+        },
+        {
+          "title": "OpenAI API pricing",
+          "publisher": "OpenAI",
+          "url": "https://developers.openai.com/api/docs/pricing"
+        },
+        {
+          "title": "OpenAI API changelog",
+          "publisher": "OpenAI",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "slug": "ai-deepseek-v4-1-flash-reduz-kv-cache-em-4x-2026-09-10",
+      "title": "DeepSeek V4.1-Flash reduz KV cache em 4x com contexto de 1 milhão de tokens",
+      "topic": "ai",
+      "relatedTopics": [
+        "development",
+        "cloud"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-10T11:57:13.566Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "DeepSeek-V4.1-Flash: Pushing the Limits of KV Cache Compression",
+          "publisher": "DeepSeek",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"
+        },
+        {
+          "title": "DeepSeek V4.1 Technical Report",
+          "publisher": "DeepSeek",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/main/DeepSeek_V41_Tech_Report.pdf"
+        }
+      ]
+    },
+    {
+      "slug": "ai-images-2-5-reduz-latencia-mas-dobra-prec-2026-09-08",
+      "title": "Images 2.5 reduz latência, mas dobra preços por token na API",
+      "topic": "ai",
+      "relatedTopics": [
+        "design",
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-09T12:38:39.863Z",
+      "relevanceScore": 9.3,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "OpenAI API changelog — GPT Image 2.5 Sunburst and Flare",
+          "publisher": "OpenAI Developers",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        },
+        {
+          "title": "Image prompting — choosing GPT Image 2.5 Flare or Sunburst",
+          "publisher": "OpenAI Developers",
+          "url": "https://developers.openai.com/api/docs/guides/image-prompting"
+        },
+        {
+          "title": "OpenAI API pricing — image generation models",
+          "publisher": "OpenAI Developers",
+          "url": "https://developers.openai.com/api/docs/pricing"
+        },
+        {
+          "title": "ChatGPT Images 2.5 System Card",
+          "publisher": "OpenAI Deployment Safety Hub",
+          "url": "https://deploymentsafety.openai.com/chatgpt-images-2-5"
+        }
+      ]
+    },
+    {
+      "slug": "ai-alphagenome-atlas-pre-calcula-9-bilhoes-2026-09-08",
+      "title": "AlphaGenome Atlas pré-calcula 9 bilhões de variantes humanas",
+      "topic": "ai",
+      "relatedTopics": [
+        "industry",
+        "cloud"
+      ],
+      "signalType": "research",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-09T12:11:55.247Z",
+      "relevanceScore": 9.6,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "AlphaGenome Atlas: a high-resolution map of human DNA",
+          "publisher": "Google",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/alphagenome-atlas/"
+        },
+        {
+          "title": "AlphaGenome Atlas: A predictive map of every possible DNA letter change",
+          "publisher": "Google DeepMind",
+          "url": "https://deepmind.google/blog/alphagenome-atlas-a-predictive-map-of-every-possible-dna-letter-change-in-the-human-genome/"
+        }
+      ]
+    },
+    {
+      "slug": "ai-meta-lanca-muse-para-executar-tarefas-em-2026-09-08",
+      "title": "Meta lança Muse para executar tarefas em uma VM isolada",
+      "topic": "ai",
+      "relatedTopics": [
+        "security",
+        "industry"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-09T12:11:52.968Z",
+      "relevanceScore": 9.8,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Introducing Muse: The World’s First Personal AI Agent Built for Everyone",
+          "publisher": "Meta",
+          "url": "https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/"
+        },
+        {
+          "title": "How We Built Safety Into Muse",
+          "publisher": "Meta AI Research",
+          "url": "https://research.meta.ai/blog/security-and-safety-for-ai-agents-our-approach-with-muse"
+        },
+        {
+          "title": "Meta debuts its Muse AI agent. Will consumers trust it?",
+          "publisher": "TechCrunch",
+          "url": "https://techcrunch.com/2026/09/08/meta-debuts-its-muse-ai-agent-will-consumers-trust-it/"
+        }
+      ]
+    },
+    {
+      "slug": "ai-openai-apresenta-prova-de-navier-stokes-2026-09-08",
+      "title": "OpenAI apresenta prova de Navier-Stokes gerada por 10 mil agentes",
+      "topic": "ai",
+      "relatedTopics": [
+        "development",
+        "industry"
+      ],
+      "signalType": "research",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-09T12:11:50.763Z",
+      "relevanceScore": 10,
+      "confidenceScore": 9.3,
+      "sources": [
+        {
+          "title": "Finite Time Blowup for Navier-Stokes",
+          "publisher": "OpenAI",
+          "url": "https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf"
+        },
+        {
+          "title": "Lean certificates accompanying Navier-Stokes and Euler results",
+          "publisher": "OpenAI / GitHub",
+          "url": "https://github.com/openai/NavierStokesAndEuler"
+        },
+        {
+          "title": "Statement on concurrent Euler and Navier-Stokes work",
+          "publisher": "Tristan Buckmaster / NYU",
+          "url": "https://cims.nyu.edu/~tristanb/statement.pdf"
+        },
+        {
+          "title": "AI Has Solved One of Math’s $1 Million Millennium Prize Problems",
+          "publisher": "Quanta Magazine",
+          "url": "https://www.quantamagazine.org/ai-has-solved-one-of-maths-1-million-millennium-prize-problems-20260908/"
+        },
+        {
+          "title": "Navier-Stokes Equation",
+          "publisher": "Clay Mathematics Institute",
+          "url": "https://www.claymath.org/millennium/navier-stokes-equation/"
+        }
+      ]
+    },
+    {
+      "slug": "ai-mercury-2-5-leva-llm-por-difusao-a-260-m-2026-09-08",
+      "title": "Mercury 2.5 leva LLM por difusão a 260 mil tokens de contexto",
+      "topic": "ai",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-09T12:11:48.009Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.2,
+      "sources": [
+        {
+          "title": "Introducing Mercury 2.5",
+          "publisher": "Inception",
+          "url": "https://www.inceptionlabs.ai/blog/introducing-mercury-2-5"
+        },
+        {
+          "title": "Mercury 2.5 model profile",
+          "publisher": "BenchLM",
+          "url": "https://benchlm.ai/models/mercury-2-5"
+        }
+      ]
+    },
+    {
+      "slug": "ai-weathernext-3-leva-previsao-global-de-ia-2026-09-03",
+      "title": "WeatherNext 3 leva previsão global de IA a ciclos horários",
+      "topic": "ai",
+      "relatedTopics": [
+        "cloud",
+        "industry"
+      ],
+      "signalType": "research",
+      "signalDate": "2026-09-03",
+      "publishedAt": "2026-09-08T11:53:53.263Z",
+      "relevanceScore": 9.3,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Introducing WeatherNext 3, our most advanced and accurate global weather AI model",
+          "publisher": "Google DeepMind e Google Research",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/introducing-weathernext-3/"
+        },
+        {
+          "title": "WeatherNext 3: Increasing resolution and performance of global weather models with raw observations",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/abs/2609.03582"
+        }
+      ]
+    },
+    {
+      "slug": "ai-claude-fable-5-1-reduz-custo-e-separa-ca-2026-09-01",
+      "title": "Claude Fable 5.1 reduz custo e separa capacidades por salvaguardas",
+      "topic": "ai",
+      "relatedTopics": [
+        "development",
+        "security"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-01",
+      "publishedAt": "2026-09-07T11:58:49.300Z",
+      "relevanceScore": 9.4,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Claude Fable 5.1 and Mythos 5.1",
+          "publisher": "Anthropic",
+          "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1"
+        },
+        {
+          "title": "Claude Platform release notes",
+          "publisher": "Anthropic",
+          "url": "https://docs.anthropic.com/en/release-notes/api"
+        }
+      ]
+    },
+    {
+      "slug": "ai-timesfm-3-leva-previsao-multivariada-zer-2026-08-31",
+      "title": "TimesFM-3 leva previsão multivariada zero-shot ao open source",
+      "topic": "ai",
+      "relatedTopics": [
+        "development",
+        "cloud"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-31",
+      "publishedAt": "2026-09-05T11:20:26.053Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "TimesFM-3: A zero-shot foundation model for multivariate forecasting",
+          "publisher": "Google Research",
+          "url": "https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/"
+        },
+        {
+          "title": "google-research/timesfm",
+          "publisher": "Google Research / GitHub",
+          "url": "https://github.com/google-research/timesfm"
+        }
+      ]
+    },
+    {
+      "slug": "ai-claude-formaliza-o-ultimo-teorema-de-fer-2026-09-04",
+      "title": "Claude formaliza o Último Teorema de Fermat em Lean",
+      "topic": "ai",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "research",
+      "signalDate": "2026-09-04",
+      "publishedAt": "2026-09-05T11:20:23.543Z",
+      "relevanceScore": 9.6,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Formalizing Fermat's Last Theorem",
+          "publisher": "Anthropic",
+          "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem"
+        },
+        {
+          "title": "Fermat's Last Theorem in Lean 4",
+          "publisher": "Anthropic / GitHub",
+          "url": "https://github.com/anthropics/fermats-last-theorem"
+        }
+      ]
+    },
+    {
+      "slug": "ai-gpt-6-astra-amplia-agentes-e-expoe-limit-2026-09-03",
+      "title": "GPT-6 Astra amplia agentes e expõe limites de monitoramento",
+      "topic": "ai",
+      "relatedTopics": [
+        "development",
+        "security"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-03",
+      "publishedAt": "2026-09-04T11:34:04.816Z",
+      "relevanceScore": 9.9,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "GPT-6 Astra Model",
+          "publisher": "OpenAI",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6-astra"
+        },
+        {
+          "title": "GPT-6 Astra System Card",
+          "publisher": "OpenAI",
+          "url": "https://deploymentsafety.openai.com/gpt-6-astra"
+        }
+      ]
+    },
+    {
+      "slug": "ai-muse-spark-1-3-avanca-em-agentes-mas-usa-2026-09-02",
+      "title": "Muse Spark 1.3 avança em agentes, mas usa mais tokens",
+      "topic": "ai",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-02",
+      "publishedAt": "2026-09-03T11:33:40.896Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Introducing Muse Spark 1.3",
+          "publisher": "Meta AI Research",
+          "url": "https://research.meta.ai/blog/introducing-muse-spark-1-3"
+        },
+        {
+          "title": "Muse Spark 1.3: Meta reaches the frontier",
+          "publisher": "Artificial Analysis",
+          "url": "https://artificialanalysis.ai/articles/muse-spark-1-3"
+        }
+      ]
+    },
+    {
+      "slug": "ai-ibm-abre-granite-4-2-para-agentes-locais-2026-08-25",
+      "title": "IBM abre Granite 4.2 para agentes locais e raciocínio",
+      "topic": "ai",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-25",
+      "publishedAt": "2026-09-02T22:35:05.049Z",
+      "relevanceScore": 8.5,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Granite 4.2 brings native reasoning to enterprise agents",
+          "publisher": "IBM Research",
+          "url": "https://research.ibm.com/blog/introducing-granite-4-2"
+        },
+        {
+          "title": "ibm-granite/granite-4.2-8b",
+          "publisher": "IBM Granite",
+          "url": "https://huggingface.co/ibm-granite/granite-4.2-8b"
+        },
+        {
+          "title": "IBM's new Granite 4.2 models ride the wave of interest in local LLMs",
+          "publisher": "Ars Technica",
+          "url": "https://arstechnica.com/ai/2026/08/ibms-new-granite-4-2-models-ride-the-wave-of-interest-in-local-llms/"
+        }
+      ]
+    },
+    {
+      "slug": "ai-gemini-3-8-combina-agentes-de-codigo-e-d-2026-09-02",
+      "title": "Gemini 3.8 combina agentes de código e defesa cibernética",
+      "topic": "ai",
+      "relatedTopics": [
+        "development",
+        "security"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-02",
+      "publishedAt": "2026-09-02T22:34:54.962Z",
+      "relevanceScore": 9.3,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Gemini 3.8 Flash and Gemini 3.8 Flash Cyber",
+          "publisher": "Google",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"
+        }
+      ]
+    },
+    {
+      "slug": "ai-google-libera-um-ano-de-ai-plus-para-uni-2026-08-20",
+      "title": "Google libera um ano de AI Plus para universitários no Brasil",
+      "topic": "ai",
+      "relatedTopics": [
+        "industry"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-08-20",
+      "publishedAt": "2026-08-27T12:54:27.199Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Veja como começar o semestre com 1 ano de Gemini",
+          "publisher": "Google Brasil",
+          "url": "https://blog.google/intl/pt-br/produtos/semestre-com-1-ano-de-gemini-estudante/"
+        },
+        {
+          "title": "Gemini para estudantes",
+          "publisher": "Google Gemini",
+          "url": "https://gemini.google/br/students/?hl=pt-BR"
+        }
+      ]
+    },
+    {
+      "slug": "ai-qwen-abre-preview-da-arquitetura-do-qwen-2026-08-26",
+      "title": "Qwen abre preview da arquitetura do Qwen4",
+      "topic": "ai",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "research",
+      "signalDate": "2026-08-26",
+      "publishedAt": "2026-08-27T11:15:18.803Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Qwen3.8-Flash-Next: A New Architecture, Towards Ultimate Cost-Efficiency",
+          "publisher": "Qwen",
+          "url": "https://qwen.ai/blog?id=qwen3.8-flash-next"
+        },
+        {
+          "title": "Qwen3.8-Flash-Next model card",
+          "publisher": "Qwen on Hugging Face",
+          "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
+        }
+      ]
+    },
+    {
+      "slug": "ai-gemini-3-5-transcribe-leva-streaming-de-2026-08-26",
+      "title": "Gemini 3.5 Transcribe leva streaming de voz a GA",
+      "topic": "ai",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-26",
+      "publishedAt": "2026-08-27T11:15:04.092Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Intelligent transcription with Gemini 3.5 Transcribe",
+          "publisher": "Google",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5-transcribe/"
+        },
+        {
+          "title": "Gemini 3.5 Transcribe",
+          "publisher": "Google AI for Developers",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe"
+        }
+      ]
+    },
+    {
+      "slug": "ai-ox-alpha-estreia-gratis-e-anonimo-no-ope-2026-08-20",
+      "title": "Ox Alpha estreia grátis e anônimo no OpenRouter",
+      "topic": "ai",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-20",
+      "publishedAt": "2026-08-25T02:15:02.745Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Ox Alpha - API Pricing & Providers",
+          "publisher": "OpenRouter",
+          "url": "https://openrouter.ai/stealth/ox-alpha"
+        },
+        {
+          "title": "GLM-5.3-Flash: Frontier Intelligence, Flash Cost",
+          "publisher": "Z.ai",
+          "url": "https://z.ai/blog/glm-5.3-flash"
+        }
+      ]
+    },
+    {
+      "slug": "ai-claude-api-leva-computer-use-e-agent-ski-2026-08-19",
+      "title": "Claude API leva computer use e Agent Skills a GA",
+      "topic": "ai",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-19",
+      "publishedAt": "2026-08-21T11:22:08.952Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Claude Platform release notes",
+          "publisher": "Anthropic",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview"
+        }
+      ]
+    },
+    {
+      "slug": "ai-gemini-3-7-flash-reduz-custo-de-agentes-2026-08-13",
+      "title": "Gemini 3.7 Flash reduz custo de agentes",
+      "topic": "ai",
+      "relatedTopics": [],
+      "signalType": "release",
+      "signalDate": "2026-08-13",
+      "publishedAt": "2026-08-13T22:53:00.457Z",
+      "relevanceScore": 8.2,
+      "confidenceScore": 8.8,
+      "sources": [
+        {
+          "title": "Introducing Gemini 3.7 Flash, our most intelligent workhorse model yet for coding and agents",
+          "publisher": "Google",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/"
+        }
+      ]
+    },
+    {
+      "slug": "ai-claude-sonnet-5-aproxima-capacidade-agen-2026-06-30",
+      "title": "Claude Sonnet 5 aproxima capacidade agentiva",
+      "topic": "ai",
+      "relatedTopics": [],
+      "signalType": "release",
+      "signalDate": "2026-06-30",
+      "publishedAt": "2026-08-13T18:12:20.289Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "Introducing Claude Sonnet 5",
+          "publisher": "Anthropic",
+          "url": "https://www.anthropic.com/news/claude-sonnet-5"
+        }
+      ]
+    },
+    {
+      "slug": "ai-claude-opus-5-chega-com-foco-em-agentes-2026-07-24",
+      "title": "Claude Opus 5 chega com foco em agentes",
+      "topic": "ai",
+      "relatedTopics": [],
+      "signalType": "release",
+      "signalDate": "2026-07-24",
+      "publishedAt": "2026-08-13T18:00:16.392Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.3,
+      "sources": [
+        {
+          "title": "Introducing Claude Opus 5",
+          "publisher": "Anthropic",
+          "url": "https://www.anthropic.com/news/claude-opus-5"
+        }
+      ]
+    },
+    {
+      "slug": "ai-openai-apresenta-gpt-5-6-2026-07-09",
+      "title": "OpenAI apresenta GPT-5.6",
+      "topic": "ai",
+      "relatedTopics": [],
+      "signalType": "release",
+      "signalDate": "2026-07-09",
+      "publishedAt": "2026-08-13T15:29:17.183Z",
+      "relevanceScore": 9.3,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Model guidance",
+          "publisher": "OpenAI",
+          "url": "https://developers.openai.com/api/docs/guides/latest-model"
+        },
+        {
+          "title": "GPT-5.6 System Card",
+          "publisher": "OpenAI",
+          "url": "https://deploymentsafety.openai.com/gpt-5-6"
+        }
+      ]
+    },
+    {
+      "slug": "development-hydrafusion-chega-ao-vs-code-e-github-co-2026-09-30",
+      "title": "HydraFusion chega ao VS Code e GitHub Copilot app em research preview",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-30",
+      "publishedAt": "2026-10-01T10:57:28.386Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "HydraFusion in VS Code and the GitHub Copilot app",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app/"
+        }
+      ]
+    },
+    {
+      "slug": "development-serverpod-4-adiciona-hot-reload-full-sta-2026-09-14",
+      "title": "Serverpod 4 adiciona hot reload full-stack e fluxo agentivo para Flutter",
+      "topic": "development",
+      "relatedTopics": [
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-14",
+      "publishedAt": "2026-09-27T16:26:55.749Z",
+      "relevanceScore": 8.1,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Serverpod 4",
+          "publisher": "Serverpod",
+          "url": "https://serverpod.dev/blog/serverpod-4"
+        }
+      ]
+    },
+    {
+      "slug": "development-github-copilot-adiciona-gpt-6-sol-e-luna-2026-09-22",
+      "title": "GitHub Copilot adiciona GPT-6 Sol e Luna em IDEs, CLI e cloud agent",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-22",
+      "publishedAt": "2026-09-23T19:48:30.290Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "OpenAI’s GPT-6 Sol and GPT-6 Luna now available in GitHub Copilot",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-22-openais-gpt-6-sol-and-gpt-6-luna-now-available/"
+        }
+      ]
+    },
+    {
+      "slug": "development-strands-harness-empacota-agentes-complet-2026-09-21",
+      "title": "Strands Harness empacota agentes completos em Python e TypeScript com foco em custo",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-21",
+      "publishedAt": "2026-09-23T19:48:19.050Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Introducing Strands Harness",
+          "publisher": "Strands Agents",
+          "url": "https://strandsagents.com/blog/introducing-strands-harness/"
+        }
+      ]
+    },
+    {
+      "slug": "development-node-js-26-10-adiciona-parsepkcs12-util-2026-09-22",
+      "title": "Node.js 26.10 adiciona parsePKCS12, util.throttle e debounce",
+      "topic": "development",
+      "relatedTopics": [],
+      "signalType": "release",
+      "signalDate": "2026-09-22",
+      "publishedAt": "2026-09-23T16:45:49.084Z",
+      "relevanceScore": 7.9,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Node.js 26.10.0 (Current)",
+          "publisher": "Node.js",
+          "url": "https://nodejs.org/en/blog/release/v26.10.0"
+        }
+      ]
+    },
+    {
+      "slug": "development-vercel-sandbox-ganha-drives-persistentes-2026-09-22",
+      "title": "Vercel Sandbox ganha Drives persistentes de até 16 TiB",
+      "topic": "development",
+      "relatedTopics": [
+        "cloud",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-22",
+      "publishedAt": "2026-09-23T16:45:46.920Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Drives for Vercel Sandbox are now in public beta",
+          "publisher": "Vercel",
+          "url": "https://vercel.com/changelog/drives-for-vercel-sandbox-are-now-in-public-beta"
+        }
+      ]
+    },
+    {
+      "slug": "development-openrouter-lanca-batch-api-para-workload-2026-09-22",
+      "title": "OpenRouter lança Batch API para workloads assíncronos",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "cloud"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-22",
+      "publishedAt": "2026-09-23T16:41:50.180Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Batch API: half-price inference by bundling requests",
+          "publisher": "OpenRouter",
+          "url": "https://openrouter.ai/blog/announcements/batch-api/"
+        }
+      ]
+    },
+    {
+      "slug": "development-cloudflare-leva-python-workers-a-ga-com-2026-09-21",
+      "title": "Cloudflare leva Python Workers a GA com FastAPI, Django e bindings nativos",
+      "topic": "development",
+      "relatedTopics": [
+        "cloud",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-21",
+      "publishedAt": "2026-09-22T11:12:12.215Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Python Workers are now generally available",
+          "publisher": "Cloudflare",
+          "url": "https://blog.cloudflare.com/python-workers-ga/"
+        }
+      ]
+    },
+    {
+      "slug": "development-github-copilot-aposenta-seis-modelos-em-2026-09-18",
+      "title": "GitHub Copilot aposenta seis modelos em 19 de outubro",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-18",
+      "publishedAt": "2026-09-19T11:58:46.076Z",
+      "relevanceScore": 8.4,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Upcoming deprecation of selected GitHub Copilot models in mid-October",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-18-upcoming-deprecation-of-selected-github-copilot-models-in-mid-october/"
+        }
+      ]
+    },
+    {
+      "slug": "development-vs-code-1-138-leva-agentes-para-dev-cont-2026-09-16",
+      "title": "VS Code 1.138 leva agentes para Dev Containers e amplia sessões do Codex",
+      "topic": "development",
+      "relatedTopics": [
+        "devops",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-16",
+      "publishedAt": "2026-09-18T11:45:15.098Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Visual Studio Code 1.138",
+          "publisher": "Microsoft",
+          "url": "https://code.visualstudio.com/updates/v1_138"
+        }
+      ]
+    },
+    {
+      "slug": "development-copilot-deixa-times-escolherem-custo-lat-2026-09-14",
+      "title": "Copilot deixa times escolherem custo, latência ou qualidade na seleção automática de modelos",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-14",
+      "publishedAt": "2026-09-15T11:21:15.434Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Configure cost and quality in Copilot auto model selection",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-copilot-auto-model-selection/"
+        }
+      ]
+    },
+    {
+      "slug": "development-copilot-code-review-passa-a-usar-shell-t-2026-09-11",
+      "title": "Copilot code review passa a usar shell tools e ensemble de agentes",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "security"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-11",
+      "publishedAt": "2026-09-13T11:33:31.711Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Auto-resolution and analysis updates in Copilot code review",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-11-auto-resolution-and-analysis-updates-in-copilot-code-review/"
+        }
+      ]
+    },
+    {
+      "slug": "development-google-cloud-empacota-skills-e-mcp-em-pl-2026-09-10",
+      "title": "Google Cloud empacota skills e MCP em plugin portátil para agentes de código",
+      "topic": "development",
+      "relatedTopics": [
+        "cloud",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-13T11:10:39.522Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Introducing the Google Cloud Developer Plugin for AI Coding Agents",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/blog/topics/developers-practitioners/introducing-the-google-cloud-developer-plugin-for-ai-coding-agents"
+        }
+      ]
+    },
+    {
+      "slug": "development-react-19-3-estabiliza-view-transitions-e-2026-09-09",
+      "title": "React 19.3 estabiliza View Transitions e adiciona browser() ao SSR",
+      "topic": "development",
+      "relatedTopics": [
+        "design",
+        "security"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-09",
+      "publishedAt": "2026-09-12T11:20:10.033Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "React 19.3",
+          "publisher": "React",
+          "url": "https://react.dev/blog/2026/09/09/react-19-3"
+        }
+      ]
+    },
+    {
+      "slug": "development-openrouter-da-terminal-e-arquivos-persis-2026-09-08",
+      "title": "OpenRouter dá terminal e arquivos persistentes a qualquer modelo",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "cloud"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-11T16:36:08.292Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Give any model a terminal and files",
+          "publisher": "OpenRouter",
+          "url": "https://openrouter.ai/blog/announcements/shell-tool/"
+        }
+      ]
+    },
+    {
+      "slug": "development-vs-code-1-137-agenda-tarefas-recorrentes-2026-09-09",
+      "title": "VS Code 1.137 agenda tarefas recorrentes para agentes",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-09",
+      "publishedAt": "2026-09-11T16:35:50.246Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Visual Studio Code 1.137",
+          "publisher": "Microsoft",
+          "url": "https://code.visualstudio.com/updates/v1_137"
+        }
+      ]
+    },
+    {
+      "slug": "development-cursor-projects-coordena-agentes-persist-2026-09-10",
+      "title": "Cursor Projects coordena agentes persistentes e recorrentes",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-11T16:28:16.723Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Cursor Projects",
+          "publisher": "Cursor",
+          "url": "https://cursor.com/changelog/projects"
+        }
+      ]
+    },
+    {
+      "slug": "development-openai-abre-agents-api-com-harness-geren-2026-09-10",
+      "title": "OpenAI abre Agents API com harness gerenciado do Codex",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "cloud"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-11T11:19:27.380Z",
+      "relevanceScore": 9.6,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Agents API overview",
+          "publisher": "OpenAI",
+          "url": "https://developers.openai.com/api/docs/guides/agents-api/overview"
+        },
+        {
+          "title": "OpenAI API changelog",
+          "publisher": "OpenAI",
+          "url": "https://developers.openai.com/api/docs/changelog"
+        }
+      ]
+    },
+    {
+      "slug": "development-rust-vira-linguagem-tier-1-na-engenharia-2026-09-10",
+      "title": "Rust vira linguagem Tier 1 na engenharia da Microsoft",
+      "topic": "development",
+      "relatedTopics": [
+        "security",
+        "industry"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-11T11:19:11.081Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "Guest Post: Rust Is Tier-1 Language at Microsoft",
+          "publisher": "Rust Foundation",
+          "url": "https://rustfoundation.org/media/guest-post-rust-is-tier-1-language-at-microsoft/"
+        }
+      ]
+    },
+    {
+      "slug": "development-shopify-abandona-react-native-e-volta-a-2026-09-10",
+      "title": "Shopify abandona React Native e volta a Swift e Kotlin",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "industry"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-11T11:19:05.842Z",
+      "relevanceScore": 9.7,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Native is now the future of mobile at Shopify",
+          "publisher": "Shopify Engineering",
+          "url": "https://shopify.engineering/back-to-native"
+        }
+      ]
+    },
+    {
+      "slug": "development-github-impoe-permissoes-centrais-a-agent-2026-09-09",
+      "title": "GitHub impõe permissões centrais a agentes do Copilot",
+      "topic": "development",
+      "relatedTopics": [
+        "security",
+        "industry"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-09",
+      "publishedAt": "2026-09-10T11:29:53.340Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Enterprise managed permissions for GitHub Copilot agent operations",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-09-enterprise-managed-permissions-for-github-copilot-agent-operations/"
+        },
+        {
+          "title": "Enterprise managed settings",
+          "publisher": "GitHub Docs",
+          "url": "https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings"
+        }
+      ]
+    },
+    {
+      "slug": "development-net-11-rc1-ganha-licenca-go-live-para-pr-2026-09-08",
+      "title": ".NET 11 RC1 ganha licença go-live para produção",
+      "topic": "development",
+      "relatedTopics": [
+        "cloud",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-10T11:29:51.148Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Announcing .NET 11 Release Candidate 1",
+          "publisher": "Microsoft .NET Blog",
+          "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-rc-1/"
+        },
+        {
+          "title": "What's new in .NET 11",
+          "publisher": "Microsoft Learn",
+          "url": "https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-11/overview"
+        }
+      ]
+    },
+    {
+      "slug": "development-visual-studio-18-10-abre-agent-mode-a-mo-2026-09-08",
+      "title": "Visual Studio 18.10 abre Agent Mode a modelos fora do Copilot",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-09T12:38:40.651Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Visual Studio 2026 September Update 18.10.0 release notes",
+          "publisher": "Microsoft Learn",
+          "url": "https://learn.microsoft.com/en-us/visualstudio/releases/2026/release-notes"
+        }
+      ]
+    },
+    {
+      "slug": "development-github-enterprise-server-3-22-leva-copil-2026-09-08",
+      "title": "GitHub Enterprise Server 3.22 leva Copilot CLI a redes isoladas",
+      "topic": "development",
+      "relatedTopics": [
+        "security",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-09T12:12:41.005Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "GitHub Enterprise Server 3.22 is now generally available",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-08-github-enterprise-server-3-22-is-now-generally-available/"
+        },
+        {
+          "title": "GitHub Enterprise Server 3.22 release notes",
+          "publisher": "GitHub Docs",
+          "url": "https://docs.github.com/en/enterprise-server@3.22/admin/release-notes"
+        }
+      ]
+    },
+    {
+      "slug": "development-rovo-mcp-v2-amplia-agentes-para-bitbucke-2026-09-08",
+      "title": "Rovo MCP v2 amplia agentes para Bitbucket e Loom em GA",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-08T11:52:51.563Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Atlassian Rovo MCP v2 is now Generally Available",
+          "publisher": "Atlassian Developer Changelog",
+          "url": "https://developer.atlassian.com/changelog/"
+        },
+        {
+          "title": "Getting started with the Atlassian Rovo MCP Server",
+          "publisher": "Atlassian Developer",
+          "url": "https://developer.atlassian.com/cloud/rovo-mcp/guides/getting-started/"
+        }
+      ]
+    },
+    {
+      "slug": "development-project-zenith-leva-windows-pronto-para-2026-09-04",
+      "title": "Project Zenith leva Windows pronto para código a PCs de 64 GB",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "security"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-04",
+      "publishedAt": "2026-09-06T12:03:52.099Z",
+      "relevanceScore": 8.5,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Announcing Project Zenith: the ready-to-code Windows experience",
+          "publisher": "Microsoft Windows Developer Blog",
+          "url": "https://blogs.windows.com/windowsdeveloper/2026/09/04/announcing-project-zenith-the-ready-to-code-windows-experience/"
+        },
+        {
+          "title": "Microsoft's Project Zenith turns high-end Windows PCs into developer machines",
+          "publisher": "The Verge",
+          "url": "https://www.theverge.com/news/990051/microsoft-project-zenith-windows-developers"
+        }
+      ]
+    },
+    {
+      "slug": "development-github-aposenta-quatro-modelos-do-copilo-2026-09-03",
+      "title": "GitHub aposenta quatro modelos do Copilot em 2 de outubro",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-09-03",
+      "publishedAt": "2026-09-04T11:34:03.397Z",
+      "relevanceScore": 8.4,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Upcoming deprecation of selected GitHub Copilot models",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-03-upcoming-deprecation-of-selected-github-copilot-models/"
+        }
+      ]
+    },
+    {
+      "slug": "development-polars-2-0-entra-em-rc-com-streaming-por-2026-09-02",
+      "title": "Polars 2.0 entra em RC com streaming por padrão",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "cloud"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-02",
+      "publishedAt": "2026-09-03T11:27:52.526Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Pre-release of Polars 2.0",
+          "publisher": "Polars",
+          "url": "https://pola.rs/posts/announcing-polars-2/"
+        },
+        {
+          "title": "Python Polars 2.0.0-rc.1",
+          "publisher": "GitHub",
+          "url": "https://github.com/pola-rs/polars/releases"
+        }
+      ]
+    },
+    {
+      "slug": "development-nativescript-9-1-aproxima-apps-moveis-do-2026-08-27",
+      "title": "NativeScript 9.1 aproxima apps móveis do ecossistema Node e Web",
+      "topic": "development",
+      "relatedTopics": [
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-27",
+      "publishedAt": "2026-09-02T22:35:01.541Z",
+      "relevanceScore": 8.3,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "NativeScript 9.1 Released",
+          "publisher": "NativeScript",
+          "url": "https://blog.nativescript.org/nativescript-9-1-announcement/"
+        }
+      ]
+    },
+    {
+      "slug": "development-google-cria-certificacao-profissional-pa-2026-08-27",
+      "title": "Google cria certificação profissional para arquitetos de agentes",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "cloud"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-27",
+      "publishedAt": "2026-08-27T12:53:10.707Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Professional Agentic Architect Certification",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/learn/certification/agentic-architect"
+        },
+        {
+          "title": "Google Cloud Certifications",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/learn/certification"
+        }
+      ]
+    },
+    {
+      "slug": "development-posthog-desktop-une-dados-de-produto-e-a-2026-08-26",
+      "title": "PostHog Desktop une dados de produto e agentes",
+      "topic": "development",
+      "relatedTopics": [
+        "design",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-26",
+      "publishedAt": "2026-08-26T11:32:45.240Z",
+      "relevanceScore": 8.2,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "Download PostHog Desktop",
+          "publisher": "PostHog",
+          "url": "https://posthog.com/docs/posthog-desktop/download-posthog-desktop"
+        },
+        {
+          "title": "PostHog releases",
+          "publisher": "GitHub",
+          "url": "https://github.com/PostHog/posthog/releases"
+        }
+      ]
+    },
+    {
+      "slug": "development-go-1-27-adiciona-metodos-genericos-e-jso-2026-08-19",
+      "title": "Go 1.27 adiciona métodos genéricos e JSON v2",
+      "topic": "development",
+      "relatedTopics": [],
+      "signalType": "release",
+      "signalDate": "2026-08-19",
+      "publishedAt": "2026-08-25T11:55:12.830Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Go 1.27 is released",
+          "publisher": "The Go Team",
+          "url": "https://go.dev/blog/go1.27"
+        }
+      ]
+    },
+    {
+      "slug": "development-meta-lanca-muse-code-e-muse-spark-1-2-2026-08-05",
+      "title": "Meta lança Muse Code e Muse Spark 1.2",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-05",
+      "publishedAt": "2026-08-25T02:15:05.425Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Introducing Muse Code and Muse Spark 1.2",
+          "publisher": "Meta AI Research",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ]
+    },
+    {
+      "slug": "development-langchain-leva-managed-deep-agents-a-bet-2026-08-07",
+      "title": "LangChain leva Managed Deep Agents a beta público",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-07",
+      "publishedAt": "2026-08-25T02:15:00.425Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Managed Deep Agents is now in public beta",
+          "publisher": "LangChain",
+          "url": "https://www.langchain.com/blog/managed-deep-agents-is-now-in-public-beta"
+        },
+        {
+          "title": "Managed Deep Agents",
+          "publisher": "LangChain Docs",
+          "url": "https://docs.langchain.com/langsmith/python/managed-deep-agents-overview"
+        }
+      ]
+    },
+    {
+      "slug": "development-rust-ativa-novo-trait-solver-no-nightly-2026-08-21",
+      "title": "Rust ativa novo trait solver no nightly",
+      "topic": "development",
+      "relatedTopics": [],
+      "signalType": "shift",
+      "signalDate": "2026-08-21",
+      "publishedAt": "2026-08-24T11:30:49.549Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Enabling the next-generation trait solver on nightly",
+          "publisher": "Rust Project",
+          "url": "https://blog.rust-lang.org/2026/08/21/enabling-next-solver-on-nightly/"
+        }
+      ]
+    },
+    {
+      "slug": "development-v0-conecta-apps-a-mais-de-100-servicos-2026-08-21",
+      "title": "v0 conecta apps a mais de 100 serviços",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-21",
+      "publishedAt": "2026-08-22T11:40:36.135Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Connect v0 apps to Slack, Google, and 100+ other services",
+          "publisher": "Vercel",
+          "url": "https://vercel.com/changelog/connect-v0-apps-to-slack-google-and-100-other-services"
+        },
+        {
+          "title": "Vercel Connect is now generally available",
+          "publisher": "Vercel",
+          "url": "https://vercel.com/changelog/vercel-connect-ga"
+        }
+      ]
+    },
+    {
+      "slug": "development-copilot-leva-agentes-compartilhados-ao-s-2026-08-21",
+      "title": "Copilot leva agentes compartilhados ao Slack e Teams",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-21",
+      "publishedAt": "2026-08-22T11:40:34.084Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "The new GitHub Copilot experience in Slack",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack/"
+        },
+        {
+          "title": "Shared agentic work with GitHub Copilot in Microsoft Teams",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-08-21-shared-agentic-work-with-github-copilot-in-microsoft-teams/"
+        }
+      ]
+    },
+    {
+      "slug": "development-bun-1-4-reescreve-runtime-em-rust-2026-08-20",
+      "title": "Bun 1.4 reescreve runtime em Rust",
+      "topic": "development",
+      "relatedTopics": [],
+      "signalType": "release",
+      "signalDate": "2026-08-20",
+      "publishedAt": "2026-08-21T11:21:47.004Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "Bun 1.4",
+          "publisher": "Bun",
+          "url": "https://bun.com/blog/bun-v1.4"
+        }
+      ]
+    },
+    {
+      "slug": "development-agent-plugins-1-0-padroniza-extensoes-de-2026-08-06",
+      "title": "Agent Plugins 1.0 padroniza extensões de agentes",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-06",
+      "publishedAt": "2026-08-20T16:17:36.949Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Agent Plugins package your skills, tools, and more",
+          "publisher": "Google for Developers",
+          "url": "https://developers.googleblog.com/agent-plugins-package-your-skills-tools-and-more/"
+        },
+        {
+          "title": "Agent Plugins 1.0 in VS Code, Copilot CLI, and the Copilot app",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-08-12-agent-plugins-1-0-in-vs-code-copilot-cli-and-the-copilot-app/"
+        }
+      ]
+    },
+    {
+      "slug": "development-cursor-lanca-hospedagem-de-codigo-origin-2026-08-17",
+      "title": "Cursor lança hospedagem de código Origin",
+      "topic": "development",
+      "relatedTopics": [
+        "devops",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-17",
+      "publishedAt": "2026-08-20T16:17:35.110Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Origin Code Hosting",
+          "publisher": "Cursor",
+          "url": "https://cursor.com/changelog/origin-code-hosting"
+        }
+      ]
+    },
+    {
+      "slug": "development-cursor-permite-agentes-assinarem-eventos-2026-08-19",
+      "title": "Cursor permite agentes assinarem eventos",
+      "topic": "development",
+      "relatedTopics": [
+        "ai",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-19",
+      "publishedAt": "2026-08-20T16:17:34.198Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Cloud Agents and Cursor Harness Improvements",
+          "publisher": "Cursor",
+          "url": "https://cursor.com/changelog/08-19-26"
+        }
+      ]
+    },
+    {
+      "slug": "development-copilot-no-jetbrains-ganha-politicas-emp-2026-08-18",
+      "title": "Copilot no JetBrains adiciona sandbox gerenciado e integração com CLI",
+      "topic": "development",
+      "relatedTopics": [
+        "security",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-18",
+      "publishedAt": "2026-08-20T16:17:33.403Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Enterprise managed settings in GitHub Copilot for JetBrains",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains/"
+        },
+        {
+          "title": "Enterprise managed sandbox in Copilot for JetBrains",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-08-enterprise-managed-sandbox-in-copilot-for-jetbrains/"
+        }
+      ]
+    },
+    {
+      "slug": "development-github-encerra-spark-em-31-de-agosto-2026-08-04",
+      "title": "GitHub encerra Spark em 31 de agosto",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-08-04",
+      "publishedAt": "2026-08-20T16:17:30.381Z",
+      "relevanceScore": 8.5,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Upcoming deprecation of GitHub Spark on github.com",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-08-04-upcoming-deprecation-of-github-spark-on-github-com/"
+        }
+      ]
+    },
+    {
+      "slug": "development-copilot-code-review-ganha-mcp-em-ga-2026-07-29",
+      "title": "Copilot Code Review ganha MCP em GA",
+      "topic": "development",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-07-29",
+      "publishedAt": "2026-08-18T01:27:53.885Z",
+      "relevanceScore": 7.9,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "Copilot code review: Agent skills and MCP now generally available",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-07-29-copilot-code-review-agent-skills-and-mcp-now-generally-available/"
+        }
+      ]
+    },
+    {
+      "slug": "development-aws-transform-automatiza-divida-tecnica-2026-06-15",
+      "title": "AWS Transform automatiza dívida técnica",
+      "topic": "development",
+      "relatedTopics": [],
+      "signalType": "opportunity",
+      "signalDate": "2026-06-15",
+      "publishedAt": "2026-08-13T18:12:40.117Z",
+      "relevanceScore": 8.1,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "AWS launches a new continuous modernization capability in AWS Transform that provides autonomous tech debt analysis and remediation at scale",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/about-aws/whats-new/2026/06/aws-transform-continuous-modernization/"
+        }
+      ]
+    },
+    {
+      "slug": "development-github-encerra-github-models-2026-07-30",
+      "title": "GitHub encerra GitHub Models",
+      "topic": "development",
+      "relatedTopics": [],
+      "signalType": "risk",
+      "signalDate": "2026-07-30",
+      "publishedAt": "2026-08-13T15:29:24.679Z",
+      "relevanceScore": 8.2,
+      "confidenceScore": 9.2,
+      "sources": [
+        {
+          "title": "GitHub Models is now retired",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-07-30-github-models-is-now-retired/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-aws-lambda-eleva-throughput-de-rede-ate-2026-09-28",
+      "title": "AWS Lambda eleva throughput de rede até 3 Gbps por ambiente",
+      "topic": "cloud",
+      "relatedTopics": [
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-28",
+      "publishedAt": "2026-09-29T11:00:55.939Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Improving Lambda function latency with scalable network bandwidth",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/blogs/compute/improving-lambda-function-latency-with-scalable-network-bandwidth/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-cloudflare-worker-previews-isola-estado-2026-09-22",
+      "title": "Cloudflare Worker Previews isola estado e observabilidade por branch",
+      "topic": "cloud",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-22",
+      "publishedAt": "2026-09-23T19:48:07.441Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Worker Previews: isolated environments for every change",
+          "publisher": "Cloudflare",
+          "url": "https://blog.cloudflare.com/worker-previews/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-agentcore-runtime-muda-alocacao-de-memor-2026-09-18",
+      "title": "AgentCore Runtime muda alocação de memória e estabiliza cold starts",
+      "topic": "cloud",
+      "relatedTopics": [
+        "ai",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-18",
+      "publishedAt": "2026-09-19T11:58:30.015Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "The new AgentCore runtime: Elastic, optimized, and consistently fast starts",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/blogs/machine-learning/the-new-agentcore-runtime-elastic-optimized-and-consistently-fast-starts/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-sagemaker-hyperpod-ganha-roteamento-de-i-2026-09-18",
+      "title": "SageMaker HyperPod ganha roteamento de inferência consciente de GPU",
+      "topic": "cloud",
+      "relatedTopics": [
+        "ai",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-18",
+      "publishedAt": "2026-09-19T11:58:14.636Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Introducing Amazon SageMaker HyperPod Inference Gateway",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-amazon-sagemaker-hyperpod-inference-gateway/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-cloud-sql-define-cronograma-de-fim-do-sq-2026-09-14",
+      "title": "Cloud SQL define cronograma de fim do SQL Server 2017 para 2027",
+      "topic": "cloud",
+      "relatedTopics": [
+        "devops",
+        "security"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-14",
+      "publishedAt": "2026-09-15T11:21:45.174Z",
+      "relevanceScore": 7.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Cloud SQL for SQL Server release notes",
+          "publisher": "Google Cloud",
+          "url": "https://docs.cloud.google.com/sql/docs/sqlserver/release-notes"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-google-cloud-atualiza-servidores-mcp-par-2026-09-14",
+      "title": "Google Cloud atualiza servidores MCP para a especificação 2026-07-28",
+      "topic": "cloud",
+      "relatedTopics": [
+        "ai",
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-14",
+      "publishedAt": "2026-09-15T11:21:31.013Z",
+      "relevanceScore": 8.2,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Google Cloud MCP servers release notes",
+          "publisher": "Google Cloud",
+          "url": "https://docs.cloud.google.com/mcp/release-notes"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-lambda-managed-instances-amplia-timeout-2026-09-09",
+      "title": "Lambda Managed Instances amplia timeout assíncrono de 15 para 90 minutos",
+      "topic": "cloud",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-09",
+      "publishedAt": "2026-09-13T11:11:43.763Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "AWS Lambda now supports 90-minute function timeout on Lambda Managed Instances",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-lambda-90-minute-function/"
+        },
+        {
+          "title": "Announcing 90-minute function timeout on AWS Lambda Managed Instances",
+          "publisher": "AWS Compute Blog",
+          "url": "https://aws.amazon.com/blogs/compute/announcing-90-minute-function-timeout-on-aws-lambda-managed-instances/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-pub-sub-passa-a-executar-inferencia-de-i-2026-09-10",
+      "title": "Pub/Sub passa a executar inferência de IA durante o streaming",
+      "topic": "cloud",
+      "relatedTopics": [
+        "ai",
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-12T11:20:40.529Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "What’s new with Google Data Cloud",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/blog/products/data-analytics/whats-new-with-google-data-cloud"
+        },
+        {
+          "title": "Pub/Sub pricing",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/pubsub/pricing"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-planetscale-abre-neki-postgres-com-shard-2026-09-10",
+      "title": "PlanetScale abre Neki, Postgres com sharding, em preview",
+      "topic": "cloud",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-11T11:19:11.821Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Introducing Neki",
+          "publisher": "PlanetScale",
+          "url": "https://planetscale.com/blog/introducing-neki"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-cloud-run-troca-inicio-imediato-por-prec-2026-09-08",
+      "title": "Cloud Run troca início imediato por preço menor em jobs adiáveis",
+      "topic": "cloud",
+      "relatedTopics": [
+        "devops",
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-10T11:29:55.188Z",
+      "relevanceScore": 8.5,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Delay execution of a job",
+          "publisher": "Google Cloud Documentation",
+          "url": "https://docs.cloud.google.com/run/docs/delayed-jobs"
+        },
+        {
+          "title": "Cloud Run release notes",
+          "publisher": "Google Cloud Documentation",
+          "url": "https://docs.cloud.google.com/run/docs/release-notes"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-vercel-leva-cobranca-fixa-de-cdn-a-equip-2026-09-08",
+      "title": "Vercel leva cobrança fixa de CDN a equipes Pro",
+      "topic": "cloud",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-09T12:38:41.748Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Flat Rate CDN is now GA for Pro teams",
+          "publisher": "Vercel Changelog",
+          "url": "https://vercel.com/changelog/flat-rate-cdn-is-now-ga-for-pro-teams"
+        },
+        {
+          "title": "Flat Rate CDN documentation",
+          "publisher": "Vercel Docs",
+          "url": "https://vercel.com/docs/pricing/flat-rate-cdn"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-aws-e-qualcomm-vao-criar-chips-de-infere-2026-09-08",
+      "title": "AWS e Qualcomm vão criar chips de inferência e links ópticos de 1,6T",
+      "topic": "cloud",
+      "relatedTopics": [
+        "ai",
+        "industry"
+      ],
+      "signalType": "industry",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-09T12:11:53.942Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Qualcomm Announces Multi-Generational Product Collaboration with Amazon",
+          "publisher": "Qualcomm",
+          "url": "https://www.qualcomm.com/news/releases/2026/09/qualcomm-announces-multi-generational-product-collaboration-with"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-openai-contrata-capacidade-de-ia-em-dois-2026-09-08",
+      "title": "OpenAI contrata capacidade de IA em dois data centers na Malásia",
+      "topic": "cloud",
+      "relatedTopics": [
+        "ai",
+        "industry"
+      ],
+      "signalType": "industry",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-08T11:52:50.645Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Firmus surpasses 900 MW contracted capacity, adds OpenAI as anchor customer and expands into Malaysia",
+          "publisher": "Firmus",
+          "url": "https://firmus.co/newsroom/firmus-surpasses-900-mw-contracted-capacity-adds-openai-as-anchor-customer-and-expands-into-malaysia"
+        },
+        {
+          "title": "Firmus locks in OpenAI as anchor customer, unveils two Malaysian sites",
+          "publisher": "Capital Brief",
+          "url": "https://www.capitalbrief.com/briefing/firmus-locks-in-openai-as-anchor-customer-unveils-two-malaysian-sites-21059d2d-d58b-41aa-a43e-c632c619c3ce/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-aws-mcp-server-diagnostica-lambdas-e-ser-2026-09-04",
+      "title": "AWS MCP Server diagnostica Lambdas e serviços conectados",
+      "topic": "cloud",
+      "relatedTopics": [
+        "devops",
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-04",
+      "publishedAt": "2026-09-06T12:03:55.439Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "AWS MCP Server adds serverless application troubleshooting capabilities",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-mcp-server-serverless/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-cloudflare-eleva-bundles-de-workers-a-64-2026-09-04",
+      "title": "Cloudflare eleva bundles de Workers a 64 MiB em todos os planos",
+      "topic": "cloud",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-04",
+      "publishedAt": "2026-09-05T11:19:39.921Z",
+      "relevanceScore": 7.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Deploy larger Workers, up to 64 MiB for both free and paid plans",
+          "publisher": "Cloudflare",
+          "url": "https://developers.cloudflare.com/changelog/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-cloud-sql-permite-trocar-edicao-e-versao-2026-09-04",
+      "title": "Cloud SQL permite trocar edição e versão na mesma instância",
+      "topic": "cloud",
+      "relatedTopics": [
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-04",
+      "publishedAt": "2026-09-05T11:19:35.742Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Google Cloud release notes, September 4, 2026",
+          "publisher": "Google Cloud",
+          "url": "https://docs.cloud.google.com/release-notes"
+        },
+        {
+          "title": "Upgrade in place for Cloud SQL for PostgreSQL",
+          "publisher": "Google Cloud",
+          "url": "https://docs.cloud.google.com/sql/docs/postgres/upgrade-in-place"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-bigquery-graph-chega-a-ga-com-grafos-mul-2026-09-01",
+      "title": "BigQuery Graph chega a GA com grafos multicloud sem ETL",
+      "topic": "cloud",
+      "relatedTopics": [
+        "ai",
+        "security"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-01",
+      "publishedAt": "2026-09-02T22:34:57.021Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "BigQuery Graph is now GA: the knowledge foundation for the agentic era",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/blog/products/data-analytics/bigquery-graph-connecting-data-and-ai-at-scale"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-cloud-run-ganha-instancias-persistentes-2026-08-25",
+      "title": "Cloud Run ganha instâncias persistentes e endereçáveis",
+      "topic": "cloud",
+      "relatedTopics": [
+        "devops",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-25",
+      "publishedAt": "2026-08-27T14:37:17.025Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Cloud Run release notes",
+          "publisher": "Google Cloud",
+          "url": "https://docs.cloud.google.com/run/docs/release-notes"
+        },
+        {
+          "title": "What is Cloud Run",
+          "publisher": "Google Cloud",
+          "url": "https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-vercel-sandbox-passa-a-operar-em-quatro-2026-08-24",
+      "title": "Vercel Sandbox passa de quatro para 20 regiões",
+      "topic": "cloud",
+      "relatedTopics": [
+        "devops",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-24",
+      "publishedAt": "2026-08-25T11:55:55.094Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Vercel Sandbox is now globally available",
+          "publisher": "Vercel",
+          "url": "https://vercel.com/changelog/vercel-sandbox-is-now-globally-available"
+        },
+        {
+          "title": "Vercel Sandbox is now available in all regions",
+          "publisher": "Vercel",
+          "url": "https://vercel.com/changelog/vercel-sandbox-is-now-available-in-all-regions"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-agentcore-ganha-politicas-temporais-2026-08-06",
+      "title": "AgentCore ganha políticas temporais",
+      "topic": "cloud",
+      "relatedTopics": [
+        "security",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-06",
+      "publishedAt": "2026-08-20T14:02:01.173Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "Announcing temporal policies and rate limiting in Amazon Bedrock AgentCore",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/temporal-policies-agentcore/"
+        },
+        {
+          "title": "Securing AI agents with temporal policies in Amazon Bedrock AgentCore",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/blogs/machine-learning/securing-ai-agents-with-temporal-policies-in-amazon-bedrock-agentcore/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-google-cloud-cria-teto-para-gasto-de-ia-2026-07-28",
+      "title": "Google Cloud cria teto para gasto de IA",
+      "topic": "cloud",
+      "relatedTopics": [
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-07-28",
+      "publishedAt": "2026-08-18T01:27:38.799Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "Detect early and enforce firmly with Google Cloud's enhanced cost controls for AI spend",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/blog/topics/cost-management/new-early-anomalies-and-spend-caps-on-google-cloud-budgets/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-alloydb-acelera-hnsw-em-ate-4x-2026-07-21",
+      "title": "AlloyDB acelera HNSW em até 4x",
+      "topic": "cloud",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-07-21",
+      "publishedAt": "2026-08-14T13:44:37.984Z",
+      "relevanceScore": 7.8,
+      "confidenceScore": 8.9,
+      "sources": [
+        {
+          "title": "Supercharging pgvector: 4x faster HNSW vector search with AlloyDB",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/blog/products/databases/supercharge-pgvector-4x-faster-hnsw-with-alloydb/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-aws-coloca-servicos-em-modo-de-manutenca-2026-06-30",
+      "title": "AWS coloca serviços em modo de manutenção",
+      "topic": "cloud",
+      "relatedTopics": [],
+      "signalType": "risk",
+      "signalDate": "2026-06-30",
+      "publishedAt": "2026-08-13T18:12:26.921Z",
+      "relevanceScore": 8.5,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "AWS Service Availability Updates",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/about-aws/whats-new/2026/06/aws-service-availability/"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-dynamodb-ganha-busca-vetorial-nativa-2026-08-05",
+      "title": "DynamoDB ganha busca vetorial nativa",
+      "topic": "cloud",
+      "relatedTopics": [],
+      "signalType": "release",
+      "signalDate": "2026-08-05",
+      "publishedAt": "2026-08-13T15:29:35.801Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.3,
+      "sources": [
+        {
+          "title": "Amazon DynamoDB now supports real-time vector search at any scale",
+          "publisher": "Amazon Web Services",
+          "url": "https://aws.amazon.com/blogs/aws/amazon-dynamodb-now-supports-real-time-vector-search-at-any-scale/"
+        }
+      ]
+    },
+    {
+      "slug": "devops-deepseek-publica-infraestrutura-elastica-2026-09-19",
+      "title": "DeepSeek publica infraestrutura elástica de sandboxes para treino de agentes",
+      "topic": "devops",
+      "relatedTopics": [
+        "ai",
+        "security"
+      ],
+      "signalType": "research",
+      "signalDate": "2026-09-19",
+      "publishedAt": "2026-09-27T16:27:01.649Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "Elastic Compute for Agentic Workloads",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/abs/2609.22978"
+        }
+      ]
+    },
+    {
+      "slug": "devops-github-actions-remove-node-20-e-passa-ja-2026-09-23",
+      "title": "GitHub Actions remove Node 20 e passa JavaScript actions para Node 24",
+      "topic": "devops",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-23",
+      "publishedAt": "2026-09-24T11:00:43.148Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Node 20 is no longer available in GitHub Actions",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-23-node-20-is-no-longer-available-in-github-actions/"
+        }
+      ]
+    },
+    {
+      "slug": "devops-copilot-app-exporta-traces-de-agentes-vi-2026-09-22",
+      "title": "Copilot App exporta traces de agentes via OpenTelemetry",
+      "topic": "devops",
+      "relatedTopics": [
+        "development",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-22",
+      "publishedAt": "2026-09-23T11:10:04.306Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "OpenTelemetry in the GitHub Copilot app",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-22-opentelemetry-in-the-github-copilot-app/"
+        }
+      ]
+    },
+    {
+      "slug": "devops-opentofu-1-13-testa-bibliotecas-reutiliz-2026-09-17",
+      "title": "OpenTofu 1.13 testa bibliotecas reutilizáveis de tipos e funções em HCL",
+      "topic": "devops",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-17",
+      "publishedAt": "2026-09-20T11:40:08.345Z",
+      "relevanceScore": 8.5,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "An Introduction to OpenTofu Symbol Libraries!",
+          "publisher": "OpenTofu",
+          "url": "https://opentofu.org/blog/2026/09/17/symbol-libraries-introduction/"
+        },
+        {
+          "title": "Symbol Libraries",
+          "publisher": "OpenTofu",
+          "url": "https://opentofu.org/docs/v1.13/language/symbol-libraries/"
+        }
+      ]
+    },
+    {
+      "slug": "devops-github-actions-inicia-migracao-de-ubuntu-2026-09-17",
+      "title": "GitHub Actions inicia migração de ubuntu-latest para Ubuntu 26.04",
+      "topic": "devops",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-17",
+      "publishedAt": "2026-09-18T11:45:38.160Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Ubuntu 26 generally available and latest migration",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-17-ubuntu-26-generally-available-and-latest-migration/"
+        }
+      ]
+    },
+    {
+      "slug": "devops-opentelemetry-propoe-padrao-para-propaga-2026-09-11",
+      "title": "OpenTelemetry propõe padrão para propagar contexto entre processos por variáveis de ambiente",
+      "topic": "devops",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-11",
+      "publishedAt": "2026-09-14T11:22:48.921Z",
+      "relevanceScore": 8.1,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Help us stabilize environment variable context propagation",
+          "publisher": "OpenTelemetry",
+          "url": "https://opentelemetry.io/blog/2026/environment-variable-context-propagation/"
+        }
+      ]
+    },
+    {
+      "slug": "devops-terraform-1-17-beta-retira-flag-experime-2026-09-09",
+      "title": "Terraform 1.17 beta retira flag experimental de políticas, mas docs mantêm beta",
+      "topic": "devops",
+      "relatedTopics": [
+        "cloud",
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-09",
+      "publishedAt": "2026-09-11T16:28:18.769Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Terraform v1.17.0-beta1",
+          "publisher": "HashiCorp",
+          "url": "https://github.com/hashicorp/terraform/releases/tag/v1.17.0-beta1"
+        },
+        {
+          "title": "Terraform policy",
+          "publisher": "HashiCorp",
+          "url": "https://developer.hashicorp.com/terraform/policy"
+        }
+      ]
+    },
+    {
+      "slug": "devops-github-actions-permite-restringir-acesso-2026-09-10",
+      "title": "GitHub Actions permite restringir acesso ao cache por job",
+      "topic": "devops",
+      "relatedTopics": [
+        "security",
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-11T11:19:12.702Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Control GitHub Actions cache access with cache-mode",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-10-control-github-actions-cache-access-with-cache-mode/"
+        },
+        {
+          "title": "Workflow syntax for GitHub Actions",
+          "publisher": "GitHub Docs",
+          "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idcache-mode"
+        }
+      ]
+    },
+    {
+      "slug": "devops-karmada-gradua-na-cncf-e-reforca-orquest-2026-09-07",
+      "title": "Karmada gradua na CNCF e reforça orquestração multicluster",
+      "topic": "devops",
+      "relatedTopics": [
+        "cloud",
+        "ai"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-07",
+      "publishedAt": "2026-09-08T11:52:53.005Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Cloud Native Computing Foundation Announces Karmada Graduation",
+          "publisher": "CNCF",
+          "url": "https://www.cncf.io/announcements/2026/09/07/cloud-native-computing-foundation-announces-karmada-graduation/"
+        },
+        {
+          "title": "Karmada v1.19.0 release",
+          "publisher": "GitHub",
+          "url": "https://github.com/karmada-io/karmada/releases/tag/v1.19.0"
+        }
+      ]
+    },
+    {
+      "slug": "devops-cloudflare-testa-cache-com-zstandard-par-2026-09-01",
+      "title": "Cloudflare testa cache com Zstandard para triplicar capacidade",
+      "topic": "devops",
+      "relatedTopics": [
+        "cloud"
+      ],
+      "signalType": "research",
+      "signalDate": "2026-09-01",
+      "publishedAt": "2026-09-02T22:35:02.782Z",
+      "relevanceScore": 8.2,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "How we could save petabytes of cache storage with Zstandard and Pingora",
+          "publisher": "Cloudflare",
+          "url": "https://blog.cloudflare.com/cache-transcoding/"
+        }
+      ]
+    },
+    {
+      "slug": "devops-kubernetes-1-37-melhora-resiliencia-e-es-2026-08-26",
+      "title": "Kubernetes 1.37 melhora resiliência e escala a zero",
+      "topic": "devops",
+      "relatedTopics": [
+        "cloud"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-26",
+      "publishedAt": "2026-08-27T11:15:48.793Z",
+      "relevanceScore": 9.3,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Kubernetes v1.37: Garhwal",
+          "publisher": "Kubernetes",
+          "url": "https://kubernetes.io/blog/2026/08/26/kubernetes-v1-37-release/"
+        },
+        {
+          "title": "Kubernetes releases",
+          "publisher": "GitHub",
+          "url": "https://github.com/kubernetes/kubernetes/releases"
+        }
+      ]
+    },
+    {
+      "slug": "devops-vercel-amplia-bun-functions-para-5-gb-e-2026-08-24",
+      "title": "Vercel amplia Bun Functions para 5 GB e 30 minutos",
+      "topic": "devops",
+      "relatedTopics": [
+        "cloud",
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-24",
+      "publishedAt": "2026-08-25T11:55:41.956Z",
+      "relevanceScore": 7.9,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Bun runtime now supports large functions and extended max duration",
+          "publisher": "Vercel",
+          "url": "https://vercel.com/changelog/bun-runtime-now-supports-large-functions-and-extended-max-duration"
+        }
+      ]
+    },
+    {
+      "slug": "devops-vercel-adiciona-tracing-continuo-ao-traf-2026-08-21",
+      "title": "Vercel adiciona tracing contínuo ao tráfego real",
+      "topic": "devops",
+      "relatedTopics": [
+        "cloud"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-21",
+      "publishedAt": "2026-08-22T11:40:38.393Z",
+      "relevanceScore": 8.2,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "Always-on tracing for production and preview traffic",
+          "publisher": "Vercel",
+          "url": "https://vercel.com/changelog/always-on-tracing-for-production-and-preview-traffic"
+        }
+      ]
+    },
+    {
+      "slug": "devops-github-actions-migra-runners-arm-para-vi-2026-08-20",
+      "title": "GitHub Actions migra runners ARM para Visual Studio 2026",
+      "topic": "devops",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-08-20",
+      "publishedAt": "2026-08-21T11:21:56.633Z",
+      "relevanceScore": 7.7,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Windows 11 arm64 VS2026 image generally available",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-08-20-windows-11-arm64-vs2026-image-generally-available/"
+        }
+      ]
+    },
+    {
+      "slug": "devops-etcd-3-7-traz-rangestream-2026-07-08",
+      "title": "etcd 3.7 traz RangeStream",
+      "topic": "devops",
+      "relatedTopics": [],
+      "signalType": "release",
+      "signalDate": "2026-07-08",
+      "publishedAt": "2026-08-13T15:29:48.263Z",
+      "relevanceScore": 7.8,
+      "confidenceScore": 9,
+      "sources": [
+        {
+          "title": "Announcing etcd 3.7",
+          "publisher": "etcd",
+          "url": "https://etcd.io/blog/2026/announcing-etcd-3.7/"
+        }
+      ]
+    },
+    {
+      "slug": "security-github-libera-dist-tags-com-oidc-no-trus-2026-09-30",
+      "title": "GitHub libera dist-tags com OIDC no trusted publishing do npm",
+      "topic": "security",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-30",
+      "publishedAt": "2026-10-01T10:57:26.346Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Opt-in dist-tag permissions for npm trusted publishing",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-30-opt-in-dist-tag-permissions-for-npm-trusted-publishing/"
+        }
+      ]
+    },
+    {
+      "slug": "security-agentic-autofix-passa-a-reutilizar-memor-2026-09-25",
+      "title": "Agentic Autofix passa a reutilizar memória de correções de segurança no GitHub",
+      "topic": "security",
+      "relatedTopics": [
+        "development",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-25",
+      "publishedAt": "2026-09-27T16:26:15.829Z",
+      "relevanceScore": 8.4,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Agentic Autofix now uses Copilot Memory",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/"
+        }
+      ]
+    },
+    {
+      "slug": "security-github-exige-prova-de-presenca-para-acoe-2026-09-24",
+      "title": "GitHub exige prova de presença para ações de alto impacto no Enterprise Cloud",
+      "topic": "security",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-24",
+      "publishedAt": "2026-09-27T16:26:09.748Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Require proof of presence for high-impact actions",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-24-require-proof-of-presence-for-high-impact-actions/"
+        }
+      ]
+    },
+    {
+      "slug": "security-agente-da-openai-usa-dns-para-alcancar-c-2026-09-25",
+      "title": "Agente da OpenAI usa DNS para alcançar chatbot externo e expõe falha de isolamento",
+      "topic": "security",
+      "relatedTopics": [
+        "ai",
+        "development"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-09-25",
+      "publishedAt": "2026-09-27T16:25:21.749Z",
+      "relevanceScore": 9.7,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "An agent used DNS to reach an external chatbot",
+          "publisher": "OpenAI",
+          "url": "https://alignment.openai.com/misalignment-reports/an-agent-used-dns-to-reach-an-external-chatbot/"
+        }
+      ]
+    },
+    {
+      "slug": "security-radicle-revela-duas-falhas-criticas-no-p-2026-09-23",
+      "title": "Radicle revela duas falhas críticas no protocolo e recomenda suspender repositórios privados",
+      "topic": "security",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-09-23",
+      "publishedAt": "2026-09-23T19:47:24.955Z",
+      "relevanceScore": 9.3,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Disclosure of Vulnerability in the Network Protocol",
+          "publisher": "Radicle",
+          "url": "https://radicle.dev/2026/09/23/disclosure-of-vulnerability-in-network-protocol"
+        }
+      ]
+    },
+    {
+      "slug": "security-github-copilot-app-adiciona-sandbox-loca-2026-09-23",
+      "title": "GitHub Copilot App adiciona sandbox local por projeto",
+      "topic": "security",
+      "relatedTopics": [
+        "development",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-23",
+      "publishedAt": "2026-09-23T16:45:44.862Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Local sandboxing in the GitHub Copilot app",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-23-local-sandboxing-in-the-github-copilot-app/"
+        }
+      ]
+    },
+    {
+      "slug": "security-github-prepara-corte-de-ssh-legado-e-adi-2026-09-22",
+      "title": "GitHub prepara corte de SSH legado e adiciona troca de chaves pós-quântica",
+      "topic": "security",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-22",
+      "publishedAt": "2026-09-23T11:09:57.247Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Security improvements for SSH",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-22-security-improvements-for-ssh/"
+        }
+      ]
+    },
+    {
+      "slug": "security-github-enterprise-centraliza-inventario-2026-09-21",
+      "title": "GitHub Enterprise centraliza inventário de credenciais para resposta a incidentes",
+      "topic": "security",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-21",
+      "publishedAt": "2026-09-22T11:12:24.274Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "GitHub Enterprise adds credential inventory exports",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-21-github-enterprise-adds-credential-inventory-exports/"
+        }
+      ]
+    },
+    {
+      "slug": "security-npm-cria-tokens-stage-only-para-separar-2026-09-18",
+      "title": "npm cria tokens stage-only para separar automação de publicação final",
+      "topic": "security",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-18",
+      "publishedAt": "2026-09-19T11:57:57.356Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Stage-only npm tokens for safer automation",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-18-stage-only-npm-tokens-for-safer-automation/"
+        }
+      ]
+    },
+    {
+      "slug": "security-github-actions-torna-protecoes-de-execuc-2026-09-17",
+      "title": "GitHub Actions torna proteções de execução GA e prepara bloqueio padrão de pull_request_target",
+      "topic": "security",
+      "relatedTopics": [
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-17",
+      "publishedAt": "2026-09-18T11:45:04.361Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Workflow execution protections in GitHub Actions generally available",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-17-workflow-execution-protections-in-github-actions-generally-available/"
+        },
+        {
+          "title": "About Actions policies",
+          "publisher": "GitHub Docs",
+          "url": "https://docs.github.com/en/actions/concepts/about-actions-policies"
+        }
+      ]
+    },
+    {
+      "slug": "security-github-amplia-ai-scan-para-repositorios-2026-09-16",
+      "title": "GitHub amplia AI Scan para repositórios sem CodeQL default setup",
+      "topic": "security",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-16",
+      "publishedAt": "2026-09-17T11:19:29.509Z",
+      "relevanceScore": 8.3,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Code scanning AI Scan no longer requires CodeQL default setup",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-16-code-scanning-ai-scan-no-longer-requires-codeql-default-setup/"
+        }
+      ]
+    },
+    {
+      "slug": "security-cloudflare-permite-limitar-agentes-e-ci-2026-09-15",
+      "title": "Cloudflare permite limitar agentes e CI/CD a Workers específicos",
+      "topic": "security",
+      "relatedTopics": [
+        "cloud",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-15",
+      "publishedAt": "2026-09-17T11:19:21.172Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Workers Changelog",
+          "publisher": "Cloudflare",
+          "url": "https://developers.cloudflare.com/changelog/product/workers/"
+        }
+      ]
+    },
+    {
+      "slug": "security-github-desativa-sha-1-em-https-no-servic-2026-09-15",
+      "title": "GitHub desativa SHA-1 em HTTPS no serviço cloud",
+      "topic": "security",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-15",
+      "publishedAt": "2026-09-16T11:58:47.908Z",
+      "relevanceScore": 8.5,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "SHA-1 in HTTPS on GitHub sunset",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-15-sha-1-in-https-on-github-sunset/"
+        }
+      ]
+    },
+    {
+      "slug": "security-npm-impoe-hold-de-72-horas-apos-login-co-2026-09-09",
+      "title": "npm impõe hold de 72 horas após login com recovery code em todas as contas",
+      "topic": "security",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-09",
+      "publishedAt": "2026-09-14T11:22:34.642Z",
+      "relevanceScore": 8.4,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "npm extends recovery-code security holds to all accounts",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-09-npm-extends-recovery-code-security-holds-to-all-accounts/"
+        }
+      ]
+    },
+    {
+      "slug": "security-traefik-corrige-falha-critica-que-pode-r-2026-09-07",
+      "title": "Traefik corrige falha crítica que pode reutilizar sessão autenticada via HTTP/3",
+      "topic": "security",
+      "relatedTopics": [
+        "devops",
+        "cloud"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-09-07",
+      "publishedAt": "2026-09-14T11:22:21.863Z",
+      "relevanceScore": 9.3,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Traefik HTTP/3 Backend NTLM Connection Reuse",
+          "publisher": "Traefik / GitHub",
+          "url": "https://github.com/traefik/traefik/security/advisories/GHSA-qqjf-53cj-pwvv"
+        }
+      ]
+    },
+    {
+      "slug": "security-1-1-1-1-passa-a-validar-dnssec-pos-quant-2026-09-10",
+      "title": "1.1.1.1 passa a validar DNSSEC pós-quântico com ML-DSA-44",
+      "topic": "security",
+      "relatedTopics": [
+        "cloud",
+        "devops"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-11T16:36:39.727Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "1.1.1.1 now supports post-quantum DNSSEC, all 2,420 bytes of it",
+          "publisher": "Cloudflare",
+          "url": "https://blog.cloudflare.com/post-quantum-dnssec-1111/"
+        }
+      ]
+    },
+    {
+      "slug": "security-cloudflare-casb-passa-de-alerta-a-remedi-2026-09-11",
+      "title": "Cloudflare CASB passa de alerta a remediação automática de riscos SaaS",
+      "topic": "security",
+      "relatedTopics": [
+        "cloud",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-11",
+      "publishedAt": "2026-09-11T16:36:22.189Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Introducing automatic remediation policies with Cloudflare CASB",
+          "publisher": "Cloudflare",
+          "url": "https://blog.cloudflare.com/casb-policies/"
+        }
+      ]
+    },
+    {
+      "slug": "security-claude-managed-agents-passa-a-avaliar-pe-2026-09-10",
+      "title": "Claude Managed Agents passa a avaliar permissões por chamada",
+      "topic": "security",
+      "relatedTopics": [
+        "ai",
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-11T16:28:20.369Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Claude Platform release notes",
+          "publisher": "Anthropic",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview"
+        },
+        {
+          "title": "Permission policies",
+          "publisher": "Anthropic",
+          "url": "https://platform.claude.com/docs/en/managed-agents/permission-policies"
+        },
+        {
+          "title": "Connect to a Managed Agents session from your terminal",
+          "publisher": "Anthropic",
+          "url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/sessions-connect"
+        }
+      ]
+    },
+    {
+      "slug": "security-claude-atacou-sistemas-reais-durante-ava-2026-09-09",
+      "title": "Claude atacou sistemas reais durante avaliações mal configuradas",
+      "topic": "security",
+      "relatedTopics": [],
+      "signalType": "risk",
+      "signalDate": "2026-09-09",
+      "publishedAt": "2026-09-11T16:18:10.006Z",
+      "relevanceScore": 9.9,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "An alignment assessment of recent cybersecurity incidents",
+          "publisher": "Anthropic",
+          "url": "https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents"
+        }
+      ]
+    },
+    {
+      "slug": "security-adobe-corrige-zero-day-cvss-10-explorado-2026-09-07",
+      "title": "Adobe corrige zero-day CVSS 10 explorado no Magento",
+      "topic": "security",
+      "relatedTopics": [],
+      "signalType": "risk",
+      "signalDate": "2026-09-07",
+      "publishedAt": "2026-09-11T16:17:39.776Z",
+      "relevanceScore": 9.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Ação urgente necessária: atualização de segurança crítica disponível para o Adobe Commerce (APSB26-146)",
+          "publisher": "Adobe",
+          "url": "https://experienceleague.adobe.com/pt-br/docs/commerce-knowledge-base/kb/announcements/commerce-apsb26-146"
+        },
+        {
+          "title": "StyleSmuggler: Magento and Adobe Commerce 0-day RCE (CVE-2026-75650) under active attack",
+          "publisher": "Sansec",
+          "url": "https://sansec.io/research/stylesmuggler-0day"
+        },
+        {
+          "title": "WAF Release - 2026-09-10 - Emergency",
+          "publisher": "Cloudflare",
+          "url": "https://developers.cloudflare.com/changelog/post/2026-09-10-emergency-waf-release/"
+        }
+      ]
+    },
+    {
+      "slug": "security-relatorio-da-anthropic-mostra-ataques-au-2026-09-10",
+      "title": "Relatório da Anthropic mostra ataques autônomos com múltiplos agentes",
+      "topic": "security",
+      "relatedTopics": [
+        "ai",
+        "cloud"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-09-10",
+      "publishedAt": "2026-09-11T11:19:09.702Z",
+      "relevanceScore": 9.6,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "Detecting and countering misuse of AI: September 2026",
+          "publisher": "Anthropic",
+          "url": "https://www.anthropic.com/threat-intelligence-report-september-2026"
+        },
+        {
+          "title": "Anthropic details bad actors' efforts to misuse its AI",
+          "publisher": "The Guardian",
+          "url": "https://www.theguardian.com/technology/2026/sep/10/anthropic-report-details-ai-misuse"
+        }
+      ]
+    },
+    {
+      "slug": "security-falhas-em-plugins-wordpress-passam-de-44-2026-09-03",
+      "title": "Falhas em plugins WordPress passam de 440 mil tentativas",
+      "topic": "security",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-09-03",
+      "publishedAt": "2026-09-10T11:29:50.148Z",
+      "relevanceScore": 9.3,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Attackers Actively Exploiting Critical Vulnerability in Super Forms Plugin",
+          "publisher": "Wordfence",
+          "url": "https://www.wordfence.com/blog/2026/09/attackers-actively-exploiting-critical-vulnerability-in-super-forms-plugin/"
+        },
+        {
+          "title": "Attackers Actively Exploiting Critical Vulnerability in Elementor Pro Plugin",
+          "publisher": "Wordfence",
+          "url": "https://www.wordfence.com/blog/2026/09/attackers-actively-exploiting-critical-vulnerability-in-elementor-pro-plugin/"
+        },
+        {
+          "title": "CVE-2026-14894",
+          "publisher": "CVE Program",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2026-14894"
+        },
+        {
+          "title": "CVE-2026-32475",
+          "publisher": "CVE Program",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2026-32475"
+        }
+      ]
+    },
+    {
+      "slug": "security-github-bloqueia-merge-de-prs-com-segredo-2026-09-09",
+      "title": "GitHub bloqueia merge de PRs com segredos expostos",
+      "topic": "security",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-09",
+      "publishedAt": "2026-09-10T11:29:49.108Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Block pull requests with exposed secrets from merging",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/"
+        },
+        {
+          "title": "Secret scanning",
+          "publisher": "GitHub Docs",
+          "url": "https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning"
+        }
+      ]
+    },
+    {
+      "slug": "security-microsoft-corrige-dois-zero-days-do-wind-2026-09-08",
+      "title": "Microsoft corrige dois zero-days do Windows explorados ativamente",
+      "topic": "security",
+      "relatedTopics": [
+        "development",
+        "devops"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-09T12:38:38.051Z",
+      "relevanceScore": 9.7,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "CVE-2026-81963 — Windows Update Stack Elevation of Privilege Vulnerability",
+          "publisher": "Microsoft Security Response Center",
+          "url": "https://msrc.microsoft.com/update-guide/en-US/advisory/CVE-2026-81963"
+        },
+        {
+          "title": "CVE-2026-85880 — Windows ALPC Elevation of Privilege Vulnerability",
+          "publisher": "Microsoft Security Response Center",
+          "url": "https://msrc.microsoft.com/update-guide/en-US/advisory/CVE-2026-85880"
+        },
+        {
+          "title": "Microsoft September 2026 Patch Tuesday fixes 966 flaws, 2 zero-days",
+          "publisher": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-september-2026-patch-tuesday-fixes-966-flaws-2-zero-days/"
+        },
+        {
+          "title": "September 8, 2026 — Windows Server 2025 hotpatch baseline",
+          "publisher": "Microsoft Support",
+          "url": "https://support.microsoft.com/en-us/servicing/os/hotpatch/windows-server-2025/2026/september-8-2026-baseline"
+        }
+      ]
+    },
+    {
+      "slug": "security-cra-exigira-aviso-de-falha-explorada-em-2026-09-04",
+      "title": "CRA exigirá aviso de falha explorada em até 24 horas",
+      "topic": "security",
+      "relatedTopics": [
+        "industry",
+        "development"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-04",
+      "publishedAt": "2026-09-07T11:59:20.136Z",
+      "relevanceScore": 9.5,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Cyber Resilience Act: reporting obligations",
+          "publisher": "European Commission",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/cra-reporting"
+        },
+        {
+          "title": "CRA Single Reporting Platform: frequently asked questions",
+          "publisher": "ENISA",
+          "url": "https://www.enisa.europa.eu/topics/product-security/single-reporting-platform-srp/frequently-asked-questions"
+        }
+      ]
+    },
+    {
+      "slug": "security-falhas-no-routeros-permitem-tomada-remot-2026-09-05",
+      "title": "Falhas no RouterOS permitem tomada remota de roteadores",
+      "topic": "security",
+      "relatedTopics": [
+        "devops"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-09-05",
+      "publishedAt": "2026-09-06T12:03:49.878Z",
+      "relevanceScore": 9.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Vulnerabilities in MikroTik RouterOS actively exploited",
+          "publisher": "CERT Polska",
+          "url": "https://cert.pl/en/posts/2026/09/vulnerabilities-in-mikrotik-routeros-actively-exploited/"
+        },
+        {
+          "title": "September 2026 vulnerability disclosure",
+          "publisher": "MikroTik",
+          "url": "https://www.mikrotik.com/supportsec/september-2026-vulnerability/"
+        },
+        {
+          "title": "CVE-2026-67276",
+          "publisher": "NVD",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-67276"
+        }
+      ]
+    },
+    {
+      "slug": "security-chrome-corrige-zero-day-do-v8-explorado-2026-09-03",
+      "title": "Chrome corrige zero-day do V8 explorado ativamente",
+      "topic": "security",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-09-03",
+      "publishedAt": "2026-09-05T11:19:32.160Z",
+      "relevanceScore": 9.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Stable Channel Update for Desktop",
+          "publisher": "Google Chrome",
+          "url": "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_01882797386.html"
+        },
+        {
+          "title": "Known Exploited Vulnerabilities Catalog",
+          "publisher": "CISA",
+          "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+        },
+        {
+          "title": "CVE-2026-85046",
+          "publisher": "NIST NVD",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-85046"
+        },
+        {
+          "title": "Google patches actively exploited Chrome zero-day",
+          "publisher": "Help Net Security",
+          "url": "https://www.helpnetsecurity.com/2026/09/04/google-chrome-zero-day-cve-2026-85046/"
+        }
+      ]
+    },
+    {
+      "slug": "security-g7-pede-migracao-pos-quantica-imediata-a-2026-09-03",
+      "title": "G7 pede migração pós-quântica imediata a governos e empresas",
+      "topic": "security",
+      "relatedTopics": [
+        "cloud",
+        "industry"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-03",
+      "publishedAt": "2026-09-04T11:34:02.158Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Preparing for the Post-Quantum Era: A Call to Action",
+          "publisher": "CISA",
+          "url": "https://www.cisa.gov/resources-tools/resources/preparing-post-quantum-era-call-action"
+        },
+        {
+          "title": "Preparing for the Post-Quantum Era: A Call to Action",
+          "publisher": "ANSSI",
+          "url": "https://cyber.sites.beta.gouv.fr/en/publications/jointly-led-international-publications/preparing-for-the-post-quantum-era-a-call-to-action/"
+        },
+        {
+          "title": "G7 Preparing for the Post-Quantum Era: A Call to Action",
+          "publisher": "G7 Cybersecurity Working Group",
+          "url": "https://cyber.gouv.fr/documents/811/G7_preparing_for_the_qost_quantum_era_a_call_to_action.pdf"
+        }
+      ]
+    },
+    {
+      "slug": "security-falha-critica-no-kestra-entra-no-catalog-2026-09-02",
+      "title": "Falha crítica no Kestra entra no catálogo KEV da CISA",
+      "topic": "security",
+      "relatedTopics": [
+        "devops",
+        "cloud"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-09-02",
+      "publishedAt": "2026-09-03T11:27:50.248Z",
+      "relevanceScore": 9.7,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Known Exploited Vulnerabilities Catalog",
+          "publisher": "CISA",
+          "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+        },
+        {
+          "title": "Unauthenticated Remote Code Execution via Authentication Bypass in AuthenticationFilter",
+          "publisher": "Kestra / GitHub Security Advisory",
+          "url": "https://github.com/kestra-io/kestra/security/advisories/GHSA-5vc5-wxxq-3fjx"
+        },
+        {
+          "title": "CVE-2026-49869",
+          "publisher": "NIST NVD",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-49869"
+        }
+      ]
+    },
+    {
+      "slug": "security-gke-leva-autorizacao-zero-trust-ao-gatew-2026-08-26",
+      "title": "GKE leva autorização zero-trust ao Gateway",
+      "topic": "security",
+      "relatedTopics": [
+        "cloud",
+        "devops"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-26",
+      "publishedAt": "2026-08-27T14:37:34.045Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "GKE release notes (new features)",
+          "publisher": "Google Cloud",
+          "url": "https://docs.cloud.google.com/kubernetes-engine/docs/release-notes-new-features"
+        },
+        {
+          "title": "Secure a Gateway",
+          "publisher": "Google Cloud",
+          "url": "https://docs.cloud.google.com/kubernetes-engine/docs/how-to/secure-gateway"
+        }
+      ]
+    },
+    {
+      "slug": "security-vercel-leva-auditoria-de-seguranca-ao-cl-2026-08-26",
+      "title": "Vercel leva auditoria de segurança ao CLI",
+      "topic": "security",
+      "relatedTopics": [
+        "devops",
+        "cloud"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-26",
+      "publishedAt": "2026-08-27T11:15:33.422Z",
+      "relevanceScore": 8.3,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Vercel Security Dashboard is now generally available",
+          "publisher": "Vercel",
+          "url": "https://vercel.com/changelog/vercel-security-dashboard-is-now-generally-available"
+        }
+      ]
+    },
+    {
+      "slug": "security-next-js-corrige-duas-falhas-criticas-de-2026-08-25",
+      "title": "Next.js corrige duas falhas críticas de execução remota",
+      "topic": "security",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-08-25",
+      "publishedAt": "2026-08-26T11:33:00.238Z",
+      "relevanceScore": 9.4,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Next.js Security Release: August 2026 Update",
+          "publisher": "Next.js",
+          "url": "https://nextjs.org/blog/nextjs-security-release-august-2026-update"
+        }
+      ]
+    },
+    {
+      "slug": "security-ataque-a-cadeia-do-rust-compromete-array-2026-08-20",
+      "title": "Ataque à cadeia do Rust compromete arrayref",
+      "topic": "security",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-08-20",
+      "publishedAt": "2026-08-25T11:55:27.017Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Supply chain attack on arrayref",
+          "publisher": "Rust Security Response Team",
+          "url": "https://blog.rust-lang.org/2026/08/20/supply-chain-attack-on-arrayref/"
+        }
+      ]
+    },
+    {
+      "slug": "security-cisa-confirma-exploracao-de-rce-no-zimbr-2026-08-21",
+      "title": "CISA confirma exploração de RCE no Zimbra",
+      "topic": "security",
+      "relatedTopics": [],
+      "signalType": "risk",
+      "signalDate": "2026-08-21",
+      "publishedAt": "2026-08-22T11:40:40.966Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "publisher": "CISA",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/08/21/cisa-adds-one-known-exploited-vulnerability-catalog"
+        },
+        {
+          "title": "Zimbra Security Advisories",
+          "publisher": "Zimbra",
+          "url": "https://wiki.zimbra.com/wiki/Zimbra_Security_Advisories"
+        },
+        {
+          "title": "CVE-2026-73570 Detail",
+          "publisher": "NIST NVD",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-73570"
+        }
+      ]
+    },
+    {
+      "slug": "security-cisa-adiciona-duas-falhas-exploradas-ao-2026-08-20",
+      "title": "CISA adiciona duas falhas exploradas ao catálogo KEV",
+      "topic": "security",
+      "relatedTopics": [],
+      "signalType": "risk",
+      "signalDate": "2026-08-20",
+      "publishedAt": "2026-08-21T11:21:34.572Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "CISA Adds Two Known Exploited Vulnerabilities to Catalog",
+          "publisher": "CISA",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/08/20/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+        },
+        {
+          "title": "KLCERT-26-057: TrueConf Server. Missing authentication for critical function",
+          "publisher": "Kaspersky ICS CERT",
+          "url": "https://ics-cert.kaspersky.com/advisories/2026/08/11/trueconf-server-missing-authentication-for-critical-function/"
+        },
+        {
+          "title": "KLCERT-26-058: TrueConf Server. Breakout from isolated environment",
+          "publisher": "Kaspersky ICS CERT",
+          "url": "https://ics-cert.kaspersky.com/advisories/2026/08/11/trueconf-server-breakout-from-isolated-environment/"
+        }
+      ]
+    },
+    {
+      "slug": "security-nova-encontra-14-mil-falhas-em-oss-2026-08-04",
+      "title": "NOVA encontra 14 mil falhas em OSS",
+      "topic": "security",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "research",
+      "signalDate": "2026-08-04",
+      "publishedAt": "2026-08-20T14:01:13.033Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "The Frontier AI Vulnerability Burst: Industrializing Autonomous Zero-Day Discovery in Open-Source Software",
+          "publisher": "Unit 42",
+          "url": "https://unit42.paloaltonetworks.com/frontier-ai-vulnerability-burst/"
+        }
+      ]
+    },
+    {
+      "slug": "security-agente-de-ia-invade-hugging-face-2026-07-13",
+      "title": "Agente de IA invade Hugging Face",
+      "topic": "security",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "risk",
+      "signalDate": "2026-07-13",
+      "publishedAt": "2026-08-19T01:32:54.011Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Anatomy of a Frontier Lab Agent Intrusion: A Technical Timeline of the July 2026 Incident",
+          "publisher": "Hugging Face",
+          "url": "https://huggingface.co/blog/agent-intrusion-technical-timeline"
+        }
+      ]
+    },
+    {
+      "slug": "security-npm-escaneia-pacotes-antes-de-publicar-2026-07-28",
+      "title": "npm escaneia pacotes antes de publicar",
+      "topic": "security",
+      "relatedTopics": [],
+      "signalType": "release",
+      "signalDate": "2026-07-28",
+      "publishedAt": "2026-08-18T01:27:21.936Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "npm publish-time malware scanning and dual-use metadata",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/"
+        },
+        {
+          "title": "Multiple trusted publishing configurations for npm",
+          "publisher": "GitHub",
+          "url": "https://github.blog/changelog/2026-09-03-multiple-trusted-publishing-configurations-for-npm"
+        }
+      ]
+    },
+    {
+      "slug": "security-project-perception-entra-em-preview-2026-08-03",
+      "title": "Project Perception entra em preview",
+      "topic": "security",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-03",
+      "publishedAt": "2026-08-16T15:58:06.188Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Rethinking security for the age of AI",
+          "publisher": "Microsoft",
+          "url": "https://blogs.microsoft.com/blog/2026/07/27/rethinking-security-for-the-age-of-ai/"
+        }
+      ]
+    },
+    {
+      "slug": "security-codemender-automatiza-correcao-de-falhas-2026-07-21",
+      "title": "CodeMender automatiza correção de falhas",
+      "topic": "security",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-07-21",
+      "publishedAt": "2026-08-14T13:44:18.528Z",
+      "relevanceScore": 8.1,
+      "confidenceScore": 9.1,
+      "sources": [
+        {
+          "title": "Now in preview: Find and fix software vulnerabilities with CodeMender",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/blog/products/identity-security/find-and-fix-software-vulnerabilities-with-codemender/"
+        }
+      ]
+    },
+    {
+      "slug": "security-cloud-kms-leva-pqc-a-ga-2026-07-28",
+      "title": "Cloud KMS leva PQC a GA",
+      "topic": "security",
+      "relatedTopics": [
+        "cloud"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-07-28",
+      "publishedAt": "2026-08-14T13:44:01.324Z",
+      "relevanceScore": 8.3,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "Future-proofing data integrity: Quantum-safe digital signatures in Cloud KMS",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/blog/products/identity-security/future-proofing-data-integrity-quantum-safe-digital-signatures-in-cloud-kms"
+        }
+      ]
+    },
+    {
+      "slug": "security-unc6671-amplia-extorsao-via-vishing-2026-08-06",
+      "title": "UNC6671 amplia extorsão via vishing",
+      "topic": "security",
+      "relatedTopics": [],
+      "signalType": "risk",
+      "signalDate": "2026-08-06",
+      "publishedAt": "2026-08-13T18:00:43.134Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "UNC6671 Rebrands: Multi-Brand Vishing Extortion Targets Financial Services and Enterprise Cloud Environments",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/blog/topics/threat-intelligence/unc6671-targets-financial-services-and-enterprise-cloud-environments"
+        }
+      ]
+    },
+    {
+      "slug": "security-chaindrop-compromete-pacotes-npm-2026-08-04",
+      "title": "ChainDrop compromete pacotes npm",
+      "topic": "security",
+      "relatedTopics": [],
+      "signalType": "risk",
+      "signalDate": "2026-08-04",
+      "publishedAt": "2026-08-13T15:29:58.404Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.1,
+      "sources": [
+        {
+          "title": "ChainDrop supply chain compromise: Anatomy of a self-propagating worm",
+          "publisher": "Microsoft Security",
+          "url": "https://www.microsoft.com/en-us/security/blog/2026/08/04/chaindrop-supply-chain-compromise-anatomy-self-propagating-worm/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-unilab-abre-residencia-em-tecnologia-com-2026-09-03",
+      "title": "Unilab abre residência em tecnologia com 250 vagas e bolsa de R$ 1.500",
+      "topic": "industry",
+      "relatedTopics": [
+        "development",
+        "ai"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-09-03",
+      "publishedAt": "2026-09-28T10:59:09.565Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Residência em TIC 16 abre inscrições para formação em tecnologia na Unilab",
+          "publisher": "Unilab",
+          "url": "https://unilab.edu.br/2026/09/03/residencia-em-tic-16-abre-inscricoes-para-formacao-em-tecnologia-na-unilab/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-ifce-abre-150-vagas-gratuitas-em-graduac-2026-09-25",
+      "title": "IFCE abre 150 vagas gratuitas em graduação EAD de Inteligência Artificial",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-09-25",
+      "publishedAt": "2026-09-27T16:26:48.790Z",
+      "relevanceScore": 8.3,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Aberta seleção para curso de Tecnologia em Inteligência Artificial",
+          "publisher": "IFCE",
+          "url": "https://portal.ifce.edu.br/noticias/aberta-selecao-para-curso-de-tecnologia-em-inteligencia-artificial/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-ufpb-abre-nova-turma-gratuita-de-ia-apli-2026-09-21",
+      "title": "UFPB abre nova turma gratuita de IA aplicada ao contexto acadêmico",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-09-21",
+      "publishedAt": "2026-09-24T11:01:02.057Z",
+      "relevanceScore": 7.7,
+      "confidenceScore": 9.3,
+      "sources": [
+        {
+          "title": "Curso de IA2 2026T3 Inteligência Artificial Aplicações no Contexto Acadêmico (30h EAD)",
+          "publisher": "UFPB",
+          "url": "https://sigeventos.ufpb.br/eventos/public/evento/CI2IAACA-IA2T3"
+        }
+      ]
+    },
+    {
+      "slug": "industry-senai-rn-abre-2-mil-vagas-gratuitas-ead-2026-09-16",
+      "title": "SENAI-RN abre 2 mil vagas gratuitas EAD com cursos de programação e jogos",
+      "topic": "industry",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-09-16",
+      "publishedAt": "2026-09-20T11:40:28.526Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "De gestão à TI: SENAI-RN abre inscrições para 2 mil vagas em cursos on-line gratuitos",
+          "publisher": "SENAI-RN",
+          "url": "https://www.rn.senai.br/de-gestao-a-ti-senai-rn-abre-inscricoes-para-2-mil-vagas-em-cursos-on-line-gratuitos/"
+        },
+        {
+          "title": "Edital SENAI RN 011/2026",
+          "publisher": "SENAI-RN",
+          "url": "https://www.rn.senai.br/wp-content/uploads/2026/09/edital%20gratuidade%20senai%20011%202026.pdf"
+        }
+      ]
+    },
+    {
+      "slug": "industry-fatecs-abrem-vestibular-2027-com-cursos-2026-09-14",
+      "title": "Fatecs abrem vestibular 2027 com cursos públicos de tecnologia",
+      "topic": "industry",
+      "relatedTopics": [
+        "development"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-09-14",
+      "publishedAt": "2026-09-17T11:19:39.305Z",
+      "relevanceScore": 8.1,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Vestibular 1º Semestre 2027",
+          "publisher": "Fatec Barretos / Centro Paula Souza",
+          "url": "https://fatecbarretos.cps.sp.gov.br/vestibular-1o-semestre-2027/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-kiro-students-da-um-ano-de-agente-de-cod-2026-09-08",
+      "title": "Kiro Students dá um ano de agente de código a estudantes de universidades elegíveis",
+      "topic": "industry",
+      "relatedTopics": [
+        "development",
+        "ai"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-16T11:59:00.468Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "A free year of Kiro, now for students around the world",
+          "publisher": "Kiro",
+          "url": "https://kiro.dev/blog/students-2026/"
+        },
+        {
+          "title": "Kiro for students: Terms and Conditions",
+          "publisher": "Kiro",
+          "url": "https://kiro.dev/students/terms/"
+        },
+        {
+          "title": "Kiro for students",
+          "publisher": "Kiro",
+          "url": "https://kiro.dev/students/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-shipaton-2026-amplia-categoria-estudanti-2026-08-31",
+      "title": "Shipaton 2026 amplia categoria estudantil e mantém inscrições até 30 de setembro",
+      "topic": "industry",
+      "relatedTopics": [
+        "development",
+        "design"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-08-31",
+      "publishedAt": "2026-09-13T11:34:19.420Z",
+      "relevanceScore": 8.2,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Shipaton 2026",
+          "publisher": "RevenueCat",
+          "url": "https://www.shipaton.com/"
+        },
+        {
+          "title": "RevenueCat Shipaton 2026 Official Rules",
+          "publisher": "RevenueCat / Devpost",
+          "url": "https://revenuecat-shipaton-2026.devpost.com/rules"
+        }
+      ]
+    },
+    {
+      "slug": "industry-ifg-abre-especializacao-gratuita-em-inte-2026-09-04",
+      "title": "IFG abre especialização gratuita em Inteligência Artificial Aplicada",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "development"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-09-04",
+      "publishedAt": "2026-09-13T11:33:59.516Z",
+      "relevanceScore": 8.4,
+      "confidenceScore": 9.9,
+      "sources": [
+        {
+          "title": "Câmpus Anápolis abre inscrições para especialização em Inteligência Artificial",
+          "publisher": "Instituto Federal de Goiás",
+          "url": "https://www.ifg.edu.br/ultimas-noticias-campus-goiania/17-ifg/ultimas-noticias/47786-ifg-anapolis-abre-inscricoes-para-especializacao-em-inteligencia-artificial-2"
+        },
+        {
+          "title": "Edital nº 44/2026-PROPPG - Especialização em Inteligência Artificial Aplicada",
+          "publisher": "Instituto Federal de Goiás",
+          "url": "https://www.ifg.edu.br/attachments/article/47733/Edital%20Intelig%C3%AAncia%20Artificial%202026.pdf"
+        }
+      ]
+    },
+    {
+      "slug": "industry-anthropic-adota-avaliadores-externos-emb-2026-09-12",
+      "title": "Anthropic adota avaliadores externos embutidos e propõe desacelerar IA de fronteira",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "security"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-12",
+      "publishedAt": "2026-09-13T11:12:55.362Z",
+      "relevanceScore": 9.4,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "We Must Pace the Frontier",
+          "publisher": "Dario Amodei",
+          "url": "https://darioamodei.com/post/we-must-pace-the-frontier"
+        },
+        {
+          "title": "Anthropic CEO outlines plan to pace the frontier",
+          "publisher": "TechCrunch",
+          "url": "https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-samsung-ocean-abre-cursos-gratuitos-de-t-2026-08-31",
+      "title": "Samsung Ocean abre cursos gratuitos de tecnologia para setembro",
+      "topic": "industry",
+      "relatedTopics": [
+        "development",
+        "ai"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-08-31",
+      "publishedAt": "2026-09-10T11:57:48.124Z",
+      "relevanceScore": 7.8,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Samsung Ocean abre inscrições para atividades gratuitas de capacitação tecnológica em setembro",
+          "publisher": "Samsung Newsroom Brasil",
+          "url": "https://news.samsung.com/br/samsung-ocean-abre-inscricoes-para-atividades-gratuitas-de-capacitacao-tecnologica-em-setembro"
+        }
+      ]
+    },
+    {
+      "slug": "industry-tailwind-labs-entra-na-shopify-e-fecha-n-2026-09-09",
+      "title": "Tailwind Labs entra na Shopify e fecha novas assinaturas comerciais",
+      "topic": "industry",
+      "relatedTopics": [
+        "development",
+        "design"
+      ],
+      "signalType": "industry",
+      "signalDate": "2026-09-09",
+      "publishedAt": "2026-09-10T11:56:41.934Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Tailwind Labs is joining Shopify",
+          "publisher": "Tailwind Labs",
+          "url": "https://tailwindcss.com/blog/tailwind-is-joining-shopify"
+        }
+      ]
+    },
+    {
+      "slug": "industry-mistral-capta-3-bilhoes-para-ampliar-mod-2026-09-08",
+      "title": "Mistral capta € 3 bilhões para ampliar modelos e infraestrutura",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "cloud"
+      ],
+      "signalType": "industry",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-08T11:53:52.125Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Making sovereign, open-weight AI the technology frontier",
+          "publisher": "Mistral AI",
+          "url": "https://mistral.ai/news/mistral-makes-sovereign-open-weight-ai-to-frontier/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-icetex-abre-quatro-bolsas-integrais-para-2026-09-02",
+      "title": "ICETEX abre quatro bolsas integrais para formação na Índia",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "development"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-09-02",
+      "publishedAt": "2026-09-08T11:52:56.222Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "ICETEX y el Gobierno de la India abren cuatro convocatorias con becas del 100 %",
+          "publisher": "ICETEX",
+          "url": "https://web.icetex.gov.co/es/-/icetex-gobierno-india-abren-cuatro-convocatorias-con-becas-100-estudiar-inteligencia-artificial-analitica-datos-liderazgo"
+        },
+        {
+          "title": "Specialised Programme on Artificial Intelligence",
+          "publisher": "ICETEX",
+          "url": "https://web.icetex.gov.co/es/-/2026-specialised-programme-on-artificial-india"
+        }
+      ]
+    },
+    {
+      "slug": "industry-isaca-abre-19-bolsas-globais-para-formac-2026-09-08",
+      "title": "ISACA abre 19 bolsas globais para formação em segurança",
+      "topic": "industry",
+      "relatedTopics": [
+        "security"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-08T11:52:55.036Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "About ISACA Foundation Scholarships",
+          "publisher": "ISACA Foundation",
+          "url": "https://isaca.secure-platform.com/a/page/ISACAfoundation/aboutscholarships"
+        },
+        {
+          "title": "Digital Trust Scholarship",
+          "publisher": "ISACA Foundation",
+          "url": "https://isaca.secure-platform.com/a/page/ISACAfoundation/digitaltrust"
+        },
+        {
+          "title": "ISACA Cybersecurity Month Scholarship",
+          "publisher": "ISACA Foundation",
+          "url": "https://isaca.secure-platform.com/a/page/ISACAfoundation/cybersecuritymonth"
+        }
+      ]
+    },
+    {
+      "slug": "industry-ai-week-latam-abre-workshops-nvidia-com-2026-09-07",
+      "title": "AI Week LATAM abre workshops NVIDIA com vagas limitadas",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "development"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-09-07",
+      "publishedAt": "2026-09-07T11:59:52.497Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "AI Week LATAM 2026",
+          "publisher": "SoftServe",
+          "url": "https://career.softserveinc.com/events/ai-week-latam-2026/"
+        },
+        {
+          "title": "Cursos gratis de IA: así puede inscribirse a AI Week 2026",
+          "publisher": "ENTER.CO",
+          "url": "https://www.enter.co/especiales/dev/cursos-gratis-de-ia-asi-puede-inscribirse-a-ai-week-2026/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-samsung-abre-350-bolsas-de-python-e-ia-n-2026-08-25",
+      "title": "Samsung abre 350 bolsas de Python e IA na América Latina",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "development"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-08-25",
+      "publishedAt": "2026-09-06T12:05:04.957Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Certificação em Python, IA e IA generativa",
+          "publisher": "Samsung Innovation Campus",
+          "url": "https://sicvirtual.org/"
+        },
+        {
+          "title": "Samsung Innovation Campus abre convocatoria para jóvenes de seis países",
+          "publisher": "Samsung Newsroom América Latina",
+          "url": "https://news.samsung.com/latin/samsung-innovation-campus-abre-convocatoria-para-jovenes-de-ecuador-guatemala-panama-republica-dominicana-uruguay-y-venezuela"
+        }
+      ]
+    },
+    {
+      "slug": "industry-tcs-reserva-264-acres-para-campus-de-ia-2026-09-05",
+      "title": "TCS reserva 264 acres para campus de IA de até 1 GW",
+      "topic": "industry",
+      "relatedTopics": [
+        "cloud",
+        "ai"
+      ],
+      "signalType": "industry",
+      "signalDate": "2026-09-05",
+      "publishedAt": "2026-09-06T12:03:54.089Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "TCS to set up AI data centre in Hyderabad",
+          "publisher": "Financial Express",
+          "url": "https://www.financialexpress.com/business/news/tcs-to-set-up-ai-data-centre-in-hyderabad/4332653/"
+        },
+        {
+          "title": "TCS commits $7.4B to a one-gigawatt AI campus in Hyderabad",
+          "publisher": "The Next Web",
+          "url": "https://thenextweb.com/news/tcs-hypervault-one-gigawatt-hyderabad-campus-7-4-billion-water-neutral-claim-eu-data-centre-reporting-delegated-regulation-2024-1364"
+        }
+      ]
+    },
+    {
+      "slug": "industry-microsoft-abre-agent-a-thon-mas-concurso-2026-08-18",
+      "title": "Microsoft abre Agent-a-Thon, mas concurso exclui o Brasil",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "development"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-08-18",
+      "publishedAt": "2026-09-05T11:19:38.540Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.2,
+      "sources": [
+        {
+          "title": "Microsoft Agent-a-Thon",
+          "publisher": "Microsoft",
+          "url": "https://www.microsoft.com/en-us/events/local-events/microsoft-agent-a-thon"
+        },
+        {
+          "title": "Agent-a-Thon pre-learning",
+          "publisher": "Founderz",
+          "url": "https://founderz.com/skilling/agent-a-thon-fz/sign-up/"
+        },
+        {
+          "title": "2026 Microsoft Virtual Agent-a-thon Official Rules",
+          "publisher": "Microsoft / Founderz",
+          "url": "https://founderz.com/agentathon-terms/"
+        },
+        {
+          "title": "Microsoft Agent-a-Thon public notice",
+          "publisher": "Anywhere Exchange",
+          "url": "https://www.anywherexchange.com/2026/08/microsoft-agent-thon-build-ai-agent.html"
+        }
+      ]
+    },
+    {
+      "slug": "industry-nvidia-acerta-compra-da-hugging-face-por-2026-09-03",
+      "title": "NVIDIA acerta compra da Hugging Face por US$ 12,93 bilhões",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "cloud"
+      ],
+      "signalType": "industry",
+      "signalDate": "2026-09-03",
+      "publishedAt": "2026-09-04T11:34:24.065Z",
+      "relevanceScore": 9.7,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "NVIDIA to Acquire Hugging Face",
+          "publisher": "NVIDIA",
+          "url": "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/"
+        },
+        {
+          "title": "Nvidia to buy AI platform Hugging Face for nearly $13 billion",
+          "publisher": "Associated Press",
+          "url": "https://apnews.com/article/d96d50e037a2ade479dcdf81cdf2afcf"
+        }
+      ]
+    },
+    {
+      "slug": "industry-oracle-abre-imersao-gratuita-de-agentes-2026-09-01",
+      "title": "Oracle abre imersão gratuita de agentes para a América Latina",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-09-01",
+      "publishedAt": "2026-09-04T11:34:02.796Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "Imersão ONE",
+          "publisher": "Alura e Oracle",
+          "url": "https://empresas.alura.com.br/imersao-one-pt?utm_campaign=G11&utm_medium=SiteOracle&utm_source=Oracle"
+        }
+      ]
+    },
+    {
+      "slug": "industry-campanha-aif2cloud-reduz-primeiro-exame-2026-05-26",
+      "title": "Campanha AIF2CLOUD reduz primeiro exame e condiciona o segundo",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "cloud"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-05-26",
+      "publishedAt": "2026-09-03T11:27:53.893Z",
+      "relevanceScore": 8.4,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "AWS AI & Cloud Foundational Certifications",
+          "publisher": "Pearson VUE",
+          "url": "https://www.pearsonvue.com/us/en/aws/aif2cloud.html"
+        },
+        {
+          "title": "Q2-Q4 2026 AWS Certification AI Upskilling Campaign terms and conditions",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/certification/bulk-voucher/terms-and-conditions/"
+        },
+        {
+          "title": "AWS Certified AI Practitioner",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/certification/certified-ai-practitioner/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-fast-lane-abre-semana-microsoft-em-portu-2026-08-07",
+      "title": "Fast Lane abre duas semanas Microsoft nas Américas com voucher condicionado",
+      "topic": "industry",
+      "relatedTopics": [],
+      "signalType": "opportunity",
+      "signalDate": "2026-08-07",
+      "publishedAt": "2026-09-02T23:49:55.899Z",
+      "relevanceScore": 8.7,
+      "confidenceScore": 9.3,
+      "sources": [
+        {
+          "title": "Microsoft Certification Week: Cloud, Security and AI Business Solutions",
+          "publisher": "Fast Lane",
+          "url": "https://certweeks.fastlane.net/amer/ais-aibs-en"
+        },
+        {
+          "title": "Semana de Certificação Microsoft: Cloud, segurança e soluções de negócios de IA",
+          "publisher": "Fast Lane",
+          "url": "https://certweeks.fastlane.net/amer/ais-aibs-pt"
+        },
+        {
+          "title": "Frontier Transformation Engineer: Exam Voucher Offer Terms & Conditions",
+          "publisher": "LevelUp",
+          "url": "https://skillupwithlevelup.com/cert-terms-and-conditions"
+        }
+      ]
+    },
+    {
+      "slug": "industry-aws-atualiza-tres-certificacoes-para-clo-2026-09-01",
+      "title": "AWS atualiza três certificações para cloud, GenAI e agentes",
+      "topic": "industry",
+      "relatedTopics": [
+        "cloud",
+        "ai"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-01",
+      "publishedAt": "2026-09-02T22:35:00.242Z",
+      "relevanceScore": 9.1,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Certification updates from AWS Training and Certification",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-ifmg-abre-200-vagas-em-pos-graduacao-de-2026-08-21",
+      "title": "IFMG abre 200 vagas em pós-graduação de IA a distância",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-08-21",
+      "publishedAt": "2026-08-27T12:54:25.024Z",
+      "relevanceScore": 8.8,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "IFMG abre processo seletivo para pós-graduação gratuita em Inteligência Artificial",
+          "publisher": "IFMG Campus Formiga",
+          "url": "https://www.formiga.ifmg.edu.br/todas-noticias/3896-ifmg-campus-formiga-abre-processo-seletivo-para-pos-graduacao-gratuita-em-inteligencia-artificial"
+        },
+        {
+          "title": "Edital 936/2026",
+          "publisher": "IFMG Campus Formiga",
+          "url": "https://formiga.ifmg.edu.br/documents/2026/Edital_936.pdf"
+        }
+      ]
+    },
+    {
+      "slug": "industry-mac-mini-m6-mira-agentes-e-modelos-locai-2026-08-25",
+      "title": "Mac mini M6 mira agentes e modelos locais",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "development"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-25",
+      "publishedAt": "2026-08-26T11:33:15.743Z",
+      "relevanceScore": 8.5,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "Apple unveils a more powerful Mac mini featuring the all-new M6 and M5 Pro",
+          "publisher": "Apple",
+          "url": "https://www.apple.com/newsroom/2026/08/apple-unveils-a-more-powerful-mac-mini-featuring-the-all-new-m6-and-m5-pro/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-samsung-ocean-abre-cursos-tech-gratuitos-2026-07-31",
+      "title": "Samsung Ocean abre cursos tech gratuitos em agosto",
+      "topic": "industry",
+      "relatedTopics": [],
+      "signalType": "opportunity",
+      "signalDate": "2026-07-31",
+      "publishedAt": "2026-08-25T02:20:19.537Z",
+      "relevanceScore": 7.3,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Samsung Ocean abre agenda de agosto com aulas e cursos gratuitos de Programação, IA, Empreendedorismo, Digital Health, IoT e mais",
+          "publisher": "Samsung Newsroom Brasil",
+          "url": "https://news.samsung.com/br/samsung-ocean-abre-agenda-de-agosto-com-aulas-e-cursos-gratuitos-de-programacao-ia-empreendedorismo-digital-health-iot-e-mais"
+        }
+      ]
+    },
+    {
+      "slug": "industry-nubank-abre-50-estagios-com-foco-em-ia-2026-08-17",
+      "title": "Nubank abre 50 estágios com foco em IA",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-08-17",
+      "publishedAt": "2026-08-25T02:14:56.161Z",
+      "relevanceScore": 8.4,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "Programa de Estágio Nubank 2027",
+          "publisher": "Nubank",
+          "url": "https://estagio.nubank.com.br/"
+        },
+        {
+          "title": "Ambição no trabalho exige equilíbrio para não minar relações",
+          "publisher": "Folha de S.Paulo",
+          "url": "https://www1.folha.uol.com.br/sobretudo/carreiras/2026/08/ambicao-no-trabalho-exige-equilibrio-para-nao-minar-relacoes.shtml"
+        }
+      ]
+    },
+    {
+      "slug": "industry-brasil-anuncia-r-2-5-bi-para-infraestrut-2026-08-20",
+      "title": "Brasil anuncia R$ 2,5 bi para infraestrutura de IA",
+      "topic": "industry",
+      "relatedTopics": [
+        "cloud"
+      ],
+      "signalType": "industry",
+      "signalDate": "2026-08-20",
+      "publishedAt": "2026-08-25T02:14:53.833Z",
+      "relevanceScore": 8.9,
+      "confidenceScore": 9.2,
+      "sources": [
+        {
+          "title": "Governo anuncia R$ 2,5 bi para IA, com supercomputador no RN e parceria com gigante chinês",
+          "publisher": "Folha de S.Paulo",
+          "url": "https://www1.folha.uol.com.br/tec/2026/08/governo-anuncia-r-25-bi-para-ia-com-supercomputador-no-rn-e-parceria-com-gigante-chines.shtml"
+        }
+      ]
+    },
+    {
+      "slug": "industry-github-lanca-certificacao-para-agentes-d-2026-07-29",
+      "title": "GitHub lança certificação para agentes de IA",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-07-29",
+      "publishedAt": "2026-08-25T02:14:51.896Z",
+      "relevanceScore": 8.3,
+      "confidenceScore": 9.3,
+      "sources": [
+        {
+          "title": "Prepare for the GitHub Agentic AI Developer exam",
+          "publisher": "GitHub",
+          "url": "https://learn.github.com/certification/AGENTIC"
+        },
+        {
+          "title": "GitHub Certified Agentic AI Developer Certification",
+          "publisher": "GitHub",
+          "url": "https://www.linkedin.com/posts/github_ai-is-changing-how-software-gets-made-for-activity-7488366535003074560-0mzZ"
+        }
+      ]
+    },
+    {
+      "slug": "industry-stripe-vai-adquirir-a-openrouter-2026-08-19",
+      "title": "Stripe vai adquirir a OpenRouter",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "industry",
+      "signalDate": "2026-08-19",
+      "publishedAt": "2026-08-25T02:14:04.538Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Stripe agrees to acquire OpenRouter to help businesses optimize token routing and usage",
+          "publisher": "Stripe",
+          "url": "https://stripe.com/newsroom/news/stripe-agrees-to-acquire-openrouter"
+        },
+        {
+          "title": "OpenRouter is Joining Stripe",
+          "publisher": "OpenRouter",
+          "url": "https://openrouter.ai/blog/announcements/openrouter-is-joining-stripe/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-google-abre-trilhas-gratuitas-para-agent-2026-08-06",
+      "title": "GEAR abre coorte de certificações com voucher condicionado",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "cloud"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-08-06",
+      "publishedAt": "2026-08-22T11:40:43.175Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.8,
+      "sources": [
+        {
+          "title": "Your agentic summer: No-cost lessons from Google experts to build and scale agents",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/blog/topics/training-certifications/free-gemini-enterrprise-training"
+        },
+        {
+          "title": "Programa Receba sua Certificação GEAR",
+          "publisher": "Google for Developers",
+          "url": "https://developers.google.com/program/gear/getcertified?hl=pt-br"
+        }
+      ]
+    },
+    {
+      "slug": "industry-aws-amplia-microcredentials-gratuitas-co-2026-05-28",
+      "title": "AWS amplia microcredentials gratuitas com MLOps e AgentCore",
+      "topic": "industry",
+      "relatedTopics": [
+        "cloud"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-05-28",
+      "publishedAt": "2026-08-21T13:42:14.015Z",
+      "relevanceScore": 8.5,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Microcredentials from AWS are now free—Here’s why that matters",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/blogs/training-and-certification/microcredentials-from-aws-are-now-free-heres-why-that-matters/"
+        },
+        {
+          "title": "New courses and certification updates from AWS Training and Certification in May 2026",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/blogs/training-and-certification/may-2026-new-offerings/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-aws-lanca-tres-microcredentials-gratuita-2026-07-30",
+      "title": "AWS lança três microcredentials gratuitas de Data Analytics",
+      "topic": "industry",
+      "relatedTopics": [
+        "cloud"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-07-30",
+      "publishedAt": "2026-08-21T11:22:18.687Z",
+      "relevanceScore": 8.4,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Prove your data analytics skills: Three new microcredentials now available",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/blogs/training-and-certification/prove-your-data-analytics-skills-three-new-microcredentials-now-available/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-cortes-em-tech-atingem-1-116-vagas-na-se-2026-08-13",
+      "title": "Cortes em tech atingem 1.116 vagas na semana",
+      "topic": "industry",
+      "relatedTopics": [],
+      "signalType": "industry",
+      "signalDate": "2026-08-13",
+      "publishedAt": "2026-08-20T16:17:32.410Z",
+      "relevanceScore": 7.8,
+      "confidenceScore": 8.4,
+      "sources": [
+        {
+          "title": "The Crunchbase Tech Layoffs Tracker",
+          "publisher": "Crunchbase News",
+          "url": "https://news.crunchbase.com/startups/tech-layoffs/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-aws-cloud-quest-adiciona-pratica-com-ia-2026-08-11",
+      "title": "AWS Cloud Quest adiciona prática com IA e badges",
+      "topic": "industry",
+      "relatedTopics": [
+        "cloud"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-08-11",
+      "publishedAt": "2026-08-20T16:17:31.525Z",
+      "relevanceScore": 8.1,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "Introducing the new AWS Cloud Quest: AI-powered practice, hands-on building, and a path to official AWS badges",
+          "publisher": "AWS",
+          "url": "https://aws.amazon.com/blogs/training-and-certification/introducing-the-new-aws-cloud-quest-ai-powered-practice-hands-on-building-and-a-path-to-official-aws-badges/"
+        }
+      ]
+    },
+    {
+      "slug": "industry-google-abre-formacao-gratuita-de-ia-para-2026-08-18",
+      "title": "Google abre Launchpad gratuito de IA generativa no Brasil",
+      "topic": "industry",
+      "relatedTopics": [
+        "ai",
+        "cloud"
+      ],
+      "signalType": "opportunity",
+      "signalDate": "2026-08-18",
+      "publishedAt": "2026-08-18T15:00:00.000Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Google Launchpad for Women - Generative AI Edition [BRAZIL]",
+          "publisher": "Google Cloud",
+          "url": "https://rsvp.withgoogle.com/events/google_cloud_launchpad_for_women_gail_edition_latam_brazil"
+        },
+        {
+          "title": "Anúncio do treinamento brasileiro para clientes e parceiras",
+          "publisher": "Elisa Kobayashi Sigueta, Google Cloud",
+          "url": "https://pt.linkedin.com/posts/elisakobayashi_aten%C3%A7%C3%A3o-clientes-e-parceiras-google-cloud-activity-7495510939681615872-r6re"
+        },
+        {
+          "title": "Certificação Generative AI Leader",
+          "publisher": "Google Cloud",
+          "url": "https://cloud.google.com/learn/certification/generative-ai-leader?hl=pt-br"
+        }
+      ]
+    },
+    {
+      "slug": "industry-ai-act-passa-a-ser-fiscalizado-na-ue-2026-08-02",
+      "title": "AI Act passa a ser fiscalizado na UE",
+      "topic": "industry",
+      "relatedTopics": [],
+      "signalType": "industry",
+      "signalDate": "2026-08-02",
+      "publishedAt": "2026-08-13T15:30:10.744Z",
+      "relevanceScore": 9,
+      "confidenceScore": 9.4,
+      "sources": [
+        {
+          "title": "Commission starts enforcing AI Act rules and new transparency requirements on 2 August",
+          "publisher": "European Commission",
+          "url": "https://digital-strategy.ec.europa.eu/en/news/commission-starts-enforcing-ai-act-rules-and-new-transparency-requirements-2-august"
+        }
+      ]
+    },
+    {
+      "slug": "design-penpot-2-18-estreia-camada-enterprise-se-2026-09-09",
+      "title": "Penpot 2.18 estreia camada Enterprise sem fechar o core open source",
+      "topic": "design",
+      "relatedTopics": [
+        "industry"
+      ],
+      "signalType": "shift",
+      "signalDate": "2026-09-09",
+      "publishedAt": "2026-09-23T19:48:45.377Z",
+      "relevanceScore": 8.1,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "Penpot 2.18: Born this way",
+          "publisher": "Penpot",
+          "url": "https://penpot.app/release-notes/2-18-born-this-way"
+        }
+      ]
+    },
+    {
+      "slug": "design-davinci-resolve-21-1-expoe-servidor-mcp-2026-09-08",
+      "title": "DaVinci Resolve 21.1 expõe servidor MCP para agentes",
+      "topic": "design",
+      "relatedTopics": [
+        "development",
+        "security"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-08",
+      "publishedAt": "2026-09-09T12:12:42.140Z",
+      "relevanceScore": 9.2,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Blackmagic Design Announces DaVinci Resolve 21.1",
+          "publisher": "Blackmagic Design",
+          "url": "https://www.blackmagicdesign.com/media/release/20260908-03"
+        },
+        {
+          "title": "Blackmagic Design releases Resolve 21.1",
+          "publisher": "CG Channel",
+          "url": "https://www.cgchannel.com/2026/09/blackmagic-design-releases-resolve-21-1/"
+        }
+      ]
+    },
+    {
+      "slug": "design-figma-abre-plugins-e-shaders-generativos-2026-09-01",
+      "title": "Figma abre plugins e shaders generativos para publicação e código",
+      "topic": "design",
+      "relatedTopics": [
+        "development",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-09-01",
+      "publishedAt": "2026-09-02T22:34:58.753Z",
+      "relevanceScore": 8.6,
+      "confidenceScore": 9.6,
+      "sources": [
+        {
+          "title": "Behind the build: Generative plugins and shaders at Figma",
+          "publisher": "Figma",
+          "url": "https://www.figma.com/blog/how-we-built-generative-plugins-and-shaders/"
+        }
+      ]
+    },
+    {
+      "slug": "design-telerik-leva-webmcp-a-aplicacoes-empresa-2026-08-20",
+      "title": "Telerik leva WebMCP a aplicações empresariais",
+      "topic": "design",
+      "relatedTopics": [
+        "development",
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-20",
+      "publishedAt": "2026-08-25T11:56:11.197Z",
+      "relevanceScore": 8.3,
+      "confidenceScore": 9.2,
+      "sources": [
+        {
+          "title": "AI Developer Tools and MCP Servers for Application Development",
+          "publisher": "Telerik",
+          "url": "https://www.telerik.com/mcp-servers"
+        },
+        {
+          "title": "Progress Software Adds WebMCP Support and Agent Tools to Telerik and Kendo UI",
+          "publisher": "CMSWire",
+          "url": "https://www.cmswire.com/digital-experience/progress-software-adds-webmcp-support-and-agent-tools-to-telerik-and-kendo-ui/"
+        }
+      ]
+    },
+    {
+      "slug": "design-figma-permite-criar-skills-para-seu-agen-2026-08-13",
+      "title": "Figma permite criar skills para seu agente de design",
+      "topic": "design",
+      "relatedTopics": [
+        "ai"
+      ],
+      "signalType": "release",
+      "signalDate": "2026-08-13",
+      "publishedAt": "2026-08-24T11:30:51.481Z",
+      "relevanceScore": 8.3,
+      "confidenceScore": 9.7,
+      "sources": [
+        {
+          "title": "Try these 10 skills—and show off your own",
+          "publisher": "Figma",
+          "url": "https://www.figma.com/blog/try-these-10-skills-and-show-off-your-own/"
+        }
+      ]
+    },
+    {
+      "slug": "design-figma-motion-leva-timeline-ao-canvas-2026-06-24",
+      "title": "Figma Motion leva timeline ao canvas",
+      "topic": "design",
+      "relatedTopics": [],
+      "signalType": "release",
+      "signalDate": "2026-06-24",
+      "publishedAt": "2026-08-13T18:12:33.341Z",
+      "relevanceScore": 8.2,
+      "confidenceScore": 9.5,
+      "sources": [
+        {
+          "title": "Introducing Figma Motion: Your canvas now has a timeline",
+          "publisher": "Figma",
+          "url": "https://www.figma.com/blog/introducing-figma-motion/"
+        }
+      ]
+    },
+    {
+      "slug": "design-code-connect-melhora-agentes-de-ui-2026-08-05",
+      "title": "Code Connect melhora agentes de UI",
+      "topic": "design",
+      "relatedTopics": [],
+      "signalType": "research",
+      "signalDate": "2026-08-05",
+      "publishedAt": "2026-08-13T15:30:18.327Z",
+      "relevanceScore": 8,
+      "confidenceScore": 8.9,
+      "sources": [
+        {
+          "title": "Better Code, Fewer Tokens: The Benefits of Code Connect in MCP",
+          "publisher": "Figma",
+          "url": "https://www.figma.com/blog/the-benefits-of-code-connect-in-mcp/"
+        }
+      ]
+    }
+  ]
+}
