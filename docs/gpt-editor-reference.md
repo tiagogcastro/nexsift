@@ -2,6 +2,8 @@
 
 Editorial version: 2026-09-27
 
+> **Inativo:** o pipeline AWS de publicacao esta configurado no repositorio, mas nao esta em uso na implantacao atual de portfolio. Documento mantido como referencia do contrato.
+
 Arquivo de referencia embutido na ferramenta `editorialInstructions` do connector MCP. Detalha a linha editorial, as classificacoes, o gate de publicacao, a verificacao de fontes, o fluxo da rotina, o modo degradado e o tratamento de erros. O contrato de publicacao, o exemplo de payload e os endpoints estao em `gpt-editor-payload-reference.md`.
 
 ## Vocabulario oficial

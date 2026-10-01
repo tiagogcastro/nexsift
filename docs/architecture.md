@@ -1,5 +1,14 @@
 # NexSift Architecture
 
+## Deployment status (portfolio)
+
+The live site runs as a frozen, static personal portfolio. It serves a snapshot of 21 signals bundled in the repository (`web/src/content/signals.ts` with images in `web/public/images/`) and does not call AWS at runtime. A configuration switch selects the content source:
+
+- `CONTENT_SOURCE=static` (default): web reads bundled content and serves images through the `/s3/public/images/:path*` to `/images/:path*` rewrite.
+- `CONTENT_SOURCE=s3`: web reads posts and indexes from the AWS content bucket through the AWS SDK; the rewrite is disabled.
+
+The AWS stack below (S3, Lambda, API Gateway, Terraform, MiniStack, MCP) remains fully configured and functional, but is inactive by decision to avoid cost. Regenerating the snapshot uses `packages/dev-publish/export-static.ts`. Do not switch back to `s3` or re-enable the scheduled editor without an explicit decision.
+
 ## Current architecture
 
 ```text
@@ -42,7 +51,7 @@ Editor ────────>│  ChatGPT (GPT Action)                    │
 
 Key properties:
 
-- The site always reads content from S3 (no bundled posts, no `CONTENT_SOURCE` switch).
+- The site reads content from a pluggable source: bundled static content by default, or S3 with `CONTENT_SOURCE=s3`.
 - The Lambda uses `PUBLISH_TOKEN` from an environment variable, not SSM Parameter Store.
 - PostHog Cloud is used in development and production; analytics stays disabled until a key is configured.
 - The default locale pt-BR has no URL prefix; `en-US` and `es-ES` keep their prefix.

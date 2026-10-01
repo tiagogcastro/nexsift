@@ -2,6 +2,8 @@
 
 Editorial version: 2026-09-27
 
+> **Inativo:** o pipeline AWS de publicacao esta configurado no repositorio, mas nao esta em uso na implantacao atual de portfolio. Documento mantido como referencia do contrato.
+
 Documento de configuracao do editor NexSift no ChatGPT. O bloco de instructions e o prompt que voce cola na Task; o resto e o passo a passo de configuracao.
 
 ## Como configurar (ChatGPT Tasks + connector MCP)
