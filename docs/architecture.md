@@ -7,7 +7,7 @@ The live site runs as a frozen, static personal portfolio. It serves a snapshot 
 - `CONTENT_SOURCE=static` (default): web reads bundled content and serves images through the `/s3/public/images/:path*` to `/images/:path*` rewrite.
 - `CONTENT_SOURCE=s3`: web reads posts and indexes from the AWS content bucket through the AWS SDK; the rewrite is disabled.
 
-The AWS stack below (S3, Lambda, API Gateway, Terraform, MiniStack, MCP) remains fully configured and functional, but is inactive by decision to avoid cost. Regenerating the snapshot uses `packages/dev-publish/export-static.ts`. Do not switch back to `s3` or re-enable the scheduled editor without an explicit decision.
+The AWS stack below (S3, Lambda, API Gateway, Terraform, MiniStack, MCP) remains fully configured in the repository and can be recreated, but the resources were decommissioned to keep the cost at zero. `packages/dev-publish/catalog.json` keeps the slug, title, topic, relatedTopics and sources of all 204 signals as history; `export-static.ts` and `export-catalog.ts` regenerate the snapshot and catalog when the stack exists. Do not switch back to `s3` or re-enable the scheduled editor without an explicit decision.
 
 ## Current architecture
 

@@ -6,7 +6,7 @@ NexSift is a technology intelligence product for developers. It filters, verifie
 
 The product must feel like an editorial intelligence tool, not a generic blog template or personal portfolio.
 
-Current deployment: NexSift runs as a frozen, static personal portfolio. The AWS stack (S3, Lambda, API Gateway, Terraform, MiniStack, MCP) stays fully configured in this repository but is intentionally not wired, because operating it costs money and this is a portfolio. The web app defaults to bundled static content (`CONTENT_SOURCE=static`); `CONTENT_SOURCE=s3` restores the AWS-backed path. Do not point the site back at S3 or re-enable the ChatGPT schedule without an explicit decision.
+Current deployment: NexSift runs as a frozen, static personal portfolio. The web app defaults to bundled static content (`CONTENT_SOURCE=static`); `CONTENT_SOURCE=s3` restores the AWS-backed path. The AWS resources were decommissioned to keep the cost at zero, but the stack (Terraform, MiniStack, Lambda, MCP) stays fully configured in this repository and can be recreated. `packages/dev-publish/catalog.json` keeps the slug, title, topic, relatedTopics and sources of every signal as history. Do not point the site back at S3 or re-enable the ChatGPT schedule without an explicit decision.
 
 ## Repository structure
 
