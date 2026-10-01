@@ -6,9 +6,11 @@ NexSift is a technology intelligence product for developers. It filters, verifie
 
 The product must feel like an editorial intelligence tool, not a generic blog template or personal portfolio.
 
+Current deployment: NexSift runs as a frozen, static personal portfolio. The AWS stack (S3, Lambda, API Gateway, Terraform, MiniStack, MCP) stays fully configured in this repository but is intentionally not wired, because operating it costs money and this is a portfolio. The web app defaults to bundled static content (`CONTENT_SOURCE=static`); `CONTENT_SOURCE=s3` restores the AWS-backed path. Do not point the site back at S3 or re-enable the ChatGPT schedule without an explicit decision.
+
 ## Repository structure
 
-- `web/`: Next.js product surface (reads posts from S3 only, no bundled content).
+- `web/`: Next.js surface. Defaults to bundled static content (`CONTENT_SOURCE=static`); set `CONTENT_SOURCE=s3` to read posts from the AWS content bucket.
 - `lambda/`: AWS Lambda handler (`src/publish/handler.ts`) and publishing pipeline (`src/publishing/`).
 - `packages/schemas/`: shared Zod schemas as a yarn workspace (`@nexsift/schemas`) resolved via `node_modules`, so both web and lambda consume the same TS sources. The schema is the contract between publisher and site.
 - `packages/dev-publish/`: local publish tool (`publish.ts`, `reset.ts`) and example payloads.

@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: NexSift Publisher
   version: 2.3.0
-  description: Publishes validated pt-BR NexSift signals and lists recently published signals.
+  description: Publishes validated pt-BR NexSift signals and lists recently published signals. This contract remains the source of truth, but the AWS pipeline behind it is inactive in the current static portfolio deployment.
 servers:
   - url: https://oh4qzz4ivd.execute-api.us-east-1.amazonaws.com/
 paths:
