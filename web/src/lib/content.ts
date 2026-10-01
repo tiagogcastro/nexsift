@@ -3,9 +3,19 @@ import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import {
   postIndexSchema,
   postSchema,
+  postSummarySchema,
+  type PostSummary,
 } from '@nexsift/schemas/post'
 import type { Topic } from '@nexsift/schemas/topic'
 import { topicSchema } from '@nexsift/schemas/topic'
+import { contentSource } from '@/config/content-source'
+import { signals } from '@/content/signals'
+
+const staticPosts = signals.map((value) => postSchema.parse(value))
+
+const staticSummaries: PostSummary[] = staticPosts
+  .map((post) => postSummarySchema.parse(post))
+  .sort((first, second) => Date.parse(second.publishedAt) - Date.parse(first.publishedAt))
 
 function createS3Client() {
   const endpoint = process.env.AWS_ENDPOINT_URL || undefined
@@ -54,6 +64,10 @@ function cachedReadJsonObject(key: string) {
 }
 
 export async function listPosts() {
+  if (contentSource === 'static') {
+    return staticSummaries
+  }
+
   // Topic indexes contain the entire archive, including signals omitted from
   // an older 100-item latest index before its next audit rebuild.
   const indexes = await Promise.all(topicSchema.options.map((topic) => listPostsByTopic(topic)))
@@ -69,6 +83,10 @@ export async function listPosts() {
 }
 
 export async function getPostBySlug(slug: string) {
+  if (contentSource === 'static') {
+    return staticPosts.find((post) => post.slug === slug) ?? null
+  }
+
   try {
     const value = await cachedReadJsonObject(`public/posts/${slug}.json`)()
     return postSchema.parse(value)
@@ -86,6 +104,10 @@ export async function getPostBySlug(slug: string) {
 }
 
 export async function listPostsByTopic(topic: Topic) {
+  if (contentSource === 'static') {
+    return staticSummaries.filter((post) => post.topic === topic)
+  }
+
   try {
     const value = await cachedReadJsonObject(`public/indexes/topics/${topic}.json`)()
     return postIndexSchema.parse(value)

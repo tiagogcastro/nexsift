@@ -6,6 +6,8 @@ NexSift is a technology intelligence product for developers. It filters, verifie
 
 The product is designed to feel closer to a technical signal console than a traditional blog. Editorial posts are published in pt-BR. Institutional interface copy supports pt-BR, en-US and es-ES.
 
+> **Current deployment:** NexSift runs as a frozen, static personal portfolio. The site serves a bundled snapshot of 21 signals by default (`CONTENT_SOURCE=static`) and does not call AWS at runtime. The full AWS stack (S3, Lambda, API Gateway, Terraform, MiniStack, MCP) remains configured in this repository but is inactive by decision to avoid cost. Set `CONTENT_SOURCE=s3` to restore the AWS-backed path and see the "Full local AWS simulation" section.
+
 ## Screens
 
 | | |
@@ -27,7 +29,7 @@ The repository already contains the foundation for:
 - signal-ledger blog archive
 - article pages with visible source rails
 - topic pages
-- S3 content provider (the site always reads posts from S3)
+- pluggable content source: bundled static snapshot by default (`CONTENT_SOURCE=static`), S3 provider available behind `CONTENT_SOURCE=s3`
 - MiniStack local AWS simulation
 - Terraform for S3, Lambda and IAM
 - publication Lambda with Bearer authentication and Zod validation

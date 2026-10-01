@@ -2,6 +2,8 @@
 
 Editorial version: 2026-09-27
 
+> **Inativo:** o pipeline AWS de publicacao esta configurado no repositorio, mas nao esta em uso na implantacao atual de portfolio. Documento mantido como referencia do contrato.
+
 Arquivo de referencia embutido na ferramenta `editorialInstructions` do connector MCP. Detalha o contrato das operacoes, o exemplo de payload e os codigos de erro relevantes para a rotina editorial.
 
 ## Payload de exemplo
